@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,8 @@ public class MainActivity extends FragmentActivity {
         btnNewHour.setOnClickListener(v -> {
             Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
         });
+        Intent intent = new Intent(this, LoginPacientActivity.class);
+        startActivity(intent);
 
         Doctor doctor = new Doctor("Priscila", "www.google.com", "05/12/1995", "Feminino", "32991313947");
 
