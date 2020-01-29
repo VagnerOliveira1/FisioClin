@@ -26,8 +26,8 @@ public class MainActivity extends FragmentActivity {
         btnNewHour.setOnClickListener(v -> {
             Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
         });
-        Intent intent = new Intent(this, LoginPacientActivity.class);
-        startActivity(intent);
+//        Intent intent = new Intent(this, LoginPacientActivity.class);
+//        startActivity(intent);
 
         Doctor doctor = new Doctor("Priscila", "www.google.com", "05/12/1995", "Feminino", "32991313947");
 

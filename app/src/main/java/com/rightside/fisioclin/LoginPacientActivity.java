@@ -75,8 +75,8 @@ public class LoginPacientActivity extends AppCompatActivity {
 
         GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
         if(account != null) {
-//            startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
-            Toast.makeText(LoginPacientActivity.this, "Logado com Sucesso", Toast.LENGTH_LONG).show();
+           startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
+//            Toast.makeText(LoginPacientActivity.this, "Logado com Sucesso", Toast.LENGTH_LONG).show();
 
         }
         super.onStart();
