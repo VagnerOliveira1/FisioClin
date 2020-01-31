@@ -4,6 +4,7 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 
 import android.app.DatePickerDialog;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,7 +32,6 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
         cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
 
