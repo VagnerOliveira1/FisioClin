@@ -1,0 +1,45 @@
+package com.rightside.fisioclin.controller;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.InputType;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TimePicker;
+import android.widget.Toast;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentActivity;
+
+import com.rightside.fisioclin.HorarioActivity;
+import com.rightside.fisioclin.fragment.HourFragment;
+import com.rightside.fisioclin.models.Hour;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class NovoHorarioController {
+
+    public static void alertaDeNovoHorario(final FragmentActivity activity) {
+        final AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
+
+        LinearLayout container = new LinearLayout(activity.getApplicationContext());
+        container.setOrientation(LinearLayout.VERTICAL);
+
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(60, -20, 60, 0);
+
+
+        alerta.setTitle("Novo Horário").setMessage("Deseja cadastrar um novo horário?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                HourFragment hourFragment = new HourFragment();
+                hourFragment.setCancelable(false);
+                hourFragment.show(activity.getSupportFragmentManager(), "teste");
+
+            }
+        }).setNegativeButton("Cancelar", null).show();
+    }
+
+}
