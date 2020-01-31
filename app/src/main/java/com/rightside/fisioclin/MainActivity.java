@@ -1,39 +1,42 @@
 package com.rightside.fisioclin;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.rightside.fisioclin.models.Doctor;
 import com.rightside.fisioclin.view.HorarioActivity;
 
 public class MainActivity extends FragmentActivity {
-
-    private Button btnNewHour;
+    private ImageView imageViewDoctorPicture;
+    private CardView cardViewNovoHorario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
+        cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
+        cardViewNovoHorario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
-        btnNewHour = findViewById(R.id.btn_new_hour);
-        btnNewHour.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, HorarioActivity.class);
-            startActivity(intent);
-            Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
+            }
         });
-//        Intent intent = new Intent(this, LoginPacientActivity.class);
-//        startActivity(intent);
-
         Doctor doctor = new Doctor("Priscila", "www.google.com", "05/12/1995", "Feminino", "32991313947");
+        doctor.setProfilePictureUrl("http://3.bp.blogspot.com/-xVhOdAS5SWw/T-UNX6qzuHI/AAAAAAAAAks/uC4eXUcXmK4/s1600/IMG_4214.jpg");
+
+        Glide.with(this).load(doctor.getProfilePictureUrl()).circleCrop().into(imageViewDoctorPicture);
 
         Log.d("teste", String.valueOf(doctor.isAdmin()));
+
+
     }
 }
