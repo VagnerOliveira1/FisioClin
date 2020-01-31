@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="12dp"
+    tools:context=".HorarioActivity">
+
+    <TextView
+        android:id="@+id/textview_dados_consulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Cadastrar novo Horário:"
+        android:textSize="25sp" />
+
+    <TextView
+        android:id="@+id/textview_hora"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Hora: 21:30"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textview_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="05/01/1997"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView_dia_semana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:text="Quinta-feira"
+        android:textSize="18sp" />
+
+</LinearLayout>
