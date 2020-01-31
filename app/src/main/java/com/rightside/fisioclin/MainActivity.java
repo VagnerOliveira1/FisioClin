@@ -18,9 +18,12 @@ import com.rightside.fisioclin.controller.NovoHorarioController;
 import com.rightside.fisioclin.fragment.DatePickerFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
 import com.rightside.fisioclin.models.Doctor;
+
+import com.rightside.fisioclin.view.HorarioActivity;
 import com.rightside.fisioclin.models.Hour;
 
 import java.util.UUID;
+
 
 public class MainActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
     private ImageView imageViewDoctorPicture;
@@ -34,7 +37,6 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         setContentView(R.layout.activity_main);
         imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
         cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
-
         cardViewNovoHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
