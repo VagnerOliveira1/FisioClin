@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.rightside.fisioclin.models.Doctor;
+import com.rightside.fisioclin.view.HorarioActivity;
 
 public class MainActivity extends FragmentActivity {
 
@@ -24,6 +25,8 @@ public class MainActivity extends FragmentActivity {
 
         btnNewHour = findViewById(R.id.btn_new_hour);
         btnNewHour.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, HorarioActivity.class);
+            startActivity(intent);
             Toast.makeText(this, "teste", Toast.LENGTH_SHORT).show();
         });
 //        Intent intent = new Intent(this, LoginPacientActivity.class);

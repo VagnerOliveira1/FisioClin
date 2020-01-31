@@ -5,6 +5,9 @@ public class Hour {
     private String date;
     private String dayOfWeek;
 
+    public Hour(boolean b, String s, String s1) {
+    }
+
     public String getHour() {
         return hour;
     }
