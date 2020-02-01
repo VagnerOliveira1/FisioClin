@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 
@@ -24,12 +25,14 @@ public class LoginPacientActivity extends AppCompatActivity {
     int RC_SIGN_IN = 0;
     SignInButton signInButton;
     GoogleSignInClient mGoogleSignInClient;
+    Button buttonLoginPacient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_pacient);
         signInButton = findViewById(R.id.sign_in_button);
+        buttonLoginPacient = findViewById(R.id.button_paciente_login);
 
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -42,6 +45,14 @@ public class LoginPacientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 signIn();
+            }
+        });
+
+        buttonLoginPacient.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginPacientActivity.this,MainPacientActivity.class);
+                startActivity(intent);
             }
         });
     }
