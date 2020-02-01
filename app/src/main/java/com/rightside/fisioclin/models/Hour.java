@@ -139,9 +139,16 @@ public class Hour implements Serializable {
         map.put("dayOfMonth", getDayOfMonth());
         map.put("hour", getHour());
         map.put("minute", getMinute());
+<<<<<<< Updated upstream
         map.put("data", getDataFormatada());
         map.put("hora", getHoraFormatada());
         map.put("diaDaSemana", getDiaDaSemanaFormatado());
+=======
+        map.put("dataFormatada", getDataFormatada());
+        map.put("horaFormatada", getHoraFormatada());
+        map.put("diaDaSemanaFormatado", getDiaDaSemanaFormatado());
+        map.put("date", getDate());
+>>>>>>> Stashed changes
         return map;
     }
 
