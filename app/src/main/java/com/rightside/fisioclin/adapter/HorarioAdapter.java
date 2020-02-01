@@ -1,7 +1,6 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,10 +12,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
-import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Hour;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +28,7 @@ public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.cardview_item_horario, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_doctor_item_horario, parent, false);
         return new ViewHolder(view);
     }
 
@@ -44,7 +40,7 @@ public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHold
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, Integer.toString(position), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -69,7 +65,7 @@ public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHold
             textViewData = itemView.findViewById(R.id.horario_data);
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
-            cardView = itemView.findViewById(R.id.cardview_horarios);
+            cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
         }
     }
 }
