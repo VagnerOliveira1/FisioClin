@@ -2,11 +2,23 @@ package com.rightside.fisioclin.controller;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.text.InputType;
+import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TimePicker;
+import android.widget.Toast;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.rightside.fisioclin.HorarioActivity;
 import com.rightside.fisioclin.fragment.HourFragment;
+import com.rightside.fisioclin.models.Hour;
+import com.rightside.fisioclin.repository.FirebaseRepository;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class NovoHorarioController {
 

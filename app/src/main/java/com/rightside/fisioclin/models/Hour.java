@@ -134,7 +134,7 @@ public class Hour implements Serializable {
 
     public HashMap<String, Object> map(){
         HashMap<String, Object> map = new HashMap<>();
-        map.put("ano", getYear());
+        map.put("year", getYear());
         map.put("mounth", getMonth());
         map.put("dayOfMonth", getDayOfMonth());
         map.put("hour", getHour());
@@ -142,6 +142,7 @@ public class Hour implements Serializable {
         map.put("dataFormatada", getDataFormatada());
         map.put("horaFormatada", getHoraFormatada());
         map.put("diaDaSemanaFormatado", getDiaDaSemanaFormatado());
+        map.put("date", getDate());
         return map;
     }
 

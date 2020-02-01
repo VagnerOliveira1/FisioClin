@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,9 +10,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.controller.DeletarHorarioController;
 import com.rightside.fisioclin.models.Hour;
 
 import java.util.ArrayList;
@@ -20,9 +24,11 @@ import java.util.List;
 public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHolder> {
     private List<Hour> horarios = new ArrayList<>();
     private Context context;
+    private FragmentActivity fragmentActivity;
 
-    public HorarioAdapter(Context context) {
+    public HorarioAdapter(Context context, FragmentActivity activity) {
         this.context = context;
+        this.fragmentActivity = activity;
     }
 
     @NonNull
@@ -37,12 +43,14 @@ public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHold
         holder.textViewHora.setText(String.valueOf(horarios.get(position).getHoraFormatada()));
         holder.textViewData.setText(String.valueOf(horarios.get(position).getDataFormatada()));
         holder.textViewDiaSemana.setText(String.valueOf(horarios.get(position).getDiaDaSemanaFormatado()));
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
-                Toast.makeText(context, Integer.toString(position), Toast.LENGTH_SHORT).show();
+            public boolean onLongClick(View view) {
+                DeletarHorarioController.alertaDeletarHorario(horarios.get(position),fragmentActivity);
+                return false;
             }
         });
+
     }
 
     @Override
