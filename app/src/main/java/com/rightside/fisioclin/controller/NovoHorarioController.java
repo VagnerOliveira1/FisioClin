@@ -12,7 +12,6 @@ import android.widget.Toast;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
-import com.rightside.fisioclin.HorarioActivity;
 import com.rightside.fisioclin.fragment.HourFragment;
 import com.rightside.fisioclin.models.Hour;
 import com.rightside.fisioclin.repository.FirebaseRepository;
