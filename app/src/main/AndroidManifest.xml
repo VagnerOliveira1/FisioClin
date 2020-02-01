@@ -9,7 +9,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".HorarioActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +17,8 @@
             </intent-filter>
         </activity>
       
-       <activity android:name=".LoginPacienteActivity"></activity>
+       <activity android:name=".LoginPacientActivity"></activity>
+        <activity android:name=".HorarioDoctorActivity"></activity>
         
     </application>
 

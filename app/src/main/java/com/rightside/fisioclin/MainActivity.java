@@ -17,9 +17,9 @@ import com.bumptech.glide.Glide;
 import com.rightside.fisioclin.controller.NovoHorarioController;
 import com.rightside.fisioclin.fragment.DatePickerFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
+import com.rightside.fisioclin.fragment.NovoHorarioDialogFragment;
 import com.rightside.fisioclin.models.Doctor;
 
-import com.rightside.fisioclin.view.HorarioActivity;
 import com.rightside.fisioclin.models.Hour;
 
 import java.util.UUID;
@@ -27,7 +27,7 @@ import java.util.UUID;
 
 public class MainActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
     private ImageView imageViewDoctorPicture;
-    private CardView cardViewNovoHorario;
+    private CardView cardViewNovoHorario, cardViewHorarios;
     private Hour horario;
     private int hour,min;
 
@@ -37,11 +37,19 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         setContentView(R.layout.activity_main);
         imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
         cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
+        cardViewHorarios = findViewById(R.id.cardview_horarios);
         cardViewNovoHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 NovoHorarioController.alertaDeNovoHorario(MainActivity.this);
 
+            }
+        });
+
+        cardViewHorarios.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(MainActivity.this, HorarioDoctorActivity.class));
             }
         });
         Doctor doctor = new Doctor("Priscila", "www.google.com", "05/12/1995", "Feminino", "32991313947");
@@ -66,8 +74,6 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfWeek) {
         String uniqueId = UUID.randomUUID().toString();
         horario = new Hour(hour, min, year, dayOfWeek, month, uniqueId);
-        Intent i = new Intent(MainActivity.this, HorarioActivity.class);
-        i.putExtra("horario", horario);
-        startActivity(i);
+        NovoHorarioDialogFragment.novoHorarioDialogFragment(horario).show(getSupportFragmentManager(), "horario");
     }
 }

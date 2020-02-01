@@ -1,5 +1,6 @@
 package com.rightside.fisioclin.repository;
 
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Hour;
 
@@ -12,6 +13,11 @@ public class FirebaseRepository {
 
     public static void save(Hour hour) {
         getDB().collection("horarios").document(hour.getId()).set(hour.map());
+    }
+
+    public static CollectionReference getHorarios() {
+        return getDB().collection("horarios");
+
     }
 
 }

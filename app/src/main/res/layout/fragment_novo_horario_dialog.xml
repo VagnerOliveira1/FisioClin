@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.NovoHorarioDialogFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_dados_consulta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme" />
+
+    <TextView
+        android:id="@+id/textView_data"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_dia_semana"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <TextView
+        android:id="@+id/textView_horario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_weight="0"
+        android:text="Salvar Horário" />
+</LinearLayout>

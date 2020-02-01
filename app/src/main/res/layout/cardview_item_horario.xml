@@ -3,17 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_margin="8dp">
-    <RelativeLayout
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="8dp">
+
         <TextView
-            android:id="@+id/horario_id"
+            android:id="@+id/horario_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="asasdsa"
+            android:textColor="#222222"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/horario_hora"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:text="asdsad"
+            android:textColor="#222222"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/horario_dia_semana"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:textColor="#222222"
             android:textSize="16sp"
             android:textStyle="bold" />
-    </RelativeLayout>
+    </LinearLayout>
 </androidx.cardview.widget.CardView>
