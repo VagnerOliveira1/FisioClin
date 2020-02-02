@@ -1,7 +1,10 @@
 package com.rightside.fisioclin.models;
 
+import android.net.Uri;
+
 public class Person {
 
+    private String id;
     private String name;
     private String profilePictureUrl;
     private String datOfBirth;
@@ -9,13 +12,22 @@ public class Person {
     private String phoneNumber;
     private boolean admin;
 
-    public Person(String name, String profilePictureUrl, String datOfBirth, String sex, String phoneNumber) {
+    public Person() {
+    }
+
+    public Person(String id, String name, String profilePictureUrl) {
+        this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
-        this.datOfBirth = datOfBirth;
-        this.sex = sex;
-        this.phoneNumber = phoneNumber;
         setAdmin(false);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {

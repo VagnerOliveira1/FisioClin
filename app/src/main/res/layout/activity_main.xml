@@ -38,13 +38,13 @@
             tools:src="@tools:sample/avatars[15]" />
 
         <TextView
-            android:id="@+id/textView"
+            android:id="@+id/textView_name_doctor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imageView_doctor_picture"
             android:layout_marginStart="40dp"
             android:layout_marginTop="10dp"
-            android:text="Matheus Lima da Silva"
+            android:text="aaaa"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
             android:textStyle="bold" />

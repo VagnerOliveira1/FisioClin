@@ -1,5 +1,6 @@
 package com.rightside.fisioclin;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
@@ -18,55 +19,57 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.rightside.fisioclin.models.Doctor;
+import com.rightside.fisioclin.models.Pacient;
+import com.rightside.fisioclin.models.Person;
+import com.rightside.fisioclin.repository.FirebaseRepository;
 
 
 public class LoginPacientActivity extends AppCompatActivity {
-    int RC_SIGN_IN = 0;
-    SignInButton signInButton;
-    GoogleSignInClient mGoogleSignInClient;
-    Button buttonLoginPacient;
+    private int RC_SIGN_IN = 0;
+    private FirebaseAuth mAuth;
+    private GoogleSignInClient mGoogleSignInClient;
+    private GoogleSignInAccount account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_pacient);
-        signInButton = findViewById(R.id.sign_in_button);
-        buttonLoginPacient = findViewById(R.id.button_paciente_login);
 
+        mAuth = FirebaseAuth.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
-        mGoogleSignInClient = GoogleSignIn.getClient(LoginPacientActivity.this, gso);
+        mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                signIn();
-            }
+
+        Button buttonLogin = findViewById(R.id.button_paciente_login);
+        buttonLogin.setOnClickListener(v -> {
+            signIn();
         });
 
-        buttonLoginPacient.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginPacientActivity.this,MainPacientActivity.class);
-                startActivity(intent);
-            }
-        });
     }
+
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (requestCode == RC_SIGN_IN) {
-
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             handleSignInResult(task);
         }
@@ -74,24 +77,63 @@ public class LoginPacientActivity extends AppCompatActivity {
 
     private void handleSignInResult(Task<GoogleSignInAccount> completedTask) {
         try {
-            GoogleSignInAccount account = completedTask.getResult(ApiException.class);
-            startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
+            account = completedTask.getResult(ApiException.class);
+            firebaseAuthWithGoogle(account);
+
         } catch (ApiException e) {
 
-            Log.w("Google Sign In Error", "signInResult:failed code=" + e.getStatusCode());
-            Toast.makeText(LoginPacientActivity.this, "Failed", Toast.LENGTH_LONG).show();
         }
     }
 
-    @Override
-    protected void onStart() {
 
-        GoogleSignInAccount account = GoogleSignIn.getLastSignedInAccount(this);
-        if(account != null) {
-           startActivity(new Intent(LoginPacientActivity.this, HorarioDoctorActivity.class));
-//            Toast.makeText(LoginPacientActivity.this, "Logado com Sucesso", Toast.LENGTH_LONG).show();
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
+        mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                if(account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                    checkDoutor();
+                } else {
+                    checkPacient();
+                }
+            } else {
+                finish();
+            }
+        });
 
-        }
-        super.onStart();
     }
+
+    private void checkDoutor() {
+        final FirebaseUser firebaseDoctor = FirebaseAuth.getInstance().getCurrentUser();
+        final DocumentReference getId = FirebaseRepository.getDB().collection("doctors").document(firebaseDoctor.getUid());
+        getId.get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                if(!documentSnapshot.exists()){
+                    Doctor doctor = new Doctor(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
+                        FirebaseRepository.saveDoctor(doctor).addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                                startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
+                            }
+                        });
+                }
+            }
+        });
+    }
+
+    private void checkPacient() {
+        final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        final DocumentReference getId = FirebaseRepository.getDB().collection("users").document(firebaseUser.getUid());
+        getId.get().addOnCompleteListener(task -> {
+
+            if (task.isSuccessful()) {
+                DocumentSnapshot documentSnapshot = task.getResult();
+                if (!documentSnapshot.exists()) {
+
+                }
+
+            }
+        });
+    }
+
 }

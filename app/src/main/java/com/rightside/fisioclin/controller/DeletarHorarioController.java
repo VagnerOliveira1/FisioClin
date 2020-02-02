@@ -60,7 +60,7 @@ public class DeletarHorarioController {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 FirebaseRepository.deleteHorarios(hour.getId());
-                activity.recreate();
+
             }
         }).setNegativeButton("Cancelar", null).show();
 
