@@ -1,6 +1,5 @@
 package com.rightside.fisioclin;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
@@ -8,17 +7,12 @@ import androidx.fragment.app.FragmentActivity;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
-import com.bumptech.glide.Glide;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
@@ -26,8 +20,8 @@ import com.rightside.fisioclin.controller.NovoHorarioController;
 import com.rightside.fisioclin.controller.NovoHorarioDialogFragment;
 import com.rightside.fisioclin.fragment.DatePickerFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
-import com.rightside.fisioclin.models.Doctor;
-import com.rightside.fisioclin.models.Hour;
+import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -36,7 +30,7 @@ import java.util.UUID;
 public class MainActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
     private ImageView imageViewDoctorPicture;
     private CardView cardViewNovoHorario, cardViewHorarios;
-    private Hour horario;
+    private Horario horario;
     private TextView textViewNameDoctor;
     private int hour,min;
 
@@ -51,12 +45,12 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         cardViewHorarios = findViewById(R.id.cardview_horarios);
         textViewNameDoctor = findViewById(R.id.textView_name_doctor);
 
-        FirebaseRepository.getDoctor(FirebaseRepository.getIdPersonLoggedIn()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
+        FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if(documentSnapshot != null && documentSnapshot.exists()) {
-                    Doctor doctor = documentSnapshot.toObject(Doctor.class);
-                    alteraInformacaoPerfil(doctor);
+                    Medico medico = documentSnapshot.toObject(Medico.class);
+                    alteraInformacaoPerfil(medico);
                 }
             }
         });
@@ -92,12 +86,12 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfWeek) {
         String uniqueId = UUID.randomUUID().toString();
-        horario = new Hour(hour, min, year, dayOfWeek, month, uniqueId);
+        horario = new Horario(hour, min, year, dayOfWeek, month, uniqueId);
         NovoHorarioDialogFragment.novoHorarioDialogFragment(horario).show(getSupportFragmentManager(), "horario");
     }
 
-    private void alteraInformacaoPerfil(Doctor doctor) {
-        textViewNameDoctor.setText(doctor.getName());
-        GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, doctor.getProfilePictureUrl());
+    private void alteraInformacaoPerfil(Medico medico) {
+        textViewNameDoctor.setText(medico.getName());
+        GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
     }
 }

@@ -1,29 +1,20 @@
 package com.rightside.fisioclin.controller;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
-import android.view.Gravity;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.fragment.app.FragmentActivity;
 
-import com.rightside.fisioclin.R;
-import com.rightside.fisioclin.models.Hour;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
-
-import org.w3c.dom.Text;
 
 
 public class DeletarHorarioController {
 
-    public static void alertaDeletarHorario(Hour hour, FragmentActivity activity) {
+    public static void alertaDeletarHorario(Horario horario, FragmentActivity activity) {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
 
 
@@ -32,9 +23,9 @@ public class DeletarHorarioController {
         TextView horarioData = new TextView(activity);
         TextView horarioDiaSemana = new TextView(activity);
         TextView horarioHora = new TextView(activity);
-        horarioData.setText(hour.getDataFormatada());
-        horarioDiaSemana.setText(hour.getDiaDaSemanaFormatado());
-        horarioHora.setText(hour.getHoraFormatada());
+        horarioData.setText(horario.getDataFormatada());
+        horarioDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+        horarioHora.setText(horario.getHoraFormatada());
 
         horarioData.setPadding(50, 10,50,10);
         horarioData.setTextSize(16);
@@ -59,7 +50,7 @@ public class DeletarHorarioController {
         alerta.setTitle("Apagar Horário!").setMessage("Tem certeza disso?").setPositiveButton("Apagar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseRepository.deleteHorarios(hour.getId());
+                FirebaseRepository.deleteHorarios(horario.getId());
 
             }
         }).setNegativeButton("Cancelar", null).show();

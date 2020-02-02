@@ -1,21 +1,30 @@
 package com.rightside.fisioclin.models;
 
-import android.net.Uri;
+import java.io.Serializable;
 
-public class Person {
+public class Pessoa implements Serializable {
 
     private String id;
     private String name;
     private String profilePictureUrl;
-    private String datOfBirth;
-    private String sex;
+    private String email;
     private String phoneNumber;
     private boolean admin;
 
-    public Person() {
+    public Pessoa() {
+        setAdmin(false);
     }
 
-    public Person(String id, String name, String profilePictureUrl) {
+    public Pessoa(String id, String name, String profilePictureUrl, String email, String phoneNumber) {
+        this.id = id;
+        this.name = name;
+        this.profilePictureUrl = profilePictureUrl;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        setAdmin(false);
+    }
+
+    public Pessoa(String id, String name, String profilePictureUrl) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
@@ -46,20 +55,12 @@ public class Person {
         this.profilePictureUrl = profilePictureUrl;
     }
 
-    public String getDatOfBirth() {
-        return datOfBirth;
+    public String getEmail() {
+        return email;
     }
 
-    public void setDatOfBirth(String datOfBirth) {
-        this.datOfBirth = datOfBirth;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPhoneNumber() {

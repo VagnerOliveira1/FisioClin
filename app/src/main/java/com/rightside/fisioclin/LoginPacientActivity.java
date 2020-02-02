@@ -6,10 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.content.Intent;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -17,7 +14,6 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,9 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.rightside.fisioclin.models.Doctor;
-import com.rightside.fisioclin.models.Pacient;
-import com.rightside.fisioclin.models.Person;
+import com.rightside.fisioclin.fragment.PacientVerificationDataFragment;
+import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 
@@ -109,8 +105,8 @@ public class LoginPacientActivity extends AppCompatActivity {
             if(task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if(!documentSnapshot.exists()){
-                    Doctor doctor = new Doctor(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
-                        FirebaseRepository.saveDoctor(doctor).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    Medico medico = new Medico(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
+                        FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
@@ -129,6 +125,11 @@ public class LoginPacientActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()) {
+
+                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(),
+                            firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail(), firebaseUser.getPhoneNumber());
+
+                    PacientVerificationDataFragment.pacientVerificationDataFragment(paciente).show(getSupportFragmentManager(), "pacientVerification");
 
                 }
 

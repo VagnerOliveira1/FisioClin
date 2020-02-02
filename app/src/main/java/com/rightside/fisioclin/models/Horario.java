@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 
-public class Hour implements Serializable {
+public class Horario implements Serializable {
     private int hour;
     private int minute;
     private int year;
@@ -23,7 +23,7 @@ public class Hour implements Serializable {
     private String id;
 
 
-    public Hour(int hour, int minute, int year, int dayOfMonth, int month, String id) {
+    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id) {
         this.hour = hour;
         this.minute = minute;
         this.year = year;
@@ -44,7 +44,7 @@ public class Hour implements Serializable {
         this.id = id;
     }
 
-    public Hour() {
+    public Horario() {
     }
 
     public int getHour() {

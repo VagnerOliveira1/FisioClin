@@ -8,16 +8,14 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.rightside.fisioclin.R;
-import com.rightside.fisioclin.models.Hour;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 /**
@@ -29,10 +27,10 @@ public class NovoHorarioDialogFragment extends DialogFragment {
     private Button buttonSalvarHorario;
 
 
-    public static NovoHorarioDialogFragment novoHorarioDialogFragment(Hour hour) {
+    public static NovoHorarioDialogFragment novoHorarioDialogFragment(Horario horario) {
         NovoHorarioDialogFragment novoHorarioDialogFragment = new NovoHorarioDialogFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("horario", hour);
+        bundle.putSerializable("horario", horario);
         novoHorarioDialogFragment.setArguments(bundle);
         return novoHorarioDialogFragment;
     }
@@ -48,21 +46,21 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
         toolbar.setTitle("Confirme os dados: ");
         Bundle bundle = getArguments();
-        Hour hour = (Hour) bundle.get("horario");
+        Horario horario = (Horario) bundle.get("horario");
 
         textViewData = view.findViewById(R.id.textView_data);
         textViewDiaSemana = view.findViewById(R.id.textView_dia_semana);
         textViewHora = view.findViewById(R.id.textView_horario);
         buttonSalvarHorario = view.findViewById(R.id.button);
 
-        textViewData.setText(hour.getDataFormatada());
-        textViewHora.setText(hour.getHoraFormatada());
-        textViewDiaSemana.setText(hour.getDiaDaSemanaFormatado());
+        textViewData.setText(horario.getDataFormatada());
+        textViewHora.setText(horario.getHoraFormatada());
+        textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
 
         buttonSalvarHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseRepository.save(hour);
+                FirebaseRepository.saveHour(horario);
                 dismiss();
             }
         });

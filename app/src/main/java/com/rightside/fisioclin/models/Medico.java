@@ -1,15 +1,13 @@
 package com.rightside.fisioclin.models;
 
-import android.net.Uri;
-
 import java.util.HashMap;
 
-public class Doctor extends Person {
+public class Medico extends Pessoa {
 
-    public Doctor() {
+    public Medico() {
     }
 
-    public Doctor(String id, String name, String profilePictureUrl) {
+    public Medico(String id, String name, String profilePictureUrl) {
         super(id, name, profilePictureUrl);
         setAdmin(true);
     }

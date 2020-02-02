@@ -1,7 +1,6 @@
 package com.rightside.fisioclin;
 
 import androidx.fragment.app.FragmentActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -11,14 +10,14 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.rightside.fisioclin.adapter.HorarioAdapter;
-import com.rightside.fisioclin.models.Hour;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HorarioDoctorActivity extends FragmentActivity {
-   private List<Hour> list;
+   private List<Horario> list;
     private HorarioAdapter mAdapter;
     private ViewModelHorarios viewModelHorarios;
     @Override
