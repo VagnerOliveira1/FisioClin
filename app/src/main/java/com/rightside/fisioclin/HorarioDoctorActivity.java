@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HorarioDoctorActivity extends FragmentActivity {
-   private List<Horario> list;
+    private List<Horario> list;
     private HorarioAdapter mAdapter;
     private ViewModelHorarios viewModelHorarios;
     @Override

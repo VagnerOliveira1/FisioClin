@@ -17,7 +17,6 @@ public class Medico extends Pessoa {
         super.setAdmin(admin);
     }
 
-
     public HashMap<String, Object> returnDoctor() {
         HashMap<String, Object> doctor = new HashMap<>();
         doctor.put("id", getId());

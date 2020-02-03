@@ -1,5 +1,7 @@
 package com.rightside.fisioclin.models;
 
+import java.util.HashMap;
+
 public class Consulta {
 
     private Horario horario;
@@ -19,6 +21,17 @@ public class Consulta {
 
     public Paciente getPaciente() {
         return paciente;
+    }
+
+
+    public HashMap<String, Object> returnConsulta() {
+        HashMap<String, Object> consulta = new HashMap<>();
+        consulta.put("Dia", getHorario().getDiaDaSemanaFormatado());
+        consulta.put("Data", getHorario().getDataFormatada());
+        consulta.put("Hora", getHorario().getHoraFormatada());
+        consulta.put("pacinte",getPaciente().returnPacient());
+
+        return consulta;
     }
 
 
