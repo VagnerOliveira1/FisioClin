@@ -11,9 +11,6 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.auth.User;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
@@ -40,7 +37,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @NonNull
     @Override
     public HorarioPacienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_doctor_item_horario, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_horario, parent, false);
         return new HorarioPacienteAdapter.ViewHolder(view);
     }
 

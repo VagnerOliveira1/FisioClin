@@ -8,7 +8,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
@@ -23,6 +22,8 @@ public class FirebaseRepository {
     private MutableLiveData<List<Horario>> mutableLiveDataHorarios = new MutableLiveData<>();
 
     private MutableLiveData<List<Consulta>> mutableLiveDataConsultas = new MutableLiveData<>();
+
+    private MutableLiveData<Consulta> mutableLiveDataConsultaPaciente = new MutableLiveData<>();
 
 
     public static  FirebaseFirestore getDB() {
@@ -61,8 +62,8 @@ public class FirebaseRepository {
         return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).set(consulta.returnConsulta());
     }
 
-    public static Task<DocumentSnapshot> getConsultaPacienteLogado() {
-        return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).get();
+    public static DocumentReference getConsultaPacienteLogado() {
+        return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada());
     }
 
     public static CollectionReference getConsultas() {
@@ -87,6 +88,17 @@ public class FirebaseRepository {
         });
         return mutableLiveDataConsultas;
     }
+
+    public LiveData<Consulta> getMutableLiveDataConsultaPaciente() {
+        getConsultaPacienteLogado().addSnapshotListener((documentSnapshot, e) -> {
+            mutableLiveDataConsultaPaciente.setValue(documentSnapshot.toObject(Consulta.class));
+        });
+
+        return mutableLiveDataConsultaPaciente;
+
+    }
+
+
 
 
 

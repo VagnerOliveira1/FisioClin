@@ -109,7 +109,7 @@ public class LoginPacientActivity extends AppCompatActivity {
                         FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
                             @Override
                             public void onSuccess(Void aVoid) {
-                                startActivity(new Intent(LoginPacientActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                             }
                         });
                 }

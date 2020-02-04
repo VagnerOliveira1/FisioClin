@@ -14,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.views.ConsultaPacienteActivity;
 
 public class MainPacientActivity extends AppCompatActivity {
 
@@ -48,7 +49,7 @@ public class MainPacientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainPacientActivity.this, HorarioPacienteActivity.class);
                 intent.putExtra("paciente", paciente);
-              startActivity(intent);
+               startActivity(intent);
 
             }
         });
@@ -56,7 +57,7 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewMinhasConsultas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                startActivity(new Intent(MainPacientActivity.this, ConsultaPacienteActivity.class));
             }
         });
     }

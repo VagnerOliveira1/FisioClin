@@ -27,7 +27,7 @@ import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.UUID;
 
-public class MainActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
+public class MainMedicoActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
     private ImageView imageViewDoctorPicture;
     private CardView cardViewNovoHorario, cardViewHorarios,cardViewMinhasConsultasMedico;
     private Horario horario;
@@ -38,7 +38,7 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_medico);
 
         imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
         cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
@@ -60,7 +60,7 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         cardViewNovoHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NovoHorarioController.alertaDeNovoHorario(MainActivity.this);
+                NovoHorarioController.alertaDeNovoHorario(MainMedicoActivity.this);
 
             }
         });
@@ -68,12 +68,12 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         cardViewHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this, HorarioDoctorActivity.class));
+                startActivity(new Intent(MainMedicoActivity.this, HorarioMedicoActivity.class));
             }
         });
 
         cardViewMinhasConsultasMedico.setOnClickListener(view -> {
-            startActivity(new Intent(MainActivity.this, ConsultaActivity.class));
+            startActivity(new Intent(MainMedicoActivity.this, ConsultaMedicoActivity.class));
         });
 
 

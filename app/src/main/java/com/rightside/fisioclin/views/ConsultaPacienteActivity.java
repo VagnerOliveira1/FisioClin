@@ -1,52 +1,58 @@
 package com.rightside.fisioclin.views;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.rightside.fisioclin.ConsultaActivity;
 import com.rightside.fisioclin.R;
-import com.rightside.fisioclin.adapter.ConsultaMedicoAdapter;
-import com.rightside.fisioclin.adapter.ConsultaPacienteAdapter;
 import com.rightside.fisioclin.models.Consulta;
-import com.rightside.fisioclin.repository.FirebaseRepository;
-import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
-import com.rightside.fisioclin.viewmodel.ViewModelConsultasPaciente;
+import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ConsultaPacienteActivity extends FragmentActivity {
 
-public class ConsultaPacienteActivity extends AppCompatActivity {
-
-    private List<Consulta> consultas ;
-    private ConsultaPacienteAdapter mAdapter;
-    private ViewModelConsultasPaciente viewModelConsultasPaciente;
+    private ViewModelConsultaPaciente viewModelConsultaPaciente;
+    private TextView textViewNomePacienteConsulta, textViewTelefonePacienteConsulta, textViewDataPacienteConsulta,
+    textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta;
+    private ImageView imageViewFotoPacienteConsulta;
+    private Consulta consulta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_paciente);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        consultas = new ArrayList<>();
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setHasFixedSize(true);
-        mAdapter = new ConsultaPacienteAdapter(this);
-        recyclerView.setAdapter(mAdapter);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
 
-        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mAdapter = new ConsultaPacienteAdapter( ConsultaPacienteActivity.this);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setAdapter(mAdapter);
+        textViewDataPacienteConsulta = findViewById(R.id.textview_data_consulta_paciente);
+        textViewNomePacienteConsulta = findViewById(R.id.textview_nome_paciente_consulta);
+        textViewDiaSemanaPacienteConsulta = findViewById(R.id.textview_dia_consulta_paciente);
+        textViewTelefonePacienteConsulta = findViewById(R.id.textview_telefone_paciente_consulta);
+        imageViewFotoPacienteConsulta = findViewById(R.id.imageView_foto_paciente_consulta);
+        textViewHoraPacienteConsulta = findViewById(R.id.textview_hora_consulta_paciente);
 
+        viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
 
-        viewModelConsultasPaciente.getConsultaPacienteLogado().observe(this, listaConsulta -> {
-            this.consultas = listaConsulta;
-            mAdapter.update(listaConsulta);
+        viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
+            this.consulta = consulta;
+            setText(consulta);
         });
 
+    }
 
+    private void setText(Consulta consulta) {
+        Paciente paciente = consulta.getPaciente();
+        Horario horario = consulta.getHorario();
+        textViewNomePacienteConsulta.setText(paciente.getName());
+        textViewHoraPacienteConsulta.setText(horario.getHoraFormatada());
+        textViewTelefonePacienteConsulta.setText(paciente.getPhoneNumber());
+        textViewDiaSemanaPacienteConsulta.setText(horario.getDiaDaSemanaFormatado());
+        textViewDataPacienteConsulta.setText(horario.getDataFormatada());
+        GeralUtils.mostraImagemCircular(this,imageViewFotoPacienteConsulta,paciente.getProfilePictureUrl());
     }
 }

@@ -14,7 +14,7 @@ import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ConsultaActivity extends FragmentActivity {
+public class ConsultaMedicoActivity extends FragmentActivity {
 
     private List<Consulta>  consultas ;
     private ConsultaMedicoAdapter mAdapter;
@@ -23,8 +23,8 @@ public class ConsultaActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_consulta);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        setContentView(R.layout.activity_consulta_medico);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
         consultas = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
@@ -32,7 +32,7 @@ public class ConsultaActivity extends FragmentActivity {
         recyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mAdapter = new ConsultaMedicoAdapter( ConsultaActivity.this);
+        mAdapter = new ConsultaMedicoAdapter( ConsultaMedicoActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 

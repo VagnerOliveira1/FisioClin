@@ -16,7 +16,7 @@ import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorarioDoctorActivity extends FragmentActivity {
+public class HorarioMedicoActivity extends FragmentActivity {
     private List<Horario> list;
     private HorarioMedicoAdapter mAdapter;
     private ViewModelHorarios viewModelHorarios;
@@ -24,10 +24,10 @@ public class HorarioDoctorActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_horario);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
         list = new ArrayList<>();
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mAdapter = new HorarioMedicoAdapter(this, HorarioDoctorActivity.this);
+        mAdapter = new HorarioMedicoAdapter(this, HorarioMedicoActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);

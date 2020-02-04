@@ -7,7 +7,7 @@
     android:background="#ffffff"
     android:orientation="vertical"
     android:weightSum="10"
-    tools:context=".MainActivity">
+    tools:context=".MainMedicoActivity">
 
 
     <RelativeLayout
@@ -170,7 +170,7 @@
                     android:id="@+id/cardVi"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Novo Horário"
+                    android:text="Consultas Marcadas"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"

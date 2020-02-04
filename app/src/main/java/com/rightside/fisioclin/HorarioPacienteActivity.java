@@ -26,7 +26,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_horario_paciente);
-            RecyclerView recyclerView = findViewById(R.id.recyclerView);
+            RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
             list = new ArrayList<>();
 
             Intent intent = getIntent();

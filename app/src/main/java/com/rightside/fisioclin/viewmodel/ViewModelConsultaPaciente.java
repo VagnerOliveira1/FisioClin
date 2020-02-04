@@ -11,18 +11,18 @@ import com.rightside.fisioclin.repository.FirebaseRepository;
 
 import java.util.List;
 
-public class ViewModelConsultasPaciente extends AndroidViewModel {
+public class ViewModelConsultaPaciente extends AndroidViewModel {
 
     private FirebaseRepository firebaseRepository;
 
-    public ViewModelConsultasPaciente(@NonNull Application application) {
+    public ViewModelConsultaPaciente(@NonNull Application application) {
         super(application);
         firebaseRepository = new FirebaseRepository();
     }
 
-    public LiveData<List<Consulta>> getConsultaPacienteLogado() {
-        return firebaseRepository.getMutableLiveDataConsultasPaciente();
-
+    public LiveData<Consulta> getConsulta() {
+        return firebaseRepository.getMutableLiveDataConsultaPaciente();
     }
+
 
 }

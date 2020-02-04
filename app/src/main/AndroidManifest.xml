@@ -11,7 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".views.ConsultaPacienteActivity"></activity>
         <activity android:name=".HorarioPacienteActivity" />
-        <activity android:name=".ConsultaActivity" />
+        <activity android:name=".ConsultaMedicoActivity" />
         <activity android:name=".MainPacientActivity" />
         <activity android:name=".LoginPacientActivity">
             <intent-filter>
@@ -20,8 +20,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HorarioDoctorActivity" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".HorarioMedicoActivity" />
+        <activity android:name=".MainMedicoActivity" />
     </application>
 
 </manifest>

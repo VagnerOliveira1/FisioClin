@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,9 +15,12 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.opencensus.internal.StringUtils;
 
 public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAdapter.ViewHolder>  {
     private List<Consulta> consultas = new ArrayList<>();
@@ -40,10 +44,11 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
         Paciente paciente = consultas.get(position).getPaciente();
 
         holder.textViewData.setText(horario.getDataFormatada());
-        holder.textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
-        holder.textViewNomePacient.setText(paciente.getName());
+        holder.textViewDiaSemana.setText(GeralUtils.capitalize(horario.getDiaDaSemanaFormatado()));
+        holder.textViewNomePacient.setText(GeralUtils.capitalize(paciente.getName()));
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewTelefonePacient.setText(paciente.getPhoneNumber());
+        GeralUtils.mostraImagemCircular(context, holder.imageViewFotoPaciente,paciente.getProfilePictureUrl());
 
     }
 
@@ -64,6 +69,7 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
         private TextView textViewDiaSemana;
         private TextView textViewNomePacient;
         private TextView textViewTelefonePacient;
+        private ImageView imageViewFotoPaciente;
         private CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +79,7 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
             textViewHora = itemView.findViewById(R.id.consulta_hora_medico);
             textViewNomePacient = itemView.findViewById(R.id.consulta_nome_paciente_medico);
             textViewTelefonePacient = itemView.findViewById(R.id.consulta_telefone_paciente_medico);
+            imageViewFotoPaciente = itemView.findViewById(R.id.image_view_foto_paciente_medico);
             cardView = itemView.findViewById(R.id.card_view_consultas);
 
         }
