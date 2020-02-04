@@ -19,7 +19,7 @@ public class Horario implements Serializable {
     private String horaFormatada;
     private String dataFormatada;
     private String diaDaSemanaFormatado;
-    private Boolean isMarcado = false;
+    private boolean marcado = false;
     @DocumentId
     private String id;
 
@@ -115,12 +115,12 @@ public class Horario implements Serializable {
         this.diaDaSemanaFormatado = new SimpleDateFormat("EEEE", new Locale("pt","BR")).format(getDate());;
     }
 
-    public Boolean getMarcado() {
-        return isMarcado;
+    public boolean isMarcado() {
+        return marcado;
     }
 
-    public void setMarcado(Boolean marcado) {
-        isMarcado = marcado;
+    public void setMarcado(boolean marcado) {
+        this.marcado = marcado;
     }
 
     public Calendar calendar() {
@@ -153,7 +153,7 @@ public class Horario implements Serializable {
         map.put("horaFormatada", getHoraFormatada());
         map.put("diaDaSemanaFormatado", getDiaDaSemanaFormatado());
         map.put("date", getDate());
-        map.put("isMarcado",getMarcado());
+        map.put("marcado",isMarcado());
         return map;
     }
 

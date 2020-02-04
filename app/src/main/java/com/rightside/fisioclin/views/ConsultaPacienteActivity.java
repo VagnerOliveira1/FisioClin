@@ -27,7 +27,6 @@ public class ConsultaPacienteActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_consulta_paciente);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
 
         textViewDataPacienteConsulta = findViewById(R.id.textview_data_consulta_paciente);
         textViewNomePacienteConsulta = findViewById(R.id.textview_nome_paciente_consulta);
@@ -46,6 +45,8 @@ public class ConsultaPacienteActivity extends FragmentActivity {
     }
 
     private void setText(Consulta consulta) {
+
+        if(consulta != null) {
         Paciente paciente = consulta.getPaciente();
         Horario horario = consulta.getHorario();
         textViewNomePacienteConsulta.setText(paciente.getName());
@@ -54,5 +55,9 @@ public class ConsultaPacienteActivity extends FragmentActivity {
         textViewDiaSemanaPacienteConsulta.setText(horario.getDiaDaSemanaFormatado());
         textViewDataPacienteConsulta.setText(horario.getDataFormatada());
         GeralUtils.mostraImagemCircular(this,imageViewFotoPacienteConsulta,paciente.getProfilePictureUrl());
+        } else {
+
+        }
+
     }
 }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.graphics.Color;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -43,7 +44,13 @@ public class MarcarConsultaController {
         alerta.setTitle("Marcar Horário!").setMessage("Escolher esse horário?").setPositiveButton("SIM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseRepository.saveConsulta(consulta);
+                if(!consulta.getHorario().isMarcado()) {
+                    FirebaseRepository.atualizaHorarioMarcado(consulta.getHorario());
+                    FirebaseRepository.saveConsulta(consulta);
+                } else {
+                    Toast.makeText(activity, "Horário indisponivel, tente outro.", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         }).setNegativeButton("Cancelar", null).show();
