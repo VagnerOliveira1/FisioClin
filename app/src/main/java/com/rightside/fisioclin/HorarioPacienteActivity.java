@@ -12,6 +12,7 @@ import android.util.Log;
 import com.rightside.fisioclin.adapter.HorarioPacienteAdapter;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         private List<Horario> list;
         private HorarioPacienteAdapter mAdapter;
         private ViewModelHorarios viewModelHorarios;
+        private ViewModelConsultaPaciente viewModelConsultaPaciente;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,12 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(mAdapter);
             viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
+            viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
+
+            viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
+                mAdapter.setConsulta(consulta);
+            });
+
             viewModelHorarios.getHorarios().observe(this, listaHorario -> {
                 this.list = listaHorario;
                 mAdapter.update(listaHorario);

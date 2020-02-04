@@ -26,6 +26,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     private Context context;
     private FragmentActivity fragmentActivity;
     private Paciente paciente;
+    private Consulta consulta;
 
 
 
@@ -45,9 +46,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @Override
     public void onBindViewHolder(@NonNull HorarioPacienteAdapter.ViewHolder holder, int position) {
 
-            Horario horario = horarios.get(position);
 
-                if(!horario.getMarcado()) {
 
                     holder.textViewHora.setText(String.valueOf(horarios.get(position).getHoraFormatada()));
                     holder.textViewData.setText(String.valueOf(horarios.get(position).getDataFormatada()));
@@ -55,15 +54,18 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
                     holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
-                            horario.setMarcado(true);
-                            salvaConsulta(position);
-
+                            if (horarios.get(position).isMarcado() || consulta != null) {
+                                Toast.makeText(context, "Não foi possivel marcar a consulta!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                salvaConsulta(position);
+                                return true;
+                            }
                             return false;
                         }
                     });
                 }
 
-        }
+
 
 
 
@@ -84,6 +86,10 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     public void update(List<Horario> horarios) {
         this.horarios = horarios;
         notifyDataSetChanged();
+    }
+
+    public void setConsulta(Consulta consultaUsuario) {
+        this.consulta = consultaUsuario;
     }
 
 

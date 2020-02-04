@@ -2,14 +2,18 @@ package com.rightside.fisioclin.repository;
 
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
@@ -75,6 +79,11 @@ public class FirebaseRepository {
 
     }
 
+    public static Task<Void> atualizaHorarioMarcado(Horario horario) {
+        horario.setMarcado(true);
+       return getHorarios().document(horario.getId()).update(horario.map());
+    }
+
     public static Task<Void> deleteHorarios(String id) {
        return getHorarios().document(id).delete();
     }
@@ -97,6 +106,8 @@ public class FirebaseRepository {
         getConsultaPacienteLogado().addSnapshotListener((documentSnapshot, e) -> {
             mutableLiveDataConsultaPaciente.setValue(documentSnapshot.toObject(Consulta.class));
         });
+
+
 
         return mutableLiveDataConsultaPaciente;
 
