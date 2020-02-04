@@ -19,6 +19,7 @@ import com.rightside.fisioclin.MainPacientActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.views.FichaPacienteActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +66,7 @@ public class PacientVerificationDataFragment extends DialogFragment {
                 @Override
                 public void onSuccess(Void aVoid) {
                     startActivity(new Intent(getContext(), MainPacientActivity.class));
+//                   startActivity(new Intent(getContext(), FichaPacienteActivity.class));
                 }
             });
         });
