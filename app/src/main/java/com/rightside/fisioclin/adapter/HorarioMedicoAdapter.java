@@ -18,12 +18,12 @@ import com.rightside.fisioclin.models.Horario;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HorarioAdapter extends RecyclerView.Adapter<HorarioAdapter.ViewHolder> {
+public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdapter.ViewHolder> {
     private List<Horario> horarios = new ArrayList<>();
     private Context context;
     private FragmentActivity fragmentActivity;
 
-    public HorarioAdapter(Context context, FragmentActivity activity) {
+    public HorarioMedicoAdapter(Context context, FragmentActivity activity) {
         this.context = context;
         this.fragmentActivity = activity;
     }

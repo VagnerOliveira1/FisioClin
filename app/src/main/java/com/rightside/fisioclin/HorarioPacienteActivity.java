@@ -1,18 +1,17 @@
 package com.rightside.fisioclin;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.rightside.fisioclin.adapter.HorarioAdapter;
 import com.rightside.fisioclin.adapter.HorarioPacienteAdapter;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
@@ -29,8 +28,12 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             setContentView(R.layout.activity_horario_paciente);
             RecyclerView recyclerView = findViewById(R.id.recyclerView);
             list = new ArrayList<>();
+
+            Intent intent = getIntent();
+            Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
+
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-            mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this);
+            mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, paciente);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(mAdapter);
             viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
@@ -42,12 +45,8 @@ public class HorarioPacienteActivity extends AppCompatActivity {
 
 
 
+
                 Log.d("teste", String.valueOf(list.size()));
-
-
-
-
-
 
 
         }

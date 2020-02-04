@@ -12,7 +12,7 @@
         android:padding="8dp">
 
         <TextView
-            android:id="@+id/consulta_data"
+            android:id="@+id/consulta_data_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -22,7 +22,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/consulta_hora"
+            android:id="@+id/consulta_hora_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -32,7 +32,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/consulta_dia_semana"
+            android:id="@+id/consulta_dia_semana_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -40,7 +40,7 @@
             android:textSize="16sp"
             android:textStyle="bold" />
         <TextView
-            android:id="@+id/consulta_nome_paciente"
+            android:id="@+id/consulta_nome_paciente_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
@@ -50,7 +50,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/consulta_telefone_paciente"
+            android:id="@+id/consulta_telefone_paciente_medico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"

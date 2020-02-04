@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 import java.util.List;

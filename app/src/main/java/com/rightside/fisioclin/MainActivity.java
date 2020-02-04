@@ -29,7 +29,7 @@ import java.util.UUID;
 
 public class MainActivity extends FragmentActivity implements HourFragment.TimePickerListener, DatePickerDialog.OnDateSetListener {
     private ImageView imageViewDoctorPicture;
-    private CardView cardViewNovoHorario, cardViewHorarios;
+    private CardView cardViewNovoHorario, cardViewHorarios,cardViewMinhasConsultasMedico;
     private Horario horario;
     private TextView textViewNameDoctor;
     private int hour,min;
@@ -44,6 +44,7 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
         cardViewNovoHorario = findViewById(R.id.cardview_novo_horario);
         cardViewHorarios = findViewById(R.id.cardview_horarios);
         textViewNameDoctor = findViewById(R.id.textView_name_doctor);
+        cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
 
         FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -70,6 +71,11 @@ public class MainActivity extends FragmentActivity implements HourFragment.TimeP
                 startActivity(new Intent(MainActivity.this, HorarioDoctorActivity.class));
             }
         });
+
+        cardViewMinhasConsultasMedico.setOnClickListener(view -> {
+            startActivity(new Intent(MainActivity.this, ConsultaActivity.class));
+        });
+
 
 
 

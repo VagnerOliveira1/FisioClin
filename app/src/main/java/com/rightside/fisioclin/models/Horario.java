@@ -135,7 +135,7 @@ public class Horario implements Serializable {
     public HashMap<String, Object> map(){
         HashMap<String, Object> map = new HashMap<>();
         map.put("year", getYear());
-        map.put("mounth", getMonth());
+        map.put("month", getMonth());
         map.put("dayOfMonth", getDayOfMonth());
         map.put("hour", getHour());
         map.put("minute", getMinute());

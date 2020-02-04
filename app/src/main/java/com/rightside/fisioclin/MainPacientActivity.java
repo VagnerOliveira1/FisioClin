@@ -21,6 +21,7 @@ public class MainPacientActivity extends AppCompatActivity {
     private TextView textViewNomePaciente;
     private CardView cardViewNovaConsulta;
     private CardView cardViewMinhasConsultas;
+    private Paciente paciente;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,8 @@ public class MainPacientActivity extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()) {
-                    Paciente paciente = documentSnapshot.toObject(Paciente.class);
-                    alteraInformacaoPerfil(paciente);
+                     paciente = documentSnapshot.toObject(Paciente.class);
+                     alteraInformacaoPerfil(paciente);
                 }
             }
         });
@@ -45,7 +46,9 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewNovaConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainPacientActivity.this, HorarioPacienteActivity.class));
+                Intent intent = new Intent(MainPacientActivity.this, HorarioPacienteActivity.class);
+                intent.putExtra("paciente", paciente);
+              startActivity(intent);
 
             }
         });
@@ -53,7 +56,7 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewMinhasConsultas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainPacientActivity.this, ConsultaActivity.class));
+
             }
         });
     }

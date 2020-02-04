@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.auth.User;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
@@ -26,14 +27,14 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     private List<Horario> horarios = new ArrayList<>();
     private Context context;
     private FragmentActivity fragmentActivity;
-    final FirebaseUser pacienteLogado = FirebaseAuth.getInstance().getCurrentUser();
+    private Paciente paciente;
 
 
 
-
-    public HorarioPacienteAdapter(Context context, FragmentActivity activity) {
+    public HorarioPacienteAdapter(Context context, FragmentActivity activity, Paciente paciente) {
         this.context = context;
         this.fragmentActivity = activity;
+        this.paciente = paciente;
     }
 
     @NonNull
@@ -60,13 +61,6 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
 
     private void salvaConsulta(int position) {
         Consulta consulta = new Consulta();
-        Paciente paciente = new Paciente();
-        paciente.setEmail(pacienteLogado.getEmail());
-        paciente.setId(pacienteLogado.getUid());
-        paciente.setName(pacienteLogado.getDisplayName());
-        paciente.setPhoneNumber(pacienteLogado.getPhoneNumber());
-        paciente.setProfilePictureUrl(pacienteLogado.getPhotoUrl().toString());
-
         consulta.setHorario(horarios.get(position));
         consulta.setPaciente(paciente);
         MarcarConsultaController.marcarConsulta(consulta,fragmentActivity);

@@ -11,26 +11,24 @@ public class Consulta {
         return horario;
     }
 
+
     public void setHorario(Horario horario) {
         this.horario = horario;
-    }
-
-    public void setPaciente(Paciente paciente) {
-        this.paciente = paciente;
     }
 
     public Paciente getPaciente() {
         return paciente;
     }
 
+    public void setPaciente(Paciente paciente) {
+        this.paciente = paciente;
+    }
+
 
     public HashMap<String, Object> returnConsulta() {
         HashMap<String, Object> consulta = new HashMap<>();
-        consulta.put("Dia", getHorario().getDiaDaSemanaFormatado());
-        consulta.put("Data", getHorario().getDataFormatada());
-        consulta.put("Hora", getHorario().getHoraFormatada());
-        consulta.put("pacinte",getPaciente().returnPacient());
-
+        consulta.put("horario", horario);
+        consulta.put("paciente", paciente);
         return consulta;
     }
 

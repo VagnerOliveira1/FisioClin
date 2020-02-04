@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
@@ -17,7 +18,6 @@ import com.rightside.fisioclin.models.Paciente;
 import java.util.List;
 
 public class FirebaseRepository {
-
 
 
     private MutableLiveData<List<Horario>> mutableLiveDataHorarios = new MutableLiveData<>();
@@ -56,30 +56,18 @@ public class FirebaseRepository {
 
     }
 
-
     public static Task<Void> saveConsulta(final Consulta consulta) {
-        return getDB().collection("consultas").document(consulta.getPaciente().getId()).set(consulta.returnConsulta());
+        return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).set(consulta.returnConsulta());
+    }
+
+    public static Task<DocumentSnapshot> getConsultaPacienteLogado() {
+        return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).get();
     }
 
     public static CollectionReference getConsultas() {
         return getDB().collection("consultas");
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     public static Task<Void> deleteHorarios(String id) {
        return getHorarios().document(id).delete();

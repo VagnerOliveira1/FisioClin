@@ -16,13 +16,10 @@ public class MarcarConsultaController {
     public static void marcarConsulta(Consulta consulta, FragmentActivity activity) {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
 
-
-
-
         TextView horarioData = new TextView(activity);
         TextView horarioDiaSemana = new TextView(activity);
         TextView horarioHora = new TextView(activity);
-        horarioData.setText(consulta.getHorario().getDataFormatada());
+        horarioData.setText(consulta.getHorario().getHoraFormatada());
         horarioDiaSemana.setText(consulta.getHorario().getDiaDaSemanaFormatado());
         horarioHora.setText(consulta.getHorario().getHoraFormatada());
 
@@ -35,16 +32,12 @@ public class MarcarConsultaController {
         horarioHora.setPadding(50,10,50,10);
         horarioHora.setTextColor(Color.BLACK);
         horarioHora.setTextSize(16);
-
-
         LinearLayout container = new LinearLayout(activity.getApplicationContext());
         container.setOrientation(LinearLayout.VERTICAL);
         container.addView(horarioData);
         container.addView(horarioDiaSemana);
         container.addView(horarioHora);
-
         alerta.setView(container);
-
 
 
         alerta.setTitle("Marcar Horário!").setMessage("Escolher esse horário?").setPositiveButton("SIM", new DialogInterface.OnClickListener() {
