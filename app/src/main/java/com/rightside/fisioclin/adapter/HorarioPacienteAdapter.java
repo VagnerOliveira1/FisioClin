@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -43,24 +44,37 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
 
     @Override
     public void onBindViewHolder(@NonNull HorarioPacienteAdapter.ViewHolder holder, int position) {
-        holder.textViewHora.setText(String.valueOf(horarios.get(position).getHoraFormatada()));
-        holder.textViewData.setText(String.valueOf(horarios.get(position).getDataFormatada()));
-        holder.textViewDiaSemana.setText(String.valueOf(horarios.get(position).getDiaDaSemanaFormatado()));
-        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                salvaConsulta(position);
-                return false;
-            }
-        });
 
-    }
+            Horario horario = horarios.get(position);
+
+                if(!horario.getMarcado()) {
+
+                    holder.textViewHora.setText(String.valueOf(horarios.get(position).getHoraFormatada()));
+                    holder.textViewData.setText(String.valueOf(horarios.get(position).getDataFormatada()));
+                    holder.textViewDiaSemana.setText(String.valueOf(horarios.get(position).getDiaDaSemanaFormatado()));
+                    holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+                        @Override
+                        public boolean onLongClick(View view) {
+                            horario.setMarcado(true);
+                            salvaConsulta(position);
+
+                            return false;
+                        }
+                    });
+                }
+
+        }
+
+
 
     private void salvaConsulta(int position) {
         Consulta consulta = new Consulta();
         consulta.setHorario(horarios.get(position));
         consulta.setPaciente(paciente);
+
+
         MarcarConsultaController.marcarConsulta(consulta,fragmentActivity);
+
     }
 
     @Override

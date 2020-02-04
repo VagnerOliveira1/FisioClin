@@ -1,5 +1,7 @@
 package com.rightside.fisioclin.repository;
 
+import android.widget.Toast;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -54,11 +56,13 @@ public class FirebaseRepository {
 
 
     public static CollectionReference getHorarios() {
+
         return getDB().collection("horarios");
 
     }
 
     public static Task<Void> saveConsulta(final Consulta consulta) {
+
         return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).set(consulta.returnConsulta());
     }
 
