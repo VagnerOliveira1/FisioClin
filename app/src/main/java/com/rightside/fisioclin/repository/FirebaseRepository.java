@@ -24,6 +24,7 @@ public class FirebaseRepository {
 
     private MutableLiveData<List<Consulta>> mutableLiveDataConsultas = new MutableLiveData<>();
 
+
     public static  FirebaseFirestore getDB() {
         return FirebaseFirestore.getInstance();
     }
@@ -86,6 +87,8 @@ public class FirebaseRepository {
         });
         return mutableLiveDataConsultas;
     }
+
+
 
 
 
