@@ -60,6 +60,12 @@ dependencies {
 
     implementation 'com.github.santalu:mask-edittext:1.0.2'
 
+    implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
+
+    implementation 'com.github.whilu.CustomButton:library:1.0.0'
+
+
+
 
 
 }

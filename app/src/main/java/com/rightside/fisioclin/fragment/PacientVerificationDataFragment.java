@@ -52,7 +52,6 @@ public class PacientVerificationDataFragment extends DialogFragment {
         buttonConfirmarPacient = view.findViewById(R.id.button_confirmar);
         Bundle bundle = getArguments();
         Paciente paciente = (Paciente) bundle.get("paciente");
-
         pacientName.setText(paciente.getName());
         pacientEmail.setText(paciente.getEmail());
         textInputEditTextPacientPhone.setText(paciente.getPhoneNumber());
@@ -65,8 +64,8 @@ public class PacientVerificationDataFragment extends DialogFragment {
             FirebaseRepository.savePacient(paciente).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                    startActivity(new Intent(getContext(), MainPacientActivity.class));
-//                   startActivity(new Intent(getContext(), FichaPacienteActivity.class));
+                   // startActivity(new Intent(getContext(), MainPacientActivity.class));
+                    startActivity(new Intent(getContext(), FichaPacienteActivity.class));
                 }
             });
         });
