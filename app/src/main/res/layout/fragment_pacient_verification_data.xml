@@ -2,52 +2,247 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:whilu="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="top"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".fragment.PacientVerificationDataFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <include layout="@layout/toolbar" />
-
-    <TextView
-        android:id="@+id/textview_paciente_nome_verifica"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:text="Matheus Lima da Silva" />
+        android:layout_margin="5dp"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/textview_paciente_email_verifica"
-        android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Complete sua ficha, ela é importante para melhorar o nosso atendimento."
+            android:textColor="@drawable/txt_selector"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutNomePaciente"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:text="Email" />
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNomePaciente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editNomePaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nome Completo"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutProfissaoPaciente"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutProfissaoPaciente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editProfissaoPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Sua Profissão"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutQueixaPaciente"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutQueixaPaciente"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintVertical_chainStyle="packed">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/editQueixaPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Queixa Pricipal"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
 
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutDiagnosticoMedico"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp">
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="16dp"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutDiagnosticoMedico"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edittext_phone_pacient_verifica"
+            android:id="@+id/editDiagnosticoMedico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:hint="Telefone:" />
+            android:hint="Diagnostico Médico"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/button_confirmar"
-        android:layout_width="120dp"
+
+    <LinearLayout
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:paddingTop="20dp"
-        android:text="Confirmar" />
+        android:layout_margin="8dp"
+        android:background="@drawable/border_layout"
+
+        android:orientation="horizontal">
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/editTelefonePaciente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:hint="(xx) xxxxx xxxx"
+            android:inputType="number"
+            app:met_mask="(##) ##### ####" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/editDataNascPaciente"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
+            android:hint=" xx/ xx/ xxxxx"
+            android:inputType="date"
+            app:met_mask="##/ ##/ ####" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Sexo" />
+
+            <io.ghyeok.stickyswitch.widget.StickySwitch
+                android:id="@+id/sticky_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                app:ss_animationDuration="300"
+                app:ss_animationType="line"
+                app:ss_iconPadding="18dp"
+                app:ss_iconSize="22dp"
+                app:ss_leftIcon="@drawable/ic_male"
+                app:ss_leftText="M"
+                app:ss_rightIcon="@drawable/ic_fem"
+                app:ss_rightText="F"
+                app:ss_selectedTextSize="14sp"
+                app:ss_sliderBackgroundColor="@color/colorStickyBack"
+                app:ss_switchColor="@color/colorSticky"
+                app:ss_textColor="@color/colorStickyBack"
+                app:ss_textSize="16sp" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="115dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/mostraNumeroSessoes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Numero de sessões"
+                android:textSize="16sp" />
+
+            <NumberPicker
+                android:id="@+id/numberPicker"
+                android:layout_width="wrap_content"
+                android:layout_height="90dp"
+                android:layout_gravity="center" />
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btnSalvaFichaPaciente"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:background="@drawable/botao_salva_ficha"
+            android:padding="8dp"
+            android:text="Salvar"
+            android:textColor="@drawable/txt_selector"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 
 
 </LinearLayout>

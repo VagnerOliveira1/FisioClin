@@ -86,7 +86,7 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if(account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                if(account.getEmail().equals("matheusldasilva200818@gmail.com")) {
                     checkDoutor();
                 } else {
                     checkPacient();
@@ -125,10 +125,7 @@ public class LoginPacientActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()) {
-
-                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(),
-                            firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail(), firebaseUser.getPhoneNumber());
-
+                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
                     PacientVerificationDataFragment.pacientVerificationDataFragment(paciente).show(getSupportFragmentManager(), "pacientVerification");
 
                 }

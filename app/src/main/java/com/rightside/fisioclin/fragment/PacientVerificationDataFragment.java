@@ -1,7 +1,9 @@
 package com.rightside.fisioclin.fragment;
 
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -11,7 +13,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
@@ -19,16 +23,28 @@ import com.rightside.fisioclin.MainPacientActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
-import com.rightside.fisioclin.views.FichaPacienteActivity;
+import com.santalu.maskedittext.MaskEditText;
+
+import org.jetbrains.annotations.NotNull;
+
+import io.ghyeok.stickyswitch.widget.StickySwitch;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PacientVerificationDataFragment extends DialogFragment {
+public class PacientVerificationDataFragment extends DialogFragment implements NumberPicker.OnValueChangeListener {
 
-    private TextInputEditText textInputEditTextPacientPhone;
-    private TextView pacientName, pacientEmail;
-    private Button buttonConfirmarPacient;
+    private MaskEditText maskEditTextTelefone;
+    private MaskEditText maskEditTextDataNasc;
+    private TextInputEditText editTextNomePaciente;
+    private TextInputEditText editTextProfissaoPaciente;
+    private TextInputEditText editTextQueixaPrincipal;
+    private TextInputEditText editTextDiagnosticoMedico;
+    private StickySwitch stickySwitchSexoPaciente;
+    private Button buttonSalvaFichaPaciente;
+    private int sessoes = 1;
+    private TextView mostraNumeroSessoes;
+    private String sexo = "";
 
 
     public static PacientVerificationDataFragment pacientVerificationDataFragment(Paciente paciente) {
@@ -46,26 +62,60 @@ public class PacientVerificationDataFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pacient_verification_data, container, false);
 
-        textInputEditTextPacientPhone = view.findViewById(R.id.edittext_phone_pacient_verifica);
-        pacientEmail = view.findViewById(R.id.textview_paciente_email_verifica);
-        pacientName = view.findViewById(R.id.textview_paciente_nome_verifica);
-        buttonConfirmarPacient = view.findViewById(R.id.button_confirmar);
+        maskEditTextTelefone = view.findViewById(R.id.editTelefonePaciente);
+        maskEditTextDataNasc = view.findViewById(R.id.editDataNascPaciente);
+        editTextNomePaciente = view.findViewById(R.id.editNomePaciente);
+        editTextProfissaoPaciente = view.findViewById(R.id.editProfissaoPaciente);
+        editTextQueixaPrincipal = view.findViewById(R.id.editQueixaPaciente);
+        editTextDiagnosticoMedico = view.findViewById(R.id.editDiagnosticoMedico);
+        stickySwitchSexoPaciente = view.findViewById(R.id.sticky_switch);
+        buttonSalvaFichaPaciente = view.findViewById(R.id.btnSalvaFichaPaciente);
+        mostraNumeroSessoes = view.findViewById(R.id.mostraNumeroSessoes);
+        NumberPicker numberPicker = view.findViewById(R.id.numberPicker);
+        editTextProfissaoPaciente.requestFocus();
+
         Bundle bundle = getArguments();
         Paciente paciente = (Paciente) bundle.get("paciente");
-        pacientName.setText(paciente.getName());
-        pacientEmail.setText(paciente.getEmail());
-        textInputEditTextPacientPhone.setText(paciente.getPhoneNumber());
+        paciente.setSessoes("0");;
+        numberPicker.setMinValue(1);
+        numberPicker.setMaxValue(30);
+        numberPicker.setOnValueChangedListener(this);
 
-        buttonConfirmarPacient.setOnClickListener((v) -> {
+        stickySwitchSexoPaciente.setSwitchColor(Color.GREEN);
+        stickySwitchSexoPaciente.setSliderBackgroundColor(Color.GRAY);
+        stickySwitchSexoPaciente.setDirection(StickySwitch.Direction.RIGHT);
+        stickySwitchSexoPaciente.setActivated(true);
 
-            String number = textInputEditTextPacientPhone.getText().toString();
-            paciente.setPhoneNumber(number);
+
+
+        editTextNomePaciente.setText(paciente.getName());
+        maskEditTextTelefone.setText(paciente.getPhoneNumber());
+
+        stickySwitchSexoPaciente.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
+            @Override
+            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
+                Toast.makeText(getContext(), "Selecionado "+ text,Toast.LENGTH_LONG).show();
+                sexo = text;
+            }
+        });
+
+
+        buttonSalvaFichaPaciente.setOnClickListener((v) -> {
+
+            paciente.setName(editTextNomePaciente.getText().toString());
+            paciente.setPhoneNumber(maskEditTextTelefone.getText().toString());
+            paciente.setSexo(verificaSexo(sexo));
+            paciente.setDataNascimento(maskEditTextDataNasc.getText().toString());
+            paciente.setDescricaoMedica(editTextDiagnosticoMedico.getText().toString());
+            paciente.setQueixa(editTextQueixaPrincipal.getText().toString());
+            paciente.setSessoes(String.valueOf(sessoes));
+            paciente.setProfissao(editTextProfissaoPaciente.getText().toString());
+
 
             FirebaseRepository.savePacient(paciente).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
-                   // startActivity(new Intent(getContext(), MainPacientActivity.class));
-                    startActivity(new Intent(getContext(), FichaPacienteActivity.class));
+                    startActivity(new Intent(getContext(), MainPacientActivity.class));
                 }
             });
         });
@@ -73,5 +123,28 @@ public class PacientVerificationDataFragment extends DialogFragment {
         return view;
 
     }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+       sessoes = newVal;
+       mostraNumeroSessoes.setText("Número de sessões: " + newVal);
+
+    }
+
+
+    private String verificaSexo(String sexo) {
+         return sexo.equalsIgnoreCase("m") ? "Masculino" : "Feminino";
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog dialog = getDialog();
+        if (dialog != null) {
+            dialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
+    }
+
 
 }
