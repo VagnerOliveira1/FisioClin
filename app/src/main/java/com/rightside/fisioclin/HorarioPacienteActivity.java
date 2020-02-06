@@ -54,15 +54,16 @@ public class HorarioPacienteActivity extends AppCompatActivity {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     if(tab.getPosition() == 0) {
-                        Toast.makeText(HorarioPacienteActivity.this, "segunda", Toast.LENGTH_SHORT).show();
+                        observerHorarioDia("segunda-feira");
                     } else if (tab.getPosition() == 1) {
+                        observerHorarioDia("terça-feira");
 
                     } else if(tab.getPosition() == 2) {
-
+                        observerHorarioDia("quarta-feira");
                     } else if(tab.getPosition() == 3) {
-
+                        observerHorarioDia("quinta-feira");
                     } else if(tab.getPosition() == 4) {
-
+                        observerHorarioDia("sexta-feira");
                     }
                 }
 
@@ -82,18 +83,19 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             });
 
 
-            viewModelHorarios.getHorarios(diaSemana).observe(this, listaHorario -> {
-                this.list = listaHorario;
-                mAdapter.update(listaHorario);
-            });
-
-
-
-
-
-                Log.d("teste", String.valueOf(list.size()));
-
 
         }
 
+    public void observerHorarioDia(String dia) {
+        viewModelHorarios.getHorarios(dia).observe(this, listaHorario -> {
+            this.list = listaHorario;
+            mAdapter.update(listaHorario);
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        observerHorarioDia("segunda-feira");
+    }
 }
