@@ -1,19 +1,13 @@
 package com.rightside.fisioclin.repository;
 
-import android.widget.Toast;
-
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
@@ -41,7 +35,8 @@ public class FirebaseRepository {
     }
 
     public static void saveHour(Horario horario) {
-        getDB().collection("horarios").document(horario.getId()).set(horario.map());
+        getDB().collection("horarios").document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).set(horario.map());
+
     }
     public static Task<Void> saveDoctor(final Medico medico) {
         return getDB().collection("medicos").document(medico.getId()).set(medico.returnDoctor());
@@ -81,16 +76,16 @@ public class FirebaseRepository {
 
     public static Task<Void> atualizaHorarioMarcado(Horario horario) {
         horario.setMarcado(true);
-       return getHorarios().document(horario.getId()).update(horario.map());
+       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).update(horario.map());
     }
 
-    public static Task<Void> deleteHorarios(String id) {
-       return getHorarios().document(id).delete();
+    public static Task<Void> deleteHorarios(Horario horario) {
+       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).delete();
     }
 
-    public LiveData<List<Horario>> getMutableLiveData() {
-        getHorarios().addSnapshotListener((queryDocumentSnapshots, e) -> {
-            mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));
+    public LiveData<List<Horario>> getMutableLiveData(String diaSemana) {
+        getHorarios().document(diaSemana).collection("horariosID").addSnapshotListener((queryDocumentSnapshots, e) -> {
+           mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));
         });
         return mutableLiveDataHorarios;
     }

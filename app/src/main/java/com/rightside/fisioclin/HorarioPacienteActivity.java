@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.google.android.material.tabs.TabLayout;
 import com.rightside.fisioclin.adapter.HorarioPacienteAdapter;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
@@ -23,6 +25,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         private HorarioPacienteAdapter mAdapter;
         private ViewModelHorarios viewModelHorarios;
         private ViewModelConsultaPaciente viewModelConsultaPaciente;
+        private String diaSemana = "segunda-feira";
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
 
             Intent intent = getIntent();
             Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
-
+            TabLayout tabLayout = findViewById(R.id.tabLayout_navigation_paciente);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, paciente);
             recyclerView.setLayoutManager(mLayoutManager);
@@ -41,11 +44,45 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
             viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
 
+            tabLayout.addTab(tabLayout.newTab().setText("Segunda"));
+            tabLayout.addTab(tabLayout.newTab().setText("Terça"));
+            tabLayout.addTab(tabLayout.newTab().setText("Quarta"));
+            tabLayout.addTab(tabLayout.newTab().setText("Quinta"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sexta"));
+
+            tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    if(tab.getPosition() == 0) {
+                        Toast.makeText(HorarioPacienteActivity.this, "segunda", Toast.LENGTH_SHORT).show();
+                    } else if (tab.getPosition() == 1) {
+
+                    } else if(tab.getPosition() == 2) {
+
+                    } else if(tab.getPosition() == 3) {
+
+                    } else if(tab.getPosition() == 4) {
+
+                    }
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+
+                }
+            });
+
             viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
                 mAdapter.setConsulta(consulta);
             });
 
-            viewModelHorarios.getHorarios().observe(this, listaHorario -> {
+
+            viewModelHorarios.getHorarios(diaSemana).observe(this, listaHorario -> {
                 this.list = listaHorario;
                 mAdapter.update(listaHorario);
             });
