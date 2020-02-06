@@ -10,6 +10,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
@@ -65,6 +66,10 @@ public class FirebaseRepository {
         return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).set(consulta.returnConsulta());
     }
 
+    public static Task<Void> saveFicha(final Ficha ficha) {
+        return getDB().collection("fichas").document(ficha.getConsulta().getPaciente().getId()).set(ficha.returnFicha());
+    }
+
     public static DocumentReference getConsultaPacienteLogado() {
         return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada());
     }
@@ -82,6 +87,7 @@ public class FirebaseRepository {
     public static Task<Void> deleteHorarios(Horario horario) {
        return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).delete();
     }
+
 
     public LiveData<List<Horario>> getMutableLiveData(String diaSemana) {
         getHorarios().document(diaSemana).collection("horariosID").addSnapshotListener((queryDocumentSnapshots, e) -> {

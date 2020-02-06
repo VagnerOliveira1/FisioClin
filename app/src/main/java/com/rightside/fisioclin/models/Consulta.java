@@ -1,11 +1,13 @@
 package com.rightside.fisioclin.models;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Consulta {
 
     private Horario horario;
     private Paciente paciente;
+    private String comentarioPosConsulta;
 
     public Horario getHorario() {
         return horario;

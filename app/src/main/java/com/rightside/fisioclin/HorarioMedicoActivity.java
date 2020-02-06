@@ -98,6 +98,6 @@ public class HorarioMedicoActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
+        observerHorarioDia("segunda-feira");
     }
 }

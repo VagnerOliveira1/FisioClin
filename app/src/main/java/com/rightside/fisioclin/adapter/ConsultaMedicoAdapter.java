@@ -9,9 +9,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.controller.ConcluirConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
@@ -25,9 +27,11 @@ import io.opencensus.internal.StringUtils;
 public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAdapter.ViewHolder>  {
     private List<Consulta> consultas = new ArrayList<>();
     private Context context;
+    private FragmentActivity fragmentActivity;
 
-    public ConsultaMedicoAdapter(Context context) {
+    public ConsultaMedicoAdapter(Context context, FragmentActivity fragmentActivity) {
         this.context = context;
+        this.fragmentActivity = fragmentActivity;
     }
 
     @NonNull
@@ -49,6 +53,13 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewTelefonePacient.setText(paciente.getPhoneNumber());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoPaciente,paciente.getProfilePictureUrl());
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ConcluirConsultaController.alertaConcluirConsulta(fragmentActivity, consultas.get(position));
+            }
+        });
 
     }
 
