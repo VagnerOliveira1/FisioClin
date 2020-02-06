@@ -28,11 +28,11 @@ public class ConsultaMedicoActivity extends FragmentActivity {
         consultas = new ArrayList<>();
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        mAdapter = new ConsultaMedicoAdapter(this);
+        mAdapter = new ConsultaMedicoAdapter(ConsultaMedicoActivity.this, ConsultaMedicoActivity.this);
         recyclerView.setAdapter(mAdapter);
 
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        mAdapter = new ConsultaMedicoAdapter( ConsultaMedicoActivity.this);
+        mAdapter = new ConsultaMedicoAdapter( ConsultaMedicoActivity.this, ConsultaMedicoActivity.this);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
 
