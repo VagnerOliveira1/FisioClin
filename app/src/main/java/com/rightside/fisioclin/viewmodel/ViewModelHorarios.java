@@ -20,7 +20,7 @@ public class ViewModelHorarios extends AndroidViewModel {
         firebaseRepository = new FirebaseRepository();
     }
 
-    public LiveData<List<Horario>> getHorarios() {
-        return firebaseRepository.getMutableLiveData();
+    public LiveData<List<Horario>> getHorarios(String diaSemana) {
+        return firebaseRepository.getMutableLiveData(diaSemana);
     }
 }

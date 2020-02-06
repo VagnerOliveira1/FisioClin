@@ -8,20 +8,33 @@ public class Pessoa implements Serializable {
     private String name;
     private String profilePictureUrl;
     private String email;
-    private String phoneNumber;
+    private String phoneNumber = "";
+    private String profissao = "";
+    private String dataNascimento = "";
+    private String sexo = "";
     private boolean admin;
 
     public Pessoa() {
         setAdmin(false);
     }
 
-    public Pessoa(String id, String name, String profilePictureUrl, String email, String phoneNumber) {
+    public Pessoa(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, boolean admin) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        setAdmin(false);
+        this.profissao = profissao;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.admin = admin;
+    }
+
+    public Pessoa(String id, String name, String profilePictureUrl, String email) {
+        this.id = id;
+        this.name = name;
+        this.profilePictureUrl = profilePictureUrl;
+        this.email = email;
     }
 
     public Pessoa(String id, String name, String profilePictureUrl) {
@@ -77,5 +90,29 @@ public class Pessoa implements Serializable {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public String getProfissao() {
+        return profissao;
+    }
+
+    public void setProfissao(String profissao) {
+        this.profissao = profissao;
+    }
+
+    public String getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(String dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 }

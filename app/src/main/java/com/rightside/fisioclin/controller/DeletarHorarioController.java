@@ -50,7 +50,7 @@ public class DeletarHorarioController {
         alerta.setTitle("Apagar Horário!").setMessage("Tem certeza disso?").setPositiveButton("Apagar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseRepository.deleteHorarios(horario.getId());
+                FirebaseRepository.deleteHorarios(horario);
 
             }
         }).setNegativeButton("Cancelar", null).show();

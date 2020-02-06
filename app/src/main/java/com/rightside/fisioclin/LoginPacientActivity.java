@@ -125,10 +125,7 @@ public class LoginPacientActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()) {
-
-                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(),
-                            firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail(), firebaseUser.getPhoneNumber());
-
+                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
                     PacientVerificationDataFragment.pacientVerificationDataFragment(paciente).show(getSupportFragmentManager(), "pacientVerification");
 
                 }
