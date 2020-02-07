@@ -65,6 +65,6 @@ public class ConsultaPacienteActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        
+
     }
 }
