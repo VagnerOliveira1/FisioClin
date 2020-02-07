@@ -14,6 +14,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 import org.w3c.dom.Text;
@@ -29,6 +30,11 @@ public class ConcluirConsultaController {
         TextView textView = new TextView(fragmentActivity);
         EditText editText = new EditText(fragmentActivity);
 
+        container.addView(textView);
+        container.addView(editText);
+        alerta.setView(container);
+
+
         textView.setText("Faça uma descrição a respeito dessa consulta:");
 
         editText.setText("Ex: Nessa consulta fizemos exercicio tal tal e o paciente teve avanço no quadro");
@@ -37,17 +43,16 @@ public class ConcluirConsultaController {
                     .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
+                            Ficha ficha = new Ficha(editText.getText().toString(), consulta, consulta.getPaciente());
 
-
-                            Ficha ficha = new Ficha();
-                            ficha.setConsulta(consulta);
-                            ficha.setPaciente(consulta.getPaciente());
-                            ficha.setComentarioPosConsulta(editText.getText().toString());
                             FirebaseRepository.saveFicha(ficha).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()){
-                                        Toast.makeText(fragmentActivity, "Consulta concluida, ficha do paciente salva.", Toast.LENGTH_SHORT).show();
+                                        FirebaseRepository.deleteConsulta(consulta);
+                                        FirebaseRepository.deleteHorarios(consulta.getHorario());
+
+                                        Toast.makeText(fragmentActivity, "Consulta finalizada, agora o usuario pode marcar outra consulta", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

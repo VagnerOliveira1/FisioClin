@@ -12,8 +12,10 @@ public class Ficha {
     public Ficha() {
     }
 
-    public Ficha(String comentarioPosConsulta, Consulta consulta) {
-
+    public Ficha(String comentarioPosConsulta, Consulta consulta, Paciente paciente) {
+        this.comentarioPosConsulta = comentarioPosConsulta;
+        this.consulta = consulta;
+        this.paciente = paciente;
     }
 
     public String getComentarioPosConsulta() {

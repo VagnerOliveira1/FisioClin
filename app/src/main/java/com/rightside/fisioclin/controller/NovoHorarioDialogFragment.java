@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;

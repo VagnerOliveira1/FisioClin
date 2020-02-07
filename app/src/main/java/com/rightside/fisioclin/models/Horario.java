@@ -20,11 +20,14 @@ public class Horario implements Serializable {
     private String dataFormatada;
     private String diaDaSemanaFormatado;
     private boolean marcado = false;
+    private String horarioNumber;
     @DocumentId
     private String id;
 
+    public Horario() {
+    }
 
-    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id) {
+    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id, String horarioNumber) {
         this.hour = hour;
         this.minute = minute;
         this.year = year;
@@ -36,6 +39,7 @@ public class Horario implements Serializable {
         setHoraFormatada();
         setDiaDaSemanaFormatado();
         setMarcado(false);
+        setHorarioNumber(horarioNumber);
     }
 
     public String getId() {
@@ -46,7 +50,12 @@ public class Horario implements Serializable {
         this.id = id;
     }
 
-    public Horario() {
+    public String getHorarioNumber() {
+        return horarioNumber;
+    }
+
+    public void setHorarioNumber(String horarioNumber) {
+        this.horarioNumber = horarioNumber;
     }
 
     public int getHour() {
@@ -80,7 +89,7 @@ public class Horario implements Serializable {
     }
 
     public int getDayOfMonth() {
-        return dayOfMonth;
+        return dayOfMonth - 1;
     }
 
     public void setDayOfMonth(int dayOfMonth) {
@@ -104,7 +113,8 @@ public class Horario implements Serializable {
     }
 
     public void setDataFormatada() {
-        this.dataFormatada = new SimpleDateFormat("dd-MM-yyyy", new Locale("pt","BR")).format(getDate());;
+        this.dataFormatada = new SimpleDateFormat("dd-MM-yyyy", new Locale("pt", "BR")).format(getDate());
+        ;
     }
 
     public void setHoraFormatada() {
@@ -112,7 +122,8 @@ public class Horario implements Serializable {
     }
 
     public void setDiaDaSemanaFormatado() {
-        this.diaDaSemanaFormatado = new SimpleDateFormat("EEEE", new Locale("pt","BR")).format(getDate());;
+        this.diaDaSemanaFormatado = new SimpleDateFormat("EEEE", new Locale("pt", "BR")).format(getDate());
+        ;
     }
 
     public boolean isMarcado() {
@@ -129,7 +140,7 @@ public class Horario implements Serializable {
         c.set(Calendar.MONTH, getMonth());
         c.set(Calendar.DAY_OF_MONTH, getDayOfMonth());
         c.set(Calendar.HOUR, getHour());
-        c.set(Calendar.MINUTE,getMinute());
+        c.set(Calendar.MINUTE, getMinute());
         return c;
     }
 
@@ -138,11 +149,11 @@ public class Horario implements Serializable {
         return date;
     }
 
-    public void setDate( ) {
+    public void setDate() {
         this.date = calendar().getTime();
     }
 
-    public HashMap<String, Object> map(){
+    public HashMap<String, Object> map() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("year", getYear());
         map.put("month", getMonth());
@@ -153,7 +164,8 @@ public class Horario implements Serializable {
         map.put("horaFormatada", getHoraFormatada());
         map.put("diaDaSemanaFormatado", getDiaDaSemanaFormatado());
         map.put("date", getDate());
-        map.put("marcado",isMarcado());
+        map.put("marcado", isMarcado());
+        map.put("horarioNumber", getHorarioNumber());
         return map;
     }
 

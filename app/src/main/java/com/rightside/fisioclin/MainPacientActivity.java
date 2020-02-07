@@ -2,6 +2,7 @@ package com.rightside.fisioclin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,9 +12,11 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.views.ConsultaPacienteActivity;
 
 public class MainPacientActivity extends AppCompatActivity {
@@ -23,6 +26,8 @@ public class MainPacientActivity extends AppCompatActivity {
     private CardView cardViewNovaConsulta;
     private CardView cardViewMinhasConsultas;
     private Paciente paciente;
+    private Consulta consulta;
+    private ViewModelConsultaPaciente viewModelConsultaPaciente;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,11 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente = findViewById(R.id.textview_paciente_nome);
         cardViewNovaConsulta = findViewById(R.id.card_view_paciente_horarios);
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
+
+        viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
+        viewModelConsultaPaciente.getConsulta().observe(this,consulta -> {
+            this.consulta = consulta;
+        });
 
 
 
@@ -57,7 +67,12 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewMinhasConsultas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainPacientActivity.this, ConsultaPacienteActivity.class));
+                    if(consulta != null) {
+                        startActivity(new Intent(MainPacientActivity.this, ConsultaPacienteActivity.class));
+                    } else {
+                        GeralUtils.mostraAlerta("Você ainda não tem consulta", "marque uma consulta antes!", MainPacientActivity.this);
+                    }
+
             }
         });
     }
@@ -68,4 +83,6 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente.setText(paciente.getName());
         GeralUtils.mostraImagemCircular(this, imageViewFotoPaciente, paciente.getProfilePictureUrl());
     }
+
+
 }

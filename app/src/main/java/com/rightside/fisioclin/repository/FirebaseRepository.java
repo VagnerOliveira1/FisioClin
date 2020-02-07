@@ -17,6 +17,7 @@ import com.rightside.fisioclin.models.Paciente;
 
 import java.util.List;
 
+
 public class FirebaseRepository {
 
 
@@ -85,7 +86,11 @@ public class FirebaseRepository {
     }
 
     public static Task<Void> deleteHorarios(Horario horario) {
-       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).delete();
+       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getHorarioNumber()).delete();
+    }
+
+    public static Task<Void> deleteConsulta(Consulta consulta) {
+        return getConsultas().document(consulta.getPaciente().getId()).delete();
     }
 
 

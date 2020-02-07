@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,8 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
 
         Horario horario = consultas.get(position).getHorario();
         Paciente paciente = consultas.get(position).getPaciente();
+
+        Log.d("horarioid", horario.getId().toString());
 
         holder.textViewData.setText(horario.getDataFormatada());
         holder.textViewDiaSemana.setText(GeralUtils.capitalize(horario.getDiaDaSemanaFormatado()));
@@ -95,5 +98,8 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
 
         }
     }
+
+
+
 
 }
