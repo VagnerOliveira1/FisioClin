@@ -7,7 +7,6 @@ public class Consulta {
 
     private Horario horario;
     private Paciente paciente;
-    private String comentarioPosConsulta;
 
     public Horario getHorario() {
         return horario;

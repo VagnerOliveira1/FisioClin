@@ -30,7 +30,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
                 android:gravity="center"
-                android:text="asdsad"
                 android:textColor="#222222"
                 android:textSize="20sp"
                 android:textStyle="bold|italic" />
@@ -58,7 +57,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="asdsad"
                 android:textColor="#222222"
                 android:textSize="16sp" />
 
@@ -67,7 +65,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:text="asasdsa"
                 android:textColor="#222222"
                 android:textSize="16sp" />
 

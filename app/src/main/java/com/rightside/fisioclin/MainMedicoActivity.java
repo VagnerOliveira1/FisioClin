@@ -92,7 +92,7 @@ public class MainMedicoActivity extends FragmentActivity implements HourFragment
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfWeek) {
         String uniqueId = UUID.randomUUID().toString();
-        horario = new Horario(hour, min, year, dayOfWeek, month, uniqueId);
+        horario = new Horario(hour, min, year, dayOfWeek, month, uniqueId, uniqueId);
         NovoHorarioDialogFragment.novoHorarioDialogFragment(horario).show(getSupportFragmentManager(), "horario");
     }
 

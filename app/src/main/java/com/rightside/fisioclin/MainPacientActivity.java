@@ -68,4 +68,5 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente.setText(paciente.getName());
         GeralUtils.mostraImagemCircular(this, imageViewFotoPaciente, paciente.getProfilePictureUrl());
     }
+
 }
