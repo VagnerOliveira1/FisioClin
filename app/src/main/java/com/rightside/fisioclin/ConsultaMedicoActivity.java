@@ -9,7 +9,9 @@ import android.os.Bundle;
 
 import com.rightside.fisioclin.adapter.ConsultaMedicoAdapter;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
+import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
@@ -21,6 +23,7 @@ public class ConsultaMedicoActivity extends FragmentActivity {
     private ConsultaMedicoAdapter mAdapter;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelHorarios viewModelHorarios;
+    private Ficha ficha = new Ficha();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +43,7 @@ public class ConsultaMedicoActivity extends FragmentActivity {
 
 
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
+
 
 
        viewModelConsultas.getConsultas().observe(this, listaConsulta -> {

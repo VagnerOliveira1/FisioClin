@@ -55,6 +55,9 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
     implementation 'com.google.android.material:material:1.0.0'
+    implementation 'com.github.medyo:fancybuttons:1.9.1'
+    implementation 'com.github.clans:fab:1.6.4'
+
 
     implementation 'com.github.GwonHyeok:StickySwitch:0.0.15'
 
@@ -63,9 +66,6 @@ dependencies {
     implementation 'com.michaelmuenzer.android:ScrollableNumberPicker:0.2.2'
 
     implementation 'com.github.whilu.CustomButton:library:1.0.0'
-
-
-
 
 
 }
