@@ -5,7 +5,9 @@ import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -27,6 +29,9 @@ public class MainPacientActivity extends AppCompatActivity {
     private TextView textViewNomePaciente;
     private CardView cardViewNovaConsulta;
     private CardView cardViewMinhasConsultas;
+
+    private CardView cardViewLocalizacaoClinica;
+    private Paciente paciente;
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private ViewModelUser viewModelUser;
@@ -39,6 +44,8 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente = findViewById(R.id.textview_paciente_nome);
         cardViewNovaConsulta = findViewById(R.id.card_view_paciente_horarios);
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
+        cardViewLocalizacaoClinica  = findViewById(R.id.card_view_localizacao_clinica);
+
 
         viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
         viewModelUser = ViewModelProviders.of(this).get(ViewModelUser.class);
@@ -71,6 +78,22 @@ public class MainPacientActivity extends AppCompatActivity {
                     } else {
                         GeralUtils.mostraAlerta("Você ainda não tem consulta", "marque uma consulta antes!", MainPacientActivity.this);
                     }
+
+            }
+        });
+
+        cardViewLocalizacaoClinica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Uri.Builder builder = new Uri.Builder();
+                builder.scheme("https")
+                        .authority("www.google.com").appendPath("maps").appendPath("dir").appendPath("").appendQueryParameter("api", "1")
+                        .appendQueryParameter("destination", -21.0270128 + "," + -41.6581527);
+                String url = builder.build().toString();
+                Log.d("Directions", url);
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(url));
+                startActivity(intent);
 
             }
         });
