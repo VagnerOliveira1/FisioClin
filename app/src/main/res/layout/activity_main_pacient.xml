@@ -140,6 +140,7 @@
 
         </androidx.cardview.widget.CardView>
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_localizacao_clinica"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="16dp"
@@ -167,7 +168,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="aaa"
+                    android:text=" lacalizacao"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="18sp"
