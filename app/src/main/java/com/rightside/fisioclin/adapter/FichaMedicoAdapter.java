@@ -1,6 +1,8 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,11 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.rightside.fisioclin.FichaDadosMedicoActivity;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.utils.GeralUtils;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -35,11 +40,20 @@ public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Paciente paciente = fichaList.get(position).getPaciente();
-        fichaList.get(position).getComentarioPosConsulta();
-        holder.textViewFichaPacienteNome.setText(fichaList.get(position).getComentarioPosConsulta().toString());
+
+        Ficha ficha = fichaList.get(position);
+        Paciente paciente = ficha.getPaciente();
+        List<Consulta> consultaList  = ficha.getConsulta();
+        holder.textViewFichaPacienteNome.setText(paciente.getName());
         holder.textViewFichaPacienteTelefone.setText(paciente.getPhoneNumber());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFichaPacienteFoto, paciente.getProfilePictureUrl());
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(context, FichaDadosMedicoActivity.class);
+            intent.putExtra("paciente",paciente);
+            intent.putExtra("consultaList", (Serializable) consultaList);
+            context.startActivity(intent);
+        });
 
     }
 

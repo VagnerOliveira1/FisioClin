@@ -1,8 +1,9 @@
 package com.rightside.fisioclin.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Medico extends User {
+public class Medico extends User implements Serializable {
 
     public Medico() {
     }

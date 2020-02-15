@@ -1,10 +1,11 @@
 package com.rightside.fisioclin.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Ficha {
+public class Ficha implements Serializable {
 
     private List<Consulta> consulta = new ArrayList<>();
     private List<String> comentarioPosConsulta = new ArrayList<>();

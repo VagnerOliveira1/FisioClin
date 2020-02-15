@@ -1,14 +1,15 @@
 package com.rightside.fisioclin.models;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Paciente extends User {
+public class Paciente extends User implements Serializable {
 
 
     private int sessoes = 1;
-    private List<DiagnosticoMedico> diagnosticoMedicosList = new ArrayList<>();
+    private DiagnosticoMedico diagnosticoMedico;
 
     public Paciente() {
     }
@@ -17,7 +18,7 @@ public class Paciente extends User {
     public Paciente(User user, DiagnosticoMedico diagnosticoMedico, int sessoes) {
         super(user.getId(), user.getName(), user.getProfilePictureUrl(), user.getEmail(), user.getPhoneNumber(), user.getProfissao(), user.getDataNascimento(),user.getSexo(), false);
         this.sessoes = sessoes;
-        this.diagnosticoMedicosList.add(diagnosticoMedico);
+        this.diagnosticoMedico = diagnosticoMedico;
 
     }
 
@@ -37,15 +38,13 @@ public class Paciente extends User {
         this.sessoes = sessoes;
     }
 
-    public List<DiagnosticoMedico> getDiagnosticoMedicosList() {
-        return diagnosticoMedicosList;
+    public DiagnosticoMedico getDiagnosticoMedico() {
+        return diagnosticoMedico;
     }
 
-    public void setDiagnosticoMedicosList(List<DiagnosticoMedico> diagnosticoMedicosList) {
-        this.diagnosticoMedicosList = diagnosticoMedicosList;
+    public void setDiagnosticoMedico(DiagnosticoMedico diagnosticoMedico) {
+        this.diagnosticoMedico = diagnosticoMedico;
     }
-
-
 
     public HashMap<String, Object> returnPacient() {
         HashMap<String, Object> pacient = new HashMap<>();
@@ -58,7 +57,7 @@ public class Paciente extends User {
         pacient.put("dataNascimento", getDataNascimento());
         pacient.put("email", getEmail());
         pacient.put("profilePictureUrl", getProfilePictureUrl());
-        pacient.put("diagnosticoMedicosList", getDiagnosticoMedicosList());
+        pacient.put("diagnosticoMedico", getDiagnosticoMedico());
         return pacient;
     }
 

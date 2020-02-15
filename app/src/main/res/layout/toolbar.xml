@@ -5,4 +5,5 @@
     android:background="?attr/colorPrimary"
     android:minHeight="?attr/actionBarSize"
     android:theme="?attr/actionBarTheme"
-    xmlns:android="http://schemas.android.com/apk/res/android" />
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    />
