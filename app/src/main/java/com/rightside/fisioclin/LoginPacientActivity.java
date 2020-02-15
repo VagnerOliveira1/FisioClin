@@ -23,9 +23,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.rightside.fisioclin.fragment.PacientVerificationDataFragment;
+import com.rightside.fisioclin.fragment.UserVerificationDataFragment;
 import com.rightside.fisioclin.models.Medico;
-import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 
@@ -125,8 +125,8 @@ public class LoginPacientActivity extends AppCompatActivity {
             if (task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()) {
-                    Paciente paciente = new Paciente(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
-                    PacientVerificationDataFragment.pacientVerificationDataFragment(paciente).show(getSupportFragmentManager(), "pacientVerification");
+                    User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
+                    UserVerificationDataFragment.pacientVerificationDataFragment(user).show(getSupportFragmentManager(), "pacientVerification");
 
                 }
 

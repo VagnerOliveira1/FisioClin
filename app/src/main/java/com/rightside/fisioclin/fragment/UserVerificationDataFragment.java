@@ -22,6 +22,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.MainPacientActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.santalu.maskedittext.MaskEditText;
 
@@ -32,27 +33,23 @@ import io.ghyeok.stickyswitch.widget.StickySwitch;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PacientVerificationDataFragment extends DialogFragment implements NumberPicker.OnValueChangeListener {
+public class UserVerificationDataFragment extends DialogFragment {
 
     private MaskEditText maskEditTextTelefone;
     private MaskEditText maskEditTextDataNasc;
     private TextInputEditText editTextNomePaciente;
     private TextInputEditText editTextProfissaoPaciente;
-    private TextInputEditText editTextQueixaPrincipal;
-    private TextInputEditText editTextDiagnosticoMedico;
     private StickySwitch stickySwitchSexoPaciente;
     private Button buttonSalvaFichaPaciente;
-    private int sessoes = 1;
-    private TextView mostraNumeroSessoes;
     private String sexo = "";
 
 
-    public static PacientVerificationDataFragment pacientVerificationDataFragment(Paciente paciente) {
-        PacientVerificationDataFragment pacientVerificationDataFragment = new PacientVerificationDataFragment();
+    public static UserVerificationDataFragment pacientVerificationDataFragment(User user) {
+        UserVerificationDataFragment userVerificationDataFragment = new UserVerificationDataFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("paciente", paciente);
-        pacientVerificationDataFragment.setArguments(bundle);
-        return pacientVerificationDataFragment;
+        bundle.putSerializable("user", user);
+        userVerificationDataFragment.setArguments(bundle);
+        return userVerificationDataFragment;
     }
 
 
@@ -60,26 +57,18 @@ public class PacientVerificationDataFragment extends DialogFragment implements N
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_pacient_verification_data, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_verification_data, container, false);
 
         maskEditTextTelefone = view.findViewById(R.id.editTelefonePaciente);
         maskEditTextDataNasc = view.findViewById(R.id.editDataNascPaciente);
         editTextNomePaciente = view.findViewById(R.id.editNomePaciente);
         editTextProfissaoPaciente = view.findViewById(R.id.editProfissaoPaciente);
-        editTextQueixaPrincipal = view.findViewById(R.id.editQueixaPaciente);
-        editTextDiagnosticoMedico = view.findViewById(R.id.editDiagnosticoMedico);
         stickySwitchSexoPaciente = view.findViewById(R.id.sticky_switch);
         buttonSalvaFichaPaciente = view.findViewById(R.id.btnSalvaFichaPaciente);
-        mostraNumeroSessoes = view.findViewById(R.id.mostraNumeroSessoes);
-        NumberPicker numberPicker = view.findViewById(R.id.numberPicker);
         editTextProfissaoPaciente.requestFocus();
 
         Bundle bundle = getArguments();
-        Paciente paciente = (Paciente) bundle.get("paciente");
-        paciente.setSessoes("0");;
-        numberPicker.setMinValue(1);
-        numberPicker.setMaxValue(30);
-        numberPicker.setOnValueChangedListener(this);
+        User user = (User) bundle.get("user");
 
         stickySwitchSexoPaciente.setSwitchColor(Color.GREEN);
         stickySwitchSexoPaciente.setSliderBackgroundColor(Color.GRAY);
@@ -88,8 +77,8 @@ public class PacientVerificationDataFragment extends DialogFragment implements N
 
 
 
-        editTextNomePaciente.setText(paciente.getName());
-        maskEditTextTelefone.setText(paciente.getPhoneNumber());
+        editTextNomePaciente.setText(user.getName());
+        maskEditTextTelefone.setText(user.getPhoneNumber());
 
         stickySwitchSexoPaciente.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
@@ -102,17 +91,14 @@ public class PacientVerificationDataFragment extends DialogFragment implements N
 
         buttonSalvaFichaPaciente.setOnClickListener((v) -> {
 
-            paciente.setName(editTextNomePaciente.getText().toString());
-            paciente.setPhoneNumber(maskEditTextTelefone.getText().toString());
-            paciente.setSexo(verificaSexo(sexo));
-            paciente.setDataNascimento(maskEditTextDataNasc.getText().toString());
-            paciente.setDescricaoMedica(editTextDiagnosticoMedico.getText().toString());
-            paciente.setQueixa(editTextQueixaPrincipal.getText().toString());
-            paciente.setSessoes(String.valueOf(sessoes));
-            paciente.setProfissao(editTextProfissaoPaciente.getText().toString());
+            user.setName(editTextNomePaciente.getText().toString());
+            user.setPhoneNumber(maskEditTextTelefone.getText().toString());
+            user.setSexo(verificaSexo(sexo));
+            user.setDataNascimento(maskEditTextDataNasc.getText().toString());
+            user.setProfissao(editTextProfissaoPaciente.getText().toString());
 
 
-            FirebaseRepository.savePacient(paciente).addOnSuccessListener(new OnSuccessListener<Void>() {
+            FirebaseRepository.saveUser(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void aVoid) {
                     startActivity(new Intent(getContext(), MainPacientActivity.class));
@@ -121,13 +107,6 @@ public class PacientVerificationDataFragment extends DialogFragment implements N
         });
 
         return view;
-
-    }
-
-    @Override
-    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-       sessoes = newVal;
-       mostraNumeroSessoes.setText("Número de sessões: " + newVal);
 
     }
 

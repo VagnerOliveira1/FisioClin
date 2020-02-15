@@ -34,7 +34,7 @@ public class HourFragment extends DialogFragment implements TimePickerDialog.OnT
         void OnTimeSet(TimePicker timePicker, int i, int i1);
     }
 
-    TimePickerListener mListener;
+    private TimePickerListener mListener;
 
 
     @Override

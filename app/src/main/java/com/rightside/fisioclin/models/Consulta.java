@@ -1,9 +1,18 @@
 package com.rightside.fisioclin.models;
 
+import java.io.Serializable;
 import java.util.HashMap;
-import java.util.List;
 
-public class Consulta {
+public class Consulta implements Serializable {
+
+
+    public Consulta() {
+    }
+
+    public Consulta(Horario horario, Paciente paciente) {
+        this.horario = horario;
+        this.paciente = paciente;
+    }
 
     private Horario horario;
     private Paciente paciente;

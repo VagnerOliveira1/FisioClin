@@ -17,13 +17,12 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.controller.ConcluirConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
-import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.opencensus.internal.StringUtils;
 
 public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAdapter.ViewHolder>  {
     private List<Consulta> consultas = new ArrayList<>();
@@ -46,7 +45,7 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
     public void onBindViewHolder(@NonNull ConsultaMedicoAdapter.ViewHolder holder, int position) {
 
         Horario horario = consultas.get(position).getHorario();
-        Paciente paciente = consultas.get(position).getPaciente();
+        User paciente = consultas.get(position).getPaciente();
 
         Log.d("horarioid", horario.getId().toString());
 

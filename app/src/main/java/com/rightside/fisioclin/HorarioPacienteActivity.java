@@ -14,6 +14,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.rightside.fisioclin.adapter.HorarioPacienteAdapter;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
@@ -35,10 +36,10 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             list = new ArrayList<>();
 
             Intent intent = getIntent();
-            Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
+            User usuario = (User) intent.getSerializableExtra("usuario");
             TabLayout tabLayout = findViewById(R.id.tabLayout_navigation_paciente);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
-            mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, paciente);
+            mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, usuario);
             recyclerView.setLayoutManager(mLayoutManager);
             recyclerView.setAdapter(mAdapter);
             viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
