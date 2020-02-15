@@ -42,7 +42,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_novo_horario_dialog, container, false);
 
-        Toolbar toolbar = view.findViewById(R.id.toolbar_dados_consulta);
+        Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
 
         toolbar.setTitle("Confirme os dados: ");
         Bundle bundle = getArguments();

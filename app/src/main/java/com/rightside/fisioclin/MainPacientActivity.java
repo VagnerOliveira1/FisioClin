@@ -14,9 +14,11 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
+import com.rightside.fisioclin.viewmodel.ViewModelUser;
 import com.rightside.fisioclin.views.ConsultaPacienteActivity;
 
 public class MainPacientActivity extends AppCompatActivity {
@@ -25,9 +27,10 @@ public class MainPacientActivity extends AppCompatActivity {
     private TextView textViewNomePaciente;
     private CardView cardViewNovaConsulta;
     private CardView cardViewMinhasConsultas;
-    private Paciente paciente;
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
+    private ViewModelUser viewModelUser;
+    private User usuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,27 +41,23 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
 
         viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
+        viewModelUser = ViewModelProviders.of(this).get(ViewModelUser.class);
+
+        viewModelUser.getUser(FirebaseRepository.getIdPessoaLogada()).observe(this, usuario -> {
+            alteraInformacaoPerfil(usuario);
+            this.usuario = usuario;
+        });
+
         viewModelConsultaPaciente.getConsulta().observe(this,consulta -> {
             this.consulta = consulta;
         });
 
 
-
-        FirebaseRepository.getPaciente(FirebaseRepository.getIdPessoaLogada()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
-            @Override
-            public void onSuccess(DocumentSnapshot documentSnapshot) {
-                if(documentSnapshot.exists()) {
-                     paciente = documentSnapshot.toObject(Paciente.class);
-                     alteraInformacaoPerfil(paciente);
-                }
-            }
-        });
-
         cardViewNovaConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainPacientActivity.this, HorarioPacienteActivity.class);
-                intent.putExtra("paciente", paciente);
+                intent.putExtra("usuario", usuario );
                startActivity(intent);
 
             }
@@ -79,7 +78,7 @@ public class MainPacientActivity extends AppCompatActivity {
 
 
 
-    private void alteraInformacaoPerfil(Paciente paciente) {
+    private void alteraInformacaoPerfil(User paciente) {
         textViewNomePaciente.setText(paciente.getName());
         GeralUtils.mostraImagemCircular(this, imageViewFotoPaciente, paciente.getProfilePictureUrl());
     }

@@ -3,26 +3,30 @@ package com.rightside.fisioclin.controller;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
+import com.rightside.fisioclin.fragment.PacienteVerificationDataFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
 public class MarcarConsultaController {
-    public static void marcarConsulta(Consulta consulta, FragmentActivity activity) {
+    public static void marcarConsulta(Horario horario, User user, FragmentActivity activity) {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
 
         TextView horarioData = new TextView(activity);
         TextView horarioDiaSemana = new TextView(activity);
         TextView horarioHora = new TextView(activity);
-        horarioData.setText(consulta.getHorario().getHoraFormatada());
-        horarioDiaSemana.setText(consulta.getHorario().getDiaDaSemanaFormatado());
-        horarioHora.setText(consulta.getHorario().getHoraFormatada());
+        horarioData.setText(horario.getHoraFormatada());
+        horarioDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+        horarioHora.setText(horario.getHoraFormatada());
 
         horarioData.setPadding(50, 10,50,10);
         horarioData.setTextSize(16);
@@ -44,13 +48,8 @@ public class MarcarConsultaController {
         alerta.setTitle("Marcar Horário!").setMessage("Escolher esse horário?").setPositiveButton("SIM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                if(!consulta.getHorario().isMarcado()) {
-                    FirebaseRepository.atualizaHorarioMarcado(consulta.getHorario());
-                    FirebaseRepository.saveConsulta(consulta);
-                } else {
-                    Toast.makeText(activity, "Horário indisponivel, tente outro.", Toast.LENGTH_SHORT).show();
-                }
 
+                PacienteVerificationDataFragment.novaInstancia(horario, user).show(activity.getSupportFragmentManager(), "consulta");
 
             }
         }).setNegativeButton("Cancelar", null).show();

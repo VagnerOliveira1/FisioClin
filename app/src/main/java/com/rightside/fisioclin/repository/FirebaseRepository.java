@@ -14,6 +14,7 @@ import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 
 import java.util.List;
 
@@ -27,12 +28,17 @@ public class FirebaseRepository {
 
     private MutableLiveData<Consulta> mutableLiveDataConsultaPaciente = new MutableLiveData<>();
 
+    private MutableLiveData<List<Ficha>> mutableLiveDataFichas = new MutableLiveData<>();
 
-    public static  FirebaseFirestore getDB() {
+    private  MutableLiveData<Ficha> mutableLiveDataFicha = new MutableLiveData<>();
+    private MutableLiveData<User> mutableLiveDataUser = new MutableLiveData<>();
+
+
+    public static FirebaseFirestore getDB() {
         return FirebaseFirestore.getInstance();
     }
 
-    public static String getIdPessoaLogada(){
+    public static String getIdPessoaLogada() {
         return FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
@@ -40,11 +46,18 @@ public class FirebaseRepository {
         getDB().collection("horarios").document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).set(horario.map());
 
     }
+
     public static Task<Void> saveDoctor(final Medico medico) {
         return getDB().collection("medicos").document(medico.getId()).set(medico.returnDoctor());
     }
+
     public static Task<Void> savePacient(final Paciente paciente) {
+
         return getDB().collection("pacientes").document(paciente.getId()).set(paciente.returnPacient());
+    }
+
+    public static Task<Void> saveUser(final User user) {
+        return getDB().collection("usuarios").document(user.getId()).set(user.returnUser());
     }
 
     public static DocumentReference getMedico(String id) {
@@ -53,6 +66,10 @@ public class FirebaseRepository {
 
     public static DocumentReference getPaciente(String id) {
         return getDB().collection("pacientes").document(id);
+    }
+
+    public static DocumentReference getUser(String id) {
+        return getDB().collection("usuarios").document(id);
     }
 
 
@@ -68,7 +85,7 @@ public class FirebaseRepository {
     }
 
     public static Task<Void> saveFicha(final Ficha ficha) {
-        return getDB().collection("fichas").document(ficha.getConsulta().getPaciente().getId()).set(ficha.returnFicha());
+        return getDB().collection("fichas").document(ficha.getPaciente().getId()).set(ficha.returnFicha());
     }
 
     public static DocumentReference getConsultaPacienteLogado() {
@@ -80,23 +97,31 @@ public class FirebaseRepository {
 
     }
 
+    public static Task<Void> atualizaPaciente(Paciente paciente, Consulta consulta) {
+        return getPaciente(paciente.getId()).update(paciente.returnPacient());
+    }
+
     public static Task<Void> atualizaHorarioMarcado(Horario horario) {
         horario.setMarcado(true);
-       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).update(horario.map());
+        return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getId()).update(horario.map());
     }
 
     public static Task<Void> deleteHorarios(Horario horario) {
-       return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getHorarioNumber()).delete();
+        return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getHorarioNumber()).delete();
     }
 
     public static Task<Void> deleteConsulta(Consulta consulta) {
         return getConsultas().document(consulta.getPaciente().getId()).delete();
     }
 
+    public static CollectionReference getFichas() {
+        return getDB().collection("fichas");
+    }
+
 
     public LiveData<List<Horario>> getMutableLiveData(String diaSemana) {
         getHorarios().document(diaSemana).collection("horariosID").addSnapshotListener((queryDocumentSnapshots, e) -> {
-           mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));
+            mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));
         });
         return mutableLiveDataHorarios;
     }
@@ -113,17 +138,39 @@ public class FirebaseRepository {
             mutableLiveDataConsultaPaciente.setValue(documentSnapshot.toObject(Consulta.class));
         });
 
-
-
         return mutableLiveDataConsultaPaciente;
-
     }
 
 
+    public LiveData<List<Ficha>> getMutableLiveDataFichas() {
+        getFichas().addSnapshotListener((queryDocumentSnapshots, e) -> {
+            mutableLiveDataFichas.setValue(queryDocumentSnapshots.toObjects(Ficha.class));
+        });
+        return mutableLiveDataFichas;
+    }
 
+    public LiveData<Ficha> getMutableLiveDataFicha(String id) {
+        getFichas().document(id).addSnapshotListener((documentSnapshot, e) -> {
+            mutableLiveDataFicha.setValue(documentSnapshot.toObject(Ficha.class));
+        });
+        return mutableLiveDataFicha;
+    }
 
+    public LiveData<User> getMutableLiveDataUser(String id) {
+        getUser(id).addSnapshotListener((documentSnapshot, e) -> {
+           mutableLiveDataUser.setValue(documentSnapshot.toObject(User.class));
+        });
 
-
-
+        return mutableLiveDataUser;
+    }
 
 }
+
+
+
+
+
+
+
+
+

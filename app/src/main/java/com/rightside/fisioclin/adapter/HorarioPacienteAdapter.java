@@ -16,7 +16,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
-import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,15 +25,15 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     private List<Horario> horarios = new ArrayList<>();
     private Context context;
     private FragmentActivity fragmentActivity;
-    private Paciente paciente;
+    private User usuario;
     private Consulta consulta;
 
 
 
-    public HorarioPacienteAdapter(Context context, FragmentActivity activity, Paciente paciente) {
+    public HorarioPacienteAdapter(Context context, FragmentActivity activity, User usuario) {
         this.context = context;
         this.fragmentActivity = activity;
-        this.paciente = paciente;
+        this.usuario = usuario;
     }
 
     @NonNull
@@ -46,18 +46,17 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @Override
     public void onBindViewHolder(@NonNull HorarioPacienteAdapter.ViewHolder holder, int position) {
 
-
-
-                    holder.textViewHora.setText(String.valueOf(horarios.get(position).getHoraFormatada()));
-                    holder.textViewData.setText(String.valueOf(horarios.get(position).getDataFormatada()));
-                    holder.textViewDiaSemana.setText(String.valueOf(horarios.get(position).getDiaDaSemanaFormatado()));
+                    Horario horario = horarios.get(position);
+                    holder.textViewHora.setText(horario.getHoraFormatada());
+                    holder.textViewData.setText(horario.getDataFormatada());
+                    holder.textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
                     holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {
                             if (horarios.get(position).isMarcado() || consulta != null) {
                                 Toast.makeText(context, "Não foi possivel marcar a consulta!", Toast.LENGTH_SHORT).show();
                             } else {
-                                salvaConsulta(position);
+                                MarcarConsultaController.marcarConsulta(horario, usuario,fragmentActivity);
                                 return true;
                             }
                             return false;
@@ -68,16 +67,6 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
 
 
 
-
-    private void salvaConsulta(int position) {
-        Consulta consulta = new Consulta();
-        consulta.setHorario(horarios.get(position));
-        consulta.setPaciente(paciente);
-
-
-        MarcarConsultaController.marcarConsulta(consulta,fragmentActivity);
-
-    }
 
     @Override
     public int getItemCount() {

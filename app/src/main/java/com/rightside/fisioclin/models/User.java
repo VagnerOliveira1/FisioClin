@@ -1,8 +1,9 @@
 package com.rightside.fisioclin.models;
 
 import java.io.Serializable;
+import java.util.HashMap;
 
-public class Pessoa implements Serializable {
+public class User implements Serializable {
 
     private String id;
     private String name;
@@ -14,11 +15,11 @@ public class Pessoa implements Serializable {
     private String sexo = "";
     private boolean admin;
 
-    public Pessoa() {
+    public User() {
         setAdmin(false);
     }
 
-    public Pessoa(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, boolean admin) {
+    public User(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, boolean admin) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
@@ -30,18 +31,31 @@ public class Pessoa implements Serializable {
         this.admin = admin;
     }
 
-    public Pessoa(String id, String name, String profilePictureUrl, String email) {
+    public User(String id, String name, String profilePictureUrl, String email) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
         this.email = email;
     }
 
-    public Pessoa(String id, String name, String profilePictureUrl) {
+    public User(String id, String name, String profilePictureUrl) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
         setAdmin(false);
+    }
+
+    public HashMap<String, Object> returnUser() {
+        HashMap<String, Object> user = new HashMap<>();
+        user.put("id", getId());
+        user.put("name", getName());
+        user.put("phoneNumber", getPhoneNumber());
+        user.put("profissao", getProfissao());
+        user.put("sexo", getSexo());
+        user.put("dataNascimento", getDataNascimento());
+        user.put("email", getEmail());
+        user.put("profilePictureUrl", getProfilePictureUrl());
+        return user;
     }
 
     public String getId() {

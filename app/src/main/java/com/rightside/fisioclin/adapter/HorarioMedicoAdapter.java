@@ -54,6 +54,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
     public int getItemCount() {
         return horarios.size();
     }
+
     public void update(List<Horario> horarios) {
         this.horarios = horarios;
         notifyDataSetChanged();
