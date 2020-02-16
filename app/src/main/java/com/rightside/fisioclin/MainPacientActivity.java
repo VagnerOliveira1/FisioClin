@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.rightside.fisioclin.fragment.FichaPacienteFragment;
+import com.rightside.fisioclin.fragment.FichasMedicoFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
@@ -31,6 +33,7 @@ public class MainPacientActivity extends AppCompatActivity {
     private CardView cardViewMinhasConsultas;
 
     private CardView cardViewLocalizacaoClinica;
+    private CardView cardViewMinhaFicha;
     private Paciente paciente;
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
@@ -45,6 +48,7 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewNovaConsulta = findViewById(R.id.card_view_paciente_horarios);
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
         cardViewLocalizacaoClinica  = findViewById(R.id.card_view_localizacao_clinica);
+        cardViewMinhaFicha = findViewById(R.id.card_view_minha_ficha);
 
 
         viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
@@ -97,8 +101,12 @@ public class MainPacientActivity extends AppCompatActivity {
 
             }
         });
-    }
 
+        cardViewMinhaFicha.setOnClickListener(view -> {
+            FichaPacienteFragment.novaInstancia().show(getSupportFragmentManager(), "minhaFicha");
+        });
+
+    }
 
 
     private void alteraInformacaoPerfil(User paciente) {
