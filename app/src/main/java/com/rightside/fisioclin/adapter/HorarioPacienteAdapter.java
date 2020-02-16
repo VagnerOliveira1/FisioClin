@@ -17,6 +17,7 @@ import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.User;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,7 +50,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
                     Horario horario = horarios.get(position);
                     holder.textViewHora.setText(horario.getHoraFormatada());
                     holder.textViewData.setText(horario.getDataFormatada());
-                    holder.textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+                    holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
                     holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {

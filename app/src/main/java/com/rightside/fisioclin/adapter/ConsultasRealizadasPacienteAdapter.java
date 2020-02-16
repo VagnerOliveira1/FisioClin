@@ -14,6 +14,7 @@ import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.List;
 
@@ -43,7 +44,7 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
 
         holder.textViewRecomendacao.setText(consulta.getComentarioPosConsulta());
         holder.textViewHora.setText(horario.getHoraFormatada());
-        holder.textViewDia.setText(horario.getDiaDaSemanaFormatado());
+        holder.textViewDia.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.textViewData.setText(horario.getDataFormatada());
         holder.textViewDiagnosticoMedico.setText(diagnosticoMedico.getDescricaoMedica());
         holder.textViewQueixa.setText(diagnosticoMedico.getQueixa());

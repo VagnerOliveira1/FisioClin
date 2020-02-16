@@ -36,4 +36,21 @@ public class GeralUtils {
     }
 
 
+    public static String retornaDiaSemana(String dia) {
+        switch (dia) {
+            case "seg":
+                return "Segunda-feira";
+            case "ter":
+                return "Terça-feira";
+            case "qua":
+                return "Quarta-feira";
+            case "qui":
+                return "Quinta-feira";
+            case "sex":
+                return "Sexta-feira";
+        }
+        return dia;
+
+    }
+
 }
