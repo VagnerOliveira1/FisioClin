@@ -31,6 +31,7 @@ public class FirebaseRepository {
     private MutableLiveData<List<Ficha>> mutableLiveDataFichas = new MutableLiveData<>();
 
     private  MutableLiveData<Ficha> mutableLiveDataFicha = new MutableLiveData<>();
+
     private MutableLiveData<User> mutableLiveDataUser = new MutableLiveData<>();
 
 

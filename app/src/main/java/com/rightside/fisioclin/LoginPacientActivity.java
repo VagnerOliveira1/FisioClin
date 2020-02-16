@@ -84,7 +84,7 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if(account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                if(account.getEmail().equals("ti.vagner@gmail.com")) {
                     checkDoutor();
                     //matheusldasilva20088@gmail.com
                 } else {
@@ -130,6 +130,7 @@ public class LoginPacientActivity extends AppCompatActivity {
                     UserVerificationDataFragment.pacientVerificationDataFragment(user).show(getSupportFragmentManager(), "pacientVerification");
                 } else {
                     startActivity(new Intent(this, MainPacientActivity.class));
+                    finish();
                 }
 
             }

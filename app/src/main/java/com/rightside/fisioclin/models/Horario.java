@@ -122,7 +122,7 @@ public class Horario implements Serializable {
     }
 
     public void setDiaDaSemanaFormatado() {
-        this.diaDaSemanaFormatado = new SimpleDateFormat("EEEE", new Locale("pt", "BR")).format(getDate());
+        this.diaDaSemanaFormatado = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(getDate()).toLowerCase();
         ;
     }
 
