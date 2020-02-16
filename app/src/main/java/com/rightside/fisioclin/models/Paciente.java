@@ -8,14 +8,14 @@ import java.util.List;
 public class Paciente extends User implements Serializable {
 
 
-    private int sessoes = 1;
+    private String sessoes = "";
     private DiagnosticoMedico diagnosticoMedico;
 
     public Paciente() {
     }
 
 
-    public Paciente(User user, DiagnosticoMedico diagnosticoMedico, int sessoes) {
+    public Paciente(User user, DiagnosticoMedico diagnosticoMedico, String sessoes) {
         super(user.getId(), user.getName(), user.getProfilePictureUrl(), user.getEmail(), user.getPhoneNumber(), user.getProfissao(), user.getDataNascimento(),user.getSexo(), false);
         this.sessoes = sessoes;
         this.diagnosticoMedico = diagnosticoMedico;
@@ -30,11 +30,11 @@ public class Paciente extends User implements Serializable {
 
 
 
-    public int getSessoes() {
+    public String getSessoes() {
         return sessoes;
     }
 
-    public void setSessoes(int sessoes) {
+    public void setSessoes(String sessoes) {
         this.sessoes = sessoes;
     }
 

@@ -11,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
 /**
@@ -26,6 +29,7 @@ public class ConcluirConsultaFragment extends DialogFragment {
     private ViewModelFichas viewModelFichas;
     private Ficha ficha;
     private Button button;
+    private TextInputEditText textInputEditTextConcluirConsulta;
     public static ConcluirConsultaFragment novaInstancia(Consulta consulta){
         ConcluirConsultaFragment concluirConsultaFragment = new ConcluirConsultaFragment();
         Bundle bundle = new Bundle();
@@ -42,6 +46,7 @@ public class ConcluirConsultaFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_concluir_consulta, container, false);
         button = view.findViewById(R.id.button2);
+        textInputEditTextConcluirConsulta = view.findViewById(R.id.edittext_concluirconsulta);
         Bundle bundle = getArguments();
         Consulta consulta = (Consulta) bundle.get("consulta");
 
@@ -56,9 +61,16 @@ public class ConcluirConsultaFragment extends DialogFragment {
             if(ficha == null) {
                 ficha = new Ficha();
             }
-                consulta.setComentarioPosConsulta("teste");
+
+            if (textInputEditTextConcluirConsulta.getText().toString().isEmpty()) {
+                GeralUtils.mostraAlerta("Atenção", "É importante fazer um comentário sobre a consulta", getContext());
+            } else {
+                consulta.setComentarioPosConsulta(textInputEditTextConcluirConsulta.getText().toString());
                 ficha.getConsulta().add(consulta);
                 ficha.setPaciente(consulta.getPaciente());
+            }
+
+
 
             FirebaseRepository.saveFicha(ficha);
             FirebaseRepository.deleteConsulta(consulta);

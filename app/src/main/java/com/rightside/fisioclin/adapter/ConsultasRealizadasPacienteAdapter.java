@@ -37,9 +37,11 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Horario horario = consultaRealizadaList.get(position).getHorario();
+        Consulta consulta  = consultaRealizadaList.get(position);
         Paciente paciente = consultaRealizadaList.get(position).getPaciente();
         DiagnosticoMedico diagnosticoMedico = paciente.getDiagnosticoMedico();
 
+        holder.textViewRecomendacao.setText(consulta.getComentarioPosConsulta());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewDia.setText(horario.getDiaDaSemanaFormatado());
         holder.textViewData.setText(horario.getDataFormatada());
@@ -54,10 +56,10 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDia, textViewQueixa, textViewDiagnosticoMedico;
+        private TextView textViewData, textViewHora, textViewDia, textViewQueixa, textViewDiagnosticoMedico, textViewRecomendacao;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            textViewRecomendacao = itemView.findViewById(R.id.textViewRecomendacaoConsulta);
             textViewData = itemView.findViewById(R.id.textView_consulta_realizada_data);
             textViewDia = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana);
             textViewHora = itemView.findViewById(R.id.textView_consulta_realizada_hora);
