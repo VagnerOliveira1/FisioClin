@@ -25,6 +25,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.rightside.fisioclin.fragment.UserVerificationDataFragment;
 import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
@@ -49,11 +50,8 @@ public class LoginPacientActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-
-        Button buttonLogin = findViewById(R.id.button_paciente_login);
-        buttonLogin.setOnClickListener(v -> {
             signIn();
-        });
+
 
     }
 
@@ -100,7 +98,7 @@ public class LoginPacientActivity extends AppCompatActivity {
 
     private void checkDoutor() {
         final FirebaseUser firebaseDoctor = FirebaseAuth.getInstance().getCurrentUser();
-        final DocumentReference getId = FirebaseRepository.getDB().collection("doctors").document(firebaseDoctor.getUid());
+        final DocumentReference getId = FirebaseRepository.getDB().collection("medicos").document(firebaseDoctor.getUid());
         getId.get().addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
@@ -112,6 +110,8 @@ public class LoginPacientActivity extends AppCompatActivity {
                                 startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                             }
                         });
+                } else {
+                    startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                 }
             }
         });
@@ -119,7 +119,7 @@ public class LoginPacientActivity extends AppCompatActivity {
 
     private void checkPacient() {
         final FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        final DocumentReference getId = FirebaseRepository.getDB().collection("users").document(firebaseUser.getUid());
+        final DocumentReference getId = FirebaseRepository.getDB().collection("usuarios").document(firebaseUser.getUid());
         getId.get().addOnCompleteListener(task -> {
 
             if (task.isSuccessful()) {
@@ -127,11 +127,16 @@ public class LoginPacientActivity extends AppCompatActivity {
                 if (!documentSnapshot.exists()) {
                     User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
                     UserVerificationDataFragment.pacientVerificationDataFragment(user).show(getSupportFragmentManager(), "pacientVerification");
-
+                } else {
+                    startActivity(new Intent(this, MainPacientActivity.class));
                 }
 
             }
         });
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 }
