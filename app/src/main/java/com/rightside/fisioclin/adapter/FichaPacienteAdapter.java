@@ -38,8 +38,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Paciente paciente = fichaPaciente.getPaciente();
-        fichaPaciente.getComentarioPosConsulta();
-        holder.textViewFichaDoPacienteNome.setText(fichaPaciente.getComentarioPosConsulta().toString());
+        holder.textViewFichaDoPacienteNome.setText(fichaPaciente.getPaciente().getName());
         holder.textViewFichaDoPacienteTelefone.setText(paciente.getPhoneNumber());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFichaDoPacienteFoto, paciente.getProfilePictureUrl());
 

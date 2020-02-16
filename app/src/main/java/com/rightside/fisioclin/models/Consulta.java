@@ -1,17 +1,27 @@
 package com.rightside.fisioclin.models;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Consulta implements Serializable {
 
 
     public Consulta() {
     }
+    private String comentarioPosConsulta = "";
+
 
     public Consulta(Horario horario, Paciente paciente) {
         this.horario = horario;
         this.paciente = paciente;
+    }
+
+    public Consulta(Horario horario, Paciente paciente, String comentario) {
+        this.horario = horario;
+        this.paciente = paciente;
+        this.comentarioPosConsulta = comentario;
     }
 
     private Horario horario;
@@ -35,10 +45,19 @@ public class Consulta implements Serializable {
     }
 
 
+    public String getComentarioPosConsulta() {
+        return comentarioPosConsulta;
+    }
+
+    public void setComentarioPosConsulta(String comentarioPosConsulta) {
+        this.comentarioPosConsulta = comentarioPosConsulta;
+    }
+
     public HashMap<String, Object> returnConsulta() {
         HashMap<String, Object> consulta = new HashMap<>();
         consulta.put("horario", horario);
         consulta.put("paciente", paciente);
+        consulta.put("comentarioPosConsulta", getComentarioPosConsulta());
         return consulta;
     }
 

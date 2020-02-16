@@ -8,16 +8,15 @@ import java.util.List;
 public class Ficha implements Serializable {
 
     private List<Consulta> consulta = new ArrayList<>();
-    private List<String> comentarioPosConsulta = new ArrayList<>();
     private Paciente paciente;
 
     public Ficha() {
     }
 
-    public Ficha(Consulta consulta, Paciente paciente, String comentario) {
+    public Ficha(Consulta consulta, Paciente paciente) {
         this.paciente = paciente;
         this.consulta.add(consulta);
-        this.comentarioPosConsulta.add(comentario);
+
     }
 
     public List<Consulta> getConsulta() {
@@ -36,19 +35,11 @@ public class Ficha implements Serializable {
         this.paciente = paciente;
     }
 
-    public List<String> getComentarioPosConsulta() {
-        return comentarioPosConsulta;
-    }
-
-    public void setComentarioPosConsulta(List<String> comentarioPosConsulta) {
-        this.comentarioPosConsulta = comentarioPosConsulta;
-    }
 
     public HashMap<String, Object> returnFicha() {
         HashMap<String, Object> ficha = new HashMap<>();
         ficha.put("paciente", getPaciente());
         ficha.put("consulta", getConsulta());
-        ficha.put("comentarioPosConsulta", getComentarioPosConsulta());
         return ficha;
     }
 }

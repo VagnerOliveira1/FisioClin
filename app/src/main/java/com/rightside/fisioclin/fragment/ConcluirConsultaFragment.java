@@ -56,10 +56,9 @@ public class ConcluirConsultaFragment extends DialogFragment {
             if(ficha == null) {
                 ficha = new Ficha();
             }
+                consulta.setComentarioPosConsulta("teste");
                 ficha.getConsulta().add(consulta);
-                ficha.getComentarioPosConsulta().add("teasdasd");
                 ficha.setPaciente(consulta.getPaciente());
-
 
             FirebaseRepository.saveFicha(ficha);
             FirebaseRepository.deleteConsulta(consulta);
