@@ -48,11 +48,11 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
         recyclerView.setAdapter(mAdapter);
         viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
 
-        tabLayout.addTab(tabLayout.newTab().setText("segunda"));
-        tabLayout.addTab(tabLayout.newTab().setText("terça"));
-        tabLayout.addTab(tabLayout.newTab().setText("quarta"));
-        tabLayout.addTab(tabLayout.newTab().setText("quinta"));
-        tabLayout.addTab(tabLayout.newTab().setText("sexta"));
+        tabLayout.addTab(tabLayout.newTab().setText("Seg"));
+        tabLayout.addTab(tabLayout.newTab().setText("Ter"));
+        tabLayout.addTab(tabLayout.newTab().setText("Qua"));
+        tabLayout.addTab(tabLayout.newTab().setText("Qui"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sex"));
 
         tabLayout.getTabAt(0).select();
         tabLayout.setSelectedTabIndicatorColor(Color.BLUE);
@@ -65,16 +65,16 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
            @Override
            public void onTabSelected(TabLayout.Tab tab) {
                if(tab.getPosition() == 0) {
-                   Toast.makeText(HorarioMedicoActivity.this, "segunda", Toast.LENGTH_SHORT).show();
-                    observerHorarioDia("segunda-feira");
+                   Toast.makeText(HorarioMedicoActivity.this, "seg", Toast.LENGTH_SHORT).show();
+                    observerHorarioDia("seg");
                } else if (tab.getPosition() == 1) {
-                   observerHorarioDia("terça-feira");
+                   observerHorarioDia("ter");
                } else if(tab.getPosition() == 2) {
-                   observerHorarioDia("quarta-feira");
+                   observerHorarioDia("qua");
                } else if(tab.getPosition() == 3) {
-                    observerHorarioDia("quinta-feira");
+                    observerHorarioDia("qui");
                } else if(tab.getPosition() == 4) {
-                   observerHorarioDia("sexta-feira");
+                   observerHorarioDia("sex");
                }
            }
 
@@ -120,6 +120,6 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     @Override
     protected void onStart() {
         super.onStart();
-        observerHorarioDia("segunda-feira");
+        observerHorarioDia("seg");
     }
 }

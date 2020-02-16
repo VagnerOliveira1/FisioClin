@@ -45,26 +45,26 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
             viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
 
-            tabLayout.addTab(tabLayout.newTab().setText("Segunda"));
-            tabLayout.addTab(tabLayout.newTab().setText("Terça"));
-            tabLayout.addTab(tabLayout.newTab().setText("Quarta"));
-            tabLayout.addTab(tabLayout.newTab().setText("Quinta"));
-            tabLayout.addTab(tabLayout.newTab().setText("Sexta"));
+            tabLayout.addTab(tabLayout.newTab().setText("Seg"));
+            tabLayout.addTab(tabLayout.newTab().setText("Ter"));
+            tabLayout.addTab(tabLayout.newTab().setText("Qua"));
+            tabLayout.addTab(tabLayout.newTab().setText("Qui"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sex"));
 
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
                 public void onTabSelected(TabLayout.Tab tab) {
                     if(tab.getPosition() == 0) {
-                        observerHorarioDia("segunda-feira");
+                        observerHorarioDia("seg");
                     } else if (tab.getPosition() == 1) {
-                        observerHorarioDia("terça-feira");
+                        observerHorarioDia("ter");
 
                     } else if(tab.getPosition() == 2) {
-                        observerHorarioDia("quarta-feira");
+                        observerHorarioDia("qua");
                     } else if(tab.getPosition() == 3) {
-                        observerHorarioDia("quinta-feira");
+                        observerHorarioDia("qui");
                     } else if(tab.getPosition() == 4) {
-                        observerHorarioDia("sexta-feira");
+                        observerHorarioDia("sex");
                     }
                 }
 
@@ -97,6 +97,6 @@ public class HorarioPacienteActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        observerHorarioDia("segunda-feira");
+        observerHorarioDia("seg");
     }
 }
