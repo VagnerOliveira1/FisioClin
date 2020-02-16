@@ -31,11 +31,7 @@ public class ConcluirConsultaController {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(fragmentActivity);
         LinearLayout container = new LinearLayout(fragmentActivity.getApplicationContext());
         container.setOrientation(LinearLayout.VERTICAL);
-        TextView textView = new TextView(fragmentActivity);
-        EditText editText = new EditText(fragmentActivity);
 
-        container.addView(textView);
-        container.addView(editText);
         alerta.setView(container);
 
 

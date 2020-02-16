@@ -30,11 +30,9 @@ public class FichasMedicoFragment extends DialogFragment {
 
 
 
-
     public static FichasMedicoFragment novaInstancia(){
         FichasMedicoFragment fichasMedicoFragment = new FichasMedicoFragment();
         return fichasMedicoFragment;
-
     }
 
 
@@ -62,7 +60,6 @@ public class FichasMedicoFragment extends DialogFragment {
 
         return view;
     }
-
 
     @Override
     public void onStart() {
