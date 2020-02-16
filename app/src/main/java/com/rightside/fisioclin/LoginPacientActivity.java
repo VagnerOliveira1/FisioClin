@@ -84,7 +84,7 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if(account.getEmail().equals("ti.vagner@gmail.com")) {
+                if(account.getEmail().equals("ti.vagner@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
                     checkDoutor();
                     //matheusldasilva20088@gmail.com
                 } else {

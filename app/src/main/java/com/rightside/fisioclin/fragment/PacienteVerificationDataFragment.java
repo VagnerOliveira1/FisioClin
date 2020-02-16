@@ -37,7 +37,7 @@ import java.util.List;
  */
 public class PacienteVerificationDataFragment extends DialogFragment implements NumberPicker.OnValueChangeListener {
 
-    private int sessoes = 1;
+    private String sessoes = "";
     private TextView textViewmostrarSessoes;
     private TextInputEditText textInputEditTextQueixaPaciente, textInputEditTextDiagnosticoMedico;
     private Button buttonSalvarConsulta;
@@ -108,7 +108,7 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
 
     @Override
     public void onValueChange(NumberPicker numberPicker, int oldVal, int newVal) {
-        sessoes = newVal;
+        sessoes = String.valueOf(newVal);
         textViewmostrarSessoes.setText("Quantidade de sessões: " + newVal);
     }
 
