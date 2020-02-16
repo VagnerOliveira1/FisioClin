@@ -88,6 +88,7 @@ public class LoginPacientActivity extends AppCompatActivity {
             if(task.isSuccessful()) {
                 if(account.getEmail().equals("matheusldasilva20088@gmail.com")) {
                     checkDoutor();
+                    //matheusldasilva20088@gmail.com
                 } else {
                     checkPacient();
                 }
