@@ -58,7 +58,6 @@ public class HorarioPacienteActivity extends AppCompatActivity {
                         observerHorarioDia("seg");
                     } else if (tab.getPosition() == 1) {
                         observerHorarioDia("ter");
-
                     } else if(tab.getPosition() == 2) {
                         observerHorarioDia("qua");
                     } else if(tab.getPosition() == 3) {
