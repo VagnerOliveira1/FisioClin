@@ -2,7 +2,6 @@ package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +20,6 @@ import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.ViewHolder> {
     private List<Ficha> fichaList;
@@ -80,8 +78,8 @@ public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewFichaPacienteNome = itemView.findViewById(R.id.textVIew_paciente_ficha_nome);
-            textViewFichaPacienteTelefone = itemView.findViewById(R.id.textView_ficha_paciente_telefone);
+            textViewFichaPacienteNome = itemView.findViewById(R.id.textView_medico_ficha_paciente_escolher_nome);
+            textViewFichaPacienteTelefone = itemView.findViewById(R.id.textView_ficha_medico_paciente_escolher_telefone);
             imageViewFichaPacienteFoto = itemView.findViewById(R.id.imageView_ficha_paciente_foto);
 
         }

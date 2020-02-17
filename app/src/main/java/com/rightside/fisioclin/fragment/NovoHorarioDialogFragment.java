@@ -2,6 +2,7 @@ package com.rightside.fisioclin.fragment;
 
 
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -17,6 +18,7 @@ import android.widget.TextView;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,7 +46,8 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
 
-        toolbar.setTitle("Confirme os dados: ");
+        toolbar.setTitle("Confirme os dados do novo horário: ");
+        toolbar.setTitleTextColor(Color.WHITE);
         Bundle bundle = getArguments();
         Horario horario = (Horario) bundle.get("horario");
 
@@ -55,7 +58,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
         textViewData.setText(horario.getDataFormatada());
         textViewHora.setText(horario.getHoraFormatada());
-        textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+        textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
 
         buttonSalvarHorario.setOnClickListener(new View.OnClickListener() {
             @Override
