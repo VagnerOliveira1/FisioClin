@@ -13,11 +13,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.adapter.FichaPacienteAdapter;
-import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
 import java.util.List;
@@ -28,7 +32,9 @@ import java.util.List;
 public class FichaPacienteFragment extends DialogFragment {
 
     private ViewModelFichas viewModelFichaPaciente;
-
+    private TextView textViewFichaPacienteNome, textViewFichaPacienteSexo, textViewFichaPacienteTelefone,
+            textViewFichaPacienteEmail, textViewFichaPacienteProfissao, textViewFichaPacienteDataNascimento;
+    private ImageView imageViewPacienteFichaFoto;
 
     private FichaPacienteAdapter fichaPacienteAdapter;
 
@@ -45,12 +51,22 @@ public class FichaPacienteFragment extends DialogFragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_ficha_paciente,container, false);
-        RecyclerView recyclerViewFicha = view.findViewById(R.id.recycler_view_ficha_paciente);
+        RecyclerView recyclerViewFicha = view.findViewById(R.id.recyclerView_ficha_paciente_consultas_realizadas);
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
         recyclerViewFicha.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewFicha.setHasFixedSize(true);
         toolbar.setTitle("Minha Ficha:");
         toolbar.setTitleTextColor(Color.WHITE);
+        textViewFichaPacienteDataNascimento = view.findViewById(R.id.textView_ficha_paciente_nascimento);
+        textViewFichaPacienteNome = view.findViewById(R.id.textView_ficha_paciente_nome);
+        textViewFichaPacienteTelefone = view.findViewById(R.id.textView_ficha_paciente_telefone);
+        textViewFichaPacienteProfissao = view.findViewById(R.id.textView_ficha_paciente_profissao);
+        textViewFichaPacienteSexo = view.findViewById(R.id.textView_ficha_paciente_sexo);
+        textViewFichaPacienteEmail = view.findViewById(R.id.textView_ficha_paciente_email);
+        imageViewPacienteFichaFoto = view.findViewById(R.id.imageView_ficha_paciente_picture);
+
+
+
         viewModelFichaPaciente = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
         fichaPacienteAdapter = new FichaPacienteAdapter(getContext());
@@ -59,10 +75,25 @@ public class FichaPacienteFragment extends DialogFragment {
 
 
         viewModelFichaPaciente.getFicha(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaPaciente -> {
-            fichaPacienteAdapter.update(fichaPaciente);
+           List<Consulta> consultaList = fichaPaciente.getConsulta();
+           fichaPacienteAdapter.update(consultaList);
+           Paciente paciente = fichaPaciente.getPaciente();
+           setInformacoesPacient(paciente);
         });
 
         return view;
+
+    }
+
+
+    public void setInformacoesPacient(Paciente paciente) {
+        textViewFichaPacienteNome.setText(paciente.getName());
+        textViewFichaPacienteSexo.setText(paciente.getSexo());
+        textViewFichaPacienteProfissao.setText(paciente.getProfissao());
+        textViewFichaPacienteTelefone.setText(paciente.getPhoneNumber());
+        textViewFichaPacienteDataNascimento.setText(paciente.getDataNascimento());
+        textViewFichaPacienteEmail.setText(paciente.getEmail());
+        GeralUtils.mostraImagemCircular(getContext(), imageViewPacienteFichaFoto, paciente.getProfilePictureUrl());
 
     }
     @Override

@@ -26,6 +26,7 @@ import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -92,7 +93,9 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
                         if (task.isSuccessful()) {
                             FirebaseRepository.atualizaHorarioMarcado(horario);
                             FirebaseRepository.savePacient(paciente);
-                            Toast.makeText(getContext(), "Consulta marcada com sucesso!", Toast.LENGTH_SHORT).show();
+                            GeralUtils.mostraAlerta("Consulta Marcada", "Sua consulta foi marcada com sucesso.", getContext());
+                            dismiss();
+
                         }
                     }
                 });

@@ -53,28 +53,29 @@ public class ConcluirConsultaFragment extends DialogFragment {
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
         viewModelFichas.getFicha(consulta.getPaciente().getId()).observe(this, ficha -> {
            this.ficha = ficha;
-
         });
+
+
 
         button.setOnClickListener(view1 -> {
 
-            if(ficha == null) {
-                ficha = new Ficha();
+            if (this.ficha == null)  {
+                this.ficha = new Ficha();
             }
 
             if (textInputEditTextConcluirConsulta.getText().toString().isEmpty()) {
-                GeralUtils.mostraAlerta("Atenção", "É importante fazer um comentário sobre a consulta", getContext());
-            } else {
+                GeralUtils.mostraAlerta("Atenção!", "É importante fazer um comentário sobre a consulta", getContext());
+            }
+
                 consulta.setComentarioPosConsulta(textInputEditTextConcluirConsulta.getText().toString());
                 ficha.getConsulta().add(consulta);
                 ficha.setPaciente(consulta.getPaciente());
-            }
+                FirebaseRepository.saveFicha(ficha);
+                FirebaseRepository.deleteConsulta(consulta);
+                FirebaseRepository.deleteHorarios(consulta.getHorario());
 
 
 
-            FirebaseRepository.saveFicha(ficha);
-            FirebaseRepository.deleteConsulta(consulta);
-            FirebaseRepository.deleteHorarios(consulta.getHorario());
         });
 
 

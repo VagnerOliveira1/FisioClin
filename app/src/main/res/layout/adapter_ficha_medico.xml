@@ -21,14 +21,14 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/textVIew_paciente_ficha_nome"
+            android:id="@+id/textView_medico_ficha_paciente_escolher_nome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/textView_ficha_paciente_telefone"
+            android:id="@+id/textView_ficha_medico_paciente_escolher_telefone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
