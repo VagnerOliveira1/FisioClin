@@ -43,6 +43,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         DiagnosticoMedico diagnosticoMedico = consulta.getPaciente().getDiagnosticoMedico();
 
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+        holder.textViewConsultaRealizadaData.setText(horario.getDataFormatada());
         holder.textViewConsultaRealizaHora.setText(horario.getHoraFormatada());
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
         holder.textViewPosConsulta.setText(consulta.getComentarioPosConsulta());
@@ -80,7 +81,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
             textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana);
             textViewQueixaFicha = itemView.findViewById(R.id.textViewQueixaFicha);
             textViewDiagnosticoMedico = itemView.findViewById(R.id.textViewDiagonosticoMedicaFicha);
-            textViewPosConsulta = itemView.findViewById(R.id.textViewDiagonosticoMedicaFicha);
+            textViewPosConsulta = itemView.findViewById(R.id.textViewRecomendacaoConsulta);
 
 
         }
