@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.User;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,9 +49,15 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     public void onBindViewHolder(@NonNull HorarioPacienteAdapter.ViewHolder holder, int position) {
 
                     Horario horario = horarios.get(position);
+                    if(horario.isMarcado()){
+                        holder.cardView.setBackgroundColor(Color.RED);
+                        holder.textViewData.setTextColor(Color.WHITE);
+                        holder.textViewDiaSemana.setTextColor(Color.WHITE);
+                        holder.textViewHora.setTextColor(Color.WHITE);
+                    }
                     holder.textViewHora.setText(horario.getHoraFormatada());
                     holder.textViewData.setText(horario.getDataFormatada());
-                    holder.textViewDiaSemana.setText(horario.getDiaDaSemanaFormatado());
+                    holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
                     holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
                         @Override
                         public boolean onLongClick(View view) {

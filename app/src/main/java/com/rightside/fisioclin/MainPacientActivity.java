@@ -98,12 +98,11 @@ public class MainPacientActivity extends AppCompatActivity {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse(url));
                 startActivity(intent);
-
             }
         });
 
         cardViewMinhaFicha.setOnClickListener(view -> {
-            FichaPacienteFragment.novaInstancia().show(getSupportFragmentManager(), "minhaFicha");
+            FichaPacienteFragment.novaInstancia().show(getSupportFragmentManager(), "Minha Ficha");
         });
 
     }
