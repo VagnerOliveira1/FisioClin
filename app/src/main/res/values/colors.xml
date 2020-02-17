@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorStickyBack">#303F9F</color>
     <color name="colorSticky">#303EEE</color>
+    <color name="colorPrimaryDark">#025928</color>
+    <color name="colorPrimary">#118C46</color>
+    <color name="colorCinzaClaro">#F2F2F0</color>
+    <color name="colorPessego">#BF8821</color>
+    <color name="colorPessegoClaro">#F2A488</color>
+
+
+
+
 </resources>
