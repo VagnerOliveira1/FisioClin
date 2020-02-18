@@ -12,10 +12,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.rightside.fisioclin.fragment.ConsultaPacientDialogFragment;
 import com.rightside.fisioclin.fragment.FichaPacienteFragment;
-import com.rightside.fisioclin.fragment.FichasMedicoFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
@@ -23,7 +21,6 @@ import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
-import com.rightside.fisioclin.views.ConsultaPacienteActivity;
 
 public class MainPacientActivity extends AppCompatActivity {
 
@@ -78,7 +75,8 @@ public class MainPacientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                     if(consulta != null) {
-                        startActivity(new Intent(MainPacientActivity.this, ConsultaPacienteActivity.class));
+                        ConsultaPacientDialogFragment.novaInstancia().show(getSupportFragmentManager(),"Minha Consulta");
+
                     } else {
                         GeralUtils.mostraAlerta("Você ainda não tem consulta", "marque uma consulta antes!", MainPacientActivity.this);
                     }
