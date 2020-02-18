@@ -76,6 +76,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
                 public void onTabReselected(TabLayout.Tab tab) {
 
                 }
+
             });
 
             viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
@@ -89,7 +90,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
     public void observerHorarioDia(String dia) {
         viewModelHorarios.getHorarios(dia).observe(this, listaHorario -> {
             this.list = listaHorario;
-            mAdapter.update(listaHorario);
+            mAdapter.update(list);
         });
     }
 
