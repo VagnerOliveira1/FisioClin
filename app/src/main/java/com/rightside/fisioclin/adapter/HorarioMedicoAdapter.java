@@ -48,6 +48,18 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             holder.textViewData.setTextColor(Color.WHITE);
             holder.textViewDiaSemana.setTextColor(Color.WHITE);
             holder.textViewHora.setTextColor(Color.WHITE);
+            holder.textViewDisponibilidade.setTextColor(Color.WHITE);
+            holder.textViewDisponibilidade.setText("Horário indisponível");
+
+        } else {
+            holder.cardView.setBackgroundColor(Color.WHITE);
+            holder.textViewData.setTextColor(Color.BLACK);
+            holder.textViewDiaSemana.setTextColor(Color.BLACK);
+            holder.textViewHora.setTextColor(Color.BLACK);
+            holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_black_24dp);
+            holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
+            holder.textViewDisponibilidade.setTextColor(Color.BLACK);
+            holder.textViewDisponibilidade.setText("");
         }
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewData.setText(horario.getDataFormatada());
@@ -75,7 +87,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDiaSemana;
+        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade;
         private CardView cardView;
         private ImageView imageViewCalendario, imageViewHorario;
         public ViewHolder(@NonNull View itemView) {
@@ -86,6 +98,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             textViewHora = itemView.findViewById(R.id.horario_hora);
             imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
             imageViewCalendario = itemView.findViewById(R.id.imageViewCalendario);
+            textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
         }
     }

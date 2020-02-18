@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,7 +32,6 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     private Consulta consulta;
 
 
-
     public HorarioPacienteAdapter(Context context, FragmentActivity activity, User usuario) {
         this.context = context;
         this.fragmentActivity = activity;
@@ -48,38 +48,54 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @Override
     public void onBindViewHolder(@NonNull HorarioPacienteAdapter.ViewHolder holder, int position) {
 
-                    Horario horario = horarios.get(position);
-                    if(horario.isMarcado()){
-                        holder.cardView.setBackgroundColor(Color.RED);
-                        holder.textViewData.setTextColor(Color.WHITE);
-                        holder.textViewDiaSemana.setTextColor(Color.WHITE);
-                        holder.textViewHora.setTextColor(Color.WHITE);
-                    }
-                    holder.textViewHora.setText(horario.getHoraFormatada());
-                    holder.textViewData.setText(horario.getDataFormatada());
-                    holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
-                    holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
-                        @Override
-                        public boolean onLongClick(View view) {
-                            if (horarios.get(position).isMarcado() || consulta != null) {
-                               GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Você já possui uma consulta marcada.",  context);
-                            } else {
-                                MarcarConsultaController.marcarConsulta(horario, usuario,fragmentActivity);
-                                return true;
-                            }
-                            return false;
-                        }
-                    });
+        Horario horario = horarios.get(position);
+        if (horario.isMarcado()) {
+            holder.cardView.setBackgroundColor(Color.RED);
+            holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_white);
+            holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_white);
+            holder.textViewData.setTextColor(Color.WHITE);
+            holder.textViewDiaSemana.setTextColor(Color.WHITE);
+            holder.textViewHora.setTextColor(Color.WHITE);
+            holder.textViewDisponibilidade.setTextColor(Color.WHITE);
+            holder.textViewDisponibilidade.setText("Horário indisponível");
+        } else {
+            holder.cardView.setBackgroundColor(Color.WHITE);
+            holder.textViewData.setTextColor(Color.BLACK);
+            holder.textViewDiaSemana.setTextColor(Color.BLACK);
+            holder.textViewHora.setTextColor(Color.BLACK);
+            holder.textViewDisponibilidade.setTextColor(Color.BLACK);
+            holder.textViewDisponibilidade.setText("");
+            holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_black_24dp);
+            holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
+        }
+        holder.textViewHora.setText(horario.getHoraFormatada());
+        holder.textViewData.setText(horario.getDataFormatada());
+        holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
+        holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if (horarios.get(position).isMarcado() || consulta != null) {
+                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Você já possui uma consulta marcada.", context);
+                } else {
+                    MarcarConsultaController.marcarConsulta(horario, usuario, fragmentActivity);
+                    return true;
                 }
-
-
-
+                return false;
+            }
+        });
+    }
 
 
     @Override
     public int getItemCount() {
+
+        if (horarios == null) {
+            return 0;
+        }
+
         return horarios.size();
     }
+
     public void update(List<Horario> horarios) {
         this.horarios = horarios;
         notifyDataSetChanged();
@@ -89,11 +105,17 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
         this.consulta = consultaUsuario;
     }
 
+    public void clear() {
+        this.horarios.clear();
+    }
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDiaSemana;
+        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade;
         private CardView cardView;
+        private ImageView imageViewCalendario, imageViewHorario;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -101,6 +123,9 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
+            imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
+            textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);
+            imageViewCalendario = itemView.findViewById(R.id.imageViewCalendario);
         }
     }
 
