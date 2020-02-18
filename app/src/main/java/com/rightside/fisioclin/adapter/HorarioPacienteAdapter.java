@@ -74,9 +74,13 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (horarios.get(position).isMarcado() || consulta != null) {
+                if (consulta != null) {
                     GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Você já possui uma consulta marcada.", context);
-                } else {
+                } else if (horarios.get(position).isMarcado() && consulta == null){
+                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Escolha um horário disponível.", context);
+                }
+
+                else {
                     MarcarConsultaController.marcarConsulta(horario, usuario, fragmentActivity);
                     return true;
                 }
