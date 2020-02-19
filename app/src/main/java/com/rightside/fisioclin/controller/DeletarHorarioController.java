@@ -13,12 +13,10 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Horario;
+
 import com.rightside.fisioclin.repository.FirebaseRepository;
-<<<<<<< HEAD
 import com.rightside.fisioclin.utils.ConstantUtils;
-=======
 import com.rightside.fisioclin.utils.GeralUtils;
->>>>>>> 46238eda42f74f65906914c0755777030bbfb0b5
 
 
 public class DeletarHorarioController {
@@ -64,12 +62,8 @@ public class DeletarHorarioController {
         alerta.setView(container);
 
 
-        
-<<<<<<< HEAD
         alerta.setTitle("Apagar Horário!").setMessage(ConstantUtils.TEM_CERTEZA_DISSO).setPositiveButton("Apagar", new DialogInterface.OnClickListener() {
-=======
-        alerta.setTitle("Excluir Horário").setMessage("Tem certeza que deseja fazer isso?").setPositiveButton("Apagar", new DialogInterface.OnClickListener() {
->>>>>>> 46238eda42f74f65906914c0755777030bbfb0b5
+
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 FirebaseRepository.deleteHorarios(horario);
