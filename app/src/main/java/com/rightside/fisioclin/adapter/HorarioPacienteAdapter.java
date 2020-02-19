@@ -19,6 +19,7 @@ import com.rightside.fisioclin.controller.MarcarConsultaController;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.User;
+import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.ArrayList;
@@ -75,9 +76,9 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             @Override
             public boolean onLongClick(View view) {
                 if (consulta != null) {
-                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Você já possui uma consulta marcada.", context);
+                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", ConstantUtils.VOCE_POSSUI_CONSULTA_MARCADA, context);
                 } else if (horarios.get(position).isMarcado() && consulta == null){
-                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", "Escolha um horário disponível.", context);
+                    GeralUtils.mostraAlerta("Não foi possivel marcar consulta", ConstantUtils.ESCOLHA_UM_HORARIO_DISPONIVEL, context);
                 }
 
                 else {

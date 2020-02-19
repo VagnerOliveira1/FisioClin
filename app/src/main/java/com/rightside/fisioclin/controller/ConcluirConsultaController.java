@@ -18,6 +18,7 @@ import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
 import org.w3c.dom.Text;
@@ -35,7 +36,7 @@ public class ConcluirConsultaController {
         alerta.setView(container);
 
 
-            alerta.setTitle("Concluir consulta").setMessage("Deseja concluir a consulta do paciente?")
+            alerta.setTitle("Concluir consulta").setMessage(ConstantUtils.DESEJA_CONCLUIR_A_CONSULTA_DO_PACIENTE)
                     .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {

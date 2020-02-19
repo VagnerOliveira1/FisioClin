@@ -16,6 +16,7 @@ import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
 
 public class MarcarConsultaController {
     public static void marcarConsulta(Horario horario, User user, FragmentActivity activity) {
@@ -45,7 +46,7 @@ public class MarcarConsultaController {
         alerta.setView(container);
 
 
-        alerta.setTitle("Marcar Horário!").setMessage("Escolher esse horário?").setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+        alerta.setTitle("Marcar Horário!").setMessage(ConstantUtils.ESCOLHER_ESSE_HORARIO).setPositiveButton("SIM", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 

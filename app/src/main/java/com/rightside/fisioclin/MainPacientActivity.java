@@ -18,6 +18,7 @@ import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
@@ -78,7 +79,7 @@ public class MainPacientActivity extends AppCompatActivity {
                         ConsultaPacientDialogFragment.novaInstancia().show(getSupportFragmentManager(),"Minha Consulta");
 
                     } else {
-                        GeralUtils.mostraAlerta("Você ainda não tem consulta", "marque uma consulta antes!", MainPacientActivity.this);
+                        GeralUtils.mostraAlerta("Você ainda não tem consulta", ConstantUtils.MARQUE_UMA_CONSULTA_ANTES, MainPacientActivity.this);
                     }
 
             }

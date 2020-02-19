@@ -18,6 +18,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
@@ -64,7 +65,7 @@ public class ConcluirConsultaFragment extends DialogFragment {
             }
 
             if (textInputEditTextConcluirConsulta.getText().toString().isEmpty()) {
-                GeralUtils.mostraAlerta("Atenção!", "É importante fazer um comentário sobre a consulta", getContext());
+                GeralUtils.mostraAlerta("Atenção!", ConstantUtils.IMPORTANTE_FAZER_COMENTARIO_SOBRE_CONSULTA, getContext());
             }
 
                 consulta.setComentarioPosConsulta(textInputEditTextConcluirConsulta.getText().toString());
