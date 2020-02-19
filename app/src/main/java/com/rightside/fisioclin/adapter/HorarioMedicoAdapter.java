@@ -50,6 +50,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             holder.textViewHora.setTextColor(Color.WHITE);
             holder.textViewDisponibilidade.setTextColor(Color.WHITE);
             holder.textViewDisponibilidade.setText("Horário indisponível");
+            holder.textViewNomeDoMedicoHorario.setTextColor(Color.WHITE);
 
         } else {
             holder.cardView.setBackgroundColor(Color.WHITE);
@@ -60,9 +61,12 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
             holder.textViewDisponibilidade.setTextColor(Color.BLACK);
             holder.textViewDisponibilidade.setText("");
+            holder.textViewNomeDoMedicoHorario.setTextColor(Color.BLACK);
         }
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewData.setText(horario.getDataFormatada());
+        holder.textViewNomeDoMedicoHorario.setText("Fisio: " + horario.getMedico().getName());
+        GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
         holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -87,9 +91,9 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade;
+        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade, textViewNomeDoMedicoHorario;
         private CardView cardView;
-        private ImageView imageViewCalendario, imageViewHorario;
+        private ImageView imageViewCalendario, imageViewHorario, imageViewFotoDoMedicoHorario;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -98,6 +102,8 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             textViewHora = itemView.findViewById(R.id.horario_hora);
             imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
             imageViewCalendario = itemView.findViewById(R.id.imageViewCalendario);
+            textViewNomeDoMedicoHorario = itemView.findViewById(R.id.textView_horario_medico_nome);
+            imageViewFotoDoMedicoHorario = itemView.findViewById(R.id.imageView_foto_do_medico_horario);
             textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
         }

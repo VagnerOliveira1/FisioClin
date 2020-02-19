@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -53,8 +54,6 @@ public class FichaPacienteFragment extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_ficha_paciente,container, false);
         RecyclerView recyclerViewFicha = view.findViewById(R.id.recyclerView_ficha_paciente_consultas_realizadas);
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
-        recyclerViewFicha.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerViewFicha.setHasFixedSize(true);
         toolbar.setTitle("Minha Ficha:");
         toolbar.setTitleTextColor(Color.WHITE);
         textViewFichaPacienteDataNascimento = view.findViewById(R.id.textView_ficha_paciente_nascimento);
@@ -65,11 +64,19 @@ public class FichaPacienteFragment extends DialogFragment {
         textViewFichaPacienteEmail = view.findViewById(R.id.textView_ficha_paciente_email);
         imageViewPacienteFichaFoto = view.findViewById(R.id.imageView_ficha_paciente_picture);
 
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
 
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewFicha.getContext(),
+                layoutManager.getOrientation());
+
+        recyclerViewFicha.addItemDecoration(dividerItemDecoration);;
+        recyclerViewFicha.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewFicha.setHasFixedSize(true);
 
         viewModelFichaPaciente = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
         fichaPacienteAdapter = new FichaPacienteAdapter(getContext());
+
         recyclerViewFicha.setAdapter(fichaPacienteAdapter);
 
 

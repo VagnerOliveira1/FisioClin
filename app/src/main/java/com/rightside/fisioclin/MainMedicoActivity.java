@@ -14,6 +14,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.rightside.fisioclin.fragment.FichasMedicoFragment;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
@@ -23,6 +24,7 @@ public class MainMedicoActivity extends FragmentActivity {
     private ImageView imageViewDoctorPicture;
     private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico;
     private TextView textViewNameDoctor;
+    private Medico medico;
 
 
     @Override
@@ -40,7 +42,7 @@ public class MainMedicoActivity extends FragmentActivity {
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
                 if(documentSnapshot != null && documentSnapshot.exists()) {
-                    Medico medico = documentSnapshot.toObject(Medico.class);
+                     medico = documentSnapshot.toObject(Medico.class);
                     alteraInformacaoPerfil(medico);
                 }
             }
@@ -51,7 +53,9 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewHorarios.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainMedicoActivity.this, HorarioMedicoActivity.class));
+                Intent intent = new Intent(MainMedicoActivity.this, HorarioMedicoActivity.class);
+                intent.putExtra("medico", medico);
+                startActivity(intent);
             }
         });
 

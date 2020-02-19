@@ -12,13 +12,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.NumberPicker;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
@@ -44,7 +47,9 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
     private TextInputEditText textInputEditTextQueixaPaciente, textInputEditTextDiagnosticoMedico;
     private Button buttonSalvarConsulta;
     private DiagnosticoMedico diagnosticoMedico = new DiagnosticoMedico();
+    private TextInputLayout textInputLayoutDiagnosticoMedico;
     private Paciente paciente;
+    private Switch aSwitch;
 
 
     public static PacienteVerificationDataFragment novaInstancia(Horario horario, User usuario) {
@@ -68,8 +73,10 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
         textViewmostrarSessoes = view.findViewById(R.id.mostraNumeroSessoes);
         textInputEditTextDiagnosticoMedico = view.findViewById(R.id.editDiagnosticoMedico);
         textInputEditTextQueixaPaciente = view.findViewById(R.id.editQueixaPaciente);
+        textInputLayoutDiagnosticoMedico = view.findViewById(R.id.textInputLayoutDiagnosticoMedico);
         buttonSalvarConsulta = view.findViewById(R.id.button_salvar_consulta);
         NumberPicker numberPicker = view.findViewById(R.id.numberPicker);
+        aSwitch = view.findViewById(R.id.switch2);
         Bundle bundle = getArguments();
         Horario horario = (Horario) bundle.get("horario");
         User usuario = (User) bundle.get("usuario");
@@ -77,6 +84,20 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
         numberPicker.setMinValue(1);
         numberPicker.setMaxValue(30);
         numberPicker.setOnValueChangedListener(this);
+
+        aSwitch.setTextOff("Não");
+        aSwitch.setTextOn("Sim");
+
+        aSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if(b) {
+                    textInputLayoutDiagnosticoMedico.setVisibility(View.VISIBLE);
+                } else {
+                    textInputLayoutDiagnosticoMedico.setVisibility(View.GONE);
+                }
+            }
+        });
 
         buttonSalvarConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,7 +115,11 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
                         if (task.isSuccessful()) {
                             FirebaseRepository.atualizaHorarioMarcado(horario);
                             FirebaseRepository.savePacient(paciente);
+<<<<<<< HEAD
                             GeralUtils.mostraAlerta("Consulta Marcada", ConstantUtils.CONSULTA_MARCADA_COM_SUCESSO, getContext());
+=======
+                            GeralUtils.mostraAlerta("Consulta marcada", "Sua consulta foi marcada com sucesso.", getContext());
+>>>>>>> 46238eda42f74f65906914c0755777030bbfb0b5
                             dismiss();
 
                         }

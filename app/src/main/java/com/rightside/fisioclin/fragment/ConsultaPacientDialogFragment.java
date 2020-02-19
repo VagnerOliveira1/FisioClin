@@ -29,7 +29,7 @@ import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 public class ConsultaPacientDialogFragment extends DialogFragment {
 
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
-    private TextView textViewNomePacienteConsulta, textViewTelefonePacienteConsulta, textViewDataPacienteConsulta,
+    private TextView textViewNomeMedicoFichaPaciente, textViewDataPacienteConsulta,
             textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta;
     private ImageView imageViewFotoPacienteConsulta;
     private Consulta consulta;
@@ -54,12 +54,12 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
 
         toolbar.setTitle("Minha Consulta");
+        toolbar.setSubtitle("Confira os dados da sua consulta");
         toolbar.setTitleTextColor(Color.WHITE);
 
         textViewDataPacienteConsulta = view.findViewById(R.id.textview_data_consulta_paciente);
-        textViewNomePacienteConsulta = view.findViewById(R.id.textview_nome_paciente_consulta);
+        textViewNomeMedicoFichaPaciente = view.findViewById(R.id.textView6);
         textViewDiaSemanaPacienteConsulta = view.findViewById(R.id.textview_dia_consulta_paciente);
-        textViewTelefonePacienteConsulta = view.findViewById(R.id.textview_telefone_paciente_consulta);
         imageViewFotoPacienteConsulta = view.findViewById(R.id.imageView_foto_paciente_consulta);
         textViewHoraPacienteConsulta = view.findViewById(R.id.textview_hora_consulta_paciente);
 
@@ -78,12 +78,11 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         if (consulta != null) {
             User paciente = consulta.getPaciente();
             Horario horario = consulta.getHorario();
-            textViewNomePacienteConsulta.setText(paciente.getName());
+            textViewNomeMedicoFichaPaciente.setText(horario.getMedico().getName());
             textViewHoraPacienteConsulta.setText(horario.getHoraFormatada());
-            textViewTelefonePacienteConsulta.setText(paciente.getPhoneNumber());
-            textViewDiaSemanaPacienteConsulta.setText(horario.getDiaDaSemanaFormatado());
+            textViewDiaSemanaPacienteConsulta.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
             textViewDataPacienteConsulta.setText(horario.getDataFormatada());
-            GeralUtils.mostraImagemCircular(getContext(), imageViewFotoPacienteConsulta, paciente.getProfilePictureUrl());
+            GeralUtils.mostraImagemCircular(getContext(), imageViewFotoPacienteConsulta, horario.getMedico().getProfilePictureUrl());
         } else {
 
         }
