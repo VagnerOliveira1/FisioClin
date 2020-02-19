@@ -1,5 +1,6 @@
 package com.rightside.fisioclin;
 
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.DatePicker;
@@ -21,6 +23,7 @@ import com.rightside.fisioclin.fragment.DatePickerFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
 import com.rightside.fisioclin.fragment.NovoHorarioDialogFragment;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     private ViewModelHorarios viewModelHorarios;
     private int hour,min;
     private Horario horario;
+    private Medico medico;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +51,15 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setAdapter(mAdapter);
         viewModelHorarios = ViewModelProviders.of(this).get(ViewModelHorarios.class);
+        Toolbar toolbar = findViewById(R.id.toolbar_principal);
+        toolbar.setTitleTextColor(Color.WHITE);
+        toolbar.setSubtitleTextColor(Color.WHITE);
+
+        Intent intent = getIntent();
+        Medico medico = (Medico) intent.getSerializableExtra("medico");
+
+        toolbar.setTitle("Horários:");
+        toolbar.setSubtitle("Segunda-feira");
 
         tabLayout.addTab(tabLayout.newTab().setText("Seg"));
         tabLayout.addTab(tabLayout.newTab().setText("Ter"));
@@ -67,14 +80,19 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
                if(tab.getPosition() == 0) {
                    Toast.makeText(HorarioMedicoActivity.this, "seg", Toast.LENGTH_SHORT).show();
                     observerHorarioDia("seg");
+                   toolbar.setSubtitle("Segunda-feira");
                } else if (tab.getPosition() == 1) {
                    observerHorarioDia("ter");
+                   toolbar.setSubtitle("Terça-feira");
                } else if(tab.getPosition() == 2) {
                    observerHorarioDia("qua");
+                   toolbar.setSubtitle("Quarta-feira");
                } else if(tab.getPosition() == 3) {
                     observerHorarioDia("qui");
+                   toolbar.setSubtitle("Quinta-feira");
                } else if(tab.getPosition() == 4) {
                    observerHorarioDia("sex");
+                   toolbar.setSubtitle("Sexta-feira");
                }
            }
 
@@ -113,7 +131,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfWeek) {
         String uniqueId = UUID.randomUUID().toString();
-        horario = new Horario(hour, min, year, dayOfWeek, month, uniqueId, uniqueId);
+        horario = new Horario(hour, min, year, dayOfWeek, month, uniqueId, uniqueId, medico);
         NovoHorarioDialogFragment.novoHorarioDialogFragment(horario).show(getSupportFragmentManager(), "horario");
     }
 

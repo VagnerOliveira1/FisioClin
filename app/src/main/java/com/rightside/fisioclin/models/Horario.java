@@ -21,25 +21,37 @@ public class Horario implements Serializable {
     private String diaDaSemanaFormatado;
     private boolean marcado = false;
     private String horarioNumber;
+    private Medico medico;
+
     @DocumentId
     private String id;
 
     public Horario() {
     }
 
-    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id, String horarioNumber) {
+    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id, String horarioNumber, Medico medico) {
         this.hour = hour;
         this.minute = minute;
         this.year = year;
         this.dayOfMonth = dayOfMonth;
         this.month = month;
         this.id = id;
+        this.medico = medico;
         setDate();
         setDataFormatada();
         setHoraFormatada();
         setDiaDaSemanaFormatado();
         setMarcado(false);
         setHorarioNumber(horarioNumber);
+    }
+
+
+    public Medico getMedico() {
+        return medico;
+    }
+
+    public void setMedico(Medico medico) {
+        this.medico = medico;
     }
 
     public String getId() {
@@ -166,6 +178,7 @@ public class Horario implements Serializable {
         map.put("date", getDate());
         map.put("marcado", isMarcado());
         map.put("horarioNumber", getHorarioNumber());
+        map.put("medico", getMedico());
         return map;
     }
 

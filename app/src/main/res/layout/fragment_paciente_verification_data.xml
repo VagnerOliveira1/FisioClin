@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    tools:context=".fragment.PacientVerificationDataFragment">
+    android:padding="16dp"
+    tools:context=".fragment.PacienteVerificationDataFragment">
 
     <!--    <LinearLayout-->
     <!--        android:layout_width="match_parent"-->
@@ -18,26 +19,12 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Nos ajude a te ajudar!"
-        android:textSize="18sp" />
+        android:paddingBottom="10dp"
+        android:text="Nos ajude a te ajudar:"
+        android:textColor="#000000"
+        android:textSize="22sp" />
 
     <!--    </LinearLayout>-->
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textInputLayoutProfissaoPaciente"
-        style="@style/TextInputLayoutStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:theme="@style/TextInputLayoutStyle"
-        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutProfissaoPaciente"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07999998"
-        app:layout_constraintVertical_chainStyle="packed"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutQueixaPaciente"
@@ -59,10 +46,24 @@
             android:id="@+id/editQueixaPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Queixa Pricipal"
-            android:inputType="text" />
+            android:hint="Qual é sua queixa principal?"
+            android:inputType="text"
+            android:textSize="18sp" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
+
+    <Switch
+        android:id="@+id/switch2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Possui um diagnóstico médico?"
+        android:textOff="Não"
+        android:textOn="Sim"
+        android:textSize="18sp" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutDiagnosticoMedico"
@@ -73,6 +74,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
         android:theme="@style/TextInputLayoutStyle"
+        android:visibility="gone"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutDiagnosticoMedico"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -85,7 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Diagnostico Médico"
-            android:inputType="text" />
+            android:inputType="text"
+            android:visibility="visible" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -95,18 +98,13 @@
         android:layout_margin="8dp"
         android:background="@drawable/border_layout"
 
-        android:orientation="horizontal"/>
+        android:orientation="horizontal" />
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_margin="6dp"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="90dp"
-            android:orientation="vertical"/>
 
 
         <LinearLayout

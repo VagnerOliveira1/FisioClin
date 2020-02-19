@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class DiagnosticoMedico implements Serializable {
 
-    private String descricaoMedica = "";
+    private String descricaoMedica = "Não possui";
     private String queixa = "";
 
 
