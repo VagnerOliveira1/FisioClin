@@ -42,7 +42,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_horario);
-        RecyclerView recyclerView = findViewById(R.id.recyclerView_consultas_medico);
+        RecyclerView recyclerView = findViewById(R.id.recyclerView_horarios_medico);
         FloatingActionButton floatingActionButton = findViewById(R.id.floatingActionButton_novo_horario_medico);
         list = new ArrayList<>();
         TabLayout tabLayout = findViewById(R.id.tabLayout_navigation);
@@ -56,7 +56,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
         toolbar.setSubtitleTextColor(Color.WHITE);
 
         Intent intent = getIntent();
-        Medico medico = (Medico) intent.getSerializableExtra("medico");
+        medico = (Medico) intent.getSerializableExtra("medico");
 
         toolbar.setTitle("Horários:");
         toolbar.setSubtitle("Segunda-feira");
