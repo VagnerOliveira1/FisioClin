@@ -115,11 +115,8 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
                         if (task.isSuccessful()) {
                             FirebaseRepository.atualizaHorarioMarcado(horario);
                             FirebaseRepository.savePacient(paciente);
-<<<<<<< HEAD
                             GeralUtils.mostraAlerta("Consulta Marcada", ConstantUtils.CONSULTA_MARCADA_COM_SUCESSO, getContext());
-=======
-                            GeralUtils.mostraAlerta("Consulta marcada", "Sua consulta foi marcada com sucesso.", getContext());
->>>>>>> 46238eda42f74f65906914c0755777030bbfb0b5
+
                             dismiss();
 
                         }
@@ -129,7 +126,6 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
 
             }
         });
-
 
 
         return  view;
