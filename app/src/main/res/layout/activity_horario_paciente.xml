@@ -4,18 +4,22 @@
     android:id="@+id/hora_id"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
     android:orientation="vertical">
+
+    <include layout="@layout/toolbar" />
+
     <com.google.android.material.tabs.TabLayout
-        app:tabSelectedTextColor="@color/colorAccent"
-        android:background="@android:color/white"
         android:id="@+id/tabLayout_navigation_paciente"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        app:tabMode="scrollable" />
+        android:background="@android:color/white"
+        app:tabMode="scrollable"
+        app:tabSelectedTextColor="@color/colorAccent" />
+
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView_consultas_medico"
+        android:id="@+id/recyclerView_horarios_paciente"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:padding="16dp" />
 </LinearLayout>

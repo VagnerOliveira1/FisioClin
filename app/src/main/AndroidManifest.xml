@@ -9,11 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".FichaDadosMedicoActivity"></activity>
         <activity android:name=".HorarioPacienteActivity" />
         <activity android:name=".ConsultaMedicoActivity" />
         <activity android:name=".MainPacientActivity" />
         <activity android:name=".LoginPacientActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -22,6 +24,8 @@
         </activity>
         <activity android:name=".HorarioMedicoActivity" />
         <activity android:name=".MainMedicoActivity" />
+
+
     </application>
 
 </manifest>
