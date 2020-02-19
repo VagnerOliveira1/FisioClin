@@ -3,4 +3,25 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="nome_paciente">Nome Paciente</string>
+    <string name="profissao_paciente">Profissão</string>
+    <string name="telefone_paciente">Telefone</string>
+    <string name="sexo_paciente">Sexo</string>
+    <string name="data_nascimento_paciente">Data Nascimento</string>
+    <string name="email_paciente">Email</string>
+    <string name="consultas_realizadas">Consultas Realizadas:</string>
+    <string name="nome_doutor">Nome</string>
+    <string name="horarios">Horários</string>
+    <string name="Consultas">consultas</string>
+    <string name="fichas">Fichas</string>
+    <string name="minhas_consultas">Minhas Consultas</string>
+    <string name="localizacao_clinica">Localozação</string>
+    <string name="minha_ficha">Minha Ficha</string>
+    <string name="consulta_realizada_data">Data</string>
+    <string name="consultas_realizada_hora">Hora</string>
+    <string name="consulta_realizada_dia_semana">Dia</string>
+    <string name="diagnostico_medico">Diagnostico Médico:</string>
+    <string name="queixa_paciente">Queixa</string>
+    <string name="avaliacao_pos_consulta">Avaliação pós consulta</string>
+    <string name="recomendacao_consulta">Recomendações</string>
 </resources>

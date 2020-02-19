@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.Toast;
 
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -28,6 +29,7 @@ import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
 
 
 public class LoginPacientActivity extends AppCompatActivity {
@@ -84,7 +86,7 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if(account.getEmail().equals("ti.vagner1@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                if(account.getEmail().equals("ti.vagner@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
                     checkDoutor();
                     //matheusldasilva20088@gmail.com
                 } else {
@@ -109,10 +111,14 @@ public class LoginPacientActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
+                                finish();
                             }
                         });
                 } else {
                     startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
+                    Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
+                    finish();
+
                 }
             }
         });
@@ -130,10 +136,12 @@ public class LoginPacientActivity extends AppCompatActivity {
                     UserVerificationDataFragment.pacientVerificationDataFragment(user).show(getSupportFragmentManager(), "pacientVerification");
                 } else {
                     startActivity(new Intent(this, MainPacientActivity.class));
+                    Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
                     finish();
                 }
 
             }
+            finish();
         });
     }
 

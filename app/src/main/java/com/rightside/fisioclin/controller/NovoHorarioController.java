@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import androidx.fragment.app.FragmentActivity;
 
 import com.rightside.fisioclin.fragment.HourFragment;
+import com.rightside.fisioclin.utils.ConstantUtils;
 
 public class NovoHorarioController {
 
@@ -19,7 +20,7 @@ public class NovoHorarioController {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT);
         lp.setMargins(60, -20, 60, 0);
 
-        alerta.setTitle("Novo Horário").setMessage("Deseja cadastrar um novo horário?").setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+        alerta.setTitle("Novo Horário").setMessage(ConstantUtils.CADASTRAR_UM_NOVO_HORARIO).setPositiveButton("Sim", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 HourFragment hourFragment = new HourFragment();
