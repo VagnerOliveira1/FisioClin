@@ -86,14 +86,12 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if(account.getEmail().equals("ti.vagner@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                if (account.getEmail().equals("ti.vagner@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
                     checkDoutor();
                     //matheusldasilva20088@gmail.com
                 } else {
                     checkPacient();
                 }
-            } else {
-                finish();
             }
         });
 
@@ -111,13 +109,11 @@ public class LoginPacientActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
-                                finish();
                             }
                         });
                 } else {
                     startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
-                    finish();
 
                 }
             }
@@ -137,11 +133,9 @@ public class LoginPacientActivity extends AppCompatActivity {
                 } else {
                     startActivity(new Intent(this, MainPacientActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
-                    finish();
                 }
 
             }
-            finish();
         });
     }
 

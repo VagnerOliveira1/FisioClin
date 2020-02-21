@@ -51,11 +51,10 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
+
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
-
-//apagar futuramente
         FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
             @Override
             public void onComplete(@NonNull Task<InstanceIdResult> task) {
@@ -73,6 +72,7 @@ public class MainMedicoActivity extends FragmentActivity {
 
             }
         });
+
 
         FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
