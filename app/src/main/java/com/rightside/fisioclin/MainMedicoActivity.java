@@ -1,5 +1,6 @@
 package com.rightside.fisioclin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.FragmentActivity;
@@ -7,13 +8,19 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.rightside.fisioclin.fragment.FichasMedicoFragment;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
@@ -47,6 +54,25 @@ public class MainMedicoActivity extends FragmentActivity {
 
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if(!task.isSuccessful()){
+                    Log.w("falha", "getInstanceId failed", task.getException());
+                    return;
+
+                }
+
+                String token = task.getResult().getToken();
+
+                String msg = token;
+                Log.d("token", msg);
+                Toast.makeText(MainMedicoActivity.this, msg, Toast.LENGTH_SHORT).show();
+
+            }
+        });
+
 
         FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -95,6 +121,8 @@ public class MainMedicoActivity extends FragmentActivity {
             FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
         });
 
+
+
     }
 
 
@@ -102,4 +130,6 @@ public class MainMedicoActivity extends FragmentActivity {
         textViewNameDoctor.setText(medico.getName());
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
     }
+
+
 }

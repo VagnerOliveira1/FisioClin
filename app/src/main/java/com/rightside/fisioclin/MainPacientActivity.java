@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -23,6 +24,19 @@ import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
+
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
+
+import static com.rightside.fisioclin.FCMNotification.API_URL_FCM;
+import static com.rightside.fisioclin.FCMNotification.AUTH_KEY_FCM;
+
 public class MainPacientActivity extends AppCompatActivity {
 
     private ImageView imageViewFotoPaciente;
@@ -37,6 +51,7 @@ public class MainPacientActivity extends AppCompatActivity {
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private ViewModelUser viewModelUser;
     private User usuario;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +60,7 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente = findViewById(R.id.textview_paciente_nome);
         cardViewNovaConsulta = findViewById(R.id.card_view_paciente_horarios);
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
-        cardViewLocalizacaoClinica  = findViewById(R.id.card_view_localizacao_clinica);
+        cardViewLocalizacaoClinica = findViewById(R.id.card_view_localizacao_clinica);
         cardViewMinhaFicha = findViewById(R.id.card_view_minha_ficha);
 
 
@@ -57,7 +72,7 @@ public class MainPacientActivity extends AppCompatActivity {
             this.usuario = usuario;
         });
 
-        viewModelConsultaPaciente.getConsulta().observe(this,consulta -> {
+        viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
             this.consulta = consulta;
         });
 
@@ -66,8 +81,8 @@ public class MainPacientActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainPacientActivity.this, HorarioPacienteActivity.class);
-                intent.putExtra("usuario", usuario );
-               startActivity(intent);
+                intent.putExtra("usuario", usuario);
+                startActivity(intent);
 
             }
         });
@@ -75,12 +90,12 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewMinhasConsultas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    if(consulta != null) {
-                        ConsultaPacientDialogFragment.novaInstancia().show(getSupportFragmentManager(),"Minha Consulta");
+                if (consulta != null) {
+                    ConsultaPacientDialogFragment.novaInstancia().show(getSupportFragmentManager(), "Minha Consulta");
 
-                    } else {
-                        GeralUtils.mostraAlerta("Você ainda não tem consulta", ConstantUtils.MARQUE_UMA_CONSULTA_ANTES, MainPacientActivity.this);
-                    }
+                } else {
+                    GeralUtils.mostraAlerta("Você ainda não tem consulta", ConstantUtils.MARQUE_UMA_CONSULTA_ANTES, MainPacientActivity.this);
+                }
 
             }
         });
@@ -113,4 +128,12 @@ public class MainPacientActivity extends AppCompatActivity {
     }
 
 
+
+
 }
+
+
+
+
+
+
