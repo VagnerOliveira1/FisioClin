@@ -55,23 +55,6 @@ public class MainMedicoActivity extends FragmentActivity {
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
-        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-            @Override
-            public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                if(!task.isSuccessful()){
-                    Log.w("falha", "getInstanceId failed", task.getException());
-                    return;
-
-                }
-
-                String token = task.getResult().getToken();
-
-                String msg = token;
-                Log.d("token", msg);
-                Toast.makeText(MainMedicoActivity.this, msg, Toast.LENGTH_SHORT).show();
-
-            }
-        });
 
 
         FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
