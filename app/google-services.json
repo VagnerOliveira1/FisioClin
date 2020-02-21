@@ -1,42 +1,42 @@
 {
   "project_info": {
-    "project_number": "365065630805",
-    "firebase_url": "https://fisioclin-44053.firebaseio.com",
-    "project_id": "fisioclin-44053",
-    "storage_bucket": "fisioclin-44053.appspot.com"
+    "project_number": "454116628934",
+    "firebase_url": "https://fisioclin-7a163.firebaseio.com",
+    "project_id": "fisioclin-7a163",
+    "storage_bucket": "fisioclin-7a163.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:365065630805:android:2c623f7d7dbc3868f810dc",
+        "mobilesdk_app_id": "1:454116628934:android:21010934d22cc060497ac7",
         "android_client_info": {
           "package_name": "com.rightside.fisioclin"
         }
       },
       "oauth_client": [
         {
-          "client_id": "365065630805-2nlo75tac517ihgvpl6632a4cddue4vv.apps.googleusercontent.com",
+          "client_id": "454116628934-6q0qapfi9kkm2kvbkud7kjbgkh5k5ktg.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.rightside.fisioclin",
-            "certificate_hash": "ded2d30c399f07c663b85a601146414a72dd34d6"
+            "certificate_hash": "ffe497aaebe21a21c28b78cbfc89c5f9b34aa674"
           }
         },
         {
-          "client_id": "365065630805-bjh56rsh7p18vnn20e16r0uipclihbpt.apps.googleusercontent.com",
+          "client_id": "454116628934-nv1dakehk82tkt4k76nlke6h7osentvc.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDPNQpiyFf6B2sd16u5hVCkZp1sN_qj9b0"
+          "current_key": "AIzaSyB_hN5yQ20njGXYwkqoozfaZMTo-dxkbDw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "365065630805-bjh56rsh7p18vnn20e16r0uipclihbpt.apps.googleusercontent.com",
+              "client_id": "454116628934-nv1dakehk82tkt4k76nlke6h7osentvc.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
