@@ -19,25 +19,34 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+
+import com.rightside.fisioclin.fragment.EscolherAlvoNotificacaoFragment;
+
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
+
 import com.rightside.fisioclin.fragment.FichasMedicoFragment;
+import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
+import com.rightside.fisioclin.viewmodel.ViewModelUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainMedicoActivity extends FragmentActivity {
 
     private ImageView imageViewDoctorPicture;
-    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico;
+    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification;
     private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas;
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
-
+    private List<Consulta> consultaList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +56,7 @@ public class MainMedicoActivity extends FragmentActivity {
         imageViewDoctorPicture = findViewById(R.id.imageView_doctor_picture);
         cardViewHorarios = findViewById(R.id.cardview_horarios);
         textViewNameDoctor = findViewById(R.id.textView_name_doctor);
+        cardViewPushNotification = findViewById(R.id.card_view_push);
         cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
@@ -67,12 +77,16 @@ public class MainMedicoActivity extends FragmentActivity {
             }
         });
 
+
+
         viewModelConsultas.getConsultas().observe(this, consultaList -> {
 
             if(consultaList != null) {
                 textViewQuantidadeConsultasMarcadas.setText(String.valueOf(consultaList.size()));
+                this.consultaList = consultaList;
             } else {
                 textViewQuantidadeConsultasMarcadas.setText("0");
+
             }
 
         });
@@ -83,6 +97,10 @@ public class MainMedicoActivity extends FragmentActivity {
             } else {
                 textViewConsultasFinalizadas.setText("0");
             }
+        });
+
+        cardViewPushNotification.setOnClickListener(view -> {
+            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList).setFragmentActivity(this).show(getSupportFragmentManager(), "notificacao");
         });
 
 
@@ -101,7 +119,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewFichasMedico.setOnClickListener(view -> {
-            FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
+           FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
         });
 
 

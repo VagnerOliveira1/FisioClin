@@ -23,4 +23,8 @@ public class ViewModelUser extends AndroidViewModel {
     public LiveData<User> getUser(String id) {
         return firebaseRepository.getMutableLiveDataUser(id);
     }
+
+    public LiveData<List<User>> getUsers() {
+        return firebaseRepository.getMutableLiveDataUsers();
+    }
 }
