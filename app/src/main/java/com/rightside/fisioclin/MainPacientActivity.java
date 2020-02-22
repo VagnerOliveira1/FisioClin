@@ -1,5 +1,6 @@
 package com.rightside.fisioclin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
@@ -11,7 +12,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.rightside.fisioclin.fragment.ConsultaPacientDialogFragment;
 import com.rightside.fisioclin.fragment.FichaPacienteFragment;
 import com.rightside.fisioclin.models.Consulta;
@@ -32,7 +38,6 @@ public class MainPacientActivity extends AppCompatActivity {
 
     private CardView cardViewLocalizacaoClinica;
     private CardView cardViewMinhaFicha;
-    private Paciente paciente;
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private ViewModelUser viewModelUser;
@@ -54,12 +59,16 @@ public class MainPacientActivity extends AppCompatActivity {
 
         viewModelUser.getUser(FirebaseRepository.getIdPessoaLogada()).observe(this, usuario -> {
             alteraInformacaoPerfil(usuario);
+            setToken(usuario);
             this.usuario = usuario;
         });
 
         viewModelConsultaPaciente.getConsulta().observe(this,consulta -> {
             this.consulta = consulta;
         });
+
+
+
 
 
         cardViewNovaConsulta.setOnClickListener(new View.OnClickListener() {
@@ -110,6 +119,24 @@ public class MainPacientActivity extends AppCompatActivity {
     private void alteraInformacaoPerfil(User paciente) {
         textViewNomePaciente.setText(paciente.getName());
         GeralUtils.mostraImagemCircular(this, imageViewFotoPaciente, paciente.getProfilePictureUrl());
+    }
+
+
+    private void setToken(User usuario) {
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                if(!task.isSuccessful()){
+                    Log.w("falha", "getInstanceId failed", task.getException());
+                    return;
+                }
+                String token = task.getResult().getToken();
+               usuario.setToken(token);
+               FirebaseRepository.getUser(FirebaseRepository.getIdPessoaLogada()).update(usuario.returnUser());
+            }
+        });
+
     }
 
 

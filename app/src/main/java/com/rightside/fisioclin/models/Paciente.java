@@ -16,7 +16,7 @@ public class Paciente extends User implements Serializable {
 
 
     public Paciente(User user, DiagnosticoMedico diagnosticoMedico, String sessoes) {
-        super(user.getId(), user.getName(), user.getProfilePictureUrl(), user.getEmail(), user.getPhoneNumber(), user.getProfissao(), user.getDataNascimento(),user.getSexo(), false);
+        super(user.getId(), user.getName(), user.getProfilePictureUrl(), user.getEmail(), user.getPhoneNumber(), user.getProfissao(), user.getDataNascimento(),user.getSexo(), user.getToken(), false);
         this.sessoes = sessoes;
         this.diagnosticoMedico = diagnosticoMedico;
 
@@ -58,6 +58,7 @@ public class Paciente extends User implements Serializable {
         pacient.put("email", getEmail());
         pacient.put("profilePictureUrl", getProfilePictureUrl());
         pacient.put("diagnosticoMedico", getDiagnosticoMedico());
+        pacient.put("token", getToken());
         return pacient;
     }
 

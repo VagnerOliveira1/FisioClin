@@ -13,13 +13,14 @@ public class User implements Serializable {
     private String profissao = "";
     private String dataNascimento = "";
     private String sexo = "";
+    private String token = "";
     private boolean admin;
 
     public User() {
         setAdmin(false);
     }
 
-    public User(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, boolean admin) {
+    public User(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, String token, boolean admin) {
         this.id = id;
         this.name = name;
         this.profilePictureUrl = profilePictureUrl;
@@ -28,7 +29,9 @@ public class User implements Serializable {
         this.profissao = profissao;
         this.dataNascimento = dataNascimento;
         this.sexo = sexo;
+        this.token = token;
         this.admin = admin;
+
     }
 
     public User(String id, String name, String profilePictureUrl, String email) {
@@ -55,7 +58,16 @@ public class User implements Serializable {
         user.put("dataNascimento", getDataNascimento());
         user.put("email", getEmail());
         user.put("profilePictureUrl", getProfilePictureUrl());
+        user.put("token", getToken());
         return user;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 
     public String getId() {
