@@ -4,20 +4,16 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
-import com.rightside.fisioclin.fragment.FichaPacienteFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
-import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Horario;
-import com.rightside.fisioclin.models.Paciente;
-import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.List;
 
@@ -32,7 +28,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_consultas_realizadas,parent,false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_consultas_realizadas_paciente,parent,false);
         return new FichaPacienteAdapter.ViewHolder(view);
     }
 
@@ -46,8 +42,6 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.textViewConsultaRealizadaData.setText(horario.getDataFormatada());
         holder.textViewConsultaRealizaHora.setText(horario.getHoraFormatada());
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
-        holder.textViewPosConsulta.setText(consulta.getComentarioPosConsulta());
-        holder.textViewDiagnosticoMedico.setText(diagnosticoMedico.getDescricaoMedica());
         holder.textViewQueixaFicha.setText(diagnosticoMedico.getQueixa());
 
 
@@ -71,17 +65,15 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
 
 
         private TextView textViewConsultaRealizaHora,textViewConsultaRealizadaData, textViewConsultaRealizaDiaSemana,
-        textViewQueixaFicha, textViewDiagnosticoMedico, textViewPosConsulta;
+        textViewQueixaFicha;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            textViewConsultaRealizadaData = itemView.findViewById(R.id.textView_consulta_realizada_data);
-            textViewConsultaRealizaHora = itemView.findViewById(R.id.textView_consulta_realizada_hora);
-            textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana);
-            textViewQueixaFicha = itemView.findViewById(R.id.textViewQueixaFicha);
-            textViewDiagnosticoMedico = itemView.findViewById(R.id.textViewDiagonosticoMedicaFicha);
-            textViewPosConsulta = itemView.findViewById(R.id.textViewRecomendacaoConsulta);
+            textViewConsultaRealizadaData = itemView.findViewById(R.id.textView_consulta_realizada_data_paciente);
+            textViewConsultaRealizaHora = itemView.findViewById(R.id.textView_consulta_realizada_hora_paciente);
+            textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana_paciente);
+            textViewQueixaFicha = itemView.findViewById(R.id.textViewQueixaFicha_paciente);
 
 
         }

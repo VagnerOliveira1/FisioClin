@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -65,6 +64,8 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.textViewData.setTextColor(Color.BLACK);
             holder.textViewDiaSemana.setTextColor(Color.BLACK);
             holder.textViewHora.setTextColor(Color.BLACK);
+            holder.textViewTelefoneMedico.setText(" Tele" + horario.getMedico().getPhoneNumber());
+//            holder.textViewCrefito.setText("Crefito: "+ horario.getMedico());
             holder.textViewDisponibilidade.setTextColor(Color.BLACK);
             holder.textViewNomeDoMedicoHorario.setText("Fisio: " + horario.getMedico().getName());
             GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
@@ -122,7 +123,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade,  textViewNomeDoMedicoHorario;
+        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade,  textViewNomeDoMedicoHorario, textViewTelefoneMedico, textViewCrefito;
         private CardView cardView;
         private ImageView imageViewCalendario, imageViewHorario, imageViewFotoDoMedicoHorario;;
 
@@ -132,6 +133,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             textViewData = itemView.findViewById(R.id.horario_data);
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
+//            textViewCrefito = itemView.findViewById(R.id.textView_crefito);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
             imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
             textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);

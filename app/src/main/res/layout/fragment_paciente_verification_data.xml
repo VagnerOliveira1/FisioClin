@@ -46,7 +46,7 @@
             android:id="@+id/editQueixaPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Qual é sua queixa principal?"
+            android:hint="Oque está sentindo?"
             android:inputType="text"
             android:textSize="18sp" />
 

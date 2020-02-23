@@ -59,6 +59,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             tabLayout.addTab(tabLayout.newTab().setText("Qua"));
             tabLayout.addTab(tabLayout.newTab().setText("Qui"));
             tabLayout.addTab(tabLayout.newTab().setText("Sex"));
+            tabLayout.addTab(tabLayout.newTab().setText("Sab"));
 
             tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
                 @Override
@@ -78,7 +79,10 @@ public class HorarioPacienteActivity extends AppCompatActivity {
                     } else if(tab.getPosition() == 4) {
                         observerHorarioDia("sex");
                         toolbar.setSubtitle("Sexta-feira");
-                    }
+                    }else if(tab.getPosition() == 5) {
+                    observerHorarioDia("sab");
+                    toolbar.setSubtitle("Sábado");
+                }
                 }
 
                 @Override

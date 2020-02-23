@@ -66,6 +66,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
         tabLayout.addTab(tabLayout.newTab().setText("Qua"));
         tabLayout.addTab(tabLayout.newTab().setText("Qui"));
         tabLayout.addTab(tabLayout.newTab().setText("Sex"));
+        tabLayout.addTab(tabLayout.newTab().setText("Sab"));
 
         tabLayout.getTabAt(0).select();
         tabLayout.setSelectedTabIndicatorColor(Color.BLUE);
@@ -93,6 +94,9 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
                } else if(tab.getPosition() == 4) {
                    observerHorarioDia("sex");
                    toolbar.setSubtitle("Sexta-feira");
+               }else if(tab.getPosition() == 5) {
+                    observerHorarioDia("sab");
+                    toolbar.setSubtitle("Sábado");
                }
            }
 
