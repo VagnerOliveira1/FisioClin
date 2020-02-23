@@ -49,6 +49,8 @@ public class GeralUtils {
                 return "Quinta-feira";
             case "sex":
                 return "Sexta-feira";
+            case "sab":
+                return "Sábado";
         }
         return dia;
 

@@ -133,7 +133,6 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             textViewData = itemView.findViewById(R.id.horario_data);
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
-            textViewTelefoneMedico = itemView.findViewById(R.id.textview_telefone_medico);
 //            textViewCrefito = itemView.findViewById(R.id.textView_crefito);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
             imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
