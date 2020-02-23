@@ -31,18 +31,6 @@ import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
 
-
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
-
-import static com.rightside.fisioclin.FCMNotification.API_URL_FCM;
-import static com.rightside.fisioclin.FCMNotification.AUTH_KEY_FCM;
-
 public class MainPacientActivity extends AppCompatActivity {
 
     private ImageView imageViewFotoPaciente;
