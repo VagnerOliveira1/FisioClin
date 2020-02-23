@@ -101,7 +101,7 @@ public class Horario implements Serializable {
     }
 
     public int getDayOfMonth() {
-        return dayOfMonth - 1;
+        return dayOfMonth;
     }
 
     public void setDayOfMonth(int dayOfMonth) {
