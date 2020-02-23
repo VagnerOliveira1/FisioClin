@@ -43,7 +43,7 @@
             android:id="@+id/editNomePaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome Completo"
+            android:hint="@string/nome_completo"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -67,7 +67,7 @@
             android:id="@+id/editProfissaoPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sua Profissão"
+            android:hint="@string/sua_profissao"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +125,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="Sexo" />
+                android:text="@string/sexo" />
 
             <io.ghyeok.stickyswitch.widget.StickySwitch
                 android:id="@+id/sticky_switch"
@@ -164,7 +164,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
-            android:text="Salvar"
+            android:text="@string/salvar"
             android:textColor="@drawable/txt_selector"
             android:textSize="14sp" />
 

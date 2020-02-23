@@ -69,6 +69,9 @@ dependencies {
 
     implementation 'com.github.whilu.CustomButton:library:1.0.0'
 
+    implementation 'com.github.mejdi14:Flat-Dialog-Android:1.0.4'
+
+
 
 }
 
