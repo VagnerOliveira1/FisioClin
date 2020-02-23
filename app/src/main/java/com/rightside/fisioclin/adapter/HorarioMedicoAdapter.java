@@ -41,7 +41,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Horario horario = horarios.get(position);
-        if (horario.isMarcado()){
+        if (horario.isMarcado()) {
             holder.cardView.setBackgroundColor(Color.RED);
             holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_white);
             holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_white);
@@ -51,22 +51,31 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
             holder.textViewDisponibilidade.setTextColor(Color.WHITE);
             holder.textViewDisponibilidade.setText("Horário indisponível");
             holder.textViewNomeDoMedicoHorario.setTextColor(Color.WHITE);
-
+            holder.textViewFisioterapeuta.setTextColor(Color.WHITE);
+            holder.textViewTelefoneMedicoHorario.setTextColor(Color.WHITE);
+            holder.textViewCrefito.setTextColor(Color.WHITE);
+            holder.imageViewPhone.setImageResource(R.drawable.ic_phone_android_white_24dp);
         } else {
             holder.cardView.setBackgroundColor(Color.WHITE);
             holder.textViewData.setTextColor(Color.BLACK);
+            holder.textViewCrefito.setTextColor(Color.BLACK);
+            holder.textViewFisioterapeuta.setTextColor(Color.BLACK);
+            holder.textViewTelefoneMedicoHorario.setTextColor(Color.BLACK);
             holder.textViewDiaSemana.setTextColor(Color.BLACK);
+            holder.imageViewPhone.setImageResource(R.drawable.ic_phone_android_black_24dp);
             holder.textViewHora.setTextColor(Color.BLACK);
+            holder.textViewDisponibilidade.setTextColor(Color.BLACK);
+            holder.textViewNomeDoMedicoHorario.setText(horario.getMedico().getName());
+            holder.textViewDisponibilidade.setText("");
             holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_black_24dp);
             holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
-            holder.textViewDisponibilidade.setTextColor(Color.BLACK);
-            holder.textViewDisponibilidade.setText("");
             holder.textViewNomeDoMedicoHorario.setTextColor(Color.BLACK);
         }
+        holder.textViewTelefoneMedicoHorario.setText(horario.getMedico().getPhoneNumber());
+        holder.textViewCrefito.setText("Crefito: "+ horario.getMedico().getCrefito());
+        GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewData.setText(horario.getDataFormatada());
-        holder.textViewNomeDoMedicoHorario.setText("Fisio: " + horario.getMedico().getName());
-        GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
         holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
@@ -91,21 +100,25 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDiaSemana, textViewDisponibilidade, textViewNomeDoMedicoHorario;
+        private TextView textViewData, textViewFisioterapeuta, textViewTelefoneMedicoHorario, textViewHora, textViewDiaSemana, textViewDisponibilidade,  textViewNomeDoMedicoHorario, textViewCrefito;
         private CardView cardView;
-        private ImageView imageViewCalendario, imageViewHorario, imageViewFotoDoMedicoHorario;
+        private ImageView imageViewCalendario, imageViewHorario, imageViewFotoDoMedicoHorario, imageViewPhone;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewData = itemView.findViewById(R.id.horario_data);
+            textViewTelefoneMedicoHorario = itemView.findViewById(R.id.textViewtelefoneMedicoHorario);
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
+            textViewCrefito = itemView.findViewById(R.id.textViewCrefitoMedicoHorario);
+            cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
+            textViewFisioterapeuta = itemView.findViewById(R.id.textViewFisioterapeuta);
             imageViewHorario = itemView.findViewById(R.id.imageViewRelogio);
+            textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);
             imageViewCalendario = itemView.findViewById(R.id.imageViewCalendario);
             textViewNomeDoMedicoHorario = itemView.findViewById(R.id.textView_horario_medico_nome);
             imageViewFotoDoMedicoHorario = itemView.findViewById(R.id.imageView_foto_do_medico_horario);
-            textViewDisponibilidade = itemView.findViewById(R.id.textView_horario_disponibilidade);
-            cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
+            imageViewPhone = itemView.findViewById(R.id.imageViewPhone);
         }
     }
 }

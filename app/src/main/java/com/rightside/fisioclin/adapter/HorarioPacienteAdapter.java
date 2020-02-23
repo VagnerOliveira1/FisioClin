@@ -72,17 +72,16 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.textViewDiaSemana.setTextColor(Color.BLACK);
             holder.imageViewPhone.setImageResource(R.drawable.ic_phone_android_black_24dp);
             holder.textViewHora.setTextColor(Color.BLACK);
-            holder.textViewTelefoneMedicoHorario.setText(horario.getMedico().getPhoneNumber());
-            holder.textViewCrefito.setText("Crefito: "+ horario.getMedico().getCrefito());
             holder.textViewDisponibilidade.setTextColor(Color.BLACK);
             holder.textViewNomeDoMedicoHorario.setText(horario.getMedico().getName());
-            GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
             holder.textViewDisponibilidade.setText("");
             holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_black_24dp);
             holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
             holder.textViewNomeDoMedicoHorario.setTextColor(Color.BLACK);
         }
-
+        holder.textViewTelefoneMedicoHorario.setText(horario.getMedico().getPhoneNumber());
+        holder.textViewCrefito.setText("Crefito: "+ horario.getMedico().getCrefito());
+        GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewData.setText(horario.getDataFormatada());
         holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));

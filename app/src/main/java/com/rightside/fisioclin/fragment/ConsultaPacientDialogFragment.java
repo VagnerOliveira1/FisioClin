@@ -54,7 +54,6 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
 
         toolbar.setTitle("Minha Consulta");
-        toolbar.setSubtitle("Confira os dados da sua consulta");
         toolbar.setTitleTextColor(Color.WHITE);
 
         textViewDataPacienteConsulta = view.findViewById(R.id.textview_data_consulta_paciente);
