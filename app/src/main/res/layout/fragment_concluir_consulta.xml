@@ -3,21 +3,36 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".fragment.ConcluirConsultaFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
     <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textInputLayoutConcluirConsulta"
+        style="@style/TextInputLayoutStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:theme="@style/TextInputLayoutStyle"
+        app:layout_constraintBottom_toTopOf="@+id/textInputLayoutConcluirConsulta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:layout_constraintVertical_chainStyle="packed">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/edittext_concluirconsulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="hint" />
+            android:hint="@string/evolucao"
+            android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
+
 
     <Button
         android:id="@+id/button2"
