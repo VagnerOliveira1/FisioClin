@@ -23,6 +23,8 @@ public class Medico extends User implements Serializable {
         doctor.put("id", getId());
         doctor.put("name", getName());
         doctor.put("profilePictureUrl", getProfilePictureUrl());
+
+
         return doctor;
     }
 

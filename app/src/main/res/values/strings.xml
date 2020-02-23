@@ -20,8 +20,9 @@
     <string name="consulta_realizada_data">Data</string>
     <string name="consultas_realizada_hora">Hora</string>
     <string name="consulta_realizada_dia_semana">Dia</string>
-    <string name="diagnostico_medico">Diagnostico Médico:</string>
+    <string name="queixa_principal">Queixa Principal:</string>
     <string name="queixa_paciente">Queixa</string>
-    <string name="avaliacao_pos_consulta">Avaliação pós consulta</string>
+    <string name="evolucao">Evolução</string>
     <string name="recomendacao_consulta">Recomendações</string>
+    <string name="diagnostico_medico">Queixa</string>
 </resources>
