@@ -6,22 +6,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:padding="15dp"
     tools:context=".fragment.UserVerificationDataFragment">
 
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_margin="5dp"-->
-<!--        android:gravity="center"-->
-<!--        android:orientation="vertical">-->
+    <!--    <LinearLayout-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="5dp"-->
+    <!--        android:gravity="center"-->
+    <!--        android:orientation="vertical">-->
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
         android:text="Complete sua ficha, ela é importante para o atendimento."
+        android:textColor="#000000"
         android:textSize="20sp" />
 
-<!--    </LinearLayout>-->
+    <!--    </LinearLayout>-->
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayoutNomePaciente"
@@ -80,75 +83,100 @@
 
         android:orientation="horizontal">
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/editTelefonePaciente"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint="(xx) xxxxx xxxx"
-            android:inputType="number"
-            app:met_mask="(##) ##### ####" />
+            android:orientation="vertical">
 
-        <com.santalu.maskedittext.MaskEditText
-            android:id="@+id/editDataNascPaciente"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_marginBottom="1dp"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="center"
+                android:text="Telefone:"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/editTelefonePaciente"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_weight="1"
+                android:hint="(xx) xxxxx xxxx"
+                android:inputType="number"
+                app:met_mask="(##) ##### ####" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            android:hint=" xx/ xx/ xxxxx"
-            android:inputType="date"
-            app:met_mask="##/ ##/ ####" />
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:gravity="center"
+                android:text="Data de nascimento:"
+                android:textColor="#000000"
+                android:textSize="16sp" />
+
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/editDataNascPaciente"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_gravity="right"
+                android:layout_marginBottom="1dp"
+                android:layout_weight="1"
+                android:hint=" xx/ xx/ xxxxx"
+                android:inputType="date"
+                app:met_mask="##/ ##/ ####" />
+        </LinearLayout>
 
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_margin="6dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="90dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="vertical">
+            android:text="Sexo:"
+            android:textColor="#000000" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="Sexo" />
-
-            <io.ghyeok.stickyswitch.widget.StickySwitch
-                android:id="@+id/sticky_switch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                app:ss_animationDuration="300"
-                app:ss_animationType="line"
-                app:ss_iconPadding="14dp"
-                app:ss_iconSize="22dp"
-                app:ss_leftIcon="@drawable/ic_male"
-                app:ss_leftText="M"
-                app:ss_rightIcon="@drawable/ic_fem"
-                app:ss_rightText="F"
-                app:ss_selectedTextSize="10sp"
-                app:ss_sliderBackgroundColor="@color/colorStickyBack"
-                app:ss_switchColor="@color/colorSticky"
-                app:ss_textColor="@color/colorStickyBack"
-                app:ss_textSize="12sp" />
-
-        </LinearLayout>
-
+        <io.ghyeok.stickyswitch.widget.StickySwitch
+            android:id="@+id/sticky_switch"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            app:ss_animationDuration="300"
+            app:ss_animationType="line"
+            app:ss_iconPadding="14dp"
+            app:ss_iconSize="22dp"
+            app:ss_leftIcon="@drawable/ic_male"
+            app:ss_leftText="M"
+            app:ss_rightIcon="@drawable/ic_fem"
+            app:ss_rightText="F"
+            app:ss_selectedTextSize="10sp"
+            app:ss_sliderBackgroundColor="@color/colorStickyBack"
+            app:ss_switchColor="@color/colorSticky"
+            app:ss_textColor="@color/colorStickyBack"
+            app:ss_textSize="12sp" />
 
     </LinearLayout>
 
@@ -164,8 +192,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
-            android:text="Salvar"
-            android:textColor="@drawable/txt_selector"
+            android:text="Confirmar"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
     </LinearLayout>

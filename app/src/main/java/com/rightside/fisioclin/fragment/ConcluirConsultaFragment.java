@@ -89,7 +89,6 @@ public class ConcluirConsultaFragment extends DialogFragment {
             }
 
 
-
         });
 
 

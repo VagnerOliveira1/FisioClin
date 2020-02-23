@@ -54,13 +54,11 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
 
     public static PacienteVerificationDataFragment novaInstancia(Horario horario, User usuario) {
         PacienteVerificationDataFragment pacienteVerificationDataFragment = new PacienteVerificationDataFragment();
-
         Bundle bundle = new Bundle();
         bundle.putSerializable("horario", horario);
         bundle.putSerializable("usuario", usuario);
         pacienteVerificationDataFragment.setArguments(bundle);
         return pacienteVerificationDataFragment;
-
     }
 
 

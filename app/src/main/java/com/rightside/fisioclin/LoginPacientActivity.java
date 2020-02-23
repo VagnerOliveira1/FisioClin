@@ -24,6 +24,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.rightside.fisioclin.fragment.MedicoVerificationDataFragment;
 import com.rightside.fisioclin.fragment.UserVerificationDataFragment;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
@@ -105,16 +106,10 @@ public class LoginPacientActivity extends AppCompatActivity {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if(!documentSnapshot.exists()){
                     Medico medico = new Medico(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
-                        FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void aVoid) {
-                                startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
-                            }
-                        });
+                    MedicoVerificationDataFragment.medicoVerificationDataFragment(medico).show(getSupportFragmentManager(), "medicoverification");
                 } else {
                     startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
-
                 }
             }
         });

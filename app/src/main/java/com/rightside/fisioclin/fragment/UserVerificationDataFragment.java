@@ -71,7 +71,7 @@ public class UserVerificationDataFragment extends DialogFragment {
         User user = (User) bundle.get("user");
 
         stickySwitchSexoPaciente.setSwitchColor(Color.GREEN);
-        stickySwitchSexoPaciente.setSliderBackgroundColor(Color.GRAY);
+        stickySwitchSexoPaciente.setSliderBackgroundColor(Color.LTGRAY);
         stickySwitchSexoPaciente.setDirection(StickySwitch.Direction.RIGHT);
         stickySwitchSexoPaciente.setActivated(true);
 
