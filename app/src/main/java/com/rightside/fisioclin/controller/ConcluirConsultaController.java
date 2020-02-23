@@ -40,7 +40,7 @@ public class ConcluirConsultaController {
                     .setPositiveButton("Concluir", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            ConcluirConsultaFragment.novaInstancia(consulta).show(fragmentActivity.getSupportFragmentManager(), "concluir");
+                            ConcluirConsultaFragment.novaInstancia(consulta).getFragment(fragmentActivity).show(fragmentActivity.getSupportFragmentManager(), "concluir");
 
                         }}).setNegativeButton("Cancelar", null).show();
     }

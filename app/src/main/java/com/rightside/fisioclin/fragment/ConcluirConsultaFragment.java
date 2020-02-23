@@ -1,10 +1,13 @@
 package com.rightside.fisioclin.fragment;
 
 
+
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.LayoutInflater;
@@ -31,6 +34,8 @@ public class ConcluirConsultaFragment extends DialogFragment {
     private Ficha ficha;
     private Button button;
     private TextInputEditText textInputEditTextConcluirConsulta;
+    private FragmentActivity fragmentActivity;
+
     public static ConcluirConsultaFragment novaInstancia(Consulta consulta){
         ConcluirConsultaFragment concluirConsultaFragment = new ConcluirConsultaFragment();
         Bundle bundle = new Bundle();
@@ -38,6 +43,11 @@ public class ConcluirConsultaFragment extends DialogFragment {
         concluirConsultaFragment.setArguments(bundle);
         return concluirConsultaFragment;
         // Required empty public constructor
+    }
+
+    public ConcluirConsultaFragment getFragment(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
+        return this;
     }
 
 
@@ -66,14 +76,17 @@ public class ConcluirConsultaFragment extends DialogFragment {
 
             if (textInputEditTextConcluirConsulta.getText().toString().isEmpty()) {
                 GeralUtils.mostraAlerta("Atenção!", ConstantUtils.IMPORTANTE_FAZER_COMENTARIO_SOBRE_CONSULTA, getContext());
-            }
-
+            } else {
                 consulta.setComentarioPosConsulta(textInputEditTextConcluirConsulta.getText().toString());
                 ficha.getConsulta().add(consulta);
                 ficha.setPaciente(consulta.getPaciente());
                 FirebaseRepository.saveFicha(ficha);
                 FirebaseRepository.deleteConsulta(consulta);
                 FirebaseRepository.deleteHorarios(consulta.getHorario());
+                dismiss();
+                fragmentActivity.finish();
+
+            }
 
 
 

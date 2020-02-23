@@ -64,7 +64,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.textViewData.setTextColor(Color.BLACK);
             holder.textViewDiaSemana.setTextColor(Color.BLACK);
             holder.textViewHora.setTextColor(Color.BLACK);
-            holder.textViewTelefoneMedico.setText(" Tele" + horario.getMedico().getPhoneNumber());
+//            holder.textViewTelefoneMedico.setText(" Tele" + horario.getMedico().getPhoneNumber());
 //            holder.textViewCrefito.setText("Crefito: "+ horario.getMedico());
             holder.textViewDisponibilidade.setTextColor(Color.BLACK);
             holder.textViewNomeDoMedicoHorario.setText("Fisio: " + horario.getMedico().getName());
