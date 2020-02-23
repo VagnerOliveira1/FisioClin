@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.rightside.fisioclin.MainMedicoActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
@@ -74,6 +76,10 @@ public class ConcluirConsultaFragment extends DialogFragment {
                 FirebaseRepository.saveFicha(ficha);
                 FirebaseRepository.deleteConsulta(consulta);
                 FirebaseRepository.deleteHorarios(consulta.getHorario());
+
+                GeralUtils.mostraMensagem(getContext(),ConstantUtils.CONSULTA_CONCLUIDA_COM_SUCESSO);
+                startActivity(new Intent(getActivity(), MainMedicoActivity.class));
+                dismiss();
 
 
 

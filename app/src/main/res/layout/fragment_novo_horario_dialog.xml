@@ -75,12 +75,13 @@
 
         <Button
             android:id="@+id/button"
+            android:background="@drawable/botao_salva_ficha"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_weight="0"
-            android:text="Salvar Horário" />
+            android:text="@string/salvar_horario" />
     </LinearLayout>
 
 
