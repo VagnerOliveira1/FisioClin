@@ -103,27 +103,34 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
             @Override
             public void onClick(View view) {
 
-
                 diagnosticoMedico.setQueixa(textInputEditTextQueixaPaciente.getText().toString());
                 diagnosticoMedico.setDescricaoMedica(textInputEditTextDiagnosticoMedico.getText().toString());
-                paciente = new Paciente(usuario, diagnosticoMedico, sessoes);
-                Consulta consulta = new Consulta(horario,paciente);
 
-                FirebaseRepository.saveConsulta(consulta).addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            FirebaseRepository.atualizaHorarioMarcado(horario);
-                            FirebaseRepository.savePacient(paciente);
-                            GeralUtils.mostraAlerta("Consulta Marcada", ConstantUtils.CONSULTA_MARCADA_COM_SUCESSO, getContext());
-                            dismiss();
+                String queixa = diagnosticoMedico.getQueixa();
+                if(!queixa.isEmpty()) {
+                        paciente = new Paciente(usuario, diagnosticoMedico, sessoes);
+                        Consulta consulta = new Consulta(horario, paciente);
 
-                        }
-                    }
-                });
+                        FirebaseRepository.saveConsulta(consulta).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    FirebaseRepository.atualizaHorarioMarcado(horario);
+                                    FirebaseRepository.savePacient(paciente);
+                                    GeralUtils.mostraAlerta("Consulta Marcada", ConstantUtils.CONSULTA_MARCADA_COM_SUCESSO, getContext());
+                                    dismiss();
+
+                                }
+                            }
+                        });
+                }
+                if (queixa.isEmpty()) {
+                   GeralUtils.mostraMensagem(getContext(),ConstantUtils.INFORME_SUA_QUEIXA);
+                }
 
 
             }
+
         });
 
 
