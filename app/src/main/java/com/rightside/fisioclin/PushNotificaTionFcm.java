@@ -32,10 +32,10 @@ public class PushNotificaTionFcm {
             }
         });
 
-        for(int i = 0; i < consultaList.size(); i++){
-            firebasePush.setNotification(new Notification("Olá, " + consultaList.get(i).getPaciente().getName() + " temos um lembrete:",
-                    "Você possui uma consulta: " + consultaList.get(i).getHorario().getDataFormatada() + " " + consultaList.get(i).getHorario().getHoraFormatada() + " " + GeralUtils.retornaDiaSemana(consultaList.get(i).getHorario().getDiaDaSemanaFormatado())));
-            firebasePush.sendToToken(consultaList.get(i).getPaciente().getToken());
+        for(Consulta consulta : consultaList) {
+            firebasePush.setNotification(new Notification("Olá, " + consulta.getPaciente().getName() + " temos um lembrete:",
+                    "Você possui uma consulta: " + consulta.getHorario().getDataFormatada() + " " + consulta.getHorario().getHoraFormatada() + " " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado())));
+            firebasePush.sendToToken(consulta.getPaciente().getToken());
         }
 
 
@@ -60,8 +60,8 @@ public class PushNotificaTionFcm {
 
         firebasePush.setNotification(new Notification(titulo, mensagem));
 
-        for(int i = 0; i < userList.size(); i++){
-            firebasePush.sendToToken(userList.get(i).getToken());
+        for (User user : userList) {
+            firebasePush.sendToToken(user.getToken());
         }
 
 
