@@ -24,6 +24,8 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.ConstantUtils;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.santalu.maskedittext.MaskEditText;
 
 import org.jetbrains.annotations.NotNull;
@@ -89,22 +91,47 @@ public class UserVerificationDataFragment extends DialogFragment {
         });
 
 
-        buttonSalvaFichaPaciente.setOnClickListener((v) -> {
+            buttonSalvaFichaPaciente.setOnClickListener((v) -> {
 
-            user.setName(editTextNomePaciente.getText().toString());
-            user.setPhoneNumber(maskEditTextTelefone.getText().toString());
-            user.setSexo(verificaSexo(sexo));
-            user.setDataNascimento(maskEditTextDataNasc.getText().toString());
-            user.setProfissao(editTextProfissaoPaciente.getText().toString());
+                user.setName(editTextNomePaciente.getText().toString());
+                user.setPhoneNumber(maskEditTextTelefone.getText().toString());
+                user.setSexo(verificaSexo(sexo));
+                user.setDataNascimento(maskEditTextDataNasc.getText().toString());
+                user.setProfissao(editTextProfissaoPaciente.getText().toString());
+
+                String nome = editTextNomePaciente.getText().toString();
+                String telefone = maskEditTextTelefone.getText().toString();
+                String dataNascimento = maskEditTextDataNasc.getText().toString();
+                String profissao = editTextProfissaoPaciente.getText().toString();
+
+                if((!nome.isEmpty()) && (!telefone.isEmpty()) && (!dataNascimento.isEmpty()) && (!profissao.isEmpty())) {
 
 
-            FirebaseRepository.saveUser(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    startActivity(new Intent(getContext(), MainPacientActivity.class));
+                    FirebaseRepository.saveUser(user).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            startActivity(new Intent(getContext(), MainPacientActivity.class));
+                        }
+                    });
+
                 }
+                if(nome.isEmpty()){
+                    GeralUtils.mostraMensagem(getContext(), ConstantUtils.INFORME_SEU_NOME);
+                }
+                else if(profissao.isEmpty()){
+                    GeralUtils.mostraMensagem(getContext(),ConstantUtils.INFORME_SUA_PROFISSAO);
+                }
+                else if (telefone.isEmpty()){
+                    GeralUtils.mostraMensagem(getContext(),ConstantUtils.INFORME_SEU_TELEFONE);
+                }
+                else if (dataNascimento.isEmpty()){
+                    GeralUtils.mostraMensagem(getContext(),ConstantUtils.INFORME_SUA_DATA_DE_NASCIMENTO);
+                }
+
+
             });
-        });
+
+
 
         return view;
 

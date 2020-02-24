@@ -54,6 +54,8 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
         holder.textViewNomePacient.setText(GeralUtils.capitalize(paciente.getName()));
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewTelefonePacient.setText(paciente.getPhoneNumber());
+        holder.textViewDataNascPacient.setText(paciente.getDataNascimento());
+        holder.textViewProfissaoPacient.setText(paciente.getProfissao());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoPaciente,paciente.getProfilePictureUrl());
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +84,8 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
         private TextView textViewDiaSemana;
         private TextView textViewNomePacient;
         private TextView textViewTelefonePacient;
+        private TextView textViewProfissaoPacient;
+        private TextView textViewDataNascPacient;
         private ImageView imageViewFotoPaciente;
         private CardView cardView;
         public ViewHolder(@NonNull View itemView) {
@@ -92,6 +96,8 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
             textViewHora = itemView.findViewById(R.id.consulta_hora_medico);
             textViewNomePacient = itemView.findViewById(R.id.consulta_nome_paciente_medico);
             textViewTelefonePacient = itemView.findViewById(R.id.consulta_telefone_paciente_medico);
+            textViewProfissaoPacient = itemView.findViewById(R.id.consulta_profissao_paciente_medico);
+            textViewDataNascPacient = itemView.findViewById(R.id.data_nascimento_paciente_medico);
             imageViewFotoPaciente = itemView.findViewById(R.id.image_view_foto_paciente_medico);
             cardView = itemView.findViewById(R.id.card_view_consultas);
 
