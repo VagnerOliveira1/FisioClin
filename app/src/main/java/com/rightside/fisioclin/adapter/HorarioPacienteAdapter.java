@@ -41,7 +41,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @NonNull
     @Override
     public HorarioPacienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_horario_paciente, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_horario, parent, false);
         return new HorarioPacienteAdapter.ViewHolder(view);
     }
 
