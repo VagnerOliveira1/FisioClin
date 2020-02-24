@@ -21,52 +21,6 @@
             android:orientation="vertical">
 
 
-            <TextView
-                android:id="@+id/textView8"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Fisioterapeuta:"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal"
-                android:padding="8dp">
-
-
-                <ImageView
-                    android:id="@+id/imageView_foto_paciente_consulta"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="10dp" />
-
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:text="Matheus LIma da Silva"
-                    android:textColor="#000000"
-                    android:textSize="16sp" />
-
-
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Horário:"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,9 +47,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:paddingLeft="5dp"
-                        android:text="asdasd"
                         android:textColor="#222222"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
                     <ImageView
                         android:id="@+id/imageView8"
@@ -111,9 +65,9 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentStart="true"
                         android:paddingLeft="5dp"
-                        android:text="21321321"
                         android:textColor="#222222"
-                        android:textSize="16sp" />
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
 
                 </LinearLayout>
@@ -126,13 +80,92 @@
                     android:layout_alignParentStart="true"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="asdsad"
                     android:textColor="#222222"
                     android:textSize="16sp"
-                    android:textStyle="normal" />
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/textView8"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Informações do fisioterapeuta:"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
 
+                    <ImageView
+                        android:id="@+id/imageView_foto_paciente_consulta"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="10dp" />
 
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:textColor="#000000"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/textViewCrefitoConsultaPaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="5dp"
+                            android:layout_weight="0"
+                            android:gravity="center"
+                            android:text="TextViewCrefito"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_weight="1"
+                            app:srcCompat="@drawable/ic_phone_android_black_24dp" />
+
+                        <TextView
+                            android:id="@+id/textVIewTelefoneConsultaPaciente"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center"
+                            android:textColor="#000000"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+
+
+                </LinearLayout>
 
 
             </LinearLayout>

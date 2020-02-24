@@ -5,7 +5,16 @@ import java.util.HashMap;
 
 public class Medico extends User implements Serializable {
 
+    private String crefito = "";
+
     public Medico() {
+
+    }
+
+    public Medico(String id, String name, String profilePictureUrl, String email, String crefito) {
+        super(id, name, profilePictureUrl, email);
+        this.crefito = crefito;
+        setAdmin(true);
     }
 
     public Medico(String id, String name, String profilePictureUrl) {
@@ -18,11 +27,22 @@ public class Medico extends User implements Serializable {
         super.setAdmin(admin);
     }
 
+
+    public String getCrefito() {
+        return crefito;
+    }
+
+    public void setCrefito(String crefito) {
+        this.crefito = crefito;
+    }
+
     public HashMap<String, Object> returnDoctor() {
         HashMap<String, Object> doctor = new HashMap<>();
         doctor.put("id", getId());
         doctor.put("name", getName());
         doctor.put("profilePictureUrl", getProfilePictureUrl());
+        doctor.put("phoneNumber", getPhoneNumber());
+        doctor.put("crefito", getCrefito());
 
 
         return doctor;
