@@ -9,7 +9,6 @@
     <string name="sexo_paciente">Sexo</string>
     <string name="data_nascimento_paciente">Data Nascimento</string>
     <string name="email_paciente">Email</string>
-    <string name="consultas_realizadas">Consultas Realizadas:</string>
     <string name="nome_doutor">Nome</string>
     <string name="horarios">Horários</string>
     <string name="Consultas">Consultas</string>
@@ -25,4 +24,22 @@
     <string name="evolucao">Evolução</string>
     <string name="recomendacao_consulta">Recomendações</string>
     <string name="diagnostico_medico">Queixa</string>
+    <string name="veja_seus_indicadores_abaixo">Veja seus indicadores abaixo:</string>
+    <string name="atendimentos">Atendimentos</string>
+    <string name="agendados">Agendados</string>
+    <string name="encerrados">Encerrados</string>
+    <string name="notificacoes">Notificações</string>
+    <string name="consultas_realizadas">Consultas Realizadas:</string>
+    <string name="concluir_consulta">Concluir Consulta</string>
+    <string name="salvar_horario">Salvar Horário</string>
+    <string name="nos_ajude_a_te_ajudar">Nos ajude a te ajudar:</string>
+    <string name="oque_esta_sentindo">Oque está sentindo?</string>
+    <string name="possui_um_diagnostico_medico">Possui um diagnóstico médico?</string>
+    <string name="diagnostico_medico_paciente">Diaginóstico médico</string>
+    <string name="numero_de_sessoes">Numero de sessões</string>
+    <string name="salvar">Salvar</string>
+    <string name="nome_completo">Nome Completo</string>
+    <string name="sua_profissao">Sua Profissão</string>
+    <string name="sexo">Sexo</string>
+
 </resources>

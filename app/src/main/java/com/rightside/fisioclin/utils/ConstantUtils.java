@@ -30,5 +30,7 @@ public class ConstantUtils {
 
     public static final String IMPORTANTE_FAZER_COMENTARIO_SOBRE_CONSULTA = "É importante fazer um comentário sobre a consulta";
 
+    public static final String CONSULTA_CONCLUIDA_COM_SUCESSO = "Consulta concluída com sucesso";
+
 
 }

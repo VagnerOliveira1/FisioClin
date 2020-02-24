@@ -1,7 +1,6 @@
 package com.rightside.fisioclin.fragment;
 
 
-
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -17,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.rightside.fisioclin.MainMedicoActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
@@ -85,13 +85,10 @@ public class ConcluirConsultaFragment extends DialogFragment {
                 FirebaseRepository.deleteHorarios(consulta.getHorario());
                 dismiss();
                 fragmentActivity.finish();
-
             }
 
 
         });
-
-
 
         return view;
     }

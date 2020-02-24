@@ -46,7 +46,7 @@
             android:id="@+id/editNomePaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome Completo"
+            android:hint="@string/nome_completo"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,7 +70,7 @@
             android:id="@+id/editProfissaoPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Sua Profissão"
+            android:hint="@string/sua_profissao"
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,7 +125,6 @@
                 android:text="Data de nascimento:"
                 android:textColor="#000000"
                 android:textSize="16sp" />
-
             <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/editDataNascPaciente"
                 android:layout_width="wrap_content"
@@ -192,6 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
+
             android:text="Confirmar"
             android:textColor="#FFFFFF"
             android:textSize="14sp" />

@@ -36,7 +36,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:text="TextView"
+                android:text="@string/nome_paciente"
                 android:textSize="20sp" />
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="TextView" />
+                android:text="@string/profissao_paciente" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_telefone"
@@ -56,7 +56,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="TextView" />
+                android:text="@string/telefone_paciente" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_sexo"
@@ -65,7 +65,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="TextView" />
+                android:text="@string/sexo_paciente" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_nascimento"
@@ -75,7 +75,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="TextView" />
+                android:text="@string/data_nascimento_paciente" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_email"
@@ -84,7 +84,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="TextView" />
+                android:text="@string/email_paciente" />
 
 
 
@@ -98,7 +98,7 @@
         android:layout_gravity="center"
         android:layout_weight="0"
         android:gravity="center"
-        android:text="Consultas Realizadas:"
+        android:text="@string/consultas_realizadas"
         android:textColor="#000000"
         android:textSize="17sp" />
 

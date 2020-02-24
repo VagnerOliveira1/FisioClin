@@ -75,8 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:text="Veja seus indicadores abaixo:"
-        android:textColor="#000000"
+        android:text="@string/veja_seus_indicadores_abaixo"
         android:textSize="15sp"
         android:textStyle="bold" />
 
@@ -112,7 +111,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="0"
                 android:gravity="center"
-                android:text="Atendimentos"
+                android:text="@string/atendimentos"
                 android:textColor="#000000"
                 android:textSize="14sp" />
 
@@ -152,7 +151,7 @@
                     android:id="@+id/textView12113"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Agendados" />
+                    android:text="@string/agendados" />
             </LinearLayout>
 
 
@@ -185,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="Encerrados" />
+                    android:text="@string/encerrados" />
 
 
             </LinearLayout>
@@ -368,8 +367,8 @@
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="17sp"
-                    android:textStyle="bold" />
-
+                    android:src="@drawable/ic_folder" />
+            
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

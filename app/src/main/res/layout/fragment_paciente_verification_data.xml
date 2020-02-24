@@ -20,7 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="10dp"
-        android:text="Nos ajude a te ajudar:"
+        android:text="@string/nos_ajude_a_te_ajudar"
         android:textColor="#000000"
         android:textSize="22sp" />
 
@@ -46,7 +46,7 @@
             android:id="@+id/editQueixaPaciente"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Oque está sentindo?"
+            android:hint="@string/oque_esta_sentindo"
             android:inputType="text"
             android:textSize="18sp" />
 
@@ -60,7 +60,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="Possui um diagnóstico médico?"
+        android:text="@string/possui_um_diagnostico_medico"
         android:textOff="Não"
         android:textOn="Sim"
         android:textSize="18sp" />
@@ -86,7 +86,7 @@
             android:id="@+id/editDiagnosticoMedico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Diagnostico Médico"
+            android:hint="@string/diagnostico_medico_paciente"
             android:inputType="text"
             android:visibility="visible" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -118,7 +118,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Numero de sessões"
+                android:text="@string/numero_de_sessoes"
                 android:textSize="14sp" />
 
             <NumberPicker
@@ -145,7 +145,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
-            android:text="Salvar"
+            android:text="@string/salvar"
             android:textColor="@drawable/txt_selector"
             android:textSize="14sp" />
 
