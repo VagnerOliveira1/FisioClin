@@ -16,19 +16,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="10dp">
+        android:padding="15dp">
 
 
         <ImageView
             android:id="@+id/imageView_ficha_medico_paciente_foto"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
             android:layout_weight="0"
             tools:srcCompat="@tools:sample/avatars[0]" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
             android:orientation="vertical">
 
             <TextView
@@ -39,55 +41,136 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/nome_paciente"
-                android:textSize="20sp" />
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
-            <TextView
-                android:id="@+id/textView_ficha_medico_paciente_profissao"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="2dp">
+
+                <ImageView
+                    android:id="@+id/imageView17"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_phone_android_black_24dp" />
+
+                <TextView
+                    android:id="@+id/textView_ficha_medico_paciente_telefone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:paddingTop="2dp"
+                    android:text="@string/telefone_paciente"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+
+                <ImageView
+                    android:id="@+id/imageView16"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center|right"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/work" />
+
+                <TextView
+                    android:id="@+id/textView_ficha_medico_paciente_profissao"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="@string/profissao_paciente"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="@string/profissao_paciente" />
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-            <TextView
-                android:id="@+id/textView_ficha_medico_paciente_telefone"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingTop="2dp"
-                android:text="@string/telefone_paciente" />
+                <ImageView
+                    android:id="@+id/imageView22"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/birthdayicon" />
 
-            <TextView
-                android:id="@+id/textView_ficha_medico_paciente_sexo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingTop="2dp"
-                android:text="@string/sexo_paciente" />
+                <TextView
+                    android:id="@+id/textView_ficha_medico_paciente_nascimento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:paddingTop="2dp"
+                    android:text="@string/data_nascimento_paciente"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
 
-            <TextView
-                android:id="@+id/textView_ficha_medico_paciente_nascimento"
+                <ImageView
+                    android:id="@+id/imageView21"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/ic_fem" />
+
+                <TextView
+                    android:id="@+id/textView_ficha_medico_paciente_sexo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:paddingTop="2dp"
+                    android:text="@string/sexo_paciente"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:paddingTop="2dp"
-                android:text="@string/data_nascimento_paciente" />
+                android:orientation="horizontal"
+                android:padding="2dp">
 
-            <TextView
-                android:id="@+id/textView_ficha_medico_paciente_email"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:paddingTop="2dp"
-                android:text="@string/email_paciente" />
+                <ImageView
+                    android:id="@+id/imageView23"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="0"
+                    app:srcCompat="@drawable/send" />
 
+                <TextView
+                    android:id="@+id/textView_ficha_medico_paciente_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center"
+                    android:paddingTop="2dp"
+                    android:text="@string/email_paciente"
+                    android:textColor="#000000"
+                    android:textSize="15sp" />
+            </LinearLayout>
 
 
         </LinearLayout>

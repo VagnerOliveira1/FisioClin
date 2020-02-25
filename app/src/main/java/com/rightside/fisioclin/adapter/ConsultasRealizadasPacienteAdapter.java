@@ -46,7 +46,6 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewDia.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.textViewData.setText(horario.getDataFormatada());
-        holder.textViewDiagnosticoMedico.setText(diagnosticoMedico.getDescricaoMedica());
         holder.textViewQueixa.setText(diagnosticoMedico.getQueixa());
     }
 
@@ -65,7 +64,6 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
             textViewDia = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana);
             textViewHora = itemView.findViewById(R.id.textView_consulta_realizada_hora);
             textViewQueixa = itemView.findViewById(R.id.textViewQueixaFicha);
-            textViewDiagnosticoMedico = itemView.findViewById(R.id.textViewDiagonosticoMedicaFicha);
         }
     }
 }

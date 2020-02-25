@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/card_view_consultas"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -13,65 +14,101 @@
 
         <ImageView
             android:id="@+id/image_view_foto_paciente_medico"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_gravity="center" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="15dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/consulta_nome_paciente_medico"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+                android:layout_height="match_parent"
                 android:gravity="center"
-                android:text="@string/nome_paciente"
-                android:textColor="#222222"
-                android:textSize="20sp"
-                android:textStyle="bold|italic" />
+                android:orientation="horizontal">
 
-            <TextView
-                android:id="@+id/consulta_telefone_paciente_medico"
-                android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/consulta_nome_paciente_medico"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:gravity="center"
+                    android:text="@string/nome_paciente"
+                    android:textColor="#222222"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="0"
+                android:orientation="horizontal"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/telefone_paciente"
-                android:layout_alignParentStart="true"
-                android:textColor="#222222"
-                android:textSize="16sp"
-                android:textStyle="normal" />
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageView14"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_date_range_black_24dp" />
+
+                <TextView
+                    android:id="@+id/consulta_data_medico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginLeft="2dp"
+                    android:text="@string/consulta_realizada_data"
+                    android:textColor="#222222"
+                    android:textSize="16sp" />
+
+                <ImageView
+                    android:id="@+id/imageView15"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/ic_access_time_black_24dp" />
+
+                <TextView
+                    android:id="@+id/consulta_hora_medico"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:text="@string/consultas_realizada_hora"
+                    android:textColor="#222222"
+                    android:textSize="16sp" />
+
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/consulta_dia_semana_medico"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
-                android:textColor="#222222"
+                android:layout_gravity="center"
+                android:gravity="center"
                 android:text="@string/consulta_realizada_dia_semana"
-                android:textSize="16sp"
+                android:textColor="#222222"
+                android:textSize="18sp"
                 android:textStyle="normal" />
 
-            <TextView
-                android:id="@+id/consulta_hora_medico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/consultas_realizada_hora"
-                android:textColor="#222222"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/consulta_data_medico"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:text="@string/consulta_realizada_data"
-                android:textColor="#222222"
-                android:textSize="16sp" />
 
         </LinearLayout>
 

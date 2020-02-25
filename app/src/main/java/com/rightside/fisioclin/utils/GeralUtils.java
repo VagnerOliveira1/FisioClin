@@ -15,6 +15,18 @@ import androidx.fragment.app.FragmentActivity;
 
 import com.bumptech.glide.Glide;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.User;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
+import java.time.temporal.ChronoUnit;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 public class GeralUtils {
 
@@ -35,7 +47,6 @@ public class GeralUtils {
     public static void mostraMensagem(Context context, String mensagem) {
         Toast.makeText(context, mensagem, Toast.LENGTH_LONG).show();
     }
-
 
     public static String retornaDiaSemana(String dia) {
         switch (dia) {

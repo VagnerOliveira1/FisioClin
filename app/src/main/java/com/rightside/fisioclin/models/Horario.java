@@ -126,7 +126,6 @@ public class Horario implements Serializable {
 
     public void setDataFormatada() {
         this.dataFormatada = new SimpleDateFormat("dd-MM-yyyy", new Locale("pt", "BR")).format(getDate());
-        ;
     }
 
     public void setHoraFormatada() {
