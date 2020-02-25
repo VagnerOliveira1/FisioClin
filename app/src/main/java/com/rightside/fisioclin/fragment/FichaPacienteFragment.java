@@ -20,6 +20,7 @@ import android.widget.TextView;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.adapter.FichaPacienteAdapter;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
@@ -32,7 +33,7 @@ import java.util.List;
  */
 public class FichaPacienteFragment extends DialogFragment {
 
-    private ViewModelFichas viewModelFichaPaciente;
+
     private TextView textViewFichaPacienteNome, textViewFichaPacienteSexo, textViewFichaPacienteTelefone,
             textViewFichaPacienteEmail, textViewFichaPacienteProfissao, textViewFichaPacienteDataNascimento;
     private ImageView imageViewPacienteFichaFoto;
@@ -40,8 +41,11 @@ public class FichaPacienteFragment extends DialogFragment {
     private FichaPacienteAdapter fichaPacienteAdapter;
 
 
-    public static FichaPacienteFragment novaInstancia(){
+    public static FichaPacienteFragment novaInstancia(Ficha ficha){
         FichaPacienteFragment fichaPacienteFragment = new FichaPacienteFragment();
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("ficha", ficha);
+        fichaPacienteFragment.setArguments(bundle);
         return fichaPacienteFragment;
 
 
@@ -73,20 +77,18 @@ public class FichaPacienteFragment extends DialogFragment {
         recyclerViewFicha.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerViewFicha.setHasFixedSize(true);
 
-        viewModelFichaPaciente = ViewModelProviders.of(this).get(ViewModelFichas.class);
+
+        Bundle bundle = getArguments();
+        Ficha ficha = (Ficha) bundle.getSerializable("ficha");
 
         fichaPacienteAdapter = new FichaPacienteAdapter(getContext());
 
         recyclerViewFicha.setAdapter(fichaPacienteAdapter);
+        List<Consulta> consultaList = ficha.getConsulta();
+        fichaPacienteAdapter.update(consultaList);
+        Paciente paciente = ficha.getPaciente();
+        setInformacoesPacient(paciente);
 
-
-
-        viewModelFichaPaciente.getFicha(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaPaciente -> {
-           List<Consulta> consultaList = fichaPaciente.getConsulta();
-           fichaPacienteAdapter.update(consultaList);
-           Paciente paciente = fichaPaciente.getPaciente();
-           setInformacoesPacient(paciente);
-        });
 
         return view;
 

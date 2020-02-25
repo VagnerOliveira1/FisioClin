@@ -22,12 +22,14 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.rightside.fisioclin.fragment.ConsultaPacientDialogFragment;
 import com.rightside.fisioclin.fragment.FichaPacienteFragment;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
+import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
 
@@ -43,7 +45,9 @@ public class MainPacientActivity extends AppCompatActivity {
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private ViewModelUser viewModelUser;
+    private ViewModelFichas viewModelFichaPaciente;
     private User usuario;
+    private Ficha ficha;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +63,7 @@ public class MainPacientActivity extends AppCompatActivity {
 
         viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
         viewModelUser = ViewModelProviders.of(this).get(ViewModelUser.class);
+        viewModelFichaPaciente = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
         viewModelUser.getUser(FirebaseRepository.getIdPessoaLogada()).observe(this, usuario -> {
             alteraInformacaoPerfil(usuario);
@@ -68,6 +73,10 @@ public class MainPacientActivity extends AppCompatActivity {
 
         viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
             this.consulta = consulta;
+        });
+
+        viewModelFichaPaciente.getFicha(FirebaseRepository.getIdPessoaLogada()).observe(this, ficha -> {
+            this.ficha = ficha;
         });
 
 
@@ -113,7 +122,12 @@ public class MainPacientActivity extends AppCompatActivity {
         });
 
         cardViewMinhaFicha.setOnClickListener(view -> {
-            FichaPacienteFragment.novaInstancia().show(getSupportFragmentManager(), "Minha Ficha");
+            if(ficha == null) {
+                GeralUtils.mostraAlerta("Oops", "Você ainda não possui uma ficha!", this);
+            } else {
+                FichaPacienteFragment.novaInstancia(ficha).show(getSupportFragmentManager(), "Minha Ficha");
+            }
+
         });
 
     }
