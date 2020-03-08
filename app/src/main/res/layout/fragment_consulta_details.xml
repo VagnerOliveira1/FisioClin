@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".fragment.ConsultaDetailsFragment">
@@ -53,6 +53,7 @@
                     android:id="@+id/imageView13"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:layout_marginRight="2dp"
                     android:layout_weight="0"
                     android:src="@drawable/work" />
@@ -133,6 +134,7 @@
                     android:id="@+id/imageView18"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
+                    android:layout_gravity="center"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="2dp"
                     android:layout_weight="0"
@@ -170,6 +172,12 @@
                     android:layout_weight="0"
                     android:text="TextView"
                     android:textColor="#000000" />
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_height="20dp"
+                    android:layout_weight="0"
+                    android:src="@drawable/alerta" />
 
             </LinearLayout>
 

@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
     private TextView textViewPacienteNome, textViewPacienteSexo, textViewPacienteData, textViewPacienteTelefone,
     textViewPacienteProfissao, textViewPacienteEmail;
     private ImageView imageViewPacienteFoto;
+    private Button buttonRelatorio;
     private ConsultasRealizadasPacienteAdapter consultasRealizadasPacienteAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
         textViewPacienteSexo = findViewById(R.id.textView_ficha_medico_paciente_sexo);
         textViewPacienteData = findViewById(R.id.textView_ficha_medico_paciente_nascimento);
         textViewPacienteTelefone = findViewById(R.id.textView_ficha_medico_paciente_telefone);
+        buttonRelatorio = findViewById(R.id.btn_gerar_relatorio);
         textViewPacienteProfissao = findViewById(R.id.textView_ficha_medico_paciente_profissao);
         textViewPacienteEmail = findViewById(R.id.textView_ficha_medico_paciente_email);
         imageViewPacienteFoto = findViewById(R.id.imageView_ficha_medico_paciente_foto);
@@ -53,6 +56,10 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
 
         Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
         List<Consulta> consultasList = (List<Consulta>) intent.getSerializableExtra("consultaList");
+
+        buttonRelatorio.setOnClickListener(view -> {
+            GeralUtils.gerarRelatorio(paciente, consultasList);
+        });
 
         textViewPacienteNome.setText(paciente.getName());
         textViewPacienteSexo.setText(paciente.getSexo());

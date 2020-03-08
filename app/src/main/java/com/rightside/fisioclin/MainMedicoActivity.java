@@ -3,10 +3,13 @@ package com.rightside.fisioclin;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -46,6 +49,7 @@ public class MainMedicoActivity extends FragmentActivity {
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
+    private static final int REQUEST_PERMISSAO_ARQUIVOS = 1;
     private List<Consulta> consultaList = new ArrayList<>();
 
     @Override
@@ -61,6 +65,8 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
+
+        verificaPermissaoArquivos();
 
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
@@ -130,6 +136,35 @@ public class MainMedicoActivity extends FragmentActivity {
     private void alteraInformacaoPerfil(Medico medico) {
         textViewNameDoctor.setText(medico.getName());
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
+    }
+
+    public void verificaPermissaoArquivos() {
+        if (Build.VERSION.SDK_INT >= 23) {
+            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    != PackageManager.PERMISSION_GRANTED) {
+
+                ActivityCompat.requestPermissions(MainMedicoActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSAO_ARQUIVOS);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+
+        switch (requestCode) {
+
+            case REQUEST_PERMISSAO_ARQUIVOS: {
+
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+
+                } else {
+                    Toast.makeText(getBaseContext(), "Permissão para arquivos foi negada", Toast.LENGTH_LONG).show();
+                    finish();
+                }
+                return;
+            }
+        }
+
     }
 
 

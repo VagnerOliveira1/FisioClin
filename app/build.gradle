@@ -70,6 +70,16 @@ dependencies {
     implementation 'com.github.whilu.CustomButton:library:1.0.0'
 
     implementation 'com.github.mejdi14:Flat-Dialog-Android:1.0.4'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.2'
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.2'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.14.2'
+    implementation files('/home/matheus/Vídeos/FisioClin/app/lib/itextpdf-5.5.5.jar')
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.5.3'
+    implementation 'com.fasterxml.jackson.core:jackson-annotations:2.5.3'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.5.3'
+    implementation 'com.github.rtoshiro.mflibrary:mflibrary:1.0.0'
 
 
 }

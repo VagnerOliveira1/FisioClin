@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,14 +22,22 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.MainPacientActivity;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Endereco;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.ws.SetupREST;
 import com.santalu.maskedittext.MaskEditText;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
+
 import io.ghyeok.stickyswitch.widget.StickySwitch;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -42,6 +51,7 @@ public class UserVerificationDataFragment extends DialogFragment {
     private StickySwitch stickySwitchSexoPaciente;
     private Button buttonSalvaFichaPaciente;
     private String sexo = "";
+    private FragmentActivity fragmentActivity;
 
 
     public static UserVerificationDataFragment pacientVerificationDataFragment(User user) {
@@ -52,13 +62,17 @@ public class UserVerificationDataFragment extends DialogFragment {
         return userVerificationDataFragment;
     }
 
+    public UserVerificationDataFragment setActivity(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
+        return this;
+    }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_user_verification_data, container, false);
-
         maskEditTextTelefone = view.findViewById(R.id.editTelefonePaciente);
         maskEditTextDataNasc = view.findViewById(R.id.editDataNascPaciente);
         editTextNomePaciente = view.findViewById(R.id.editNomePaciente);
@@ -69,6 +83,7 @@ public class UserVerificationDataFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         User user = (User) bundle.get("user");
+
 
         stickySwitchSexoPaciente.setSwitchColor(Color.GREEN);
         stickySwitchSexoPaciente.setSliderBackgroundColor(Color.LTGRAY);
@@ -91,19 +106,27 @@ public class UserVerificationDataFragment extends DialogFragment {
 
         buttonSalvaFichaPaciente.setOnClickListener((v) -> {
 
-            user.setName(editTextNomePaciente.getText().toString());
-            user.setPhoneNumber(maskEditTextTelefone.getText().toString());
-            user.setSexo(verificaSexo(sexo));
-            user.setDataNascimento(maskEditTextDataNasc.getText().toString());
-            user.setProfissao(editTextProfissaoPaciente.getText().toString());
+            if(GeralUtils.isCampoVazio(editTextNomePaciente.getText().toString())) {
+                editTextNomePaciente.requestFocus();
+                Toast.makeText(fragmentActivity, "Informe o nome", Toast.LENGTH_SHORT).show();
+            }  else if (GeralUtils.isCampoVazio(maskEditTextDataNasc.getText().toString())){
+                maskEditTextDataNasc.requestFocus();
+                Toast.makeText(fragmentActivity, "Informe a data de nascimento", Toast.LENGTH_SHORT).show();
+            } else if(GeralUtils.isCampoVazio(maskEditTextTelefone.getText().toString())) {
+                maskEditTextTelefone.requestFocus();
+                Toast.makeText(fragmentActivity, "Informe o telefone para contato", Toast.LENGTH_SHORT).show();
+            } else {
+                user.setName(editTextNomePaciente.getText().toString());
+                user.setPhoneNumber(maskEditTextTelefone.getText().toString());
+                user.setSexo(verificaSexo(sexo));
+                user.setDataNascimento(maskEditTextDataNasc.getText().toString());
+                user.setProfissao(editTextProfissaoPaciente.getText().toString());
+
+                EnderecoVerificationFragment.enderecoVerificationFragment(user).show(fragmentActivity.getSupportFragmentManager(), "endereco");
+                this.dismiss();
+            }
 
 
-            FirebaseRepository.saveUser(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                @Override
-                public void onSuccess(Void aVoid) {
-                    startActivity(new Intent(getContext(), MainPacientActivity.class));
-                }
-            });
         });
 
         return view;

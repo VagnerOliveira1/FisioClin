@@ -77,7 +77,6 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
     private void setText(Consulta consulta) {
 
         if (consulta != null) {
-            User paciente = consulta.getPaciente();
             Horario horario = consulta.getHorario();
             textViewNomeMedicoFichaPaciente.setText(horario.getMedico().getName());
             textViewHoraPacienteConsulta.setText(horario.getHoraFormatada());
