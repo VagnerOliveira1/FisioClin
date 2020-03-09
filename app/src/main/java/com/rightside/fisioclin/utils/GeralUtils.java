@@ -89,6 +89,14 @@ public class GeralUtils {
         return resultado;
     }
 
+    public static String domiciliar(boolean domiciliar) {
+        if (domiciliar) {
+            return "Consulta domiciliar";
+        } else {
+            return "";
+        }
+    }
+
     public static void gerarRelatorio(Paciente paciente, List<Consulta> consultas) {
         Document doc = null;
         OutputStream os = null;

@@ -10,7 +10,7 @@ public class User implements Serializable {
     private String profilePictureUrl;
     private String email;
     private String phoneNumber = "";
-    private String profissao = "";
+    private String profissao = "Não trabalha";
     private String dataNascimento = "";
     private String sexo = "";
     private String token = "";

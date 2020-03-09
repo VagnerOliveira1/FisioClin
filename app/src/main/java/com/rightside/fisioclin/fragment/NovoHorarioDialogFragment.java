@@ -32,7 +32,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
     private TextView textViewData, textViewHora, textViewDiaSemana;
     private Button buttonSalvarHorario;
     private StickySwitch stickySwitchDomiciliar;
-    private boolean domiciliar;
+    private boolean domiciliar = false;
 
 
     public static NovoHorarioDialogFragment novoHorarioDialogFragment(Horario horario) {

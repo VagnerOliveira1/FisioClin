@@ -112,8 +112,9 @@
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_weight="0"
-            android:background="@drawable/botao_salva_ficha"
-            android:text="@string/salvar_horario" />
+            android:background="@color/colorPrimary"
+            android:text="@string/salvar_horario"
+            android:textColor="#FFFFFF" />
 
     </LinearLayout>
 

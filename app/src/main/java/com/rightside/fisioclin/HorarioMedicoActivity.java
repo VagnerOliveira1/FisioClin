@@ -22,6 +22,7 @@ import com.rightside.fisioclin.controller.NovoHorarioController;
 import com.rightside.fisioclin.fragment.DatePickerFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
 import com.rightside.fisioclin.fragment.NovoHorarioDialogFragment;
+import com.rightside.fisioclin.models.Endereco;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
@@ -57,6 +58,7 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
 
         Intent intent = getIntent();
         medico = (Medico) intent.getSerializableExtra("medico");
+       
 
         toolbar.setTitle("Horários:");
         toolbar.setSubtitle("Segunda-feira");

@@ -26,7 +26,7 @@ import com.rightside.fisioclin.utils.GeralUtils;
 
 public class MarcarConsultaController {
     public static void marcarConsulta(Horario horario, User user, FragmentActivity activity) {
-        final AlertDialog.Builder alerta = new AlertDialog.Builder(activity);
+        final androidx.appcompat.app.AlertDialog.Builder alerta = new androidx.appcompat.app.AlertDialog.Builder(activity);
 
         TextView horarioData = new TextView(activity);
         TextView horarioDiaSemana = new TextView(activity);
@@ -48,6 +48,7 @@ public class MarcarConsultaController {
         relogio.setPadding(15,0,15,0);
         calendario.setImageResource(R.drawable.ic_date_range_black_24dp);
         relogio.setImageResource(R.drawable.ic_access_time_black_24dp);
+
         calendariot.setImageResource(R.drawable.ic_date_range_black_24dp);
 
         LinearLayout container = new LinearLayout(activity.getApplicationContext());
@@ -62,7 +63,7 @@ public class MarcarConsultaController {
         alerta.setView(container);
 
 
-        alerta.setTitle("Marcar Horário!").setMessage(ConstantUtils.ESCOLHER_ESSE_HORARIO).setPositiveButton("SIM", new DialogInterface.OnClickListener() {
+        alerta.setTitle("Confirmar consulta:").setMessage(ConstantUtils.ESCOLHER_ESSE_HORARIO).setPositiveButton("SIM", new DialogInterface.OnClickListener() {
 
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
