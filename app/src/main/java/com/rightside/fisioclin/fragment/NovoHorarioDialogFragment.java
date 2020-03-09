@@ -20,6 +20,10 @@ import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 
+import org.jetbrains.annotations.NotNull;
+
+import io.ghyeok.stickyswitch.widget.StickySwitch;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -27,6 +31,8 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
     private TextView textViewData, textViewHora, textViewDiaSemana;
     private Button buttonSalvarHorario;
+    private StickySwitch stickySwitchDomiciliar;
+    private boolean domiciliar;
 
 
     public static NovoHorarioDialogFragment novoHorarioDialogFragment(Horario horario) {
@@ -55,6 +61,26 @@ public class NovoHorarioDialogFragment extends DialogFragment {
         textViewDiaSemana = view.findViewById(R.id.textView_dia_semana);
         textViewHora = view.findViewById(R.id.textView_horario);
         buttonSalvarHorario = view.findViewById(R.id.button);
+        stickySwitchDomiciliar = view.findViewById(R.id.sticky_switch_domiciliar);
+        stickySwitchDomiciliar.setSwitchColor(Color.GREEN);
+        stickySwitchDomiciliar.setSliderBackgroundColor(Color.LTGRAY);
+        stickySwitchDomiciliar.setDirection(StickySwitch.Direction.RIGHT);
+        stickySwitchDomiciliar.setActivated(true);
+
+
+
+        stickySwitchDomiciliar.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
+            @Override
+            public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String s) {
+                if(s.equals("Sim")) {
+                    domiciliar = true;
+                } else {
+                    domiciliar = false;
+                }
+
+            }
+        });
+
 
         textViewData.setText(horario.getDataFormatada());
         textViewHora.setText(horario.getHoraFormatada());
@@ -63,6 +89,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
         buttonSalvarHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                horario.setDomiciliar(domiciliar);
                 FirebaseRepository.saveHour(horario);
                 dismiss();
             }
