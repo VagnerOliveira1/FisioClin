@@ -23,6 +23,7 @@ public class Horario implements Serializable {
     private String horarioNumber;
     private boolean domiciliar = false;
     private Medico medico;
+    private Endereco endereco;
 
     @DocumentId
     private String id;
@@ -143,7 +144,6 @@ public class Horario implements Serializable {
 
     public void setDiaDaSemanaFormatado() {
         this.diaDaSemanaFormatado = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(getDate()).toLowerCase();
-        ;
     }
 
     public boolean isMarcado() {
@@ -173,6 +173,15 @@ public class Horario implements Serializable {
         this.date = calendar().getTime();
     }
 
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     public HashMap<String, Object> map() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("year", getYear());
@@ -188,6 +197,7 @@ public class Horario implements Serializable {
         map.put("horarioNumber", getHorarioNumber());
         map.put("medico", getMedico());
         map.put("domiciliar", isDomiciliar());
+        map.put("endereco", getEndereco());
         return map;
     }
 

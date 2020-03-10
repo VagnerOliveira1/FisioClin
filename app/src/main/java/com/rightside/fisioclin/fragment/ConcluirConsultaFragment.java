@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.fragment;
 
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AlertDialog;
@@ -91,6 +92,15 @@ public class ConcluirConsultaFragment extends DialogFragment {
         });
 
         return view;
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Dialog consultaPacienteDialog = getDialog();
+        if ( consultaPacienteDialog  != null) {
+            consultaPacienteDialog .getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        }
     }
 
 }

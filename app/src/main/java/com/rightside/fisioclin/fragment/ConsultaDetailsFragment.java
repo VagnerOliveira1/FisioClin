@@ -22,6 +22,7 @@ import com.rightside.fisioclin.utils.GeralUtils;
 public class ConsultaDetailsFragment extends DialogFragment {
 
     private TextView textViewPacienteNome, textViewPacienteData, textViewPacienteTelefone, textViewPacienteEmail, textViewPacienteProfissao, textViewPacienteSexo, textViewQueixa;
+    private TextView textViewCidade, textViewBairro, textViewRua, textViewNumero;
     private ImageView imageViewPacienteSexo, imageViewFotoPaciente;
 
     public static ConsultaDetailsFragment consultaDetailsFragment(Paciente paciente) {
@@ -47,6 +48,10 @@ public class ConsultaDetailsFragment extends DialogFragment {
         textViewPacienteData = view.findViewById(R.id.textView_detalhes_data);
         textViewPacienteEmail = view.findViewById(R.id.textView_detalhes_email);
         imageViewPacienteSexo = view.findViewById(R.id.imageView_detalhes_sexo);
+        textViewCidade = view.findViewById(R.id.textViewCidade);
+        textViewBairro = view.findViewById(R.id.textViewBairro);
+        textViewRua = view.findViewById(R.id.textViewRua);
+        textViewNumero = view.findViewById(R.id.textViewNumero);
         textViewPacienteProfissao = view.findViewById(R.id.textView_detalhes_profissao);
         textViewPacienteTelefone = view.findViewById(R.id.textView_detalhes_telefone);
         textViewPacienteSexo = view.findViewById(R.id.textView_sexo);
@@ -65,6 +70,10 @@ public class ConsultaDetailsFragment extends DialogFragment {
         textViewPacienteEmail.setText(paciente.getEmail());
         textViewPacienteProfissao.setText(paciente.getProfissao());
         textViewQueixa.setText(paciente.getDiagnosticoMedico().getQueixa());
+        textViewNumero.setText(paciente.getEndereco().getNumero());
+        textViewBairro.setText(paciente.getEndereco().getBairro());
+        textViewCidade.setText(paciente.getEndereco().getCidade());
+        textViewRua.setText(paciente.getEndereco().getLogradouro());
 
         GeralUtils.mostraImagemCircular(getContext(), imageViewFotoPaciente, paciente.getProfilePictureUrl());
 

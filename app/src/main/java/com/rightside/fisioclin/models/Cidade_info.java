@@ -10,8 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Cidade_info implements Serializable {
-    private String area_km2;
-    private String codigo_ibge;
+    private String area_km2 = "";
+    private String codigo_ibge = "";
 
     // Getter Methods
 

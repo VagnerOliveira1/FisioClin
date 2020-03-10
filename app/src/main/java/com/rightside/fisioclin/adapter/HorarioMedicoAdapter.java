@@ -78,7 +78,7 @@ public class HorarioMedicoAdapter extends RecyclerView.Adapter<HorarioMedicoAdap
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewData.setText(horario.getDataFormatada());
-        holder.textViewPresencial.setText(GeralUtils.domiciliar(horario.isDomiciliar()));
+        holder.textViewPresencial.setText(GeralUtils.domiciliar(horario.isDomiciliar()) + " " + horario.getEndereco().getCidade() );
         holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.cardView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

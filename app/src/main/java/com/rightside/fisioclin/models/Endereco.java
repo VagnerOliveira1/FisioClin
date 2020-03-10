@@ -24,11 +24,11 @@ import java.util.Map;
 public class Endereco implements Serializable {
 
     @JsonProperty("bairro")
-    private String bairro;
+    private String bairro = "";
     @JsonProperty("cidade")
-    private String cidade;
+    private String cidade = "";
     @JsonProperty("logradouro")
-    private String logradouro;
+    private String logradouro = "";
     @JsonProperty("estado_info")
     private Estado_info estado_info;
     @JsonProperty("cep")
@@ -36,11 +36,11 @@ public class Endereco implements Serializable {
     @JsonProperty("cidade_info")
     private Cidade_info cidade_info;
     @JsonProperty("estado")
-    private String estado;
+    private String estado = "";
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
     @JsonIgnore
-    private String numero;
+    private String numero = "";
 
     @JsonProperty("bairro")
     public String getBairro() {

@@ -30,7 +30,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
 
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private TextView textViewNomeMedicoFichaPaciente, textViewDataPacienteConsulta,
-            textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta, textViewCrefitoConsultaPaciente, textViewTelefoneMedicoConsultaPaciente;
+            textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta, textViewCrefitoConsultaPaciente, textViewTelefoneMedicoConsultaPaciente, textViewDomiciliar;
     private ImageView imageViewFotoPacienteConsulta;
     private Consulta consulta;
 
@@ -55,7 +55,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
 
         toolbar.setTitle("Minha Consulta");
         toolbar.setTitleTextColor(Color.WHITE);
-
+        textViewDomiciliar = view.findViewById(R.id.textView_domiciliar_pacient_dialog);
         textViewDataPacienteConsulta = view.findViewById(R.id.textview_data_consulta_paciente);
         textViewNomeMedicoFichaPaciente = view.findViewById(R.id.textView6);
         textViewDiaSemanaPacienteConsulta = view.findViewById(R.id.textview_dia_consulta_paciente);
@@ -80,10 +80,11 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
             Horario horario = consulta.getHorario();
             textViewNomeMedicoFichaPaciente.setText(horario.getMedico().getName());
             textViewHoraPacienteConsulta.setText(horario.getHoraFormatada());
-            textViewCrefitoConsultaPaciente.setText(horario.getMedico().getCrefito());
+            textViewCrefitoConsultaPaciente.setText("Crefito: " + horario.getMedico().getCrefito());
             textViewTelefoneMedicoConsultaPaciente.setText(horario.getMedico().getPhoneNumber());
             textViewDiaSemanaPacienteConsulta.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
             textViewDataPacienteConsulta.setText(horario.getDataFormatada());
+            textViewDomiciliar.setText(GeralUtils.domiciliar(horario.isDomiciliar()));
             GeralUtils.mostraImagemCircular(getContext(), imageViewFotoPacienteConsulta, horario.getMedico().getProfilePictureUrl());
         } else {
 

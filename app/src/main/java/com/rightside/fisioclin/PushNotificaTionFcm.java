@@ -34,7 +34,7 @@ public class PushNotificaTionFcm {
 
         for(Consulta consulta : consultaList) {
             firebasePush.setNotification(new Notification("Olá, " + consulta.getPaciente().getName() + " temos um lembrete:",
-                    "Você possui uma consulta: " + consulta.getHorario().getDataFormatada() + " " + consulta.getHorario().getHoraFormatada() + " " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado())));
+                    "Você possui uma consulta: " + GeralUtils.domiciliar(consulta.getHorario().isDomiciliar()) + " " + consulta.getHorario().getDataFormatada() + " " + consulta.getHorario().getHoraFormatada() + " " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado())));
             firebasePush.sendToToken(consulta.getPaciente().getToken());
         }
 
