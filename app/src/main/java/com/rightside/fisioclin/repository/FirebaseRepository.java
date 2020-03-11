@@ -1,17 +1,14 @@
 package com.rightside.fisioclin.repository;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
@@ -38,6 +35,8 @@ public class FirebaseRepository {
     private MutableLiveData<User> mutableLiveDataUser = new MutableLiveData<>();
 
     private MutableLiveData<List<User>> mutableLiveDataUsersList = new MutableLiveData<>();
+
+    private MutableLiveData<List<Medico>> mutableLiveDataMedicosList = new MutableLiveData<>();
 
 
     public static FirebaseFirestore getDB() {
@@ -72,6 +71,10 @@ public class FirebaseRepository {
 
     public static DocumentReference getMedico(String id) {
         return getDB().collection("medicos").document(id);
+    }
+
+    public static CollectionReference getMedicos() {
+        return getDB().collection("medicos");
     }
 
     public static DocumentReference getPaciente(String id) {
@@ -183,6 +186,14 @@ public class FirebaseRepository {
            mutableLiveDataUsersList.setValue(queryDocumentSnapshots.toObjects(User.class));
         });
        return mutableLiveDataUsersList;
+    }
+
+    public LiveData<List<Medico>> getMutableLiveDataMedicos() {
+        getMedicos().addSnapshotListener((queryDocumentSnapshots, e) -> {
+            mutableLiveDataMedicosList.setValue(queryDocumentSnapshots.toObjects(Medico.class));
+        });
+
+        return mutableLiveDataMedicosList;
     }
 
 }
