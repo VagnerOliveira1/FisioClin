@@ -32,5 +32,15 @@ public class ConstantUtils {
 
     public static final String CONSULTA_CONCLUIDA_COM_SUCESSO = "Consulta concluída com sucesso";
 
+    public static final String INFORME_SUA_QUEIXA = "Informe sua Queixa! O campo está vazio";
+//
+    public static final String INFORME_SEU_NOME = "Informe seu Nome! O campo está vazio";
+
+    public static final String INFORME_SUA_PROFISSAO = "Informe sua Profissão! O campo está vazio";
+
+    public static final String INFORME_SUA_DATA_DE_NASCIMENTO = "Informe sua Data de Nascimento! O campo está vazio";
+
+    public static final String INFORME_SEU_TELEFONE= "Informe seu telefone! O campo está vazio";
+
 
 }
