@@ -12,7 +12,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:orientation="vertical"
         android:padding="8dp">
 
@@ -43,11 +44,11 @@
 
             <ImageView
                 android:id="@+id/imageView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="0"
                 android:paddingLeft="5dp"
-               android:src="@drawable/ic_access_time_black_24dp" />
+                android:src="@drawable/ic_access_time_black_24dp" />
 
             <TextView
                 android:id="@+id/textView_horario"
@@ -73,15 +74,99 @@
             android:textSize="16sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center"
+            android:text="O horário é para uma consulta domiciliar?"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <io.ghyeok.stickyswitch.widget.StickySwitch
+            android:id="@+id/sticky_switch_domiciliar"
+            android:layout_width="150dp"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            app:ss_animationDuration="300"
+            app:ss_animationType="line"
+            app:ss_iconPadding="14dp"
+            app:ss_iconSize="22dp"
+            app:ss_leftIcon="@drawable/ic_check_black_24dp"
+            app:ss_leftText="Sim"
+            app:ss_rightIcon="@drawable/ic_close_black"
+            app:ss_rightText="Não"
+            app:ss_selectedTextSize="10sp"
+            app:ss_sliderBackgroundColor="@color/colorStickyBack"
+            app:ss_switchColor="@color/colorSticky"
+            app:ss_textColor="@color/colorStickyBack"
+            app:ss_textSize="12sp" />
+
+        <TextView
+            android:id="@+id/textView13"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Deseja alterar a cidade que irá atender?"
+            android:textColor="#000000"
+            android:textSize="18sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:textColorHint="#000000"
+                app:boxBackgroundColor="#FFFFFF">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_cep_horario"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Cep:" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/button_buscar_cidade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:text="Buscar cidade:"
+                android:textColor="#FFFFFF" />
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView_cidade_result"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:textSize="20dp" />
+
         <Button
             android:id="@+id/button"
-            android:background="@drawable/botao_salva_ficha"
             android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:layout_weight="0"
-            android:text="@string/salvar_horario" />
+            android:background="@color/colorPrimary"
+            android:text="@string/salvar_horario"
+            android:textColor="#FFFFFF" />
+
     </LinearLayout>
 
 

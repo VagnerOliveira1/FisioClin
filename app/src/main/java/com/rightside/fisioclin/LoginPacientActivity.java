@@ -2,6 +2,7 @@ package com.rightside.fisioclin;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 
@@ -124,7 +125,7 @@ public class LoginPacientActivity extends AppCompatActivity {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if (!documentSnapshot.exists()) {
                     User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
-                    UserVerificationDataFragment.pacientVerificationDataFragment(user).show(getSupportFragmentManager(), "pacientVerification");
+                    UserVerificationDataFragment.pacientVerificationDataFragment(user).setActivity(this).show(getSupportFragmentManager(), "pacientVerification");
                 } else {
                     startActivity(new Intent(this, MainPacientActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();

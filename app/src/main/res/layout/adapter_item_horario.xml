@@ -24,8 +24,8 @@
 
             <ImageView
                 android:id="@+id/imageViewCalendario"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 android:src="@drawable/ic_date_range_black_24dp" />
 
@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/imageViewRelogio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_weight="1"
                 android:paddingLeft="5dp"
                 android:src="@drawable/ic_access_time_black_24dp" />
@@ -73,12 +73,21 @@
 
 
         <TextView
+            android:id="@+id/textView_presencial"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="16sp" />
+
+        <TextView
             android:id="@+id/textViewFisioterapeuta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:gravity="center"
-            android:text="------------ Fisioterapeuta ------------"
+            android:text="Fisioterapeuta:"
             android:textColor="#000000"
             android:textSize="16sp"
             android:textStyle="bold|italic" />

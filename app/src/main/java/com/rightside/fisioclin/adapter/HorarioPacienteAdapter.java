@@ -41,7 +41,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
     @NonNull
     @Override
     public HorarioPacienteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_horario_paciente, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.adapter_item_horario, parent, false);
         return new HorarioPacienteAdapter.ViewHolder(view);
     }
 
@@ -62,6 +62,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.textViewFisioterapeuta.setTextColor(Color.WHITE);
             holder.textViewTelefoneMedicoHorario.setTextColor(Color.WHITE);
             holder.textViewCrefito.setTextColor(Color.WHITE);
+            holder.textViewDomiciliar.setTextColor(Color.WHITE);
             holder.imageViewPhone.setImageResource(R.drawable.ic_phone_android_white_24dp);
         } else {
             holder.cardView.setBackgroundColor(Color.WHITE);
@@ -78,7 +79,9 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.imageViewHorario.setImageResource(R.drawable.ic_access_time_black_24dp);
             holder.imageViewCalendario.setImageResource(R.drawable.ic_date_range_black_24dp);
             holder.textViewNomeDoMedicoHorario.setTextColor(Color.BLACK);
+            holder.textViewDomiciliar.setTextColor(Color.RED);
         }
+        holder.textViewDomiciliar.setText(GeralUtils.domiciliar(horario.isDomiciliar()) + " " + horario.getEndereco().getCidade() );
         holder.textViewTelefoneMedicoHorario.setText(horario.getMedico().getPhoneNumber());
         holder.textViewCrefito.setText("Crefito: "+ horario.getMedico().getCrefito());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());
@@ -130,7 +133,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewFisioterapeuta, textViewTelefoneMedicoHorario, textViewHora, textViewDiaSemana, textViewDisponibilidade,  textViewNomeDoMedicoHorario, textViewCrefito;
+        private TextView textViewData, textViewFisioterapeuta, textViewTelefoneMedicoHorario, textViewHora, textViewDiaSemana, textViewDisponibilidade,  textViewNomeDoMedicoHorario, textViewCrefito, textViewDomiciliar;
         private CardView cardView;
         private ImageView imageViewCalendario, imageViewHorario, imageViewFotoDoMedicoHorario, imageViewPhone;
 
@@ -141,6 +144,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             textViewTelefoneMedicoHorario = itemView.findViewById(R.id.textViewtelefoneMedicoHorario);
             textViewDiaSemana = itemView.findViewById(R.id.horario_dia_semana);
             textViewHora = itemView.findViewById(R.id.horario_hora);
+            textViewDomiciliar = itemView.findViewById(R.id.textView_presencial);
             textViewCrefito = itemView.findViewById(R.id.textViewCrefitoMedicoHorario);
             cardView = itemView.findViewById(R.id.card_view_doctor_horarios);
             textViewFisioterapeuta = itemView.findViewById(R.id.textViewFisioterapeuta);

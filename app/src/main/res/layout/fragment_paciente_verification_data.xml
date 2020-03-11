@@ -146,7 +146,7 @@
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
             android:text="@string/salvar"
-            android:textColor="@drawable/txt_selector"
+            android:textColor="#FFFFFF"
             android:textSize="14sp" />
 
     </LinearLayout>

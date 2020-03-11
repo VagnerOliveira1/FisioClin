@@ -24,7 +24,7 @@ public class ConstantUtils {
 
     public static final String TEM_CERTEZA_DISSO = "Tem certeza disso?";
 
-    public static final String ESCOLHER_ESSE_HORARIO = "Escolher esse horário?";
+    public static final String ESCOLHER_ESSE_HORARIO = "Deseja escolher esse horário?";
 
     public static final String CADASTRAR_UM_NOVO_HORARIO = "cadastrar um novo horário?";
 

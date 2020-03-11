@@ -21,7 +21,9 @@ public class Horario implements Serializable {
     private String diaDaSemanaFormatado;
     private boolean marcado = false;
     private String horarioNumber;
+    private boolean domiciliar = false;
     private Medico medico;
+    private Endereco endereco;
 
     @DocumentId
     private String id;
@@ -29,13 +31,14 @@ public class Horario implements Serializable {
     public Horario() {
     }
 
-    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id, String horarioNumber, Medico medico) {
+    public Horario(int hour, int minute, int year, int dayOfMonth, int month, String id, String horarioNumber, Medico medico, boolean domiciliar) {
         this.hour = hour;
         this.minute = minute;
         this.year = year;
         this.dayOfMonth = dayOfMonth;
         this.month = month;
         this.id = id;
+        this.domiciliar = domiciliar;
         this.medico = medico;
         setDate();
         setDataFormatada();
@@ -45,6 +48,13 @@ public class Horario implements Serializable {
         setHorarioNumber(horarioNumber);
     }
 
+    public boolean isDomiciliar() {
+        return domiciliar;
+    }
+
+    public void setDomiciliar(boolean domiciliar) {
+        this.domiciliar = domiciliar;
+    }
 
     public Medico getMedico() {
         return medico;
@@ -126,7 +136,6 @@ public class Horario implements Serializable {
 
     public void setDataFormatada() {
         this.dataFormatada = new SimpleDateFormat("dd-MM-yyyy", new Locale("pt", "BR")).format(getDate());
-        ;
     }
 
     public void setHoraFormatada() {
@@ -135,7 +144,6 @@ public class Horario implements Serializable {
 
     public void setDiaDaSemanaFormatado() {
         this.diaDaSemanaFormatado = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(getDate()).toLowerCase();
-        ;
     }
 
     public boolean isMarcado() {
@@ -165,6 +173,15 @@ public class Horario implements Serializable {
         this.date = calendar().getTime();
     }
 
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
     public HashMap<String, Object> map() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("year", getYear());
@@ -179,6 +196,8 @@ public class Horario implements Serializable {
         map.put("marcado", isMarcado());
         map.put("horarioNumber", getHorarioNumber());
         map.put("medico", getMedico());
+        map.put("domiciliar", isDomiciliar());
+        map.put("endereco", getEndereco());
         return map;
     }
 

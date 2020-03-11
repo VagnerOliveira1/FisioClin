@@ -10,14 +10,29 @@ public class User implements Serializable {
     private String profilePictureUrl;
     private String email;
     private String phoneNumber = "";
-    private String profissao = "";
+    private String profissao = "Não trabalha";
     private String dataNascimento = "";
     private String sexo = "";
     private String token = "";
     private boolean admin;
+    private Endereco endereco;
 
     public User() {
         setAdmin(false);
+    }
+
+    public User(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, String token, boolean admin, Endereco endereco) {
+        this.id = id;
+        this.name = name;
+        this.profilePictureUrl = profilePictureUrl;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
+        this.profissao = profissao;
+        this.dataNascimento = dataNascimento;
+        this.sexo = sexo;
+        this.token = token;
+        this.admin = admin;
+        this.endereco = endereco;
     }
 
     public User(String id, String name, String profilePictureUrl, String email, String phoneNumber, String profissao, String dataNascimento, String sexo, String token, boolean admin) {
@@ -59,6 +74,7 @@ public class User implements Serializable {
         user.put("email", getEmail());
         user.put("profilePictureUrl", getProfilePictureUrl());
         user.put("token", getToken());
+        user.put("endereco", getEndereco());
         return user;
     }
 
@@ -142,5 +158,11 @@ public class User implements Serializable {
         this.sexo = sexo;
     }
 
+    public Endereco getEndereco() {
+        return endereco;
+    }
 
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
 }
