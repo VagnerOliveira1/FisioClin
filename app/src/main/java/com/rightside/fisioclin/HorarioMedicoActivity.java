@@ -82,22 +82,22 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
            public void onTabSelected(TabLayout.Tab tab) {
                if(tab.getPosition() == 0) {
                    Toast.makeText(HorarioMedicoActivity.this, "seg", Toast.LENGTH_SHORT).show();
-                    observerHorarioDia("seg");
+                    observerHorarioDia( medico,"seg");
                    toolbar.setSubtitle("Segunda-feira");
                } else if (tab.getPosition() == 1) {
-                   observerHorarioDia("ter");
+                   observerHorarioDia(medico,"ter");
                    toolbar.setSubtitle("Terça-feira");
                } else if(tab.getPosition() == 2) {
-                   observerHorarioDia("qua");
+                   observerHorarioDia(medico,"qua");
                    toolbar.setSubtitle("Quarta-feira");
                } else if(tab.getPosition() == 3) {
-                    observerHorarioDia("qui");
+                    observerHorarioDia(medico,"qui");
                    toolbar.setSubtitle("Quinta-feira");
                } else if(tab.getPosition() == 4) {
-                   observerHorarioDia("sex");
+                   observerHorarioDia(medico,"sex");
                    toolbar.setSubtitle("Sexta-feira");
                }else if(tab.getPosition() == 5) {
-                    observerHorarioDia("sáb");
+                    observerHorarioDia(medico,"sáb");
                     toolbar.setSubtitle("Sábado");
                }
            }
@@ -118,8 +118,8 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
 
     }
 
-    public void observerHorarioDia(String dia) {
-        viewModelHorarios.getHorarios(dia).observe(this, listaHorario -> {
+    public void observerHorarioDia(Medico medico, String dia) {
+        viewModelHorarios.getHorarios(medico, dia).observe(this, listaHorario -> {
             this.list = listaHorario;
             mAdapter.update(listaHorario);
         });
@@ -144,6 +144,6 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     @Override
     protected void onStart() {
         super.onStart();
-        observerHorarioDia("seg");
+        observerHorarioDia(medico,"seg");
     }
 }

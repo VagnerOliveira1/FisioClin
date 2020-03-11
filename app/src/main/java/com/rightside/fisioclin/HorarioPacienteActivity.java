@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.android.material.tabs.TabLayout;
 import com.rightside.fisioclin.adapter.HorarioPacienteAdapter;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
@@ -28,6 +29,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         private HorarioPacienteAdapter mAdapter;
         private ViewModelHorarios viewModelHorarios;
         private ViewModelConsultaPaciente viewModelConsultaPaciente;
+        private Medico medico;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +48,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
 
             Intent intent = getIntent();
             User usuario = (User) intent.getSerializableExtra("usuario");
+            medico = (Medico) intent.getSerializableExtra("medico");
             TabLayout tabLayout = findViewById(R.id.tabLayout_navigation_paciente);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, usuario);
@@ -106,7 +109,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         }
 
     public void observerHorarioDia(String dia) {
-        viewModelHorarios.getHorarios(dia).observe(this, listaHorario -> {
+        viewModelHorarios.getHorarios(medico, dia).observe(this, listaHorario -> {
             this.list = listaHorario;
             mAdapter.update(list);
         });

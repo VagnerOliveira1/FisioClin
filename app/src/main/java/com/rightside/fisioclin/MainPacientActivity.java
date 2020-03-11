@@ -86,7 +86,9 @@ public class MainPacientActivity extends AppCompatActivity {
         cardViewNovaConsulta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               startActivity(new Intent(MainPacientActivity.this, ListaMedicosActivity.class));
+                Intent intent = new Intent(MainPacientActivity.this, ListaMedicosActivity.class);
+                intent.putExtra("usuario", usuario);
+               startActivity(intent);
 
             }
         });

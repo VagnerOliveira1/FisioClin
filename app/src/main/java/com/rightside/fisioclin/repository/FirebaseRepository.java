@@ -92,7 +92,7 @@ public class FirebaseRepository {
 
     public static CollectionReference getHorarios() {
 
-        return getDB().collection("horarios");
+        return getDB().collection("horariosids");
 
     }
 
@@ -136,8 +136,8 @@ public class FirebaseRepository {
     }
 
 
-    public LiveData<List<Horario>> getMutableLiveData(String diaSemana) {
-        getHorarios().document(diaSemana).collection("horariosID").addSnapshotListener((queryDocumentSnapshots, e) -> {
+    public LiveData<List<Horario>> getMutableLiveData(Medico medico, String diaSemana) {
+        getHorarios().document(medico.getId()).collection("diadasemana").document(diaSemana).collection("horarios").addSnapshotListener((queryDocumentSnapshots, e) -> {
             mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));
         });
         return mutableLiveDataHorarios;
@@ -195,6 +195,8 @@ public class FirebaseRepository {
 
         return mutableLiveDataMedicosList;
     }
+
+    //mudei a forma de salvar o horario para adicionarmos varios medicos ao mesmo app. ainda é necessario atualizar o delete do horario consulta, update do horario e delete horario;
 
 }
 
