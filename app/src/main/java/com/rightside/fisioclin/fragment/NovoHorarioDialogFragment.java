@@ -20,7 +20,9 @@ import com.github.rtoshiro.util.format.SimpleMaskFormatter;
 import com.github.rtoshiro.util.format.text.MaskTextWatcher;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Cidade_info;
 import com.rightside.fisioclin.models.Endereco;
+import com.rightside.fisioclin.models.Estado_info;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
@@ -43,8 +45,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
     private TextInputEditText textInputEditTextCep;
     private StickySwitch stickySwitchDomiciliar;
     private boolean domiciliar = false;
-
-
+    private Endereco endereco = new Endereco();
     public static NovoHorarioDialogFragment novoHorarioDialogFragment(Horario horario) {
         NovoHorarioDialogFragment novoHorarioDialogFragment = new NovoHorarioDialogFragment();
         Bundle bundle = new Bundle();
@@ -80,6 +81,11 @@ public class NovoHorarioDialogFragment extends DialogFragment {
         stickySwitchDomiciliar.setDirection(StickySwitch.Direction.RIGHT);
         stickySwitchDomiciliar.setActivated(true);
 
+        Cidade_info cidade_info = new Cidade_info();
+        Estado_info estado_inf = new Estado_info();
+
+        endereco.setCidade_info(cidade_info);
+        endereco.setEstado_info(estado_inf);
 
         SimpleMaskFormatter simpleMaskFormatter = new SimpleMaskFormatter("NNNNN-NNN");
         MaskTextWatcher maskTextWatcher = new MaskTextWatcher(textInputEditTextCep,simpleMaskFormatter);
@@ -98,7 +104,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
                         public void onResponse(Call<Endereco> call, Response<Endereco> response) {
                             if(response.isSuccessful()) {
                                 textViewCidadeResultado.setText(response.body().getCidade());
-                                horario.setEndereco(response.body());
+                                endereco = response.body();
                             } else {
                                 GeralUtils.mostraAlerta("Oops!, tivemos um problema", "Não conseguimos encontrar o cep informado.", getActivity());
                             }
@@ -138,12 +144,14 @@ public class NovoHorarioDialogFragment extends DialogFragment {
         buttonSalvarHorario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                horario.setEndereco(endereco);
+                endereco.setCidade(textViewCidadeResultado.getText().toString());
                 horario.setDomiciliar(domiciliar);
                 if(textViewCidadeResultado.getText().toString().equalsIgnoreCase("")) {
                     Toast.makeText(getContext(), "É necessário informar a cidade!", Toast.LENGTH_SHORT).show();
                     textInputEditTextCep.requestFocus();
                 } else {
-                    FirebaseRepository.saveHour(horario);
+                    FirebaseRepository.saveHourTeste(horario);
                     dismiss();
                 }
 

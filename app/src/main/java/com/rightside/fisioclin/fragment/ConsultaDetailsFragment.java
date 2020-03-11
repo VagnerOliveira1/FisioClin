@@ -22,13 +22,14 @@ import com.rightside.fisioclin.utils.GeralUtils;
 public class ConsultaDetailsFragment extends DialogFragment {
 
     private TextView textViewPacienteNome, textViewPacienteData, textViewPacienteTelefone, textViewPacienteEmail, textViewPacienteProfissao, textViewPacienteSexo, textViewQueixa;
-    private TextView textViewCidade, textViewBairro, textViewRua, textViewNumero;
+    private TextView textViewCidade, textViewBairro, textViewRua, textViewNumero, textViewConsultaTIpo;
     private ImageView imageViewPacienteSexo, imageViewFotoPaciente;
 
-    public static ConsultaDetailsFragment consultaDetailsFragment(Paciente paciente) {
+    public static ConsultaDetailsFragment consultaDetailsFragment(Paciente paciente, String domiciliar) {
         ConsultaDetailsFragment consultaDetailsFragment = new ConsultaDetailsFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("paciente", paciente);
+        bundle.putSerializable("domiciliar", domiciliar);
         consultaDetailsFragment.setArguments(bundle);
         return consultaDetailsFragment;
 
@@ -43,6 +44,7 @@ public class ConsultaDetailsFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         Paciente paciente = (Paciente) bundle.getSerializable("paciente");
+        String domiciliar = (String) bundle.get("domiciliar");
 
         textViewPacienteNome = view.findViewById(R.id.textView_detalhe_nome);
         textViewPacienteData = view.findViewById(R.id.textView_detalhes_data);
@@ -57,6 +59,9 @@ public class ConsultaDetailsFragment extends DialogFragment {
         textViewPacienteSexo = view.findViewById(R.id.textView_sexo);
         imageViewFotoPaciente = view.findViewById(R.id.imageViewDetailsConsulta);
         textViewQueixa = view.findViewById(R.id.textView_queixa);
+        textViewConsultaTIpo = view.findViewById(R.id.textView_consulta_details_tipo);
+
+        textViewConsultaTIpo.setText(domiciliar);
 
         if(paciente.getSexo().equalsIgnoreCase("feminino")) {
             imageViewPacienteSexo.setImageResource(R.drawable.ic_fem);

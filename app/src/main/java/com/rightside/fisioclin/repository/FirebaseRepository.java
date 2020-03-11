@@ -53,6 +53,10 @@ public class FirebaseRepository {
 
     }
 
+    public static void saveHourTeste(Horario horario) {
+        getDB().collection("horariosids").document(getIdPessoaLogada()).collection("diadasemana").document(horario.getDiaDaSemanaFormatado()).collection("horarios").document(horario.getId()).set(horario.map());
+    }
+
     public static Task<Void> saveDoctor(final Medico medico) {
         return getDB().collection("medicos").document(medico.getId()).set(medico.returnDoctor());
     }
