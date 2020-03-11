@@ -13,9 +13,9 @@ import java.util.Map;
 
 
 public class Estado_info implements Serializable {
-    private String area_km2;
-    private String codigo_ibge;
-    private String nome;
+    private String area_km2 = "";
+    private String codigo_ibge = "";
+    private String nome = "";
 
 
     // Getter Methods

@@ -81,7 +81,7 @@ public class HorarioPacienteAdapter extends RecyclerView.Adapter<HorarioPaciente
             holder.textViewNomeDoMedicoHorario.setTextColor(Color.BLACK);
             holder.textViewDomiciliar.setTextColor(Color.RED);
         }
-        holder.textViewDomiciliar.setText(GeralUtils.domiciliar(horario.isDomiciliar()));
+        holder.textViewDomiciliar.setText(GeralUtils.domiciliar(horario.isDomiciliar()) + " " + horario.getEndereco().getCidade() );
         holder.textViewTelefoneMedicoHorario.setText(horario.getMedico().getPhoneNumber());
         holder.textViewCrefito.setText("Crefito: "+ horario.getMedico().getCrefito());
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoDoMedicoHorario, horario.getMedico().getProfilePictureUrl());

@@ -32,7 +32,7 @@ public class Endereco implements Serializable {
     @JsonProperty("estado_info")
     private Estado_info estado_info;
     @JsonProperty("cep")
-    private String cep;
+    private String cep = "";
     @JsonProperty("cidade_info")
     private Cidade_info cidade_info;
     @JsonProperty("estado")
