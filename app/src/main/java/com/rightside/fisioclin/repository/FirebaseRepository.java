@@ -124,7 +124,7 @@ public class FirebaseRepository {
     }
 
     public static Task<Void> deleteHorarios(Horario horario) {
-        return getHorarios().document(horario.getDiaDaSemanaFormatado()).collection("horariosID").document(horario.getHorarioNumber()).delete();
+        return getHorarios().document(getIdPessoaLogada()).collection("diadasemana").document(horario.getDiaDaSemanaFormatado()).collection("horarios").document(horario.getHorarioNumber()).delete();
     }
 
     public static Task<Void> deleteConsulta(Consulta consulta) {
