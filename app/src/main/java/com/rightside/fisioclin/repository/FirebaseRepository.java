@@ -1,8 +1,10 @@
 package com.rightside.fisioclin.repository;
 
+import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
@@ -96,10 +98,16 @@ public class FirebaseRepository {
 
     }
 
-    public static Task<Void> saveConsulta(final Consulta consulta) {
-
+    public static Task<Void> saveConsultaUser(final Consulta consulta) {
         return getDB().collection("consultas").document(FirebaseRepository.getIdPessoaLogada()).set(consulta.returnConsulta());
+
     }
+
+    public static Task<Void> saveConsultaMedico(final Consulta consulta) {
+        return getDB().collection("consultas").document(consulta.getHorario().getMedico().getId()).set(consulta.returnConsulta());
+
+    }
+
 
     public static Task<Void> saveFicha(final Ficha ficha) {
         return getDB().collection("fichas").document(ficha.getPaciente().getId()).set(ficha.returnFicha());
