@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Consulta consulta = consultaList.get(position);
         Horario horario = consulta.getHorario();
+        Medico medico = horario.getMedico();
         DiagnosticoMedico diagnosticoMedico = consulta.getPaciente().getDiagnosticoMedico();
 
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
@@ -43,6 +47,8 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.textViewConsultaRealizaHora.setText(horario.getHoraFormatada());
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
         holder.textViewQueixaFicha.setText(diagnosticoMedico.getQueixa());
+        holder.textViewNomeMedico.setText(medico.getName());
+        GeralUtils.mostraImagemCircular(context, holder.fotoMedico, medico.getProfilePictureUrl());
 
 
     }
@@ -65,11 +71,13 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
 
 
         private TextView textViewConsultaRealizaHora,textViewConsultaRealizadaData, textViewConsultaRealizaDiaSemana,
-        textViewQueixaFicha;
+        textViewQueixaFicha, textViewNomeMedico;
+        private ImageView fotoMedico;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            textViewNomeMedico = itemView.findViewById(R.id.textViewMedicoNomeConsultaRealizada);
+            fotoMedico = itemView.findViewById(R.id.imageViewFotoMedicoFichaPaciente);
             textViewConsultaRealizadaData = itemView.findViewById(R.id.textView_consulta_realizada_data_paciente);
             textViewConsultaRealizaHora = itemView.findViewById(R.id.textView_consulta_realizada_hora_paciente);
             textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana_paciente);

@@ -10,6 +10,7 @@ public class Ficha implements Serializable {
     private List<Consulta> consulta = new ArrayList<>();
     private Paciente paciente;
 
+
     public Ficha() {
     }
 

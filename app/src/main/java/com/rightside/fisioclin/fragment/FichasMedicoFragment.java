@@ -9,6 +9,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +52,17 @@ public class FichasMedicoFragment extends DialogFragment {
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
         fichaMedicoAdapter = new FichaMedicoAdapter(getContext());
+
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerViewFichas.getContext(),
+                layoutManager.getOrientation());
+
+        recyclerViewFichas.addItemDecoration(dividerItemDecoration);;
+        recyclerViewFichas.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewFichas.setHasFixedSize(true);
+
         recyclerViewFichas.setAdapter(fichaMedicoAdapter);
 
 

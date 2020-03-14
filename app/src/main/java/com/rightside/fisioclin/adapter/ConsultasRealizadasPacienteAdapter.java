@@ -1,10 +1,13 @@
 package com.rightside.fisioclin.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,6 +16,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -37,16 +41,19 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Horario horario = consultaRealizadaList.get(position).getHorario();
         Consulta consulta  = consultaRealizadaList.get(position);
-        Paciente paciente = consultaRealizadaList.get(position).getPaciente();
+        Horario horario = consulta.getHorario();
+        Medico medico = horario.getMedico();
+        Paciente paciente = consulta.getPaciente();
         DiagnosticoMedico diagnosticoMedico = paciente.getDiagnosticoMedico();
+
 
         holder.textViewRecomendacao.setText(consulta.getComentarioPosConsulta());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewDia.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.textViewData.setText(horario.getDataFormatada());
         holder.textViewQueixa.setText(diagnosticoMedico.getQueixa());
+
     }
 
     @Override
@@ -56,7 +63,8 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
 
     class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView textViewData, textViewHora, textViewDia, textViewQueixa, textViewDiagnosticoMedico, textViewRecomendacao;
+        private TextView textViewData, textViewHora, textViewDia, textViewQueixa, textViewRecomendacao;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             textViewRecomendacao = itemView.findViewById(R.id.textViewRecomendacaoConsulta);

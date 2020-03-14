@@ -12,7 +12,6 @@ public class Consulta implements Serializable {
     }
     private String comentarioPosConsulta = "";
 
-
     public Consulta(Horario horario, Paciente paciente) {
         this.horario = horario;
         this.paciente = paciente;
