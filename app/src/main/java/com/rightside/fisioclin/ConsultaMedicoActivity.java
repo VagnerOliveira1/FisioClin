@@ -12,6 +12,7 @@ import android.os.Bundle;
 import com.rightside.fisioclin.adapter.ConsultaMedicoAdapter;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
@@ -52,7 +53,7 @@ public class ConsultaMedicoActivity extends FragmentActivity {
 
 
 
-       viewModelConsultas.getConsultas().observe(this, listaConsulta -> {
+       viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada()).observe(this, listaConsulta -> {
           this.consultas = listaConsulta;
            mAdapter.update(listaConsulta);
        });

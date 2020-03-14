@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData;
 
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Horario;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 
@@ -22,8 +23,8 @@ public class ViewModelConsultas extends AndroidViewModel {
         firebaseRepository = new FirebaseRepository();
     }
 
-    public LiveData<List<Consulta>> getConsultas() {
-        return firebaseRepository.getMutableLiveDataConsultas();
+    public LiveData<List<Consulta>> getConsultas(String idMedicoLogado) {
+        return firebaseRepository.getMutableLiveDataConsultas(idMedicoLogado);
 
     }
 

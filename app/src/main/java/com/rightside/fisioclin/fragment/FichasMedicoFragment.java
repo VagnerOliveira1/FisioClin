@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.adapter.FichaMedicoAdapter;
+import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
 /**
@@ -53,7 +54,7 @@ public class FichasMedicoFragment extends DialogFragment {
         recyclerViewFichas.setAdapter(fichaMedicoAdapter);
 
 
-        viewModelFichas.getFichas().observe(this, fichaList -> {
+        viewModelFichas.getFichas(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaList -> {
             fichaMedicoAdapter.update(fichaList);
         });
 

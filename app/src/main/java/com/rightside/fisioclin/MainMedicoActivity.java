@@ -85,7 +85,7 @@ public class MainMedicoActivity extends FragmentActivity {
 
 
 
-        viewModelConsultas.getConsultas().observe(this, consultaList -> {
+        viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada()).observe(this, consultaList -> {
 
             if(consultaList != null) {
                 textViewQuantidadeConsultasMarcadas.setText(String.valueOf(consultaList.size()));
@@ -97,7 +97,7 @@ public class MainMedicoActivity extends FragmentActivity {
 
         });
 
-        viewModelFichas.getFichas().observe(this, fichaList -> {
+        viewModelFichas.getFichas(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaList -> {
             if(fichaList != null) {
                 textViewConsultasFinalizadas.setText(String.valueOf(fichaList.size()));
             } else {
