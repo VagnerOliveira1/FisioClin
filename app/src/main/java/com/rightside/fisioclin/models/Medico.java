@@ -22,6 +22,10 @@ public class Medico extends User implements Serializable {
         setAdmin(true);
     }
 
+    public boolean contain(String text) {
+        return getName().toLowerCase().contains(text);
+    }
+
     @Override
     public void setAdmin(boolean admin) {
         super.setAdmin(admin);
