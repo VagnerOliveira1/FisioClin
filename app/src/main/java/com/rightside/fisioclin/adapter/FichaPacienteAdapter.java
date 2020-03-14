@@ -46,8 +46,9 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.textViewConsultaRealizadaData.setText(horario.getDataFormatada());
         holder.textViewConsultaRealizaHora.setText(horario.getHoraFormatada());
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
-        holder.textViewQueixaFicha.setText(diagnosticoMedico.getQueixa());
+        holder.textViewQueixaFicha.setText("Queixa: " + diagnosticoMedico.getQueixa());
         holder.textViewNomeMedico.setText(medico.getName());
+        holder.textViewComentarioMedico.setText("Evolução: " + consulta.getComentarioPosConsulta());
         GeralUtils.mostraImagemCircular(context, holder.fotoMedico, medico.getProfilePictureUrl());
 
 
@@ -71,7 +72,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
 
 
         private TextView textViewConsultaRealizaHora,textViewConsultaRealizadaData, textViewConsultaRealizaDiaSemana,
-        textViewQueixaFicha, textViewNomeMedico;
+        textViewQueixaFicha, textViewNomeMedico, textViewComentarioMedico;
         private ImageView fotoMedico;
 
         public ViewHolder(@NonNull View itemView) {
@@ -81,6 +82,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
             textViewConsultaRealizadaData = itemView.findViewById(R.id.textView_consulta_realizada_data_paciente);
             textViewConsultaRealizaHora = itemView.findViewById(R.id.textView_consulta_realizada_hora_paciente);
             textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana_paciente);
+            textViewComentarioMedico = itemView.findViewById(R.id.textViewcomentario_medico);
             textViewQueixaFicha = itemView.findViewById(R.id.textViewQueixaFicha_paciente);
 
 

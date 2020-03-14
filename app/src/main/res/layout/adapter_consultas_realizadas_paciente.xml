@@ -20,8 +20,8 @@
 
             <ImageView
                 android:id="@+id/imageViewFotoMedicoFichaPaciente"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_gravity="center"
                 android:layout_marginRight="10dp"
                 android:layout_weight="0"
@@ -41,6 +41,7 @@
                     android:layout_weight="1"
                     android:gravity="center"
                     android:text="TextView"
+                    android:textColor="#000000"
                     android:textSize="16sp" />
             </LinearLayout>
 
@@ -66,7 +67,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingLeft="5dp"
-                android:text="@string/consulta_realizada_data" />
+                android:text="@string/consulta_realizada_data"
+                android:textColor="#000000" />
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -82,7 +84,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingLeft="5dp"
-                android:text="@string/consultas_realizada_hora" />
+                android:text="@string/consultas_realizada_hora"
+                android:textColor="#000000" />
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -98,7 +101,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:paddingLeft="5dp"
-                android:text="@string/consulta_realizada_dia_semana" />
+                android:text="@string/consulta_realizada_dia_semana"
+                android:textColor="#000000" />
 
         </LinearLayout>
 
@@ -108,7 +112,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="Minha queixa foi:" />
+            android:text="Minha queixa foi:"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/textViewcomentario_medico"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="TextView"
+            android:textColor="#000000"
+            android:textSize="14sp" />
 
     </LinearLayout>
 

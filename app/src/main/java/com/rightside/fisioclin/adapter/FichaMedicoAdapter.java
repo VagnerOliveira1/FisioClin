@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.FichaDadosMedicoActivity;
@@ -24,6 +25,7 @@ import java.util.List;
 public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.ViewHolder> {
     private List<Ficha> fichaList;
     private Context context;
+
 
     public FichaMedicoAdapter(Context context) {
         this.context = context;

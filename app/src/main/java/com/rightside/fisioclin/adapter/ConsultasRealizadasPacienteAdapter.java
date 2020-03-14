@@ -48,11 +48,11 @@ public class ConsultasRealizadasPacienteAdapter extends RecyclerView.Adapter<Con
         DiagnosticoMedico diagnosticoMedico = paciente.getDiagnosticoMedico();
 
 
-        holder.textViewRecomendacao.setText(consulta.getComentarioPosConsulta());
+        holder.textViewRecomendacao.setText("Evolução: " + consulta.getComentarioPosConsulta());
         holder.textViewHora.setText(horario.getHoraFormatada());
         holder.textViewDia.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         holder.textViewData.setText(horario.getDataFormatada());
-        holder.textViewQueixa.setText(diagnosticoMedico.getQueixa());
+        holder.textViewQueixa.setText("Queixa: " + diagnosticoMedico.getQueixa());
 
     }
 

@@ -20,6 +20,10 @@ public class Ficha implements Serializable {
 
     }
 
+    public boolean contain(String text) {
+        return getPaciente().getName().toLowerCase().contains(text);
+    }
+
     public List<Consulta> getConsulta() {
         return consulta;
     }

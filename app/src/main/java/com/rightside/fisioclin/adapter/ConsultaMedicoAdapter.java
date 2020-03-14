@@ -60,7 +60,7 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
 
 
         holder.cardView.setOnClickListener(view -> {
-            ConsultaDetailsFragment.consultaDetailsFragment(paciente, domiciliar).show(fragmentActivity.getSupportFragmentManager(), "detalhes");
+            ConsultaDetailsFragment.consultaDetailsFragment(paciente, horario).show(fragmentActivity.getSupportFragmentManager(), "detalhes");
         });
 
        holder.cardView.setOnLongClickListener(view -> {
