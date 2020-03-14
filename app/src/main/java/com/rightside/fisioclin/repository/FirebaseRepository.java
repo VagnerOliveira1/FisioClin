@@ -10,6 +10,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
@@ -105,7 +106,7 @@ public class FirebaseRepository {
     }
 
     public static Task<Void> saveConsultaMedico(final Consulta consulta) {
-        return getDB().collection("consultas").document(consulta.getHorario().getMedico().getId()).collection("usuario").document(consulta.getPaciente().getId()).set(consulta.returnConsulta());
+        return getDB().collection("consultas").document(consulta.getHorario().getMedico().getId()).collection("diasemana").document(consulta.getHorario().getDiaDaSemanaFormatado()).collection("usuario").document(consulta.getPaciente().getId()).set(consulta.returnConsulta());
 
     }
 
@@ -141,7 +142,7 @@ public class FirebaseRepository {
     }
 
     public static Task<Void> concluirConsultaMedico(Consulta consulta) {
-        return getConsultas().document(consulta.getHorario().getMedico().getId()).collection("usuario").document(consulta.getPaciente().getId()).delete();
+        return getConsultas().document(consulta.getHorario().getMedico().getId()).collection("diasemana").document(consulta.getHorario().getDiaDaSemanaFormatado()).collection("usuario").document(consulta.getPaciente().getId()).delete();
     }
 
     public static Task<Void> concluirConsultaUsuario(Consulta consulta) {
@@ -160,8 +161,8 @@ public class FirebaseRepository {
         return mutableLiveDataHorarios;
     }
 
-    public LiveData<List<Consulta>> getMutableLiveDataConsultas(String idMedicoLogado) {
-        getConsultas().document(idMedicoLogado).collection("usuario").addSnapshotListener((queryDocumentSnapshots, e) -> {
+    public LiveData<List<Consulta>> getMutableLiveDataConsultas(String idMedicoLogado, String diaSemana) {
+        getConsultas().document(idMedicoLogado).collection("diasemana").document(diaSemana).collection("usuario").addSnapshotListener((queryDocumentSnapshots, e) -> {
             mutableLiveDataConsultas.setValue(queryDocumentSnapshots.toObjects(Consulta.class));
         });
         return mutableLiveDataConsultas;

@@ -151,7 +151,7 @@
                     android:id="@+id/textView12113"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/agendados" />
+                    android:text="Agendados hoje:" />
             </LinearLayout>
 
 
@@ -184,7 +184,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/encerrados" />
+                    android:text="Pacientes:" />
 
 
             </LinearLayout>

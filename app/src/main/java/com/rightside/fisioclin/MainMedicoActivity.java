@@ -38,8 +38,11 @@ import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainMedicoActivity extends FragmentActivity {
 
@@ -72,6 +75,10 @@ public class MainMedicoActivity extends FragmentActivity {
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
 
+        Date date = new Date();
+        String diaHoje = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(date).toLowerCase();
+
+        Log.d("diahoje", diaHoje);
 
         FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
             @Override
@@ -84,8 +91,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
 
-
-        viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada()).observe(this, consultaList -> {
+        viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada(), diaHoje).observe(this, consultaList -> {
 
             if(consultaList != null) {
                 textViewQuantidadeConsultasMarcadas.setText(String.valueOf(consultaList.size()));

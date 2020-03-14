@@ -23,9 +23,10 @@ public class ViewModelConsultas extends AndroidViewModel {
         firebaseRepository = new FirebaseRepository();
     }
 
-    public LiveData<List<Consulta>> getConsultas(String idMedicoLogado) {
-        return firebaseRepository.getMutableLiveDataConsultas(idMedicoLogado);
+    public LiveData<List<Consulta>> getConsultas(String idMedicoLogado, String diaSemana) {
+        return firebaseRepository.getMutableLiveDataConsultas(idMedicoLogado, diaSemana);
 
     }
+
 
 }
