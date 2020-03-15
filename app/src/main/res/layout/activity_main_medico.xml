@@ -184,7 +184,7 @@
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="7"
+        android:layout_weight="8"
         android:padding="14dp"
         app:alignmentMode="alignMargins"
         app:columnCount="2"
@@ -193,48 +193,6 @@
 
         <!--- Row 1 -->
         <!-- Columns 1 -->
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardview_horarios"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="1dp"
-            app:layout_column="0"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_access_time_black_24dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/horarios"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/card_view_minhas_consultas_medico"
@@ -270,6 +228,48 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:text="@string/Consultas"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardview_horarios"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_access_time_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:text="@string/horarios"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="17sp"
@@ -350,8 +350,47 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:src="@drawable/ic_folder"
                     android:text="Notificar"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_loja"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_store_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="Loja"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
                     android:textSize="17sp" />
