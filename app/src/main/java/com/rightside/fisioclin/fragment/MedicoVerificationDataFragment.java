@@ -21,6 +21,7 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.MainMedicoActivity;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Clinica;
 import com.rightside.fisioclin.models.Endereco;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -38,9 +39,11 @@ import retrofit2.Response;
 public class MedicoVerificationDataFragment extends DialogFragment {
 
     private MaskEditText maskEditTextTelefoneMedico;
-    private TextInputEditText textInputEditTextCrefitoMedico, textInputEditTextNomeExibicaoMedico, textInputEditTextCep;
+    private TextInputEditText textInputEditTextCrefitoMedico, textInputEditTextNomeExibicaoMedico, textInputEditTextCep, textInputEditTextBairro, textInputEditTextRua, textInputEditTextNomeClinica, textInputEditTextNumero;
     private Button buttonSalvarMedico, buttonBuscarCidade;
     private TextView textViewCidadeResultado;
+    private Clinica clinica = new Clinica();
+    private Endereco endereco = new Endereco();
 
     public static MedicoVerificationDataFragment medicoVerificationDataFragment(Medico medico) {
         MedicoVerificationDataFragment medicoVerificationDataFragment = new MedicoVerificationDataFragment();
@@ -61,8 +64,13 @@ public class MedicoVerificationDataFragment extends DialogFragment {
         textInputEditTextCrefitoMedico = view.findViewById(R.id.editCrefitoMedico);
         maskEditTextTelefoneMedico = view.findViewById(R.id.maskTelefoneMedico);
         textInputEditTextCep = view.findViewById(R.id.edit_text_cep_medico);
+        textInputEditTextBairro = view.findViewById(R.id.edit_text_bairro_medico);
+        textInputEditTextNomeClinica = view.findViewById(R.id.edit_text_nome_clinica);
+        textInputEditTextRua = view.findViewById(R.id.edit_text_rua_medico);
+        textInputEditTextNumero = view.findViewById(R.id.edit_text_numero_medico);
         buttonBuscarCidade = view.findViewById(R.id.button_buscar_cidade_medico);
         textViewCidadeResultado = view.findViewById(R.id.textView_medico_cidade_resultado);
+
 
         Bundle bundle = getArguments();
         Medico medico = (Medico) bundle.getSerializable("medico");
@@ -84,7 +92,11 @@ public class MedicoVerificationDataFragment extends DialogFragment {
                         public void onResponse(Call<Endereco> call, Response<Endereco> response) {
                             if(response.isSuccessful()) {
                                 textViewCidadeResultado.setText(response.body().getCidade());
-                                medico.setEndereco(response.body());
+                                textInputEditTextBairro.setText(response.body().getBairro());
+                                textInputEditTextRua.setText(response.body().getLogradouro());
+
+                                endereco = response.body();
+
                             } else {
                                 GeralUtils.mostraAlerta("Oops!, tivemos um problema", "Não conseguimos encontrar o cep informado.", getActivity());
                             }
@@ -110,11 +122,7 @@ public class MedicoVerificationDataFragment extends DialogFragment {
 
         buttonSalvarMedico.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                medico.setName(textInputEditTextNomeExibicaoMedico.getText().toString());
-                medico.setCrefito(textInputEditTextCrefitoMedico.getText().toString());
-                medico.setPhoneNumber(maskEditTextTelefoneMedico.getText().toString());
-
+            public void onClick(View view) { ;
                 if(GeralUtils.isCampoVazio(textInputEditTextCrefitoMedico.getText().toString())) {
                     textInputEditTextCrefitoMedico.requestFocus();
                     Toast.makeText(getActivity(), "Informe o crefito de registro", Toast.LENGTH_SHORT).show();
@@ -124,7 +132,33 @@ public class MedicoVerificationDataFragment extends DialogFragment {
                 } else if(textViewCidadeResultado.getText().toString().equalsIgnoreCase("")) {
                     textInputEditTextCep.requestFocus();
                     Toast.makeText(getActivity(), "Informe o cep para buscar a cidade:", Toast.LENGTH_SHORT).show();
-                } else {
+                }else if(GeralUtils.isCampoVazio(textInputEditTextNomeClinica.getText().toString())) {
+                    textInputEditTextNomeClinica.requestFocus();
+                    Toast.makeText(getActivity(), "Informe o nome do local em que atende", Toast.LENGTH_SHORT).show();
+                } else if (GeralUtils.isCampoVazio(textInputEditTextRua.getText().toString())) {
+                    textInputEditTextRua.requestFocus();
+                    Toast.makeText(getActivity(), "Informe a rua", Toast.LENGTH_SHORT).show();
+                }
+                else if (GeralUtils.isCampoVazio(textInputEditTextBairro.getText().toString())) {
+                    textInputEditTextBairro.requestFocus();
+                    Toast.makeText(getActivity(), "Informe o bairro", Toast.LENGTH_SHORT).show();
+                }  else if (GeralUtils.isCampoVazio(textInputEditTextNumero.getText().toString())) {
+                    textInputEditTextNumero.requestFocus();
+                    Toast.makeText(getActivity(), "Informe o número", Toast.LENGTH_SHORT).show();
+                } else{
+                    endereco.setBairro(textInputEditTextBairro.getText().toString());
+                    endereco.setCidade(textViewCidadeResultado.getText().toString());
+                    endereco.setLogradouro(textInputEditTextRua.getText().toString());
+                    endereco.setNumero(textInputEditTextNumero.getText().toString());
+                    clinica.setNome(textInputEditTextNomeClinica.getText().toString());
+                    clinica.setEndereco(endereco);
+                    medico.setClinica(clinica);
+                    medico.setEndereco(endereco);
+                    medico.setName(textInputEditTextNomeExibicaoMedico.getText().toString());
+                    medico.setCrefito(textInputEditTextCrefitoMedico.getText().toString());
+                    medico.setPhoneNumber(maskEditTextTelefoneMedico.getText().toString());
+
+
                     FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

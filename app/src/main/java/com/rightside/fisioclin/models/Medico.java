@@ -6,6 +6,7 @@ import java.util.HashMap;
 public class Medico extends User implements Serializable {
 
     private String crefito = "";
+    private Clinica clinica;
 
     public Medico() {
 
@@ -24,6 +25,14 @@ public class Medico extends User implements Serializable {
 
     public boolean contain(String text) {
         return getName().toLowerCase().contains(text);
+    }
+
+    public Clinica getClinica() {
+        return clinica;
+    }
+
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
     }
 
     @Override
@@ -48,7 +57,7 @@ public class Medico extends User implements Serializable {
         doctor.put("phoneNumber", getPhoneNumber());
         doctor.put("crefito", getCrefito());
         doctor.put("endereco", getEndereco());
-
+        doctor.put("clinica", getClinica());
 
         return doctor;
     }

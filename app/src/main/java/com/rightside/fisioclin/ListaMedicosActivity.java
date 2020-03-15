@@ -38,7 +38,7 @@ public class ListaMedicosActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("usuario");
-        medicosAdapter = new MedicosAdapter(this,user);
+        medicosAdapter = new MedicosAdapter(this,user, this);
         recyclerView.setAdapter(medicosAdapter);
         toolbar.setTitle("Escolha o fisioterapeuta:");
         toolbar.setTitleTextColor(Color.WHITE);
