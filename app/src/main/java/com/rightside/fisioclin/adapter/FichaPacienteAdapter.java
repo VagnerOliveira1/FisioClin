@@ -5,13 +5,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.fragment.AvaliarFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
 import com.rightside.fisioclin.models.Horario;
@@ -23,8 +26,10 @@ import java.util.List;
 public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdapter.ViewHolder> {
     private List<Consulta> consultaList;
     private Context context;
+    private FragmentActivity fragmentActivity;
 
-    public FichaPacienteAdapter(Context context){
+    public FichaPacienteAdapter(FragmentActivity fragmentActivity, Context context){
+        this.fragmentActivity = fragmentActivity;
         this.context = context;
     }
 
@@ -51,6 +56,12 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.textViewComentarioMedico.setText("Evolução: " + consulta.getComentarioPosConsulta());
         GeralUtils.mostraImagemCircular(context, holder.fotoMedico, medico.getProfilePictureUrl());
 
+        holder.buttonAvaliar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AvaliarFragment.avaliarFragment(medico).show(fragmentActivity.getSupportFragmentManager(), "avaliar");
+            }
+        });
 
     }
 
@@ -73,6 +84,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
 
         private TextView textViewConsultaRealizaHora,textViewConsultaRealizadaData, textViewConsultaRealizaDiaSemana,
         textViewQueixaFicha, textViewNomeMedico, textViewComentarioMedico;
+        private Button buttonAvaliar;
         private ImageView fotoMedico;
 
         public ViewHolder(@NonNull View itemView) {
@@ -84,6 +96,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
             textViewConsultaRealizaDiaSemana = itemView.findViewById(R.id.textView_consultas_realizada_dia_semana_paciente);
             textViewComentarioMedico = itemView.findViewById(R.id.textViewcomentario_medico);
             textViewQueixaFicha = itemView.findViewById(R.id.textViewQueixaFicha_paciente);
+            buttonAvaliar = itemView.findViewById(R.id.buttonAvaliar);
 
 
         }

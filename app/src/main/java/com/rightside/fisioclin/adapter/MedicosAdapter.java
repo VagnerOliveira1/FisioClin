@@ -3,6 +3,7 @@ package com.rightside.fisioclin.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.media.Rating;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -10,19 +11,23 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.HorarioPacienteActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.fragment.ComoChegarFragment;
 import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelPontuacao;
 
 import org.w3c.dom.Text;
 
@@ -53,6 +58,13 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         holder.textViewLocaldeAtendimento.setText(medico.getClinica().getEndereco().getCidade() + " " + medico.getClinica().getEndereco().getEstado());
         holder.textViewNomeMedico.setText(medico.getName());
         holder.textViewNomeClinica.setText(medico.getClinica().getNome());
+        holder.ratingBar.isIndicator();
+        if(medico.getPontuacao().getMedia() == 0) {
+            holder.ratingBar.setNumStars(1);
+        } else {
+            holder.ratingBar.setNumStars(medico.getPontuacao().getMedia());
+        }
+
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoMedico, medico.getProfilePictureUrl());
         holder.buttonComoChegar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +100,7 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         private TextView textViewNomeMedico, textViewLocaldeAtendimento, textViewNomeClinica;
         private Button buttonComoChegar;
         private ImageView imageViewFotoMedico;
+        private RatingBar ratingBar;
         public ViewHolderMedicos(@NonNull View itemView) {
             super(itemView);
             buttonComoChegar = itemView.findViewById(R.id.buttonComoChegar);
@@ -95,6 +108,7 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
             textViewLocaldeAtendimento = itemView.findViewById(R.id.textView_cidade_atendimento);
             textViewNomeClinica = itemView.findViewById(R.id.textView_nome_clinica);
             imageViewFotoMedico = itemView.findViewById(R.id.imageView_foto_medico);
+            ratingBar = itemView.findViewById(R.id.rating_medico);
         }
     }
 }

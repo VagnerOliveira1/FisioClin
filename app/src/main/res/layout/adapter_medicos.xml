@@ -78,10 +78,22 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Como chegar?" />
+
             </LinearLayout>
 
         </LinearLayout>
 
     </LinearLayout>
+
+    <RatingBar
+        android:id="@+id/rating_medico"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:numStars="5"
+        android:padding="0dp"
+        android:isIndicator="true"
+        android:rating="5"
+        android:stepSize="1" />
 
 </LinearLayout>

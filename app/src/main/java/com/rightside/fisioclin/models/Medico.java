@@ -7,6 +7,8 @@ public class Medico extends User implements Serializable {
 
     private String crefito = "";
     private Clinica clinica;
+    private Pontuacao pontuacao;
+
 
     public Medico() {
 
@@ -23,6 +25,15 @@ public class Medico extends User implements Serializable {
         setAdmin(true);
     }
 
+
+    public Pontuacao getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(Pontuacao pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
     public boolean contain(String text) {
         return getName().toLowerCase().contains(text);
     }
@@ -34,6 +45,9 @@ public class Medico extends User implements Serializable {
     public void setClinica(Clinica clinica) {
         this.clinica = clinica;
     }
+
+
+
 
     @Override
     public void setAdmin(boolean admin) {
@@ -58,6 +72,7 @@ public class Medico extends User implements Serializable {
         doctor.put("crefito", getCrefito());
         doctor.put("endereco", getEndereco());
         doctor.put("clinica", getClinica());
+        doctor.put("pontuacao", getPontuacao());
 
         return doctor;
     }

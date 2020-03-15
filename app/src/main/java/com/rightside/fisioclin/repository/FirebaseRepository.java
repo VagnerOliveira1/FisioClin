@@ -1,22 +1,20 @@
 package com.rightside.fisioclin.repository;
 
-import androidx.annotation.NonNull;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.models.User;
 
 import java.util.List;
@@ -41,6 +39,9 @@ public class FirebaseRepository {
     private MutableLiveData<List<User>> mutableLiveDataUsersList = new MutableLiveData<>();
 
     private MutableLiveData<List<Medico>> mutableLiveDataMedicosList = new MutableLiveData<>();
+
+    private MutableLiveData<Pontuacao> mutableLiveDataPontuacao = new MutableLiveData<>();
+    private MutableLiveData<Pontuacao> mutableLiveDataPontuacaoPaciente = new MutableLiveData<>();
 
 
     public static FirebaseFirestore getDB() {
@@ -128,6 +129,10 @@ public class FirebaseRepository {
 
     }
 
+    public static Task<Void> atualizaPontoMedico(Medico medico, Pontuacao pontuacao) {
+        return getMedico(medico.getId()).update(medico.returnDoctor());
+    }
+
     public static Task<Void> atualizaPaciente(Paciente paciente, Consulta consulta) {
         return getPaciente(paciente.getId()).update(paciente.returnPacient());
     }
@@ -149,11 +154,41 @@ public class FirebaseRepository {
         return getConsultas().document(consulta.getPaciente().getId()).delete();
     }
 
+    public static Task<Void> savePontuacao(Medico medico, Pontuacao pontuacao) {
+       return getDB().collection("pontuacao").document(medico.getId()).set(pontuacao.returnPontuacao());
+    }
+
+    public static Task<Void> savePontuacaoPaciente(Medico medico, Pontuacao pontuacao, String idPaciente) {
+        return getDB().collection("pontuacao").document(idPaciente).collection("medico").document(medico.getId()).set(pontuacao.returnPontuacao());
+    }
+
+    public static DocumentReference getPontuacao(Medico medico) {
+        return getDB().collection("pontuacao").document(medico.getId());
+    }
+
+    public static DocumentReference getPontuacaoPaciente(Medico medico, String id) {
+        return getDB().collection("pontuacao").document(id).collection("medico").document(medico.getId());
+    }
+
     public static CollectionReference getFichas() {
         return getDB().collection("fichas");
     }
 
+    public LiveData<Pontuacao> getMutableLiveDataPontuacaoGeral (Medico medico) {
+        getPontuacao(medico).addSnapshotListener((documentSnapshot, e) -> {
+            mutableLiveDataPontuacao.setValue(documentSnapshot.toObject(Pontuacao.class));
+        });
 
+        return mutableLiveDataPontuacao;
+    }
+
+    public LiveData<Pontuacao> getMutableLiveDataPontuacaoPaciente (String id, Medico medico) {
+        getPontuacaoPaciente(medico, id).addSnapshotListener((documentSnapshot, e) -> {
+            mutableLiveDataPontuacaoPaciente.setValue(documentSnapshot.toObject(Pontuacao.class));
+        });
+
+        return mutableLiveDataPontuacaoPaciente;
+    }
     public LiveData<List<Horario>> getMutableLiveData(Medico medico, String diaSemana) {
         getHorarios().document(medico.getId()).collection("diadasemana").document(diaSemana).collection("horarios").addSnapshotListener((queryDocumentSnapshots, e) -> {
             mutableLiveDataHorarios.setValue(queryDocumentSnapshots.toObjects(Horario.class));

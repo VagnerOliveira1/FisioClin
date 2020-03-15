@@ -17,6 +17,7 @@ import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
+import com.rightside.fisioclin.viewmodel.ViewModelPontuacao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,11 +39,13 @@ public class ListaMedicosActivity extends AppCompatActivity {
         recyclerView.addItemDecoration(dividerItemDecoration);
         Intent intent = getIntent();
         User user = (User) intent.getSerializableExtra("usuario");
-        medicosAdapter = new MedicosAdapter(this,user, this);
-        recyclerView.setAdapter(medicosAdapter);
         toolbar.setTitle("Escolha o fisioterapeuta:");
         toolbar.setTitleTextColor(Color.WHITE);
+        medicosAdapter = new MedicosAdapter(this,user, this);
+        recyclerView.setAdapter(medicosAdapter);
+
         ViewModelMedicos viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
+
 
        viewModelMedicos.getMedicos().observe(this, medicoList -> {
            this.medicoList = medicoList;

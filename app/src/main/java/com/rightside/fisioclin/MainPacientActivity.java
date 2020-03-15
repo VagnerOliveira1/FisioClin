@@ -125,7 +125,7 @@ public class MainPacientActivity extends AppCompatActivity {
             if(ficha == null) {
                 GeralUtils.mostraAlerta("Oops", "Você ainda não possui uma ficha!", this);
             } else {
-                FichaPacienteFragment.novaInstancia(ficha).show(getSupportFragmentManager(), "Minha Ficha");
+                FichaPacienteFragment.novaInstancia(ficha).setActivity(this, this).show(getSupportFragmentManager(), "Minha Ficha");
             }
 
         });

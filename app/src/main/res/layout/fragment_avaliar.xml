@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".fragment.AvaliarFragment">
+
+    <TextView
+        android:id="@+id/textView16"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Avaliar profissional:"
+        android:textColor="#000000"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView17"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Considere 1 estrela como muito ruim e 5 como excelente"
+        android:textColor="#000000" />
+
+    <RatingBar
+        android:id="@+id/smile_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:numStars="5"
+        android:padding="0dp"
+        android:rating="5"
+        android:stepSize="1" />
+
+    <Button
+        android:id="@+id/avaliarMedicoButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Avaliar" />
+</LinearLayout>

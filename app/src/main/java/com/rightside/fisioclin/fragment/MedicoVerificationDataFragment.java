@@ -24,6 +24,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Clinica;
 import com.rightside.fisioclin.models.Endereco;
 import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.ws.SetupREST;
@@ -157,6 +158,7 @@ public class MedicoVerificationDataFragment extends DialogFragment {
                     medico.setName(textInputEditTextNomeExibicaoMedico.getText().toString());
                     medico.setCrefito(textInputEditTextCrefitoMedico.getText().toString());
                     medico.setPhoneNumber(maskEditTextTelefoneMedico.getText().toString());
+                    medico.setPontuacao(new Pontuacao());
 
 
                     FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
