@@ -59,7 +59,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.buttonAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AvaliarFragment.avaliarFragment(medico).show(fragmentActivity.getSupportFragmentManager(), "avaliar");
+                AvaliarFragment.avaliarFragment(consulta).show(fragmentActivity.getSupportFragmentManager(), "avaliar");
             }
         });
 

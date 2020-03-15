@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 
+import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -27,7 +28,7 @@ public class ViewModelPontuacao extends AndroidViewModel {
         return firebaseRepository.getMutableLiveDataPontuacaoGeral(medico);
     }
 
-    public LiveData<Pontuacao> getPontuacaoPaciente(Medico medico, String paciente) {
-        return firebaseRepository.getMutableLiveDataPontuacaoPaciente(paciente, medico);
+    public LiveData<Pontuacao> getPontuacaoPaciente(Consulta consulta, String paciente) {
+        return firebaseRepository.getMutableLiveDataPontuacaoPaciente(paciente, consulta);
     }
 }

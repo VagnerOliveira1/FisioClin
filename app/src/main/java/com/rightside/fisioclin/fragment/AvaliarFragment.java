@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -35,11 +36,11 @@ public class AvaliarFragment extends DialogFragment {
     private Pontuacao pontuacao, pontuacaoPaciente;
     private ViewModelPontuacao viewModelPontuacao, viewModelPontuacaoPaciente;
 
-    public static AvaliarFragment avaliarFragment(Medico medico) {
+    public static AvaliarFragment avaliarFragment(Consulta consulta) {
         // Required empty public constructor
         AvaliarFragment avaliarFragment = new AvaliarFragment();
         Bundle bundle = new Bundle();
-        bundle.putSerializable("medico", medico);
+        bundle.putSerializable("medico", consulta);
         avaliarFragment.setArguments(bundle);
         return avaliarFragment;
     }
@@ -56,9 +57,10 @@ public class AvaliarFragment extends DialogFragment {
         viewModelPontuacao = ViewModelProviders.of(this).get(ViewModelPontuacao.class);
         viewModelPontuacaoPaciente = ViewModelProviders.of(this).get(ViewModelPontuacao.class);
         Bundle bundle = getArguments();
-        Medico medico = (Medico) bundle.get("medico");
+        Consulta consulta = (Consulta) bundle.get("medico");
+        medico = consulta.getHorario().getMedico();
 
-        viewModelPontuacaoPaciente.getPontuacaoPaciente(medico, FirebaseRepository.getIdPessoaLogada()).observe(this, pontuacaopaciente -> {
+        viewModelPontuacaoPaciente.getPontuacaoPaciente(consulta, FirebaseRepository.getIdPessoaLogada()).observe(this, pontuacaopaciente -> {
             this.pontuacaoPaciente = pontuacaopaciente;
         });
 
@@ -74,10 +76,10 @@ public class AvaliarFragment extends DialogFragment {
             @Override
             public void onClick(View view) {
 
-               // if(pontuacaoPaciente != null) {
-                  //  GeralUtils.mostraAlerta("Erro ao votar", "Só é possivel votar uma vez em cada profissional", getContext());
-                    //dismiss();
-                //}else  {
+            if(pontuacaoPaciente!= null) {
+              GeralUtils.mostraAlerta("Erro ao votar", "Só é possivel votar uma vez por consulta", getContext());
+                 dismiss();
+             }else  {
 
 
                 int voto = (int) ratingBar.getRating();
@@ -97,7 +99,7 @@ public class AvaliarFragment extends DialogFragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful() || task.isComplete()) {
-                                FirebaseRepository.savePontuacaoPaciente(medico, pontuacao, FirebaseRepository.getIdPessoaLogada());
+                                FirebaseRepository.savePontuacaoPaciente(consulta, pontuacao, FirebaseRepository.getIdPessoaLogada());
                                 FirebaseRepository.atualizaPontoMedico(medico, pontuacao);
                             }
 
@@ -108,7 +110,7 @@ public class AvaliarFragment extends DialogFragment {
                     Toast.makeText(getContext(), "Você deve escolher um valor para avaliar", Toast.LENGTH_SHORT).show();
                 }
             }
-           // }
+            }
         });
 
         return view;

@@ -158,16 +158,16 @@ public class FirebaseRepository {
        return getDB().collection("pontuacao").document(medico.getId()).set(pontuacao.returnPontuacao());
     }
 
-    public static Task<Void> savePontuacaoPaciente(Medico medico, Pontuacao pontuacao, String idPaciente) {
-        return getDB().collection("pontuacao").document(idPaciente).collection("medico").document(medico.getId()).set(pontuacao.returnPontuacao());
+    public static Task<Void> savePontuacaoPaciente(Consulta consulta, Pontuacao pontuacao, String idPaciente) {
+        return getDB().collection("pontuacao").document(idPaciente).collection("medico").document(consulta.getHorario().getMedico().getId()).collection("consulta").document(consulta.getHorario().getHorarioNumber()).set(pontuacao.returnPontuacao());
     }
 
     public static DocumentReference getPontuacao(Medico medico) {
         return getDB().collection("pontuacao").document(medico.getId());
     }
 
-    public static DocumentReference getPontuacaoPaciente(Medico medico, String id) {
-        return getDB().collection("pontuacao").document(id).collection("medico").document(medico.getId());
+    public static DocumentReference getPontuacaoPaciente(Consulta consulta, String id) {
+        return getDB().collection("pontuacao").document(id).collection("medico").document(consulta.getHorario().getMedico().getId()).collection("consulta").document(consulta.getHorario().getHorarioNumber());
     }
 
     public static CollectionReference getFichas() {
@@ -182,8 +182,8 @@ public class FirebaseRepository {
         return mutableLiveDataPontuacao;
     }
 
-    public LiveData<Pontuacao> getMutableLiveDataPontuacaoPaciente (String id, Medico medico) {
-        getPontuacaoPaciente(medico, id).addSnapshotListener((documentSnapshot, e) -> {
+    public LiveData<Pontuacao> getMutableLiveDataPontuacaoPaciente (String id, Consulta consulta) {
+        getPontuacaoPaciente(consulta, id).addSnapshotListener((documentSnapshot, e) -> {
             mutableLiveDataPontuacaoPaciente.setValue(documentSnapshot.toObject(Pontuacao.class));
         });
 
