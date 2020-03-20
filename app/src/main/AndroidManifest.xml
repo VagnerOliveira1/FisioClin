@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ListaMedicosActivity"></activity>
+        <activity android:name=".LojaActivity"></activity>
+        <activity android:name=".ListaMedicosActivity" />
         <activity android:name=".FichaDadosMedicoActivity" />
         <activity android:name=".HorarioPacienteActivity" />
         <activity android:name=".ConsultaMedicoActivity" />

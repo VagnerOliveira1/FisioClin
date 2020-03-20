@@ -23,6 +23,7 @@ import com.rightside.fisioclin.MainMedicoActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Clinica;
 import com.rightside.fisioclin.models.Endereco;
+import com.rightside.fisioclin.models.FisioPoints;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -45,6 +46,7 @@ public class MedicoVerificationDataFragment extends DialogFragment {
     private TextView textViewCidadeResultado;
     private Clinica clinica = new Clinica();
     private Endereco endereco = new Endereco();
+    private FisioPoints fisioPoints = new FisioPoints();
 
     public static MedicoVerificationDataFragment medicoVerificationDataFragment(Medico medico) {
         MedicoVerificationDataFragment medicoVerificationDataFragment = new MedicoVerificationDataFragment();
@@ -159,6 +161,7 @@ public class MedicoVerificationDataFragment extends DialogFragment {
                     medico.setCrefito(textInputEditTextCrefitoMedico.getText().toString());
                     medico.setPhoneNumber(maskEditTextTelefoneMedico.getText().toString());
                     medico.setPontuacao(new Pontuacao());
+                   medico.setFisioPoints(fisioPoints);
 
 
                     FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {

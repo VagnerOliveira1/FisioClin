@@ -47,7 +47,7 @@ import java.util.Locale;
 public class MainMedicoActivity extends FragmentActivity {
 
     private ImageView imageViewDoctorPicture;
-    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification;
+    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification, cardViewLoja;
     private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas;
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
@@ -66,6 +66,7 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewPushNotification = findViewById(R.id.card_view_push);
         cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
+        cardViewLoja = findViewById(R.id.card_view_loja);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
 
@@ -132,6 +133,12 @@ public class MainMedicoActivity extends FragmentActivity {
 
         cardViewFichasMedico.setOnClickListener(view -> {
            FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
+        });
+
+        cardViewLoja.setOnClickListener(view -> {
+            Intent intent = new Intent(MainMedicoActivity.this, LojaActivity.class);
+            intent.putExtra("medico", medico);
+            startActivity(intent);
         });
 
 

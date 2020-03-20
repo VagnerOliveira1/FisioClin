@@ -2,7 +2,9 @@ package com.rightside.fisioclin.utils;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
 import android.view.Gravity;
@@ -29,9 +31,11 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.text.ParseException;
@@ -97,7 +101,7 @@ public class GeralUtils {
         }
     }
 
-    public static void gerarRelatorio(Paciente paciente, List<Consulta> consultas) {
+    public static void gerarRelatorio(Context context, Paciente paciente, List<Consulta> consultas, Medico medico) {
         Document doc = null;
         OutputStream os = null;
         String relatorio = Environment.getExternalStorageDirectory().toString() + "/relatorio.pdf";
@@ -107,15 +111,18 @@ public class GeralUtils {
             os = new FileOutputStream(relatorio);
             PdfWriter.getInstance(doc, os);
             doc.open();
-            Font f = new Font(Font.FontFamily.TIMES_ROMAN,50.0f,Font.UNDERLINE, BaseColor.RED);
-            doc.addTitle("Fisio Clin - Ficha de acompanhamento");
-            Paragraph titulo = new Paragraph("Fisio Clin - Ficha de acompanhamento ", f);
+            Font b = new Font(Font.FontFamily.HELVETICA, 15.0f, Font.UNDERLINE, BaseColor.RED);
+            Font f = new Font(Font.FontFamily.HELVETICA,10.0f,Font.UNDERLINE, BaseColor.BLACK);
+            doc.addTitle("FisioApp - Ficha de acompanhamento");
+            Paragraph titulo = new Paragraph("Fisio Clin - Ficha de acompanhamento ", b);
             titulo.setAlignment(Paragraph.ALIGN_CENTER);
             Paragraph nome = new Paragraph("Nome: " + paciente.getName() , f);
             Paragraph telefone = new Paragraph("Telefone: " + paciente.getPhoneNumber() , f);
             Paragraph data = new Paragraph("Data de nascimento: " + paciente.getDataNascimento(), f);
             Paragraph profissao  = new Paragraph("Profissão: " + paciente.getProfissao(), f);
             Paragraph email  = new Paragraph("Email: " + paciente.getEmail(), f);
+
+
             doc.add(titulo);
             doc.add(nome);
             doc.add(telefone);
@@ -127,12 +134,15 @@ public class GeralUtils {
             doc.add(evolucao);
 
             for (Consulta consulta : consultas) {
-                Paragraph horario = new Paragraph("Data: " + consulta.getHorario().getDataFormatada() + " Hora: " + consulta.getHorario().getHoraFormatada() + " Dia: " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado()));
-                Paragraph comentario =  new Paragraph("Evolução: " + consulta.getComentarioPosConsulta());
-                Paragraph queixa = new Paragraph("Queixa: " + consulta.getPaciente().getDiagnosticoMedico().getQueixa());
+                Paragraph horario = new Paragraph("Data: " + consulta.getHorario().getDataFormatada() + " Hora: " + consulta.getHorario().getHoraFormatada() + " Dia: " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado()) , f);
+                Paragraph comentario =  new Paragraph("Evolução: " + consulta.getComentarioPosConsulta(), f);
+                Paragraph queixa = new Paragraph("Queixa: " + consulta.getPaciente().getDiagnosticoMedico().getQueixa(), f);
+                Paragraph quebralinha = new Paragraph(" ");
                 doc.add(queixa);
                 doc.add(horario);
                 doc.add(comentario);
+                doc.add(quebralinha);
+
             }
             doc.close();
             os.close();
@@ -140,6 +150,7 @@ public class GeralUtils {
         }catch (Exception e) {
 
         }
+
     }
 
 }

@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import com.rightside.fisioclin.adapter.ConsultasRealizadasPacienteAdapter;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -56,9 +57,10 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
 
         Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
         List<Consulta> consultasList = (List<Consulta>) intent.getSerializableExtra("consultaList");
+        Medico medico = consultasList.get(0).getHorario().getMedico();
 
         buttonRelatorio.setOnClickListener(view -> {
-            GeralUtils.gerarRelatorio(paciente, consultasList);
+            GeralUtils.gerarRelatorio(this,paciente, consultasList, medico);
         });
 
         textViewPacienteNome.setText(paciente.getName());

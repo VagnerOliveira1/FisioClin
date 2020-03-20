@@ -8,6 +8,7 @@ public class Medico extends User implements Serializable {
     private String crefito = "";
     private Clinica clinica;
     private Pontuacao pontuacao;
+    private FisioPoints fisioPoints;
 
 
     public Medico() {
@@ -46,8 +47,13 @@ public class Medico extends User implements Serializable {
         this.clinica = clinica;
     }
 
+    public FisioPoints getFisioPoints() {
+        return fisioPoints;
+    }
 
-
+    public void setFisioPoints(FisioPoints fisioPoints) {
+        this.fisioPoints = fisioPoints;
+    }
 
     @Override
     public void setAdmin(boolean admin) {
@@ -73,7 +79,7 @@ public class Medico extends User implements Serializable {
         doctor.put("endereco", getEndereco());
         doctor.put("clinica", getClinica());
         doctor.put("pontuacao", getPontuacao());
-
+        doctor.put("fisiopoints", getFisioPoints());
         return doctor;
     }
 
