@@ -1,5 +1,6 @@
 package com.rightside.fisioclin.repository;
 
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -8,7 +9,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
@@ -39,6 +43,7 @@ public class FirebaseRepository {
     private MutableLiveData<List<User>> mutableLiveDataUsersList = new MutableLiveData<>();
 
     private MutableLiveData<List<Medico>> mutableLiveDataMedicosList = new MutableLiveData<>();
+    private MutableLiveData<Medico> mutableLiveDataMedico = new MutableLiveData<>();
 
     private MutableLiveData<Pontuacao> mutableLiveDataPontuacao = new MutableLiveData<>();
     private MutableLiveData<Pontuacao> mutableLiveDataPontuacaoPaciente = new MutableLiveData<>();
@@ -79,6 +84,10 @@ public class FirebaseRepository {
     }
 
     public static CollectionReference getMedicos() {
+        return getDB().collection("medicos");
+    }
+
+    public static CollectionReference getMedico() {
         return getDB().collection("medicos");
     }
 
@@ -258,6 +267,13 @@ public class FirebaseRepository {
         });
 
         return mutableLiveDataMedicosList;
+    }
+
+    public LiveData<Medico> getMutableLiveDataMedico() {
+        getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener((documentSnapshot, e) -> {
+            mutableLiveDataMedico.setValue(documentSnapshot.toObject(Medico.class));
+        });
+        return mutableLiveDataMedico;
     }
 
     //mudei a forma de salvar o horario para adicionarmos varios medicos ao mesmo app. ainda é necessario atualizar o delete do horario consulta, update do horario e delete horario;

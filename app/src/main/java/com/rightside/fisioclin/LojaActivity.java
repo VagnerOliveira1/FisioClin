@@ -2,6 +2,7 @@ package com.rightside.fisioclin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Produto;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +38,8 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
     private Button buttonFisioPoints;
     private Medico medico;
     private FisioPoints fisioPoints;
+    private ViewModelMedicos viewModelMedicos;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,15 +49,17 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         toolbar.setTitle("Loja");
         toolbar.setTitleTextColor(Color.WHITE);
         buttonFisioPoints = findViewById(R.id.button_adquirir_fisio_points);
-        Intent intent = getIntent();
-        medico = (Medico) intent.getSerializableExtra("medic");
+        viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
         MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
-        fisioPoints = medico.getFisioPoints();
-        buttonFisioPoints.setEnabled(false);
-        Log.d("medico", medico.getName());
         RecyclerView recyclerView = findViewById(R.id.recyclerview_loja);
+
+        viewModelMedicos.getMedico().observe(this, medico1 -> {
+            medico = medico1;
+            fisioPoints = medico.getFisioPoints();
+            textViewFisioPoints.setText("Você possui " + String.valueOf(medico1.getFisioPoints().getPoints()) + " FisioPoints");
+        });
 
         Produto notificacao = new Produto();
         notificacao.setNome("1 - Notificação");
@@ -68,27 +74,22 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         notificacao.setPreco(5550);
 
         List<Produto> produtos = new ArrayList<>();
-       produtos.add(notificacao);
-       produtos.add(notificacoestres);
-       produtos.add(notificacoesdez);
-
+        produtos.add(notificacao);
+        produtos.add(notificacoestres);
+        produtos.add(notificacoesdez);
 
 
         ProdutosAdapter produtosAdapter = new ProdutosAdapter(produtos);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-       recyclerView.setAdapter(produtosAdapter);
+        recyclerView.setAdapter(produtosAdapter);
         mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
-       buttonFisioPoints.setOnClickListener(view -> {
-           buttonFisioPoints.setEnabled(false);
-           if(mRewardedVideoAd.isLoaded()) {
-               mRewardedVideoAd.show();
-           }
-       });
-
-
-       textViewFisioPoints.setText(String.valueOf("Você possui " + medico.getFisioPoints().getPoints()) + " FisioPoints");
-
+        buttonFisioPoints.setOnClickListener(view -> {
+            buttonFisioPoints.setEnabled(false);
+            if (mRewardedVideoAd.isLoaded()) {
+                mRewardedVideoAd.show();
+            }
+        });
 
 
     }
@@ -96,7 +97,7 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     public void onRewardedVideoAdLoaded() {
-     buttonFisioPoints.setEnabled(true);
+        buttonFisioPoints.setEnabled(true);
     }
 
     @Override
@@ -117,10 +118,9 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-      fisioPoints.setPoints(medico.getFisioPoints().getPoints() + 150);
-      medico.setFisioPoints(fisioPoints);
+        fisioPoints.setPoints(medico.getFisioPoints().getPoints() + 150);
+        medico.setFisioPoints(fisioPoints);
         FirebaseRepository.atualizaPontoMedico(medico);
-
         GeralUtils.mostraAlerta("Uhuuul!", "Você ganhou +150 FisioPoints!", this);
     }
 

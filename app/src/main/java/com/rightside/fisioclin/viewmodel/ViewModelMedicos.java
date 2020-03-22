@@ -25,4 +25,8 @@ public class ViewModelMedicos extends AndroidViewModel {
         return firebaseRepository.getMutableLiveDataMedicos();
     }
 
+    public LiveData<Medico> getMedico() {
+        return firebaseRepository.getMutableLiveDataMedico();
+    }
+
 }

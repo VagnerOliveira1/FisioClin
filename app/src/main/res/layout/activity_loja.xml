@@ -21,14 +21,16 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Você possui 15 FisioPoints."
-            android:textColor="#000000" />
+            android:textColor="#000000"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/textView20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Para você desbloquear recursos no aplicativo, é necessario compra-los com FisioPoints. \nFisioPoints é nossa moeda virtual, você pode assistir um anuncio para ganha-lá e assim comprar os recursos."
-            android:textColor="#000000" />
+            android:text="Para você desbloquear recursos no aplicativo, é necessario comprá-los com FisioPoints. \nFisioPoints é a nossa moeda virtual, você pode assistir um anuncio para ganha-lá e assim comprar os recursos abaixo."
+            android:textColor="#000000"
+            android:textSize="17sp" />
 
         <Button
             android:id="@+id/button_adquirir_fisio_points"
@@ -37,6 +39,15 @@
             android:layout_gravity="center"
             android:gravity="center"
             android:text="Adquirir FisioPoints" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="Produtos:"
+            android:textColor="#000000"
+            android:textSize="18sp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerview_loja"

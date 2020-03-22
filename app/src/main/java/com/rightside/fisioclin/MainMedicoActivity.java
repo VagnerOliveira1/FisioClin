@@ -36,6 +36,7 @@ import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
+import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
 import java.text.SimpleDateFormat;
@@ -52,6 +53,7 @@ public class MainMedicoActivity extends FragmentActivity {
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
+    private ViewModelMedicos viewModelMedico;
     private static final int REQUEST_PERMISSAO_ARQUIVOS = 1;
     private List<Consulta> consultaList = new ArrayList<>();
 
@@ -74,26 +76,20 @@ public class MainMedicoActivity extends FragmentActivity {
 
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
+        viewModelMedico = ViewModelProviders.of(this).get(ViewModelMedicos.class);
 
 
         Date date = new Date();
         String diaHoje = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(date).toLowerCase();
 
-        Log.d("diahoje", diaHoje);
 
-        FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if(documentSnapshot != null && documentSnapshot.exists()) {
-                     medico = documentSnapshot.toObject(Medico.class);
-                    alteraInformacaoPerfil(medico);
-                }
-            }
+        viewModelMedico.getMedico().observe(this, medico1 -> {
+            medico = medico1;
+            alteraInformacaoPerfil(medico);
         });
 
 
         viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada(), diaHoje).observe(this, consultaList -> {
-
             if(consultaList != null) {
                 textViewQuantidadeConsultasMarcadas.setText(String.valueOf(consultaList.size()));
                 this.consultaList = consultaList;
@@ -101,7 +97,6 @@ public class MainMedicoActivity extends FragmentActivity {
                 textViewQuantidadeConsultasMarcadas.setText("0");
 
             }
-
         });
 
         viewModelFichas.getFichas(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaList -> {
@@ -136,9 +131,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewLoja.setOnClickListener(view -> {
-            Intent intent = new Intent(MainMedicoActivity.this, LojaActivity.class);
-            intent.putExtra("medic", medico);
-            startActivity(intent);
+            startActivity(new Intent(MainMedicoActivity.this, LojaActivity.class));
         });
 
 
