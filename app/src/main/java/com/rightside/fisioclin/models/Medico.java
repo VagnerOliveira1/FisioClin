@@ -9,6 +9,8 @@ public class Medico extends User implements Serializable {
     private Clinica clinica;
     private Pontuacao pontuacao;
     private FisioPoints fisioPoints;
+    private int notificacao = 0;
+    private int relatorio = 0;
 
 
     public Medico() {
@@ -26,6 +28,21 @@ public class Medico extends User implements Serializable {
         setAdmin(true);
     }
 
+    public int getNotificacao() {
+        return notificacao;
+    }
+
+    public void setNotificacao(int notificacao) {
+        this.notificacao = notificacao;
+    }
+
+    public int getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(int relatorio) {
+        this.relatorio = relatorio;
+    }
 
     public Pontuacao getPontuacao() {
         return pontuacao;
@@ -79,7 +96,9 @@ public class Medico extends User implements Serializable {
         doctor.put("endereco", getEndereco());
         doctor.put("clinica", getClinica());
         doctor.put("pontuacao", getPontuacao());
-        doctor.put("fisiopoints", getFisioPoints());
+        doctor.put("relatorio", getRelatorio());
+        doctor.put("notificacao", getNotificacao());
+        doctor.put("fisioPoints", getFisioPoints());
         return doctor;
     }
 

@@ -100,7 +100,7 @@ public class AvaliarFragment extends DialogFragment {
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful() || task.isComplete()) {
                                 FirebaseRepository.savePontuacaoPaciente(consulta, pontuacao, FirebaseRepository.getIdPessoaLogada());
-                                FirebaseRepository.atualizaPontoMedico(medico, pontuacao);
+                                FirebaseRepository.atualizaPontoMedico(medico);
                             }
 
                         }

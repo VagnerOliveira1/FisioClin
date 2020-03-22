@@ -9,12 +9,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.rightside.fisioclin.R;
+import com.rightside.fisioclin.models.Produto;
 
 import java.util.List;
 
 public class ProdutosAdapter extends RecyclerView.Adapter<ProdutosAdapter.ViewHolderProdutos> {
-    private List<String> produtosList;
-    public ProdutosAdapter(List<String> produtosList) {
+    private List<Produto> produtosList;
+
+    public ProdutosAdapter(List<Produto> produtosList) {
         this.produtosList = produtosList;
     }
 
@@ -27,7 +29,7 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutosAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderProdutos holder, int position) {
-        holder.textViewProduto.setText(produtosList.get(position));
+        holder.textViewProduto.setText(produtosList.get(position).getNome());
     }
 
     @Override

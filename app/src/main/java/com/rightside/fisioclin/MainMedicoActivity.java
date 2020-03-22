@@ -137,7 +137,7 @@ public class MainMedicoActivity extends FragmentActivity {
 
         cardViewLoja.setOnClickListener(view -> {
             Intent intent = new Intent(MainMedicoActivity.this, LojaActivity.class);
-            intent.putExtra("medico", medico);
+            intent.putExtra("medic", medico);
             startActivity(intent);
         });
 

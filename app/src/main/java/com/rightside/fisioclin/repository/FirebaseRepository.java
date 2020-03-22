@@ -129,7 +129,7 @@ public class FirebaseRepository {
 
     }
 
-    public static Task<Void> atualizaPontoMedico(Medico medico, Pontuacao pontuacao) {
+    public static Task<Void> atualizaPontoMedico(Medico medico) {
         return getMedico(medico.getId()).update(medico.returnDoctor());
     }
 
