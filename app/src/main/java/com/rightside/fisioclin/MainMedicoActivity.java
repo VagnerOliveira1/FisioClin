@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -54,6 +55,7 @@ public class MainMedicoActivity extends FragmentActivity {
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
     private ViewModelMedicos viewModelMedico;
+    private TextView textViewFisioPoints;
     private static final int REQUEST_PERMISSAO_ARQUIVOS = 1;
     private List<Consulta> consultaList = new ArrayList<>();
 
@@ -68,6 +70,7 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewPushNotification = findViewById(R.id.card_view_push);
         cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
+        textViewFisioPoints = findViewById(R.id.textViewFisioPoints);
         cardViewLoja = findViewById(R.id.card_view_loja);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
@@ -108,7 +111,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewPushNotification.setOnClickListener(view -> {
-            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList).setFragmentActivity(this).show(getSupportFragmentManager(), "notificacao");
+            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList, medico).setFragmentActivity(this).show(getSupportFragmentManager(), "notificacao");
         });
 
 
@@ -142,11 +145,12 @@ public class MainMedicoActivity extends FragmentActivity {
     private void alteraInformacaoPerfil(Medico medico) {
         textViewNameDoctor.setText(medico.getName());
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
+        textViewFisioPoints.setText("FisioPoints:" + medico.getFisioPoints().getPoints() + "\nNotificações: " + medico.getNotificacao() + " Relatórios: " + medico.getRelatorio());
     }
 
     public void verificaPermissaoArquivos() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
 
                 ActivityCompat.requestPermissions(MainMedicoActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSAO_ARQUIVOS);

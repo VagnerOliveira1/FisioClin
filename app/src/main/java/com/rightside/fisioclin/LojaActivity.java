@@ -2,6 +2,7 @@ package com.rightside.fisioclin;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -55,34 +56,65 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         RecyclerView recyclerView = findViewById(R.id.recyclerview_loja);
 
-        viewModelMedicos.getMedico().observe(this, medico1 -> {
-            medico = medico1;
-            fisioPoints = medico.getFisioPoints();
-            textViewFisioPoints.setText("Você possui " + String.valueOf(medico1.getFisioPoints().getPoints()) + " FisioPoints");
-        });
-
         Produto notificacao = new Produto();
         notificacao.setNome("1 - Notificação");
         notificacao.setPreco(975);
+        notificacao.setQuantidade(1);
+        notificacao.setTipo(1);
 
         Produto notificacoestres = new Produto();
-        notificacoestres.setNome("3 Notificações - Compre com desconto!! ");
-        notificacao.setPreco(2600);
+        notificacoestres.setNome("3 Notificações");
+        notificacoestres.setPreco(2600);
+        notificacoestres.setQuantidade(3);
+        notificacoestres.setTipo(1);
 
         Produto notificacoesdez = new Produto();
-        notificacoesdez.setNome("10 Notificações - Super Desconto!!");
-        notificacao.setPreco(5550);
+        notificacoesdez.setNome("10 Notificações");
+        notificacoesdez.setPreco(5550);
+        notificacoesdez.setQuantidade(10);
+        notificacoesdez.setTipo(1);
+
+
+        Produto relatorio = new Produto();
+        relatorio.setNome("1 Backup da ficha em PDF salva no dispositivo");
+        relatorio.setPreco(975);
+        relatorio.setQuantidade(1);
+        relatorio.setTipo(2);
+
+        Produto relatoriotres = new Produto();
+        relatoriotres.setNome("3 Backups da ficha em PDF salva no dispositivo - Desconto!!");
+        relatoriotres.setPreco(2600);
+        relatoriotres.setQuantidade(3);
+        relatoriotres.setTipo(2);
+
+        Produto relatoriodez = new Produto();
+        relatoriodez.setNome("10 Backups da ficha em PDF salva no dispositivo - Super Desconto!!");
+        relatoriodez.setPreco(5550);
+        relatoriodez.setQuantidade(10);
+        relatoriodez.setTipo(2);
 
         List<Produto> produtos = new ArrayList<>();
         produtos.add(notificacao);
         produtos.add(notificacoestres);
         produtos.add(notificacoesdez);
+        produtos.add(relatorio);
+        produtos.add(relatoriotres);
+        produtos.add(relatoriodez);
 
-
-        ProdutosAdapter produtosAdapter = new ProdutosAdapter(produtos);
+        ProdutosAdapter produtosAdapter = new ProdutosAdapter(produtos, this, this);
         recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
         recyclerView.setAdapter(produtosAdapter);
+
+        viewModelMedicos.getMedico().observe(this, medico1 -> {
+            medico = medico1;
+            fisioPoints = medico.getFisioPoints();
+            textViewFisioPoints.setText("Você possui " + String.valueOf(medico1.getFisioPoints().getPoints()) + " FisioPoints");
+            produtosAdapter.updateMedico(medico1);
+        });
+
+
+
         mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
         buttonFisioPoints.setOnClickListener(view -> {
             buttonFisioPoints.setEnabled(false);

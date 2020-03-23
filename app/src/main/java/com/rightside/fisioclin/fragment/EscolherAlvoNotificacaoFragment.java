@@ -21,6 +21,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.controller.NovaNotificacaoPacientesController;
 import com.rightside.fisioclin.controller.NovaNotificacaoUsersController;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
@@ -36,12 +37,14 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
     private ViewModelUser viewModelUserList;
     private List<User> userList;
     private FragmentActivity fragmentActivity;
+    private Medico medico;
 
 
-    public static EscolherAlvoNotificacaoFragment novaInstancia(List<Consulta> consultaList){
+    public static EscolherAlvoNotificacaoFragment novaInstancia(List<Consulta> consultaList, Medico medico){
         EscolherAlvoNotificacaoFragment escolherAlvoNotificacaoFragment = new EscolherAlvoNotificacaoFragment();
         Bundle bundle = new Bundle();
         bundle.putSerializable("listConsulta", (Serializable) consultaList);
+        bundle.putSerializable("medico", medico);
         escolherAlvoNotificacaoFragment.setArguments(bundle);
         return escolherAlvoNotificacaoFragment;
     }
@@ -62,7 +65,7 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
 
         Bundle bundle = getArguments();
         List<Consulta> listConsulta = (List<Consulta>) bundle.getSerializable("listConsulta");
-
+        Medico medico = (Medico) bundle.getSerializable("medico");
         viewModelUserList = ViewModelProviders.of(this).get(ViewModelUser.class);
 
         viewModelUserList.getUsers().observe(this, userList -> {
@@ -78,13 +81,13 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
 
         cardViewNotificacaoPacientes.setOnClickListener(view1 -> {
            if(listConsulta != null) {
-               NovaNotificacaoPacientesController.alertaNovaNotificacao(fragmentActivity, this, listConsulta);
+               NovaNotificacaoPacientesController.alertaNovaNotificacao(medico, fragmentActivity, this, listConsulta);
            }
         });
 
         cardViewNotificacaoUsuarios.setOnClickListener(view1 -> {
             if(userList!= null) {
-                NovaNotificacaoUsersController.alertaNovaNotificacaoUsers(fragmentActivity,this, userList);
+                NovaNotificacaoUsersController.alertaNovaNotificacaoUsers(medico, fragmentActivity,this, userList);
             }
         });
 

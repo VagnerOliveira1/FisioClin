@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.LinearLayout;
 import android.widget.NumberPicker;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -43,6 +44,7 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
     private Button buttonSalvarConsulta;
     private DiagnosticoMedico diagnosticoMedico = new DiagnosticoMedico();
     private TextInputLayout textInputLayoutDiagnosticoMedico;
+    private LinearLayout linearLayout;
     private Paciente paciente;
     private Switch aSwitch;
 
@@ -66,6 +68,7 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
         textViewmostrarSessoes = view.findViewById(R.id.mostraNumeroSessoes);
         textInputEditTextDiagnosticoMedico = view.findViewById(R.id.editDiagnosticoMedico);
         textInputEditTextQueixaPaciente = view.findViewById(R.id.editQueixaPaciente);
+        linearLayout = view.findViewById(R.id.linearLayoutSessoes);
         textInputLayoutDiagnosticoMedico = view.findViewById(R.id.textInputLayoutDiagnosticoMedico);
         buttonSalvarConsulta = view.findViewById(R.id.button_salvar_consulta);
         NumberPicker numberPicker = view.findViewById(R.id.numberPicker);
@@ -86,8 +89,10 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 if(b) {
                     textInputLayoutDiagnosticoMedico.setVisibility(View.VISIBLE);
+                    linearLayout.setVisibility(View.VISIBLE);
                 } else {
                     textInputLayoutDiagnosticoMedico.setVisibility(View.GONE);
+                    linearLayout.setVisibility(View.GONE);
                 }
             }
         });
@@ -114,7 +119,7 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
                                         if (task.isSuccessful()) {
                                             FirebaseRepository.atualizaHorarioMarcado(horario);
                                             FirebaseRepository.savePacient(paciente);
-                                            GeralUtils.mostraAlerta("Consulta Marcada", ConstantUtils.CONSULTA_MARCADA_COM_SUCESSO, getContext());
+                                            GeralUtils.mostraAlerta("Sucesso!","Sua consulta foi marcada, se atente ao horário no menu minhas consultas.", getContext());
                                             dismiss();
                                         }
                                     }

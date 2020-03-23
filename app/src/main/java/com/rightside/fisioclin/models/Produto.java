@@ -5,13 +5,35 @@ import java.io.Serializable;
 public class Produto implements Serializable {
     private String nome;
     private int preco;
+    private int tipo;
+    private int quantidade;
+
 
     public Produto() {
     }
 
+
+
     public Produto(String nome, int preco) {
         this.nome = nome;
         this.preco = preco;
+    }
+
+    public int getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
+    }
+
+
+    public int getQuantidade() {
+        return quantidade;
+    }
+
+    public void setQuantidade(int quantidade) {
+        this.quantidade = quantidade;
     }
 
     public String getNome() {

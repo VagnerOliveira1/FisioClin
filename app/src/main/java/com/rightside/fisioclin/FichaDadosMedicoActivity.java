@@ -60,7 +60,7 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
         Medico medico = consultasList.get(0).getHorario().getMedico();
 
         buttonRelatorio.setOnClickListener(view -> {
-            GeralUtils.gerarRelatorio(this,paciente, consultasList, medico);
+            GeralUtils.gerarRelatorio(this,paciente, consultasList);
         });
 
         textViewPacienteNome.setText(paciente.getName());

@@ -1,6 +1,5 @@
 package com.rightside.fisioclin.controller;
 
-import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -8,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -29,7 +29,7 @@ import java.util.List;
 public class ConcluirConsultaController {
 
     public static void alertaConcluirConsulta(FragmentActivity fragmentActivity, Consulta consulta) {
-        final AlertDialog.Builder alerta = new AlertDialog.Builder(fragmentActivity);
+        final androidx.appcompat.app.AlertDialog.Builder alerta = new AlertDialog.Builder(fragmentActivity);
         LinearLayout container = new LinearLayout(fragmentActivity.getApplicationContext());
         container.setOrientation(LinearLayout.VERTICAL);
 

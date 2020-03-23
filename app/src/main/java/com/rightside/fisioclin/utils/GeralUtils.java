@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Environment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ import com.rightside.fisioclin.models.User;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -101,21 +103,25 @@ public class GeralUtils {
         }
     }
 
-    public static void gerarRelatorio(Context context, Paciente paciente, List<Consulta> consultas, Medico medico) {
+    public static void gerarRelatorio(Context context, Paciente paciente, List<Consulta> consultas) {
         Document doc = null;
         OutputStream os = null;
-        String relatorio = Environment.getExternalStorageDirectory().toString() + "/relatorio.pdf";
+
+        String diretorio = Environment.getExternalStorageDirectory() + "/"+paciente.getName()+".pdf";
 
         try {
             doc = new Document(PageSize.A4, 42, 42, 42, 42);
-            os = new FileOutputStream(relatorio);
+            os = new FileOutputStream(diretorio);
             PdfWriter.getInstance(doc, os);
             doc.open();
-            Font b = new Font(Font.FontFamily.HELVETICA, 15.0f, Font.UNDERLINE, BaseColor.RED);
-            Font f = new Font(Font.FontFamily.HELVETICA,10.0f,Font.UNDERLINE, BaseColor.BLACK);
+            Font b = new Font(Font.FontFamily.HELVETICA, 18.0f, Font.BOLD, BaseColor.BLACK);
+            Font f = new Font(Font.FontFamily.HELVETICA,15.0f,Font.UNDEFINED, BaseColor.BLACK);
             doc.addTitle("FisioApp - Ficha de acompanhamento");
-            Paragraph titulo = new Paragraph("Fisio Clin - Ficha de acompanhamento ", b);
+            Paragraph titulo = new Paragraph("FisioApp - Ficha de acompanhamento ", b);
             titulo.setAlignment(Paragraph.ALIGN_CENTER);
+
+
+
             Paragraph nome = new Paragraph("Nome: " + paciente.getName() , f);
             Paragraph telefone = new Paragraph("Telefone: " + paciente.getPhoneNumber() , f);
             Paragraph data = new Paragraph("Data de nascimento: " + paciente.getDataNascimento(), f);
@@ -129,8 +135,8 @@ public class GeralUtils {
             doc.add(data);
             doc.add(profissao);
             doc.add(email);
-            Paragraph evolucao = new Paragraph("Consutas do paciente :");
-            evolucao.setAlignment(Element.ALIGN_CENTER);
+            Paragraph evolucao = new Paragraph("Histórico de consultas do paciente :", b);
+            evolucao.setAlignment(Element.ALIGN_LEFT);
             doc.add(evolucao);
 
             for (Consulta consulta : consultas) {
@@ -146,6 +152,7 @@ public class GeralUtils {
             }
             doc.close();
             os.close();
+
 
         }catch (Exception e) {
 

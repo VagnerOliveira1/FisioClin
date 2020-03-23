@@ -13,6 +13,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.PushNotificaTionFcm;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -20,7 +21,7 @@ import java.util.List;
 
 public class NovaNotificacaoUsersController {
 
-    public static void alertaNovaNotificacaoUsers(FragmentActivity fragmentActivity, DialogFragment dialogFragment, List<User> userList) {
+    public static void alertaNovaNotificacaoUsers(Medico medico, FragmentActivity fragmentActivity, DialogFragment dialogFragment, List<User> userList) {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(fragmentActivity);
         LinearLayout container = new LinearLayout(fragmentActivity.getApplicationContext());
         container.setOrientation(LinearLayout.VERTICAL);
