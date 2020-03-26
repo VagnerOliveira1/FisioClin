@@ -75,10 +75,13 @@
 
                 <Button
                     android:id="@+id/buttonComoChegar"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Como chegar?" />
+                    android:layout_weight="0"
+                    android:drawableRight="@drawable/ic_location"
+                    android:text="Como chegar?"
+                    android:textSize="14sp"
+                    android:textStyle="normal" />
 
             </LinearLayout>
 
