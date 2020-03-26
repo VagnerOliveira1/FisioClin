@@ -2,10 +2,10 @@ package com.rightside.fisioclin.fragment;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -15,9 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.SearchView;
@@ -25,6 +22,7 @@ import android.widget.SearchView;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.adapter.FichaMedicoAdapter;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 
@@ -40,6 +38,8 @@ public class FichasMedicoFragment extends DialogFragment {
     private FichaMedicoAdapter fichaMedicoAdapter;
     private Toolbar toolbar;
     private List<Ficha> fichaList = new ArrayList<>();
+    private Medico medico;
+    private Context context;
 
 
 
@@ -47,6 +47,12 @@ public class FichasMedicoFragment extends DialogFragment {
     public static FichasMedicoFragment novaInstancia(){
         FichasMedicoFragment fichasMedicoFragment = new FichasMedicoFragment();
         return fichasMedicoFragment;
+    }
+
+    public FichasMedicoFragment setMedico(Medico medico, Context context) {
+        this.medico = medico;
+        this.context = context;
+        return this;
     }
 
 
@@ -66,7 +72,7 @@ public class FichasMedicoFragment extends DialogFragment {
         setHasOptionsMenu(true);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
 
-        fichaMedicoAdapter = new FichaMedicoAdapter(getContext());
+        fichaMedicoAdapter = new FichaMedicoAdapter(context, medico);
         recyclerViewFichas.setLayoutManager(new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false));
         recyclerViewFichas.addItemDecoration(new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL));
         recyclerViewFichas.setAdapter(fichaMedicoAdapter);
@@ -79,13 +85,13 @@ public class FichasMedicoFragment extends DialogFragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String newText) {
-                findChannel(newText.toLowerCase());
+                findFicha(newText.toLowerCase());
                 return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                findChannel(newText.toLowerCase());
+                findFicha(newText.toLowerCase());
                 return false;
             }
         });
@@ -98,7 +104,7 @@ public class FichasMedicoFragment extends DialogFragment {
     }
 
 
-    private void findChannel(String text) {
+    private void findFicha(String text) {
         if(fichaList.size() > 0 && !text.isEmpty()) {
             List<Ficha> fichalistsearch = new ArrayList<>();
             for(Ficha ficha : fichaList){

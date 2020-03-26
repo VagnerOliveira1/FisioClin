@@ -16,6 +16,7 @@ import com.rightside.fisioclin.FichaDadosMedicoActivity;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -25,10 +26,12 @@ import java.util.List;
 public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.ViewHolder> {
     private List<Ficha> fichaList;
     private Context context;
+    private Medico medico;
 
 
-    public FichaMedicoAdapter(Context context) {
+    public FichaMedicoAdapter(Context context, Medico medico) {
         this.context = context;
+        this.medico = medico;
     }
 
     @NonNull
@@ -52,6 +55,7 @@ public class FichaMedicoAdapter extends RecyclerView.Adapter<FichaMedicoAdapter.
             Intent intent = new Intent(context, FichaDadosMedicoActivity.class);
             intent.putExtra("paciente",paciente);
             intent.putExtra("consultaList", (Serializable) consultaList);
+            intent.putExtra("medico", medico);
             context.startActivity(intent);
         });
 

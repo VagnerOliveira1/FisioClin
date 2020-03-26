@@ -1,6 +1,7 @@
 package com.rightside.fisioclin.utils;
 
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -152,8 +153,22 @@ public class GeralUtils {
                 doc.add(quebralinha);
 
             }
+
+
             doc.close();
             os.close();
+
+            File file = new File(diretorio);
+            Intent target = new Intent(Intent.ACTION_VIEW);
+            target.setDataAndType(Uri.fromFile(file),"application/pdf");
+            target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+            Intent intent = Intent.createChooser(target, "Open File");
+            try {
+                context.startActivity(intent);
+            } catch (ActivityNotFoundException e) {
+                GeralUtils.mostraAlerta("Erro ao abrir pdf", "O relatório foi salvo no seu dispositivo, verifique se você possui um leitor de pdf instalado.", context);
+            }
 
 
         }catch (Exception e) {

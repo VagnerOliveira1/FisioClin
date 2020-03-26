@@ -131,7 +131,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewFichasMedico.setOnClickListener(view -> {
-           FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
+           FichasMedicoFragment.novaInstancia().setMedico(medico, MainMedicoActivity.this).show(getSupportFragmentManager(), "fichas");
         });
 
         cardViewLoja.setOnClickListener(view -> {

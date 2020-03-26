@@ -48,9 +48,6 @@ public class ConsultaMedicoAdapter extends RecyclerView.Adapter<ConsultaMedicoAd
 
         Horario horario = consultas.get(position).getHorario();
         Paciente paciente = consultas.get(position).getPaciente();
-        String domiciliar = GeralUtils.domiciliar(horario.isDomiciliar());
-
-        Log.d("horarioid", horario.getId().toString());
 
         holder.textViewData.setText(horario.getDataFormatada());
         holder.textViewDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
