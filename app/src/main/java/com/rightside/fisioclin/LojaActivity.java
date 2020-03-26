@@ -109,7 +109,7 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         viewModelMedicos.getMedico().observe(this, medico1 -> {
             medico = medico1;
             fisioPoints = medico.getFisioPoints();
-            textViewFisioPoints.setText("Você possui " + String.valueOf(medico1.getFisioPoints().getPoints()) + " FisioPoints");
+            textViewFisioPoints.setText("Você possui " + String.valueOf(medico1.getFisioPoints().getPoints()) + "");
             produtosAdapter.updateMedico(medico1);
         });
 
