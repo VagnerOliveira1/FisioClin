@@ -109,6 +109,7 @@ public class PacienteVerificationDataFragment extends DialogFragment implements 
                     diagnosticoMedico.setDescricaoMedica(textInputEditTextDiagnosticoMedico.getText().toString());
                     paciente = new Paciente(usuario, diagnosticoMedico, sessoes);
                     Consulta consulta = new Consulta(horario,paciente);
+                    consulta.setAvaliada(false);
                     FirebaseRepository.saveConsultaUser(consulta).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

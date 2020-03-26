@@ -89,8 +89,7 @@ public class FichaPacienteFragment extends DialogFragment {
         Bundle bundle = getArguments();
         Ficha ficha = (Ficha) bundle.getSerializable("ficha");
 
-        fichaPacienteAdapter = new FichaPacienteAdapter(fragmentActivity, context);
-
+        fichaPacienteAdapter = new FichaPacienteAdapter(fragmentActivity, context, ficha);
         recyclerViewFicha.setAdapter(fichaPacienteAdapter);
         List<Consulta> consultaList = ficha.getConsulta();
         fichaPacienteAdapter.update(consultaList);

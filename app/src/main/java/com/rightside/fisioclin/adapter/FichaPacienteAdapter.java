@@ -17,6 +17,7 @@ import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.fragment.AvaliarFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.DiagnosticoMedico;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.utils.GeralUtils;
@@ -27,9 +28,10 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
     private List<Consulta> consultaList;
     private Context context;
     private FragmentActivity fragmentActivity;
-
-    public FichaPacienteAdapter(FragmentActivity fragmentActivity, Context context){
+    private Ficha ficha;
+    public FichaPacienteAdapter(FragmentActivity fragmentActivity, Context context, Ficha ficha){
         this.fragmentActivity = fragmentActivity;
+        this.ficha = ficha;
         this.context = context;
     }
 
@@ -47,6 +49,14 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         Medico medico = horario.getMedico();
         DiagnosticoMedico diagnosticoMedico = consulta.getPaciente().getDiagnosticoMedico();
 
+
+        if(consulta.isAvaliada()) {
+            holder.buttonAvaliar.setEnabled(false);
+            holder.buttonAvaliar.setText("Você já avaliou essa consulta");
+        } else {
+            holder.buttonAvaliar.setEnabled(true);
+        }
+
         holder.textViewConsultaRealizaDiaSemana.setText(horario.getDiaDaSemanaFormatado());
         holder.textViewConsultaRealizadaData.setText(horario.getDataFormatada());
         holder.textViewConsultaRealizaHora.setText(horario.getHoraFormatada());
@@ -59,7 +69,7 @@ public class FichaPacienteAdapter extends RecyclerView.Adapter<FichaPacienteAdap
         holder.buttonAvaliar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AvaliarFragment.avaliarFragment(consulta).show(fragmentActivity.getSupportFragmentManager(), "avaliar");
+                AvaliarFragment.avaliarFragment(consulta, ficha, position).show(fragmentActivity.getSupportFragmentManager(), "avaliar");
             }
         });
 

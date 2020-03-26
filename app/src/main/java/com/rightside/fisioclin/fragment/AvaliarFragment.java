@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.rightside.fisioclin.R;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Pontuacao;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -38,10 +39,12 @@ public class AvaliarFragment extends DialogFragment {
     private ViewModelPontuacao viewModelPontuacao, viewModelPontuacaoPaciente;
     private ProgressBar progressBar;
 
-    public static AvaliarFragment avaliarFragment(Consulta consulta) {
+    public static AvaliarFragment avaliarFragment(Consulta consulta, Ficha ficha, int position) {
         // Required empty public constructor
         AvaliarFragment avaliarFragment = new AvaliarFragment();
         Bundle bundle = new Bundle();
+        bundle.putSerializable("ficha", ficha);
+        bundle.putSerializable("position", position);
         bundle.putSerializable("medico", consulta);
         avaliarFragment.setArguments(bundle);
         return avaliarFragment;
@@ -61,6 +64,8 @@ public class AvaliarFragment extends DialogFragment {
         viewModelPontuacaoPaciente = ViewModelProviders.of(this).get(ViewModelPontuacao.class);
         Bundle bundle = getArguments();
         Consulta consulta = (Consulta) bundle.get("medico");
+        Ficha ficha = (Ficha) bundle.get("ficha");
+        int position = (int) bundle.get("position");
         medico = consulta.getHorario().getMedico();
 
 
@@ -111,8 +116,10 @@ public class AvaliarFragment extends DialogFragment {
                                                 @Override
                                                 public void onComplete(@NonNull Task<Void> task) {
                                                     if (task.isSuccessful()) {
+                                                        ficha.getConsulta().get(position).setAvaliada(true);
+                                                        FirebaseRepository.atualizaFichaPaciente(ficha);
+                                                        FirebaseRepository.atualizaFichaMedico(ficha,position);
                                                         progressBar.setVisibility(View.GONE);
-
                                                         dismiss();
                                                     }
                                                 }

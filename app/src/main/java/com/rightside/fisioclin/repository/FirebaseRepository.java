@@ -142,6 +142,14 @@ public class FirebaseRepository {
         return getMedico(medico.getId()).update(medico.returnDoctor());
     }
 
+    public static Task<Void> atualizaFichaPaciente(Ficha ficha) {
+        return getFichas().document(FirebaseRepository.getIdPessoaLogada()).update(ficha.returnFicha());
+    }
+
+    public static Task<Void> atualizaFichaMedico(Ficha ficha, int position) {
+        return getFichas().document(ficha.getConsulta().get(position).getHorario().getMedico().getId()).collection("usuarios").document(FirebaseRepository.getIdPessoaLogada()).update(ficha.returnFicha());
+    }
+
     public static Task<Void> atualizaPaciente(Paciente paciente, Consulta consulta) {
         return getPaciente(paciente.getId()).update(paciente.returnPacient());
     }
