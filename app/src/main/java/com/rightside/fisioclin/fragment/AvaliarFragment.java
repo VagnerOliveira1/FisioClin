@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
@@ -35,6 +36,7 @@ public class AvaliarFragment extends DialogFragment {
     private Button avaliarMedicoButton;
     private Pontuacao pontuacao, pontuacaoPaciente;
     private ViewModelPontuacao viewModelPontuacao, viewModelPontuacaoPaciente;
+    private ProgressBar progressBar;
 
     public static AvaliarFragment avaliarFragment(Consulta consulta) {
         // Required empty public constructor
@@ -52,6 +54,7 @@ public class AvaliarFragment extends DialogFragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_avaliar, container, false);
         ratingBar = view.findViewById(R.id.smile_rating);
+        progressBar = view.findViewById(R.id.progressBar2);
         avaliarMedicoButton = view.findViewById(R.id.avaliarMedicoButton);
         ratingBar.setNumStars(5);
         viewModelPontuacao = ViewModelProviders.of(this).get(ViewModelPontuacao.class);
@@ -59,6 +62,7 @@ public class AvaliarFragment extends DialogFragment {
         Bundle bundle = getArguments();
         Consulta consulta = (Consulta) bundle.get("medico");
         medico = consulta.getHorario().getMedico();
+
 
         viewModelPontuacaoPaciente.getPontuacaoPaciente(consulta, FirebaseRepository.getIdPessoaLogada()).observe(this, pontuacaopaciente -> {
             this.pontuacaoPaciente = pontuacaopaciente;
@@ -77,7 +81,7 @@ public class AvaliarFragment extends DialogFragment {
             public void onClick(View view) {
 
             if(pontuacaoPaciente!= null) {
-              GeralUtils.mostraAlerta("Erro ao votar", "Só é possivel votar uma vez por consulta", getContext());
+              GeralUtils.mostraAlerta("Erro ao avaliar consulta.", "Só é possivel avaliar uma vez por consulta", getContext());
                  dismiss();
              }else  {
 
@@ -89,7 +93,7 @@ public class AvaliarFragment extends DialogFragment {
                     if(pontuacao == null) {
                         pontuacao = new Pontuacao();
                     }
-
+                    progressBar.setVisibility(View.VISIBLE);
                     pontuacao.setQuantidadeDeVotos(1);
                     pontuacao.setPontos(voto);
                     pontuacao.setMedia(pontuacao.getPontos() / pontuacao.getQuantidadeDeVotos());
@@ -99,13 +103,29 @@ public class AvaliarFragment extends DialogFragment {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful() || task.isComplete()) {
-                                FirebaseRepository.savePontuacaoPaciente(consulta, pontuacao, FirebaseRepository.getIdPessoaLogada());
-                                FirebaseRepository.atualizaPontoMedico(medico);
+                                FirebaseRepository.savePontuacaoPaciente(consulta, pontuacao, FirebaseRepository.getIdPessoaLogada()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()) {
+                                            FirebaseRepository.atualizaPontoMedico(medico).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        progressBar.setVisibility(View.GONE);
+
+                                                        dismiss();
+                                                    }
+                                                }
+                                            });
+                                        }
+                                    }
+                                });
+
                             }
 
                         }
                     });
-                    dismiss();
+
                 } else {
                     Toast.makeText(getContext(), "Você deve escolher um valor para avaliar", Toast.LENGTH_SHORT).show();
                 }
