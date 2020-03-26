@@ -50,7 +50,7 @@ public class MainMedicoActivity extends FragmentActivity {
 
     private ImageView imageViewDoctorPicture;
     private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification, cardViewLoja;
-    private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas;
+    private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas, textViewRelatorios;
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
@@ -72,6 +72,7 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
         textViewFisioPoints = findViewById(R.id.textViewFisioPoints);
         cardViewLoja = findViewById(R.id.card_view_loja);
+        textViewRelatorios = findViewById(R.id.textViewRelatorios);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
 
@@ -145,7 +146,8 @@ public class MainMedicoActivity extends FragmentActivity {
     private void alteraInformacaoPerfil(Medico medico) {
         textViewNameDoctor.setText(medico.getName());
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
-        textViewFisioPoints.setText("FisioPoints:" + medico.getFisioPoints().getPoints() + "\nNotificações: " + medico.getNotificacao() + " Relatórios: " + medico.getRelatorio());
+        textViewFisioPoints.setText(String.valueOf(medico.getFisioPoints().getPoints()));
+        textViewRelatorios.setText("Notificações: " + medico.getNotificacao() + " " + "Relátorios: " + medico.getRelatorio());
     }
 
     public void verificaPermissaoArquivos() {
