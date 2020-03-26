@@ -146,10 +146,15 @@ public class GeralUtils {
                 Paragraph horario = new Paragraph("Data: " + consulta.getHorario().getDataFormatada() + " Hora: " + consulta.getHorario().getHoraFormatada() + " Dia: " + GeralUtils.retornaDiaSemana(consulta.getHorario().getDiaDaSemanaFormatado()) , f);
                 Paragraph comentario =  new Paragraph("Evolução: " + consulta.getComentarioPosConsulta(), f);
                 Paragraph queixa = new Paragraph("Queixa: " + consulta.getPaciente().getDiagnosticoMedico().getQueixa(), f);
+                Paragraph diagnosticoMedico = new Paragraph("Diagnóstico Médico :" + consulta.getPaciente().getDiagnosticoMedico().getDescricaoMedica(), f);
+                Paragraph sessoes = new Paragraph("Sessões indicadas: " + consulta.getPaciente().getSessoes());
                 Paragraph quebralinha = new Paragraph(" ");
+
                 doc.add(queixa);
                 doc.add(horario);
                 doc.add(comentario);
+                doc.add(diagnosticoMedico);
+                doc.add(sessoes);
                 doc.add(quebralinha);
 
             }

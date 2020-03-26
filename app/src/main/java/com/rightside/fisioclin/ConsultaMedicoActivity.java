@@ -101,6 +101,7 @@ public class ConsultaMedicoActivity extends FragmentActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        toolbar.setTitle("Segunda-feira");
         viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada(), "seg").observe(this, listaConsulta -> {
             this.consultas = listaConsulta;
             mAdapter.update(listaConsulta);

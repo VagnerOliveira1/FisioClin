@@ -26,7 +26,7 @@ import com.rightside.fisioclin.utils.GeralUtils;
 public class ConsultaDetailsFragment extends DialogFragment {
 
     private TextView textViewPacienteNome, textViewPacienteData, textViewPacienteTelefone, textViewPacienteEmail, textViewPacienteProfissao, textViewPacienteSexo, textViewQueixa;
-    private TextView textViewCidade, textViewBairro, textViewRua, textViewNumero, textViewConsultaTIpo, textViewDiagnostico;
+    private TextView textViewCidade, textViewBairro, textViewRua, textViewNumero, textViewConsultaTIpo, textViewDiagnostico, textViewSessoes;
     private ImageView imageViewPacienteSexo;
     private LinearLayout linearLayout;
     public static ConsultaDetailsFragment consultaDetailsFragment(Paciente paciente, Horario horario) {
@@ -60,6 +60,7 @@ public class ConsultaDetailsFragment extends DialogFragment {
         textViewBairro = view.findViewById(R.id.textViewBairro);
         textViewRua = view.findViewById(R.id.textViewRua);
         textViewNumero = view.findViewById(R.id.textViewNumero);
+        textViewSessoes = view.findViewById(R.id.textViewsessoes);
         textViewPacienteProfissao = view.findViewById(R.id.textView_detalhes_profissao);
         textViewPacienteTelefone = view.findViewById(R.id.textView_detalhes_telefone);
         textViewPacienteSexo = view.findViewById(R.id.textView_sexo);
@@ -88,6 +89,7 @@ public class ConsultaDetailsFragment extends DialogFragment {
 
         textViewPacienteSexo.setText(paciente.getSexo());
         textViewPacienteNome.setText(paciente.getName());
+        textViewSessoes.setText(String.valueOf(paciente.getSessoes()));
         textViewPacienteData.setText(paciente.getDataNascimento());
         textViewPacienteTelefone.setText(paciente.getPhoneNumber());
         textViewPacienteEmail.setText(paciente.getEmail());
