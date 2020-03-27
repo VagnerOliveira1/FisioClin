@@ -2,6 +2,7 @@ package com.rightside.fisioclin.fragment;
 
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -38,6 +39,7 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
     private List<User> userList;
     private FragmentActivity fragmentActivity;
     private Medico medico;
+    private Context context;
 
 
     public static EscolherAlvoNotificacaoFragment novaInstancia(List<Consulta> consultaList, Medico medico){
@@ -49,8 +51,9 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
         return escolherAlvoNotificacaoFragment;
     }
 
-    public EscolherAlvoNotificacaoFragment setFragmentActivity(FragmentActivity fragmentActivity) {
+    public EscolherAlvoNotificacaoFragment setFragmentActivity(FragmentActivity fragmentActivity, Context context) {
         this.fragmentActivity = fragmentActivity;
+        this.context = context;
         return this;
     }
 
@@ -87,7 +90,7 @@ public class EscolherAlvoNotificacaoFragment extends DialogFragment {
 
         cardViewNotificacaoUsuarios.setOnClickListener(view1 -> {
             if(userList!= null) {
-                NovaNotificacaoUsersController.alertaNovaNotificacaoUsers(medico, fragmentActivity,this, userList);
+                NovaNotificacaoUsersController.alertaNovaNotificacaoUsers(medico, fragmentActivity,this, userList, context);
             }
         });
 

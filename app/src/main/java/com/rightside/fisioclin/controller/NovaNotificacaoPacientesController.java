@@ -34,18 +34,18 @@ public class NovaNotificacaoPacientesController {
         container.addView(textView);
         alerta.setView(container);
 
-        alerta.setTitle("Enviar Notificacao!").setMessage("Deseja enviar notificação para os pacientes?")
+        alerta.setTitle("Enviar Notificacao").setMessage("Deseja lembrar os pacientes de suas consultas?")
                 .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         if(medico.getNotificacao() > 0) {
-                            PushNotificaTionFcm.pushNotificationPacientes(consultaList);
                             medico.setNotificacao(medico.getNotificacao() - 1);
                             FirebaseRepository.atualizaPontoMedico(medico);
+                            PushNotificaTionFcm.pushNotificationPacientes(consultaList);
                             GeralUtils.mostraAlerta("Atenção!", "suas notificações foram enviadas com sucesso! \nVocê utilizou 1 notificação", fragmentActivity);
                             dialogFragment.dismiss();
                         } else {
-                            GeralUtils.mostraAlerta("Falha!", "Você não possui notificações suficientes, compre uma utilizando fisiopoints na loja", fragmentActivity);
+                            GeralUtils.mostraAlerta("Falha!", "Você não possui crédito de notificação suficiente, compre uma utilizando FisioPoints na loja", fragmentActivity);
                             dialogFragment.dismiss();
                         }
 

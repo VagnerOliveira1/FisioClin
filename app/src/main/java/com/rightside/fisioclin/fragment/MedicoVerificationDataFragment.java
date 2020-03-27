@@ -1,7 +1,9 @@
 package com.rightside.fisioclin.fragment;
 
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -47,6 +49,7 @@ public class MedicoVerificationDataFragment extends DialogFragment {
     private Clinica clinica = new Clinica();
     private Endereco endereco = new Endereco();
     private FisioPoints fisioPoints = new FisioPoints();
+    private Activity activity;
 
     public static MedicoVerificationDataFragment medicoVerificationDataFragment(Medico medico) {
         MedicoVerificationDataFragment medicoVerificationDataFragment = new MedicoVerificationDataFragment();
@@ -54,6 +57,11 @@ public class MedicoVerificationDataFragment extends DialogFragment {
         bundle.putSerializable("medico", medico);
         medicoVerificationDataFragment.setArguments(bundle);
         return medicoVerificationDataFragment;
+    }
+
+    public MedicoVerificationDataFragment setContext(Activity activity) {
+        this.activity = activity;
+        return this;
     }
 
 
@@ -161,13 +169,14 @@ public class MedicoVerificationDataFragment extends DialogFragment {
                     medico.setCrefito(textInputEditTextCrefitoMedico.getText().toString());
                     medico.setPhoneNumber(maskEditTextTelefoneMedico.getText().toString());
                     medico.setPontuacao(new Pontuacao());
-                   medico.setFisioPoints(fisioPoints);
+                    medico.setFisioPoints(fisioPoints);
 
 
                     FirebaseRepository.saveDoctor(medico).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {
                             startActivity(new Intent(getContext(), MainMedicoActivity.class));
+                            activity.finish();
                         }
                     });
                 }

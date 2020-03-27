@@ -112,7 +112,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewPushNotification.setOnClickListener(view -> {
-            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList, medico).setFragmentActivity(this).show(getSupportFragmentManager(), "notificacao");
+            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList, medico).setFragmentActivity(this, MainMedicoActivity.this).show(getSupportFragmentManager(), "notificacao");
         });
 
 
