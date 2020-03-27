@@ -58,10 +58,15 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         holder.textViewLocaldeAtendimento.setText(medico.getClinica().getEndereco().getCidade() + " " + medico.getClinica().getEndereco().getEstado());
         holder.textViewNomeMedico.setText(medico.getName());
         holder.textViewNomeClinica.setText(medico.getClinica().getNome());
+        holder.textViewCrefito.setText("Crefito: " + medico.getCrefito());
         holder.ratingBar.isIndicator();
         if(medico.getPontuacao().getMedia() == 0) {
-            holder.ratingBar.setNumStars(1);
+            holder.textViewNotaAtendimento.setText("Ainda não possui nota de atendimento");
+            holder.ratingBar.setNumStars(0);
+            holder.ratingBar.setVisibility(View.GONE);
         } else {
+            holder.textViewNotaAtendimento.setText("Nota de atendimento:");
+            holder.ratingBar.setVisibility(View.VISIBLE);
             holder.ratingBar.setNumStars(medico.getPontuacao().getMedia());
         }
 
@@ -97,13 +102,15 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
 
     class ViewHolderMedicos extends RecyclerView.ViewHolder {
 
-        private TextView textViewNomeMedico, textViewLocaldeAtendimento, textViewNomeClinica;
+        private TextView textViewNomeMedico, textViewLocaldeAtendimento, textViewNomeClinica, textViewCrefito, textViewNotaAtendimento;
         private Button buttonComoChegar;
         private ImageView imageViewFotoMedico;
         private RatingBar ratingBar;
         public ViewHolderMedicos(@NonNull View itemView) {
             super(itemView);
+            textViewNotaAtendimento = itemView.findViewById(R.id.textViewNotaAtendimento);
             buttonComoChegar = itemView.findViewById(R.id.buttonComoChegar);
+            textViewCrefito = itemView.findViewById(R.id.textViewCrefitoListaMedicos);
             textViewNomeMedico = itemView.findViewById(R.id.textView_medico_lista_nome);
             textViewLocaldeAtendimento = itemView.findViewById(R.id.textView_cidade_atendimento);
             textViewNomeClinica = itemView.findViewById(R.id.textView_nome_clinica);
