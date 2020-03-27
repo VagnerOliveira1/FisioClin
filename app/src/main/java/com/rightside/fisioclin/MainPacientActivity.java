@@ -39,8 +39,6 @@ public class MainPacientActivity extends AppCompatActivity {
     private TextView textViewNomePaciente;
     private CardView cardViewNovaConsulta;
     private CardView cardViewMinhasConsultas;
-
-    private CardView cardViewLocalizacaoClinica;
     private CardView cardViewMinhaFicha;
     private Consulta consulta;
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
@@ -57,7 +55,6 @@ public class MainPacientActivity extends AppCompatActivity {
         textViewNomePaciente = findViewById(R.id.textview_paciente_nome);
         cardViewNovaConsulta = findViewById(R.id.card_view_paciente_horarios);
         cardViewMinhasConsultas = findViewById(R.id.card_view_paciente_consultas);
-        cardViewLocalizacaoClinica = findViewById(R.id.card_view_localizacao_clinica);
         cardViewMinhaFicha = findViewById(R.id.card_view_minha_ficha);
 
 
@@ -106,20 +103,6 @@ public class MainPacientActivity extends AppCompatActivity {
             }
         });
 
-        cardViewLocalizacaoClinica.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Uri.Builder builder = new Uri.Builder();
-                builder.scheme("https")
-                        .authority("www.google.com").appendPath("maps").appendPath("dir").appendPath("").appendQueryParameter("api", "1")
-                        .appendQueryParameter("destination", -21.0270128 + "," + -41.6581527);
-                String url = builder.build().toString();
-                Log.d("Directions", url);
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(url));
-                startActivity(intent);
-            }
-        });
 
         cardViewMinhaFicha.setOnClickListener(view -> {
             if(ficha == null) {
