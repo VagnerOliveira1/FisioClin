@@ -29,21 +29,12 @@ public class NovaNotificacaoUsersController {
         container.setPadding(15,15,15,15);
         TextView textView = new TextView(fragmentActivity);
         textView.setTextColor(Color.BLACK);
-        TextView textViewAbuse = new TextView(fragmentActivity);
-        TextInputEditText textInputEditTextTitulo = new TextInputEditText(fragmentActivity);
-        textInputEditTextTitulo.setHint("Titulo");
 
-        TextInputEditText textInputEditTextMensagem = new TextInputEditText(fragmentActivity);
-        textInputEditTextMensagem.setHint("Mensagem");
-        textViewAbuse.setText("Atenção! não abuse disso, pode causar rejeição...");
-        textViewAbuse.setTextColor(Color.BLACK);
+
 
 
         textView.setText("Ao enviar notificação para os usuarios, todos irão receber, incluindo os pacientes.");
         container.addView(textView);
-        container.addView(textViewAbuse);
-        container.addView(textInputEditTextTitulo);
-        container.addView(textInputEditTextMensagem);
 
         alerta.setView(container);
 
@@ -51,7 +42,7 @@ public class NovaNotificacaoUsersController {
                 .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        PushNotificaTionFcm.pushNotificationUsers(userList, textInputEditTextTitulo.getText().toString(), textInputEditTextMensagem.getText().toString());
+                        PushNotificaTionFcm.pushNotificationUsers(userList, "Eii, tem sentido algo?", "Me chamo " + medico.getName() + " e estou atendendo agora!! Marque já sua consulta no app comigo!");
                         GeralUtils.mostraAlerta("Atenção!", "suas notificações foram enviadas com sucesso!", fragmentActivity);
                         dialogFragment.dismiss();
 
