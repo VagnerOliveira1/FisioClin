@@ -150,10 +150,10 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        fisioPoints.setPoints(medico.getFisioPoints().getPoints() + 150);
+        fisioPoints.setPoints(medico.getFisioPoints().getPoints() + 120);
         medico.setFisioPoints(fisioPoints);
         FirebaseRepository.atualizaPontoMedico(medico);
-        GeralUtils.mostraAlerta("Uhuuul!", "Você ganhou +150 FisioPoints!", this);
+        GeralUtils.mostraAlerta("Uhuuul!", "Você ganhou +120 FisioPoints!", this);
     }
 
     @Override
