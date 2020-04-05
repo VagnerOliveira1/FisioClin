@@ -2,7 +2,9 @@ package com.rightside.fisioclin.fragment;
 
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -34,6 +37,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
             textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta, textViewCrefitoConsultaPaciente, textViewTelefoneMedicoConsultaPaciente, textViewDomiciliar, textViewEnderecoConsulta;
     private ImageView imageViewFotoPacienteConsulta;
     private LinearLayout linearLayoutEndereco;
+    private Button buttonComoChegar;
     private Consulta consulta;
 
 
@@ -64,6 +68,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         textViewEnderecoConsulta = view.findViewById(R.id.textView_endereco_consulta);
         textViewDiaSemanaPacienteConsulta = view.findViewById(R.id.textview_dia_consulta_paciente);
         imageViewFotoPacienteConsulta = view.findViewById(R.id.imageView_foto_paciente_consulta);
+        buttonComoChegar = view.findViewById(R.id.button_como_chegar_paciente);
         textViewCrefitoConsultaPaciente = view.findViewById(R.id.textViewCrefitoConsultaPaciente);
         textViewTelefoneMedicoConsultaPaciente= view.findViewById(R.id.textVIewTelefoneConsultaPaciente);
         textViewHoraPacienteConsulta = view.findViewById(R.id.textview_hora_consulta_paciente);
@@ -73,6 +78,13 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         viewModelConsultaPaciente.getConsulta().observe(this, consulta -> {
             this.consulta = consulta;
             setText(consulta);
+        });
+
+        buttonComoChegar.setOnClickListener(click -> {
+            Uri gmmIntentUri = Uri.parse("google.navigation:q=" + consulta.getHorario().getMedico().getEndereco().getCidade() + "+" + consulta.getHorario().getMedico().getEndereco().getBairro());
+            Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+            mapIntent.setPackage("com.google.android.apps.maps");
+            startActivity(mapIntent);
         });
         return view;
 
