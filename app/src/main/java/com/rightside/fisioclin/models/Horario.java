@@ -201,4 +201,8 @@ public class Horario implements Serializable {
         return map;
     }
 
+    public String endereco() {
+        return "Cidade: " + getEndereco().getCidade() + " " + "Bairro: " + getEndereco().getBairro() + " " + "Rua: " + getEndereco().getLogradouro() + " " + "Num: " + getEndereco().getNumero();
+    }
+
 }

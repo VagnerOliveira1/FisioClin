@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rightside.fisioclin.R;
@@ -30,8 +31,9 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
 
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private TextView textViewNomeMedicoFichaPaciente, textViewDataPacienteConsulta,
-            textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta, textViewCrefitoConsultaPaciente, textViewTelefoneMedicoConsultaPaciente, textViewDomiciliar;
+            textViewDiaSemanaPacienteConsulta, textViewHoraPacienteConsulta, textViewCrefitoConsultaPaciente, textViewTelefoneMedicoConsultaPaciente, textViewDomiciliar, textViewEnderecoConsulta;
     private ImageView imageViewFotoPacienteConsulta;
+    private LinearLayout linearLayoutEndereco;
     private Consulta consulta;
 
 
@@ -57,7 +59,9 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         toolbar.setTitleTextColor(Color.WHITE);
         textViewDomiciliar = view.findViewById(R.id.textView_domiciliar_pacient_dialog);
         textViewDataPacienteConsulta = view.findViewById(R.id.textview_data_consulta_paciente);
+        linearLayoutEndereco = view.findViewById(R.id.linear_endereco);
         textViewNomeMedicoFichaPaciente = view.findViewById(R.id.textView6);
+        textViewEnderecoConsulta = view.findViewById(R.id.textView_endereco_consulta);
         textViewDiaSemanaPacienteConsulta = view.findViewById(R.id.textview_dia_consulta_paciente);
         imageViewFotoPacienteConsulta = view.findViewById(R.id.imageView_foto_paciente_consulta);
         textViewCrefitoConsultaPaciente = view.findViewById(R.id.textViewCrefitoConsultaPaciente);
@@ -77,6 +81,12 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
     private void setText(Consulta consulta) {
 
         if (consulta != null) {
+            if(!consulta.getHorario().isDomiciliar()) {
+                linearLayoutEndereco.setVisibility(View.VISIBLE);
+            } else {
+                linearLayoutEndereco.setVisibility(View.GONE);
+            }
+
             Horario horario = consulta.getHorario();
             textViewNomeMedicoFichaPaciente.setText(horario.getMedico().getName());
             textViewHoraPacienteConsulta.setText(horario.getHoraFormatada());
@@ -86,6 +96,8 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
             textViewDataPacienteConsulta.setText(horario.getDataFormatada());
             textViewDomiciliar.setText(GeralUtils.domiciliar(horario.isDomiciliar()));
             GeralUtils.mostraImagemCircular(getContext(), imageViewFotoPacienteConsulta, horario.getMedico().getProfilePictureUrl());
+            textViewEnderecoConsulta.setText("Cidade: " + horario.getMedico().getEndereco().getCidade() + "\n Bairro: " + horario.getMedico().getEndereco().getBairro() + "\n Rua: " + horario.getMedico().getEndereco().getLogradouro()
+            + "\n Número: " + horario.getMedico().getEndereco().getLogradouro());
         } else {
 
         }
