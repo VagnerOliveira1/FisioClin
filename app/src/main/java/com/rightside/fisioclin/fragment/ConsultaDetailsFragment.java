@@ -89,7 +89,7 @@ public class ConsultaDetailsFragment extends DialogFragment {
 
         textViewPacienteSexo.setText(paciente.getSexo());
         textViewPacienteNome.setText(paciente.getName());
-        textViewSessoes.setText(String.valueOf(paciente.getSessoes()));
+        textViewSessoes.setText("Sessões indicadas: " + paciente.getSessoes());
         textViewPacienteData.setText(paciente.getDataNascimento());
         textViewPacienteTelefone.setText(paciente.getPhoneNumber());
         textViewPacienteEmail.setText(paciente.getEmail());

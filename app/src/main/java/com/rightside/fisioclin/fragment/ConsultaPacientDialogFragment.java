@@ -93,7 +93,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
     private void setText(Consulta consulta) {
 
         if (consulta != null) {
-            if(!consulta.getHorario().isDomiciliar()) {
+            if(!consulta.getHorario().isDomiciliar() && consulta.getHorario().getEndereco().getCidade().equals(consulta.getHorario().getMedico().getEndereco().getCidade())) {
                 linearLayoutEndereco.setVisibility(View.VISIBLE);
             } else {
                 linearLayoutEndereco.setVisibility(View.GONE);
