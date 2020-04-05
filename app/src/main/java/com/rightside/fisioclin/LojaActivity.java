@@ -82,13 +82,13 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         relatorio.setTipo(2);
 
         Produto relatoriotres = new Produto();
-        relatoriotres.setNome("3 Backups da ficha em PDF salva no dispositivo - Desconto!!");
+        relatoriotres.setNome("3 Backups da ficha em PDF salva no dispositivo");
         relatoriotres.setPreco(2600);
         relatoriotres.setQuantidade(3);
         relatoriotres.setTipo(2);
 
         Produto relatoriodez = new Produto();
-        relatoriodez.setNome("10 Backups da ficha em PDF salva no dispositivo - Super Desconto!!");
+        relatoriodez.setNome("10 Backups da ficha em PDF salva no dispositivo");
         relatoriodez.setPreco(5550);
         relatoriodez.setQuantidade(10);
         relatoriodez.setTipo(2);

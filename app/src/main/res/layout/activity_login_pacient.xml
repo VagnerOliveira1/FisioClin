@@ -14,5 +14,7 @@
         android:id="@+id/textView5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="FisioJá" />
+        android:text="FisioJá"
+        android:textColor="@android:color/holo_red_dark" />
+
 </LinearLayout>

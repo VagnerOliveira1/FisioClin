@@ -38,13 +38,7 @@ public class PushNotificaTionFcm {
             firebasePush.sendToToken(consulta.getPaciente().getToken());
         }
 
-
-        /*
-        JSONArray jsonArray = new JSONArray();
-        jsonArray.put("firebaseTokenId1");
-        jsonArray.put("firebaseTokenId2");
-        jsonArray.put("firebaseTokenId3");
-        firebasePush.sendToGroup(jsonArray); */
+        
     }
 
 

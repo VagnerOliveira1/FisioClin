@@ -81,7 +81,6 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
            @Override
            public void onTabSelected(TabLayout.Tab tab) {
                if(tab.getPosition() == 0) {
-                   Toast.makeText(HorarioMedicoActivity.this, "seg", Toast.LENGTH_SHORT).show();
                     observerHorarioDia( medico,"seg");
                    toolbar.setSubtitle("Segunda-feira");
                } else if (tab.getPosition() == 1) {
