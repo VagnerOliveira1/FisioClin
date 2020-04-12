@@ -31,7 +31,7 @@ public class MarcarConsultaController {
         TextView horarioData = new TextView(activity);
         TextView horarioDiaSemana = new TextView(activity);
         TextView horarioHora = new TextView(activity);
-        horarioData.setText(horario.getHoraFormatada());
+        horarioData.setText(horario.getDataFormatada());
         horarioDiaSemana.setText(GeralUtils.retornaDiaSemana(horario.getDiaDaSemanaFormatado()));
         horarioHora.setText(horario.getHoraFormatada());
         ImageView calendario = new ImageView(activity);

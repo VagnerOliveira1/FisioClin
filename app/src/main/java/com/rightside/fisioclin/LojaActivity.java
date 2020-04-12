@@ -51,7 +51,7 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
         toolbar.setTitleTextColor(Color.WHITE);
         buttonFisioPoints = findViewById(R.id.button_adquirir_fisio_points);
         viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
-        MobileAds.initialize(this, "ca-app-pub-3940256099942544~3347511713");
+        MobileAds.initialize(this, "ca-app-pub-6000601527647342~1867213619");
         mRewardedVideoAd = MobileAds.getRewardedVideoAdInstance(this);
         mRewardedVideoAd.setRewardedVideoAdListener(this);
         RecyclerView recyclerView = findViewById(R.id.recyclerview_loja);
@@ -115,7 +115,7 @@ public class LojaActivity extends AppCompatActivity implements RewardedVideoAdLi
 
 
 
-        mRewardedVideoAd.loadAd("ca-app-pub-3940256099942544/5224354917", new AdRequest.Builder().build());
+        mRewardedVideoAd.loadAd("ca-app-pub-6000601527647342/3105355235", new AdRequest.Builder().build());
         buttonFisioPoints.setOnClickListener(view -> {
             buttonFisioPoints.setEnabled(false);
             if (mRewardedVideoAd.isLoaded()) {

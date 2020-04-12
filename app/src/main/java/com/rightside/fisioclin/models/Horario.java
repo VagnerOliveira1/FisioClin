@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class Horario implements Serializable {
     private int hour;
@@ -139,7 +140,7 @@ public class Horario implements Serializable {
     }
 
     public void setHoraFormatada() {
-        this.horaFormatada = new SimpleDateFormat("HH:mm").format(getDate());
+        this.horaFormatada = String.valueOf(getHour() + ":" + getMinute());
     }
 
     public void setDiaDaSemanaFormatado() {
@@ -155,10 +156,12 @@ public class Horario implements Serializable {
     }
 
     public Calendar calendar() {
-        Calendar c = Calendar.getInstance();
+        TimeZone zone = TimeZone.getTimeZone("GMT-03:00");
+        Locale locale = new Locale("pt", "BR");
+        Calendar c = Calendar.getInstance(zone, locale);
         c.set(Calendar.YEAR, getYear());
         c.set(Calendar.MONTH, getMonth());
-        c.set(Calendar.DAY_OF_MONTH, getDayOfMonth());
+        c.set(Calendar.DAY_OF_MONTH, getDayOfMonth() -1 );
         c.set(Calendar.HOUR, getHour());
         c.set(Calendar.MINUTE, getMinute());
         return c;
