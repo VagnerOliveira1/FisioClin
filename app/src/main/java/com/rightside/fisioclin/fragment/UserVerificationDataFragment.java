@@ -98,7 +98,6 @@ public class UserVerificationDataFragment extends DialogFragment {
         stickySwitchSexoPaciente.setOnSelectedChangeListener(new StickySwitch.OnSelectedChangeListener() {
             @Override
             public void onSelectedChange(@NotNull StickySwitch.Direction direction, @NotNull String text) {
-                Toast.makeText(getContext(), "Selecionado "+ text,Toast.LENGTH_LONG).show();
                 sexo = text;
             }
         });

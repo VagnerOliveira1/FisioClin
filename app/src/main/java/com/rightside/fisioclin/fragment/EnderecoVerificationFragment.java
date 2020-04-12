@@ -142,8 +142,6 @@ public class EnderecoVerificationFragment extends DialogFragment {
                         @Override
                         public void onSuccess(Void aVoid) {
                             startActivity(new Intent(getContext(), MainPacientActivity.class));
-                            fragmentActivity.finish();
-
                         }
                     });
                 }

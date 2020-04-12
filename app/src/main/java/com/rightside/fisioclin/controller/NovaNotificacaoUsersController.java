@@ -34,7 +34,7 @@ public class NovaNotificacaoUsersController {
 
 
 
-        textView.setText("Ao enviar notificação para os usuários, todos os usuários do aplicativo irão receber, incluindo aqueles que ainda não consultaram com você. \nA notificação enviada será uma divulgação do seu trabalho, e serão consumidas 10 notificações \nNão é maravilhoso?!.");
+        textView.setText("Ao enviar notificação para os usuários, todos os usuários do aplicativo irão receber, incluindo aqueles que ainda não consultaram com você. \nA notificação enviada será uma divulgação do seu trabalho, e serão consumidas 10 notificações \nNão é maravilhoso?");
         textView.setTextSize(16);
         container.addView(textView);
 

@@ -29,12 +29,13 @@ public class NovaNotificacaoPacientesController {
         container.setPadding(15,15,15,15);
         TextView textView = new TextView(fragmentActivity);
         textView.setTextColor(Color.BLACK);
+        textView.setTextSize(16);
 
-        textView.setText("Ao enviar notificação para os pacientes, todos que possuem uma consulta marcada serão alertados dos seus respectivos horários");
+        textView.setText("Ao enviar notificação para os pacientes, todos que possuem uma consulta marcada serão alertados dos seus respectivos horários.");
         container.addView(textView);
         alerta.setView(container);
 
-        alerta.setTitle("Enviar Notificacao").setMessage("Deseja lembrar os pacientes de suas consultas?")
+        alerta.setTitle("Enviar Notificação").setMessage("Deseja lembrar os pacientes de suas consultas?")
                 .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
