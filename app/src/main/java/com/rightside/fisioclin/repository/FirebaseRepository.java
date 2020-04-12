@@ -1,6 +1,5 @@
 package com.rightside.fisioclin.repository;
 
-import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
@@ -9,11 +8,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.EmailCadastrado;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Horario;
@@ -30,7 +27,7 @@ public class FirebaseRepository {
     private MutableLiveData<List<Horario>> mutableLiveDataHorarios = new MutableLiveData<>();
 
     private MutableLiveData<List<Consulta>> mutableLiveDataConsultas = new MutableLiveData<>();
-
+    private MutableLiveData<List<EmailCadastrado>> mutableLiveData = new MutableLiveData<>();
     private MutableLiveData<Consulta> mutableLiveDataConsultaPaciente = new MutableLiveData<>();
 
     private MutableLiveData<List<Ficha>> mutableLiveDataFichas = new MutableLiveData<>();
@@ -108,6 +105,10 @@ public class FirebaseRepository {
 
         return getDB().collection("horariosids");
 
+    }
+
+    public static CollectionReference getEmailsCadastrados() {
+        return getDB().collection("emailsCadastrados");
     }
 
     public static Task<Void> saveConsultaUser(final Consulta consulta) {
@@ -283,6 +284,16 @@ public class FirebaseRepository {
         });
         return mutableLiveDataMedico;
     }
+
+    public LiveData<List<EmailCadastrado>> mutableLiveDataCadastrados() {
+        getEmailsCadastrados().addSnapshotListener((queryDocumentSnapshots, e) -> {
+            mutableLiveData.setValue(queryDocumentSnapshots.toObjects(EmailCadastrado.class));
+        });
+        return mutableLiveData;
+    }
+
+
+
 
     //mudei a forma de salvar o horario para adicionarmos varios medicos ao mesmo app. ainda é necessario atualizar o delete do horario consulta, update do horario e delete horario;
 
