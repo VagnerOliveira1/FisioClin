@@ -14,13 +14,13 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:background="@color/colorPrimary"
+        android:background="@drawable/barralimpa"
         android:elevation="0dp">
 
     </RelativeLayout>
 
     <RelativeLayout
-        android:layout_width="350dp"
+        android:layout_width="wrap_content"
         android:layout_height="130dp"
         android:layout_gravity="center"
         android:layout_marginTop="-80dp"
@@ -30,8 +30,8 @@
 
         <ImageView
             android:id="@+id/imageView_doctor_picture"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_centerInParent="false"
             android:layout_centerVertical="true"
             android:layout_marginStart="10dp"
@@ -43,28 +43,68 @@
             android:id="@+id/textView_name_doctor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="20dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/imageView_doctor_picture"
-            android:fontFamily="serif"
+            android:fontFamily="sans-serif"
             android:text="@string/nome_doutor"
             android:textColor="#000000"
-            android:textSize="22sp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView4"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/textView_name_doctor"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="2dp"
-            android:layout_toRightOf="@+id/imageView_doctor_picture"
-            android:fontFamily="casual"
-            android:text="Formado na UniRedentor - 2019"
-            android:textColor="#000000"
-            android:textSize="15sp"
-            android:textStyle="bold|italic" />
+            android:layout_below="@id/textView_name_doctor"
+            android:layout_toRightOf="@id/imageView_doctor_picture"
+            android:gravity="left"
+            android:orientation="vertical"
+            android:paddingRight="40dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="left">
+
+                <TextView
+                    android:id="@+id/textViewFisioPoints"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/textView_name_doctor"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="20dp"
+                    android:layout_toRightOf="@id/imageView_doctor_picture"
+                    android:gravity="center"
+                    android:text="TextView"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="15sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView25"
+                    android:layout_width="30dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="0"
+                    android:adjustViewBounds="false"
+                    android:baselineAlignBottom="false"
+                    android:cropToPadding="false"
+                    android:src="@drawable/fp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewRelatorios"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:text="TextView"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
 
     </RelativeLayout>
 
@@ -151,7 +191,7 @@
                     android:id="@+id/textView12113"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/agendados" />
+                    android:text="Marcados hoje:" />
             </LinearLayout>
 
 
@@ -184,7 +224,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:text="@string/encerrados" />
+                    android:text="Pacientes:" />
 
 
             </LinearLayout>
@@ -196,12 +236,10 @@
     </LinearLayout>
 
 
-
-
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="7"
         android:padding="14dp"
         app:alignmentMode="alignMargins"
         app:columnCount="2"
@@ -212,14 +250,55 @@
         <!-- Columns 1 -->
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_minhas_consultas_medico"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_group" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/Consultas"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp" />
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
             android:id="@+id/cardview_horarios"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
             app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
@@ -228,13 +307,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
+                android:layout_gravity="center"
+                android:background="#ffffff"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/ic_access_time_black_24dp" />
 
@@ -246,49 +326,7 @@
                     android:text="@string/horarios"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_view_minhas_consultas_medico"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
-            app:layout_column="1"
-            app:layout_columnWeight="1"
-            app:layout_rowWeight="1">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_gravity="center_horizontal"
-                    android:src="@drawable/ic_group" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/Consultas"
-                    android:textAlignment="center"
-                    android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -300,8 +338,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
@@ -309,13 +347,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
+                android:layout_gravity="center"
+                android:background="#ffffff"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/ic_folder" />
 
@@ -327,8 +366,7 @@
                     android:text="@string/fichas"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:textStyle="bold" />
+                    android:textSize="17sp" />
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>
@@ -340,8 +378,8 @@
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="5dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
             app:layout_columnWeight="1"
             app:layout_rowWeight="1">
 
@@ -350,12 +388,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_horizontal|center_vertical"
-                android:layout_margin="16dp"
+                android:background="#ffffff"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
                     android:layout_gravity="center_horizontal"
                     android:src="@drawable/ic_notifications" />
 
@@ -366,9 +405,48 @@
                     android:text="Notificar"
                     android:textAlignment="center"
                     android:textColor="@android:color/black"
-                    android:textSize="17sp"
-                    android:src="@drawable/ic_folder" />
-            
+                    android:textSize="17sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_view_loja"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginBottom="16dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="1dp"
+            app:layout_columnWeight="1"
+            app:layout_rowWeight="1">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="#ffffff"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:src="@drawable/ic_store_black_24dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:text="Loja"
+                    android:textAlignment="center"
+                    android:textColor="@android:color/black"
+                    android:textSize="17sp" />
+
             </LinearLayout>
 
         </androidx.cardview.widget.CardView>

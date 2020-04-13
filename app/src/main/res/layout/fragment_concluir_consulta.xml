@@ -27,14 +27,24 @@
             android:id="@+id/edittext_concluirconsulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Comentário pós consulta:" />
+            android:hint="Evolução do paciente pós consulta:" />
+
+        <ProgressBar
+            android:id="@+id/progressBarSaveFicha"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:visibility="gone" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
         android:layout_gravity="center"
+        android:layout_marginTop="10dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/concluir_consulta"

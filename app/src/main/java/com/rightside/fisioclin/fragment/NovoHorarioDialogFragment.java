@@ -3,6 +3,7 @@ package com.rightside.fisioclin.fragment;
 
 import android.app.Dialog;
 import android.graphics.Color;
+import android.media.Image;
 import android.os.Bundle;
 
 import androidx.appcompat.widget.Toolbar;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,7 +43,8 @@ import retrofit2.Response;
 public class NovoHorarioDialogFragment extends DialogFragment {
 
     private TextView textViewData, textViewHora, textViewDiaSemana, textViewCidadeResultado;
-    private Button buttonSalvarHorario, buttonBuscarCidade;
+    private Button buttonSalvarHorario;
+    private ImageButton buttonBuscarCidade;
     private TextInputEditText textInputEditTextCep;
     private StickySwitch stickySwitchDomiciliar;
     private boolean domiciliar = false;
@@ -63,7 +66,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
         Toolbar toolbar = view.findViewById(R.id.toolbar_principal);
 
-        toolbar.setTitle("Confirme os dados do novo horário: ");
+        toolbar.setTitle("Novo horário: ");
         toolbar.setTitleTextColor(Color.WHITE);
         Bundle bundle = getArguments();
         Horario horario = (Horario) bundle.get("horario");
@@ -86,6 +89,7 @@ public class NovoHorarioDialogFragment extends DialogFragment {
 
         endereco.setCidade_info(cidade_info);
         endereco.setEstado_info(estado_inf);
+
 
         SimpleMaskFormatter simpleMaskFormatter = new SimpleMaskFormatter("NNNNN-NNN");
         MaskTextWatcher maskTextWatcher = new MaskTextWatcher(textInputEditTextCep,simpleMaskFormatter);

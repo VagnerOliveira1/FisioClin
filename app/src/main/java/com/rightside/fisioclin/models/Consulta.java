@@ -11,7 +11,7 @@ public class Consulta implements Serializable {
     public Consulta() {
     }
     private String comentarioPosConsulta = "";
-
+    private boolean avaliada = false;
 
     public Consulta(Horario horario, Paciente paciente) {
         this.horario = horario;
@@ -51,6 +51,14 @@ public class Consulta implements Serializable {
 
     public void setComentarioPosConsulta(String comentarioPosConsulta) {
         this.comentarioPosConsulta = comentarioPosConsulta;
+    }
+
+    public boolean isAvaliada() {
+        return avaliada;
+    }
+
+    public void setAvaliada(boolean avaliada) {
+        this.avaliada = avaliada;
     }
 
     public HashMap<String, Object> returnConsulta() {

@@ -45,7 +45,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0"
-                    android:hint="Cep:" />
+                    android:hint="Cep:"
+                    android:inputType="number" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -124,7 +125,8 @@
                     android:id="@+id/edit_text_numero"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Número:" />
+                    android:hint="Número:"
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

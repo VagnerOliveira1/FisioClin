@@ -9,6 +9,11 @@
 
     <include layout="@layout/toolbar"/>
 
+    <SearchView
+        android:id="@+id/searchBuscarMedico"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_medicos_lista"
         android:layout_width="match_parent"

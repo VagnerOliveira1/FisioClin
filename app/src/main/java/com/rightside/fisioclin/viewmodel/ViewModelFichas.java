@@ -21,12 +21,16 @@ public class ViewModelFichas extends AndroidViewModel {
         firebaseRepository = new FirebaseRepository();
     }
 
-    public LiveData<List<Ficha>> getFichas() {
-        return firebaseRepository.getMutableLiveDataFichas();
+    public LiveData<List<Ficha>> getFichas(String medicoId) {
+        return firebaseRepository.getMutableLiveDataFichas(medicoId);
 
     }
 
     public LiveData<Ficha> getFicha(String id) {
         return firebaseRepository.getMutableLiveDataFicha(id);
+    }
+
+    public LiveData<Ficha> getFichaMedico(String idMedico, String idPaciente) {
+        return firebaseRepository.getMutableLiveDataFichasPacienteMedico(idMedico, idPaciente);
     }
 }

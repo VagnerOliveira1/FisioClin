@@ -1,5 +1,6 @@
 package com.rightside.fisioclin.controller;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.rightside.fisioclin.PushNotificaTionFcm;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.utils.GeralUtils;
 
@@ -20,7 +22,7 @@ import java.util.List;
 
 public class NovaNotificacaoUsersController {
 
-    public static void alertaNovaNotificacaoUsers(FragmentActivity fragmentActivity, DialogFragment dialogFragment, List<User> userList) {
+    public static void alertaNovaNotificacaoUsers(Medico medico, FragmentActivity fragmentActivity, DialogFragment dialogFragment, List<User> userList, Context context) {
         final AlertDialog.Builder alerta = new AlertDialog.Builder(fragmentActivity);
         LinearLayout container = new LinearLayout(fragmentActivity.getApplicationContext());
         container.setOrientation(LinearLayout.VERTICAL);
@@ -28,31 +30,30 @@ public class NovaNotificacaoUsersController {
         container.setPadding(15,15,15,15);
         TextView textView = new TextView(fragmentActivity);
         textView.setTextColor(Color.BLACK);
-        TextView textViewAbuse = new TextView(fragmentActivity);
-        TextInputEditText textInputEditTextTitulo = new TextInputEditText(fragmentActivity);
-        textInputEditTextTitulo.setHint("Titulo");
-
-        TextInputEditText textInputEditTextMensagem = new TextInputEditText(fragmentActivity);
-        textInputEditTextMensagem.setHint("Mensagem");
-        textViewAbuse.setText("Atenção! não abuse disso, pode causar rejeição...");
-        textViewAbuse.setTextColor(Color.BLACK);
 
 
-        textView.setText("Ao enviar notificação para os usuarios, todos irão receber, incluindo os pacientes.");
+
+
+        textView.setText("Ao enviar notificação para os usuários, todos os usuários do aplicativo irão receber, incluindo aqueles que ainda não consultaram com você. \nA notificação enviada será uma divulgação do seu trabalho, e serão consumidas 10 notificações \nNão é maravilhoso?");
+        textView.setTextSize(16);
         container.addView(textView);
-        container.addView(textViewAbuse);
-        container.addView(textInputEditTextTitulo);
-        container.addView(textInputEditTextMensagem);
 
         alerta.setView(container);
 
-        alerta.setTitle("Nova notificação!").setMessage("Deseja enviar notificação para todos os usuários?")
+        alerta.setTitle("Enviar notificação").setMessage("Deseja se divulgar para todos os usuários?")
                 .setPositiveButton("Enviar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        PushNotificaTionFcm.pushNotificationUsers(userList, textInputEditTextTitulo.getText().toString(), textInputEditTextMensagem.getText().toString());
-                        GeralUtils.mostraAlerta("Atenção!", "suas notificações foram enviadas com sucesso!", fragmentActivity);
-                        dialogFragment.dismiss();
+
+                        if(medico.getNotificacao() >= 10) {
+                            medico.setNotificacao(medico.getNotificacao() - 10);
+                            PushNotificaTionFcm.pushNotificationUsers(userList, "Eii, tem sentido algo?", "Me chamo " + medico.getName() + " e estou atendendo agora!! Marque já sua consulta no app comigo!");
+                            GeralUtils.mostraAlerta("Sucesso!", "suas notificações foram enviadas para os usuários.", fragmentActivity);
+                            dialogFragment.dismiss();
+                        } else {
+                            GeralUtils.mostraAlerta("Falha", "Você não possui créditos de notificações suficientes, compre com FisioPoints na Loja", context);
+                        }
+
 
                     }}).setNegativeButton("Cancelar", null).show();
     }

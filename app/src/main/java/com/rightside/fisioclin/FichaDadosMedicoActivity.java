@@ -1,5 +1,6 @@
 package com.rightside.fisioclin;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -13,9 +14,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.rightside.fisioclin.adapter.ConsultasRealizadasPacienteAdapter;
 import com.rightside.fisioclin.models.Consulta;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
+import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 
 import java.util.List;
@@ -56,9 +61,25 @@ public class FichaDadosMedicoActivity extends AppCompatActivity {
 
         Paciente paciente = (Paciente) intent.getSerializableExtra("paciente");
         List<Consulta> consultasList = (List<Consulta>) intent.getSerializableExtra("consultaList");
+        Medico medico = (Medico) intent.getSerializableExtra("medico");
 
         buttonRelatorio.setOnClickListener(view -> {
-            GeralUtils.gerarRelatorio(paciente, consultasList);
+
+            if(medico.getRelatorio() > 0) {
+                medico.setRelatorio(medico.getRelatorio() - 1);
+                FirebaseRepository.atualizaPontoMedico(medico).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            GeralUtils.gerarRelatorio(FichaDadosMedicoActivity.this,paciente, consultasList);
+                        }
+                    }
+                });
+
+            } else {
+                GeralUtils.mostraAlerta("Falha ao salvar relatório.", "Você não possui créditos de relatório suficiente, compre na loja com FisioPoints.", FichaDadosMedicoActivity.this);
+            }
+
         });
 
         textViewPacienteNome.setText(paciente.getName());

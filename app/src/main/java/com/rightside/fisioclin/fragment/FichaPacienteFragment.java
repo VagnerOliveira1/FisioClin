@@ -1,10 +1,12 @@
 package com.rightside.fisioclin.fragment;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.graphics.Color;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -39,6 +41,8 @@ public class FichaPacienteFragment extends DialogFragment {
     private ImageView imageViewPacienteFichaFoto;
 
     private FichaPacienteAdapter fichaPacienteAdapter;
+    private FragmentActivity fragmentActivity;
+    private Context context;
 
 
     public static FichaPacienteFragment novaInstancia(Ficha ficha){
@@ -47,8 +51,12 @@ public class FichaPacienteFragment extends DialogFragment {
         bundle.putSerializable("ficha", ficha);
         fichaPacienteFragment.setArguments(bundle);
         return fichaPacienteFragment;
+    }
 
-
+    public FichaPacienteFragment setActivity(FragmentActivity fragmentActivity, Context context) {
+        this.fragmentActivity = fragmentActivity;
+        this.context = context;
+        return this;
     }
 
     @Override
@@ -81,8 +89,7 @@ public class FichaPacienteFragment extends DialogFragment {
         Bundle bundle = getArguments();
         Ficha ficha = (Ficha) bundle.getSerializable("ficha");
 
-        fichaPacienteAdapter = new FichaPacienteAdapter(getContext());
-
+        fichaPacienteAdapter = new FichaPacienteAdapter(fragmentActivity, context, ficha);
         recyclerViewFicha.setAdapter(fichaPacienteAdapter);
         List<Consulta> consultaList = ficha.getConsulta();
         fichaPacienteAdapter.update(consultaList);

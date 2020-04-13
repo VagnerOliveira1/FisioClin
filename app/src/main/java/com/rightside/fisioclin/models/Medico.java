@@ -6,6 +6,12 @@ import java.util.HashMap;
 public class Medico extends User implements Serializable {
 
     private String crefito = "";
+    private Clinica clinica;
+    private Pontuacao pontuacao;
+    private FisioPoints fisioPoints;
+    private int notificacao = 0;
+    private int relatorio = 0;
+
 
     public Medico() {
 
@@ -20,6 +26,50 @@ public class Medico extends User implements Serializable {
     public Medico(String id, String name, String profilePictureUrl) {
         super(id, name, profilePictureUrl);
         setAdmin(true);
+    }
+
+    public int getNotificacao() {
+        return notificacao;
+    }
+
+    public void setNotificacao(int notificacao) {
+        this.notificacao = notificacao;
+    }
+
+    public int getRelatorio() {
+        return relatorio;
+    }
+
+    public void setRelatorio(int relatorio) {
+        this.relatorio = relatorio;
+    }
+
+    public Pontuacao getPontuacao() {
+        return pontuacao;
+    }
+
+    public void setPontuacao(Pontuacao pontuacao) {
+        this.pontuacao = pontuacao;
+    }
+
+    public boolean contain(String text) {
+        return getName().toLowerCase().contains(text);
+    }
+
+    public Clinica getClinica() {
+        return clinica;
+    }
+
+    public void setClinica(Clinica clinica) {
+        this.clinica = clinica;
+    }
+
+    public FisioPoints getFisioPoints() {
+        return fisioPoints;
+    }
+
+    public void setFisioPoints(FisioPoints fisioPoints) {
+        this.fisioPoints = fisioPoints;
     }
 
     @Override
@@ -44,8 +94,11 @@ public class Medico extends User implements Serializable {
         doctor.put("phoneNumber", getPhoneNumber());
         doctor.put("crefito", getCrefito());
         doctor.put("endereco", getEndereco());
-
-
+        doctor.put("clinica", getClinica());
+        doctor.put("pontuacao", getPontuacao());
+        doctor.put("relatorio", getRelatorio());
+        doctor.put("notificacao", getNotificacao());
+        doctor.put("fisioPoints", getFisioPoints());
         return doctor;
     }
 

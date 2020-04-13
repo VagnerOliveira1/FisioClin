@@ -42,6 +42,7 @@ public class Endereco implements Serializable {
     @JsonIgnore
     private String numero = "";
 
+
     @JsonProperty("bairro")
     public String getBairro() {
         return bairro;

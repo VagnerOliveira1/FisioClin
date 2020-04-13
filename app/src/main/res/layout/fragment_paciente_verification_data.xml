@@ -60,7 +60,7 @@
         android:layout_gravity="center"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/possui_um_diagnostico_medico"
+        android:text="Você já foi em um médico?"
         android:textOff="Não"
         android:textOn="Sim"
         android:textSize="18sp" />
@@ -86,8 +86,9 @@
             android:id="@+id/editDiagnosticoMedico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/diagnostico_medico_paciente"
+            android:hint="Qual foi o diagnóstico?"
             android:inputType="text"
+            android:text="Não possuo"
             android:visibility="visible" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -108,10 +109,21 @@
 
 
         <LinearLayout
+            android:id="@+id/linearLayoutSessoes"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/textView21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Quantas sessões ele te indicou?"
+                android:textColor="#000000"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/mostraNumeroSessoes"

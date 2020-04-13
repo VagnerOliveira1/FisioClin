@@ -10,6 +10,7 @@ public class Ficha implements Serializable {
     private List<Consulta> consulta = new ArrayList<>();
     private Paciente paciente;
 
+
     public Ficha() {
     }
 
@@ -17,6 +18,10 @@ public class Ficha implements Serializable {
         this.paciente = paciente;
         this.consulta.add(consulta);
 
+    }
+
+    public boolean contain(String text) {
+        return getPaciente().getName().toLowerCase().contains(text);
     }
 
     public List<Consulta> getConsulta() {

@@ -1,12 +1,16 @@
 package com.rightside.fisioclin;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -17,6 +21,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -27,11 +32,18 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.rightside.fisioclin.fragment.MedicoVerificationDataFragment;
 import com.rightside.fisioclin.fragment.UserVerificationDataFragment;
+import com.rightside.fisioclin.models.EmailCadastrado;
+import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.ConstantUtils;
+import com.rightside.fisioclin.viewmodel.ViewModelCadastrados;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 
 public class LoginPacientActivity extends AppCompatActivity {
@@ -39,11 +51,15 @@ public class LoginPacientActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private GoogleSignInClient mGoogleSignInClient;
     private GoogleSignInAccount account;
+    private List<EmailCadastrado> emailsCadastrados = new ArrayList<>();
+    private boolean ismedico = false;
+    private ViewModelCadastrados viewModelCadastrados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_pacient);
+        viewModelCadastrados = ViewModelProviders.of(this).get(ViewModelCadastrados.class);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -54,7 +70,14 @@ public class LoginPacientActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
+
+           viewModelCadastrados.getCadastrados().observe(this, emailCadastrados -> {
+               this.emailsCadastrados = emailCadastrados;
+           });
+
             signIn();
+
 
 
     }
@@ -88,12 +111,18 @@ public class LoginPacientActivity extends AppCompatActivity {
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential).addOnCompleteListener(task -> {
             if(task.isSuccessful()) {
-                if (account.getEmail().equals("ti.vagner1@gmail.com") || account.getEmail().equals("matheusldasilva20088@gmail.com")) {
+                for (EmailCadastrado medico : emailsCadastrados) {
+                    if(account.getEmail().contains(medico.getEmail())) {
+                        ismedico = true;
+                    }
+                }
+
+                if(ismedico) {
                     checkDoutor();
-                    //matheusldasilva20088@gmail.com
                 } else {
                     checkPacient();
                 }
+
             }
         });
 
@@ -107,7 +136,7 @@ public class LoginPacientActivity extends AppCompatActivity {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if(!documentSnapshot.exists()){
                     Medico medico = new Medico(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
-                    MedicoVerificationDataFragment.medicoVerificationDataFragment(medico).show(getSupportFragmentManager(), "medicoverification");
+                    MedicoVerificationDataFragment.medicoVerificationDataFragment(medico).setContext(LoginPacientActivity.this).show(getSupportFragmentManager(), "medicoverification");
                 } else {
                     startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
@@ -127,8 +156,9 @@ public class LoginPacientActivity extends AppCompatActivity {
                     User user = new User(firebaseUser.getUid(), firebaseUser.getDisplayName(), firebaseUser.getPhotoUrl().toString(), firebaseUser.getEmail());
                     UserVerificationDataFragment.pacientVerificationDataFragment(user).setActivity(this).show(getSupportFragmentManager(), "pacientVerification");
                 } else {
-                    startActivity(new Intent(this, MainPacientActivity.class));
                     Toast.makeText(getApplicationContext(),ConstantUtils.LOGIN_SUCESSO,Toast.LENGTH_LONG).show();
+                    startActivity(new Intent(this, MainPacientActivity.class));
+                    finish();
                 }
 
             }

@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
@@ -29,6 +30,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         private HorarioPacienteAdapter mAdapter;
         private ViewModelHorarios viewModelHorarios;
         private ViewModelConsultaPaciente viewModelConsultaPaciente;
+        private TextView textViewNomeMedicoEscolhido;
         private Medico medico;
 
         @Override
@@ -36,19 +38,23 @@ public class HorarioPacienteActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_horario_paciente);
             RecyclerView recyclerView = findViewById(R.id.recyclerView_horarios_paciente);
+            textViewNomeMedicoEscolhido = findViewById(R.id.textViewMedicoEscolhidoNome);
             list = new ArrayList<>();
 
              Toolbar toolbar = findViewById(R.id.toolbar_principal);
              toolbar.setTitleTextColor(Color.WHITE);
              toolbar.setSubtitleTextColor(Color.WHITE);
 
-             toolbar.setTitle("Horários:");
-             toolbar.setSubtitle("Segunda-feira");
-
 
             Intent intent = getIntent();
             User usuario = (User) intent.getSerializableExtra("usuario");
             medico = (Medico) intent.getSerializableExtra("medico");
+
+             toolbar.setTitle("Horários:");
+             toolbar.setSubtitle("Segunda-feira");
+
+            textViewNomeMedicoEscolhido.setText(medico.getName());
+
             TabLayout tabLayout = findViewById(R.id.tabLayout_navigation_paciente);
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
             mAdapter = new HorarioPacienteAdapter(this, HorarioPacienteActivity.this, usuario);

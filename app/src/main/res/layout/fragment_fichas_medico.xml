@@ -10,9 +10,17 @@
 
     <include layout="@layout/toolbar"/>
 
+    <SearchView
+        android:id="@+id/searchMenu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alwaysDrawnWithCache="false" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_fichas_medico"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent" >
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>

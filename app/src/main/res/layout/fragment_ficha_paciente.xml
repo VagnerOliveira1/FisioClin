@@ -19,8 +19,8 @@
 
         <ImageView
             android:id="@+id/imageView_ficha_paciente_picture"
-            android:layout_width="100dp"
-            android:layout_height="120dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:layout_weight="0"
             tools:srcCompat="@tools:sample/avatars[0]" />
 
@@ -37,6 +37,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="@string/nome_paciente"
+                android:textColor="#000000"
                 android:textSize="20sp" />
 
             <TextView
@@ -47,7 +48,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="5dp"
-                android:text="@string/profissao_paciente" />
+                android:text="@string/profissao_paciente"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_telefone"
@@ -56,7 +59,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="@string/telefone_paciente" />
+                android:text="@string/telefone_paciente"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_sexo"
@@ -65,7 +70,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="@string/sexo_paciente" />
+                android:text="@string/sexo_paciente"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_nascimento"
@@ -75,7 +82,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="@string/data_nascimento_paciente" />
+                android:text="@string/data_nascimento_paciente"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/textView_ficha_paciente_email"
@@ -84,7 +93,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:paddingTop="2dp"
-                android:text="@string/email_paciente" />
+                android:text="@string/email_paciente"
+                android:textColor="#000000"
+                android:textSize="16sp" />
 
 
 
@@ -98,7 +109,7 @@
         android:layout_gravity="center"
         android:layout_weight="0"
         android:gravity="center"
-        android:text="@string/consultas_realizadas"
+        android:text="Historico de Consultas:"
         android:textColor="#000000"
         android:textSize="17sp" />
 

@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -36,19 +37,25 @@ import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
+import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class MainMedicoActivity extends FragmentActivity {
 
     private ImageView imageViewDoctorPicture;
-    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification;
-    private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas;
+    private CardView  cardViewHorarios,cardViewMinhasConsultasMedico, cardViewFichasMedico, cardViewPushNotification, cardViewLoja;
+    private TextView textViewNameDoctor, textViewQuantidadeConsultasMarcadas, textViewConsultasFinalizadas, textViewRelatorios;
     private Medico medico;
     private ViewModelConsultas viewModelConsultas;
     private ViewModelFichas viewModelFichas;
+    private ViewModelMedicos viewModelMedico;
+    private TextView textViewFisioPoints;
     private static final int REQUEST_PERMISSAO_ARQUIVOS = 1;
     private List<Consulta> consultaList = new ArrayList<>();
 
@@ -63,6 +70,9 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewPushNotification = findViewById(R.id.card_view_push);
         cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
+        textViewFisioPoints = findViewById(R.id.textViewFisioPoints);
+        cardViewLoja = findViewById(R.id.card_view_loja);
+        textViewRelatorios = findViewById(R.id.textViewRelatorios);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
         textViewQuantidadeConsultasMarcadas = findViewById(R.id.textViewNumeroConsultas);
 
@@ -70,23 +80,20 @@ public class MainMedicoActivity extends FragmentActivity {
 
         viewModelConsultas = ViewModelProviders.of(this).get(ViewModelConsultas.class);
         viewModelFichas = ViewModelProviders.of(this).get(ViewModelFichas.class);
+        viewModelMedico = ViewModelProviders.of(this).get(ViewModelMedicos.class);
 
 
+        Date date = new Date();
+        String diaHoje = new SimpleDateFormat("EEE", new Locale("pt", "BR")).format(date).toLowerCase();
 
-        FirebaseRepository.getMedico(FirebaseRepository.getIdPessoaLogada()).addSnapshotListener(new EventListener<DocumentSnapshot>() {
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException e) {
-                if(documentSnapshot != null && documentSnapshot.exists()) {
-                     medico = documentSnapshot.toObject(Medico.class);
-                    alteraInformacaoPerfil(medico);
-                }
-            }
+
+        viewModelMedico.getMedico().observe(this, medico1 -> {
+            medico = medico1;
+            alteraInformacaoPerfil(medico);
         });
 
 
-
-        viewModelConsultas.getConsultas().observe(this, consultaList -> {
-
+        viewModelConsultas.getConsultas(FirebaseRepository.getIdPessoaLogada(), diaHoje).observe(this, consultaList -> {
             if(consultaList != null) {
                 textViewQuantidadeConsultasMarcadas.setText(String.valueOf(consultaList.size()));
                 this.consultaList = consultaList;
@@ -94,10 +101,9 @@ public class MainMedicoActivity extends FragmentActivity {
                 textViewQuantidadeConsultasMarcadas.setText("0");
 
             }
-
         });
 
-        viewModelFichas.getFichas().observe(this, fichaList -> {
+        viewModelFichas.getFichas(FirebaseRepository.getIdPessoaLogada()).observe(this, fichaList -> {
             if(fichaList != null) {
                 textViewConsultasFinalizadas.setText(String.valueOf(fichaList.size()));
             } else {
@@ -106,7 +112,7 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewPushNotification.setOnClickListener(view -> {
-            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList).setFragmentActivity(this).show(getSupportFragmentManager(), "notificacao");
+            EscolherAlvoNotificacaoFragment.novaInstancia(consultaList, medico).setFragmentActivity(this, MainMedicoActivity.this).show(getSupportFragmentManager(), "notificacao");
         });
 
 
@@ -125,7 +131,11 @@ public class MainMedicoActivity extends FragmentActivity {
         });
 
         cardViewFichasMedico.setOnClickListener(view -> {
-           FichasMedicoFragment.novaInstancia().show(getSupportFragmentManager(), "fichas");
+           FichasMedicoFragment.novaInstancia().setMedico(medico, MainMedicoActivity.this).show(getSupportFragmentManager(), "fichas");
+        });
+
+        cardViewLoja.setOnClickListener(view -> {
+            startActivity(new Intent(MainMedicoActivity.this, LojaActivity.class));
         });
 
 
@@ -136,11 +146,13 @@ public class MainMedicoActivity extends FragmentActivity {
     private void alteraInformacaoPerfil(Medico medico) {
         textViewNameDoctor.setText(medico.getName());
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
+        textViewFisioPoints.setText(String.valueOf(medico.getFisioPoints().getPoints()));
+        textViewRelatorios.setText("Notificações: " + medico.getNotificacao() + " " + "Relátorios: " + medico.getRelatorio());
     }
 
     public void verificaPermissaoArquivos() {
         if (Build.VERSION.SDK_INT >= 23) {
-            if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE)
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
                     != PackageManager.PERMISSION_GRANTED) {
 
                 ActivityCompat.requestPermissions(MainMedicoActivity.this, new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PERMISSAO_ARQUIVOS);

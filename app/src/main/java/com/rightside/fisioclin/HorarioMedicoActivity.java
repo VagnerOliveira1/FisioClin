@@ -11,6 +11,7 @@ import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -81,7 +82,6 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
            @Override
            public void onTabSelected(TabLayout.Tab tab) {
                if(tab.getPosition() == 0) {
-                   Toast.makeText(HorarioMedicoActivity.this, "seg", Toast.LENGTH_SHORT).show();
                     observerHorarioDia( medico,"seg");
                    toolbar.setSubtitle("Segunda-feira");
                } else if (tab.getPosition() == 1) {

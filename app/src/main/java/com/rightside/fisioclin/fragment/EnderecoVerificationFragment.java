@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,6 +39,7 @@ public class EnderecoVerificationFragment extends DialogFragment {
     private TextView textViewConsultaTitulo;
     private Button buttonBuscar, buttonSalvar;
     private Endereco endereco = new Endereco();
+    private FragmentActivity fragmentActivity;
 
     public static EnderecoVerificationFragment enderecoVerificationFragment(User user) {
         EnderecoVerificationFragment enderecoVerificationFragment = new EnderecoVerificationFragment();
@@ -45,6 +47,11 @@ public class EnderecoVerificationFragment extends DialogFragment {
         bundle.putSerializable("user", user);
         enderecoVerificationFragment.setArguments(bundle);
         return enderecoVerificationFragment;
+    }
+
+    public EnderecoVerificationFragment fragmentActivity(FragmentActivity fragmentActivity) {
+        this.fragmentActivity = fragmentActivity;
+        return this;
     }
 
 
