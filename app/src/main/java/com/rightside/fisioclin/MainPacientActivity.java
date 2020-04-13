@@ -23,6 +23,7 @@ import com.rightside.fisioclin.fragment.ConsultaPacientDialogFragment;
 import com.rightside.fisioclin.fragment.FichaPacienteFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
+import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.Paciente;
 import com.rightside.fisioclin.models.User;
 import com.rightside.fisioclin.repository.FirebaseRepository;
@@ -30,7 +31,12 @@ import com.rightside.fisioclin.utils.ConstantUtils;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultaPaciente;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
+import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
 import com.rightside.fisioclin.viewmodel.ViewModelUser;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainPacientActivity extends AppCompatActivity {
@@ -44,6 +50,8 @@ public class MainPacientActivity extends AppCompatActivity {
     private ViewModelConsultaPaciente viewModelConsultaPaciente;
     private ViewModelUser viewModelUser;
     private ViewModelFichas viewModelFichaPaciente;
+    private ViewModelMedicos viewModelMedicos;
+    private List<Medico> medicoList = new ArrayList<>();
     private User usuario;
     private Ficha ficha;
 
@@ -61,6 +69,11 @@ public class MainPacientActivity extends AppCompatActivity {
         viewModelConsultaPaciente = ViewModelProviders.of(this).get(ViewModelConsultaPaciente.class);
         viewModelUser = ViewModelProviders.of(this).get(ViewModelUser.class);
         viewModelFichaPaciente = ViewModelProviders.of(this).get(ViewModelFichas.class);
+        viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
+
+        viewModelMedicos.getMedicos().observe(this, medicoList -> {
+        this.medicoList = medicoList;
+        });
 
         viewModelUser.getUser(FirebaseRepository.getIdPessoaLogada()).observe(this, usuario -> {
             alteraInformacaoPerfil(usuario);
@@ -85,6 +98,7 @@ public class MainPacientActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(MainPacientActivity.this, ListaMedicosActivity.class);
                 intent.putExtra("usuario", usuario);
+                intent.putExtra("medicos", (Serializable) medicoList);
                startActivity(intent);
 
             }

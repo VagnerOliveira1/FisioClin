@@ -27,30 +27,31 @@ public class ListaMedicosActivity extends AppCompatActivity {
     private MedicosAdapter medicosAdapter;
     private List<Medico> medicoList;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_medicos);
-       RecyclerView recyclerView = findViewById(R.id.recycler_view_medicos_lista);
+        RecyclerView recyclerView = findViewById(R.id.recycler_view_medicos_lista);
+        ViewModelMedicos viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
+        Intent intent = getIntent();
+        User user = (User) intent.getSerializableExtra("usuario");
+        medicoList = (List<Medico>) intent.getSerializableExtra("medicos");
         SearchView searchView = findViewById(R.id.searchBuscarMedico);
         Toolbar toolbar = findViewById(R.id.toolbar_principal);
        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
-        Intent intent = getIntent();
-        User user = (User) intent.getSerializableExtra("usuario");
+
+        medicosAdapter = new MedicosAdapter(this,user, this);
         toolbar.setTitle("Escolha o fisioterapeuta:");
         toolbar.setTitleTextColor(Color.WHITE);
-        medicosAdapter = new MedicosAdapter(this,user, this);
+
         recyclerView.setAdapter(medicosAdapter);
 
-        ViewModelMedicos viewModelMedicos = ViewModelProviders.of(this).get(ViewModelMedicos.class);
+        medicosAdapter.update(medicoList);
 
 
-       viewModelMedicos.getMedicos().observe(this, medicoList -> {
-           this.medicoList = medicoList;
-           medicosAdapter.update(medicoList);
-       });
 
        searchView.setQueryHint("Informe o nome ");
        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
