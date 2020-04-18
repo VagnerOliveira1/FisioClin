@@ -60,7 +60,7 @@ public class ProdutosAdapter extends RecyclerView.Adapter<ProdutosAdapter.ViewHo
                 if(medico.getFisioPoints().getPoints() >= produtosList.get(position).getPreco()) {
                     ComprarProdutoController.alertaComprarProduto(fragmentActivity, medico, produtosList.get(position));
                 } else {
-                    Toast.makeText(context, "Não possui grana", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Não possui FisioPoints", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -53,7 +53,7 @@ public class Medico extends User implements Serializable {
     }
 
     public boolean contain(String text) {
-        return getName().toLowerCase().contains(text);
+        return getName().toLowerCase().contains(text.toLowerCase());
     }
 
     public Clinica getClinica() {

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,6 +57,7 @@ public class MainMedicoActivity extends FragmentActivity {
     private ViewModelFichas viewModelFichas;
     private ViewModelMedicos viewModelMedico;
     private TextView textViewFisioPoints;
+    private RatingBar ratingBar;
     private static final int REQUEST_PERMISSAO_ARQUIVOS = 1;
     private List<Consulta> consultaList = new ArrayList<>();
 
@@ -71,6 +73,8 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewMinhasConsultasMedico = findViewById(R.id.card_view_minhas_consultas_medico);
         cardViewFichasMedico = findViewById(R.id.card_view_fichas_medico);
         textViewFisioPoints = findViewById(R.id.textViewFisioPoints);
+        ratingBar = findViewById(R.id.rating_nota_medico);
+        ratingBar.isIndicator();
         cardViewLoja = findViewById(R.id.card_view_loja);
         textViewRelatorios = findViewById(R.id.textViewRelatorios);
         textViewConsultasFinalizadas = findViewById(R.id.textViewConsultasFInalizadas);
@@ -148,6 +152,7 @@ public class MainMedicoActivity extends FragmentActivity {
         GeralUtils.mostraImagemCircular(this, imageViewDoctorPicture, medico.getProfilePictureUrl());
         textViewFisioPoints.setText(String.valueOf(medico.getFisioPoints().getPoints()));
         textViewRelatorios.setText("Notificações: " + medico.getNotificacao() + " " + "Relátorios: " + medico.getRelatorio());
+        ratingBar.setNumStars(medico.getPontuacao().getMedia());
     }
 
     public void verificaPermissaoArquivos() {

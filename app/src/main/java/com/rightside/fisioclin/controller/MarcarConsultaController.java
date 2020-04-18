@@ -39,12 +39,12 @@ public class MarcarConsultaController {
         ImageView calendariot = new ImageView(activity);
 
 
-        horarioData.setTextSize(16);
+        horarioData.setTextSize(14);
         horarioData.setTextColor(Color.BLACK);
         horarioDiaSemana.setTextColor(Color.BLACK);
-        horarioDiaSemana.setTextSize(16);
+        horarioDiaSemana.setTextSize(14);
         horarioHora.setTextColor(Color.BLACK);
-        horarioHora.setTextSize(16);
+        horarioHora.setTextSize(14);
         relogio.setPadding(15,0,15,0);
         calendario.setImageResource(R.drawable.ic_date_range_black_24dp);
         relogio.setImageResource(R.drawable.ic_access_time_black_24dp);

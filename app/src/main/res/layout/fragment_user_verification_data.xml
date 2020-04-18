@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="10dp"
     tools:context=".fragment.UserVerificationDataFragment">
 
     <!--    <LinearLayout-->
@@ -22,7 +22,7 @@
         android:paddingBottom="10dp"
         android:text="Complete sua ficha, ela é importante para o atendimento."
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="16sp" />
 
     <!--    </LinearLayout>-->
 
@@ -47,7 +47,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nome_completo"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +72,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sua_profissao"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -95,7 +97,7 @@
                 android:gravity="center"
                 android:text="Telefone:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
             <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/editTelefonePaciente"
@@ -123,7 +125,7 @@
                 android:gravity="center"
                 android:text="Data de nascimento:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
             <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/editDataNascPaciente"
@@ -166,7 +168,7 @@
             app:ss_animationDuration="300"
             app:ss_animationType="line"
             app:ss_iconPadding="14dp"
-            app:ss_iconSize="22dp"
+            app:ss_iconSize="16dp"
             app:ss_leftIcon="@drawable/ic_male"
             app:ss_leftText="M"
             app:ss_rightIcon="@drawable/ic_fem"
