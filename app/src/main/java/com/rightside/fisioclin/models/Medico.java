@@ -104,6 +104,7 @@ public class Medico extends User implements Serializable {
         doctor.put("relatorio", getRelatorio());
         doctor.put("notificacao", getNotificacao());
         doctor.put("fisioPoints", getFisioPoints());
+        doctor.put("email", getEmail());
         return doctor;
     }
 
