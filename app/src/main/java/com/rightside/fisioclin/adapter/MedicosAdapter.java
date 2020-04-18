@@ -72,13 +72,14 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         }
 
         GeralUtils.mostraImagemCircular(context, holder.imageViewFotoMedico, medico.getProfilePictureUrl());
-        holder.buttonComoChegar.setOnClickListener(new View.OnClickListener() {
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 ComoChegarFragment.comoChegarFragment(medico.getClinica().getEndereco()).setContext(context).show(fragmentActivity.getSupportFragmentManager(), "comochegar");
-
+                return false;
             }
         });
+
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(context, HorarioPacienteActivity.class);
             intent.putExtra("usuario", user);
@@ -104,13 +105,11 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
     class ViewHolderMedicos extends RecyclerView.ViewHolder {
 
         private TextView textViewNomeMedico, textViewLocaldeAtendimento, textViewNomeClinica, textViewCrefito, textViewNotaAtendimento;
-        private Button buttonComoChegar;
         private ImageView imageViewFotoMedico;
         private RatingBar ratingBar;
         public ViewHolderMedicos(@NonNull View itemView) {
             super(itemView);
             textViewNotaAtendimento = itemView.findViewById(R.id.textViewNotaAtendimento);
-            buttonComoChegar = itemView.findViewById(R.id.buttonComoChegar);
             textViewCrefito = itemView.findViewById(R.id.textViewCrefitoListaMedicos);
             textViewNomeMedico = itemView.findViewById(R.id.textView_medico_lista_nome);
             textViewLocaldeAtendimento = itemView.findViewById(R.id.textView_cidade_atendimento);

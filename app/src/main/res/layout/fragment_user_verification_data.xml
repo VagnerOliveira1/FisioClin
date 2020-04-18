@@ -6,15 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="15dp"
+    android:padding="5dp"
     tools:context=".fragment.UserVerificationDataFragment">
-
-    <!--    <LinearLayout-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="5dp"-->
-    <!--        android:gravity="center"-->
-    <!--        android:orientation="vertical">-->
 
     <TextView
         android:layout_width="match_parent"
@@ -22,7 +15,7 @@
         android:paddingBottom="10dp"
         android:text="Complete sua ficha, ela é importante para o atendimento."
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="15sp" />
 
     <!--    </LinearLayout>-->
 
@@ -47,7 +40,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/nome_completo"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -71,7 +65,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/sua_profissao"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textSize="15sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -95,7 +90,7 @@
                 android:gravity="center"
                 android:text="Telefone:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
             <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/editTelefonePaciente"
@@ -123,7 +118,7 @@
                 android:gravity="center"
                 android:text="Data de nascimento:"
                 android:textColor="#000000"
-                android:textSize="16sp" />
+                android:textSize="15sp" />
 
             <com.santalu.maskedittext.MaskEditText
                 android:id="@+id/editDataNascPaciente"
@@ -166,12 +161,12 @@
             app:ss_animationDuration="300"
             app:ss_animationType="line"
             app:ss_iconPadding="14dp"
-            app:ss_iconSize="22dp"
+            app:ss_iconSize="14dp"
             app:ss_leftIcon="@drawable/ic_male"
             app:ss_leftText="M"
             app:ss_rightIcon="@drawable/ic_fem"
             app:ss_rightText="F"
-            app:ss_selectedTextSize="10sp"
+            app:ss_selectedTextSize="14sp"
             app:ss_sliderBackgroundColor="@color/colorStickyBack"
             app:ss_switchColor="@color/colorSticky"
             app:ss_textColor="@color/colorStickyBack"
@@ -187,7 +182,7 @@
 
         <Button
             android:id="@+id/btnSalvaFichaPaciente"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="6dp"
 

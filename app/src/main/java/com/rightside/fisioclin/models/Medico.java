@@ -23,6 +23,11 @@ public class Medico extends User implements Serializable {
         setAdmin(true);
     }
 
+    public Medico(String id, String name, String profilePictureUrl, String email) {
+        super(id, name, profilePictureUrl, email);
+        setAdmin(true);
+    }
+
     public Medico(String id, String name, String profilePictureUrl) {
         super(id, name, profilePictureUrl);
         setAdmin(true);
@@ -53,7 +58,7 @@ public class Medico extends User implements Serializable {
     }
 
     public boolean contain(String text) {
-        return getName().toLowerCase().contains(text);
+        return getName().toLowerCase().contains(text.toLowerCase());
     }
 
     public Clinica getClinica() {
@@ -99,6 +104,7 @@ public class Medico extends User implements Serializable {
         doctor.put("relatorio", getRelatorio());
         doctor.put("notificacao", getNotificacao());
         doctor.put("fisioPoints", getFisioPoints());
+        doctor.put("email", getEmail());
         return doctor;
     }
 
