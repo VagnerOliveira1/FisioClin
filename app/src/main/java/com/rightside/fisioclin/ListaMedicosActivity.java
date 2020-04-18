@@ -8,14 +8,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.rightside.fisioclin.adapter.MedicosAdapter;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
 import com.rightside.fisioclin.viewmodel.ViewModelPontuacao;
 
@@ -26,6 +30,11 @@ public class ListaMedicosActivity extends AppCompatActivity {
 
     private MedicosAdapter medicosAdapter;
     private List<Medico> medicoList;
+    private boolean firstRun;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
+
+
 
 
     @Override
@@ -42,6 +51,9 @@ public class ListaMedicosActivity extends AppCompatActivity {
        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+        firstRun = prefs.getBoolean("firstRun", true);
 
         medicosAdapter = new MedicosAdapter(this,user, this);
         toolbar.setTitle("Escolha o fisioterapeuta:");
@@ -72,6 +84,19 @@ public class ListaMedicosActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(firstRun) {
+            GeralUtils.mostraAlerta("Primeira vez usando o aplicativo?\naqui vai algumas dicas!!", "Para ver os horários do fisioterapeuta basta clicar.\nPara ver mais detalhes de endereço clicar e segurar.", this);
+            editor.putBoolean("firstRun",false);
+            editor.commit();
+        }
+
+    }
+
+
     private void findChannel(String text) {
         if(medicoList.size() > 0 && !text.isEmpty()) {
             List<Medico> medicoSearch = new ArrayList<>();
@@ -86,4 +111,5 @@ public class ListaMedicosActivity extends AppCompatActivity {
             medicosAdapter.update(medicoList);
         }
     }
+
 }
