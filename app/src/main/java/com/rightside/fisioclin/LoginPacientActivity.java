@@ -135,7 +135,7 @@ public class LoginPacientActivity extends AppCompatActivity {
             if(task.isSuccessful()) {
                 DocumentSnapshot documentSnapshot = task.getResult();
                 if(!documentSnapshot.exists()){
-                    Medico medico = new Medico(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString());
+                    Medico medico = new Medico(firebaseDoctor.getUid(),firebaseDoctor.getDisplayName(), firebaseDoctor.getPhotoUrl().toString(), firebaseDoctor.getEmail());
                     MedicoVerificationDataFragment.medicoVerificationDataFragment(medico).setContext(LoginPacientActivity.this).show(getSupportFragmentManager(), "medicoverification");
                 } else {
                     startActivity(new Intent(LoginPacientActivity.this, MainMedicoActivity.class));

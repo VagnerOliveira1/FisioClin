@@ -23,6 +23,11 @@ public class Medico extends User implements Serializable {
         setAdmin(true);
     }
 
+    public Medico(String id, String name, String profilePictureUrl, String email) {
+        super(id, name, profilePictureUrl, email);
+        setAdmin(true);
+    }
+
     public Medico(String id, String name, String profilePictureUrl) {
         super(id, name, profilePictureUrl);
         setAdmin(true);
