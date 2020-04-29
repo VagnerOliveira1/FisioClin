@@ -9,8 +9,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Log;
 import android.widget.DatePicker;
 import android.widget.TimePicker;
@@ -21,14 +23,17 @@ import com.google.android.material.tabs.TabLayout;
 import com.rightside.fisioclin.adapter.HorarioMedicoAdapter;
 import com.rightside.fisioclin.controller.NovoHorarioController;
 import com.rightside.fisioclin.fragment.DatePickerFragment;
+import com.rightside.fisioclin.fragment.DicasDialogFragment;
 import com.rightside.fisioclin.fragment.HourFragment;
 import com.rightside.fisioclin.fragment.NovoHorarioDialogFragment;
 import com.rightside.fisioclin.models.Endereco;
 import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 
@@ -39,6 +44,9 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     private int hour,min;
     private Horario horario;
     private Medico medico;
+    private boolean firstRunHorarios;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +64,9 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
         Toolbar toolbar = findViewById(R.id.toolbar_principal);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setSubtitleTextColor(Color.WHITE);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+        firstRunHorarios = prefs.getBoolean("firstRunHorarios", true);
 
         Intent intent = getIntent();
         medico = (Medico) intent.getSerializableExtra("medico");
@@ -137,8 +148,22 @@ public class HorarioMedicoActivity extends FragmentActivity implements HourFragm
     @Override
     public void onDateSet(DatePicker datePicker, int year, int month, int dayOfWeek) {
         String uniqueId = UUID.randomUUID().toString();
+        Log.d("day", String.valueOf(dayOfWeek));
         horario = new Horario(hour,min,year,dayOfWeek,month,uniqueId, uniqueId, medico, false);
         NovoHorarioDialogFragment.novoHorarioDialogFragment(horario).show(getSupportFragmentManager(), "horario");
+    }
+
+    @Override
+    public void onResume(){
+        super.onResume();
+
+        if(firstRunHorarios) {
+            DicasDialogFragment.novaInstancia("Boas vindas!! aqui vai algumas dicas", "Essa é sua tela de horários. Para cadastrar um novo horário basta apertar o botão azul abaixo.\nCaso queira apagar algum horário basta clicar e segurar nele").show(getSupportFragmentManager(), "dicas");
+            editor.putBoolean("firstRunHorarios",false);
+            firstRunHorarios = false;
+            editor.commit();
+        }
+
     }
 
     @Override

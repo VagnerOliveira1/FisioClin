@@ -30,31 +30,33 @@
             android:layout_toRightOf="@id/imageView_foto_medico"
             android:text="TextView"
             android:textColor="#000000"
-            android:textSize="18sp"
+            android:textSize="17sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/textView_nome_clinica"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@id/textView_medico_lista_nome"
+            android:layout_alignStart="@id/textView_medico_lista_nome"
             android:layout_centerInParent="false"
             android:layout_centerHorizontal="false"
             android:layout_centerVertical="false"
-            android:layout_marginLeft="5dp"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
-            android:layout_toRightOf="@id/textView_medico_lista_nome"
+            android:layout_toRightOf="@id/imageView_foto_medico"
             android:layout_weight="0"
             android:fontFamily="sans-serif-medium"
             android:text="TextView"
             android:textColor="@android:color/holo_red_dark"
-            android:textSize="16sp"
-            android:textStyle="italic" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/textViewCrefitoListaMedicos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textView_cidade_atendimento"
+            android:layout_alignStart="@id/textView_medico_lista_nome"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
             android:layout_toRightOf="@id/imageView_foto_medico"
@@ -68,9 +70,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewNotaAtendimento"
-            android:layout_alignStart="@id/imageView_foto_medico"
+            android:layout_alignStart="@id/textViewNotaAtendimento"
             android:layout_centerHorizontal="false"
             android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/imageView_foto_medico"
             android:max="5"
             android:padding="0dp"
             android:rating="5" />
@@ -79,7 +82,8 @@
             android:id="@+id/textView_cidade_atendimento"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/textView_medico_lista_nome"
+            android:layout_below="@id/textView_nome_clinica"
+            android:layout_alignStart="@id/textView_medico_lista_nome"
             android:layout_centerHorizontal="false"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="2dp"
@@ -95,12 +99,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/textViewCrefitoListaMedicos"
-            android:layout_alignStart="@id/imageView_foto_medico"
             android:layout_centerHorizontal="false"
             android:layout_marginTop="2dp"
+            android:layout_toRightOf="@id/imageView_foto_medico"
             android:text="Nota de atendimento:"
-            android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textColor="#000000" />
 
     </RelativeLayout>
 

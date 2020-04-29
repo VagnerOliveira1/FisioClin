@@ -4,6 +4,7 @@
     xmlns:whilu="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".fragment.EnderecoVerificationFragment">
@@ -13,10 +14,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:orientation="vertical"
-        android:padding="10dp">
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView_consulta_texto"
@@ -26,7 +25,7 @@
             android:gravity="center"
             android:text="Caso você futuramente escolha uma consulta domiciliar iremos precisar do seu endereço, então vamos inclui-lo na sua ficha:"
             android:textColor="#000000"
-            android:textSize="16sp" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +37,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0"
+                android:textColorHint="@color/colorPrimary"
                 whilu:boxBackgroundColor="#FFFFFF">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -46,7 +46,9 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0"
                     android:hint="Cep:"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -69,6 +71,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textColorHint="@color/colorPrimary"
                 whilu:boxBackgroundColor="#FFFFFF"
                 whilu:errorEnabled="true">
 
@@ -76,13 +79,16 @@
                     android:id="@+id/edit_text_cidade"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Cidade:" />
+                    android:hint="Cidade:"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColorHint="@color/colorPrimary"
                 whilu:boxBackgroundColor="#FFFFFF"
                 whilu:errorEnabled="true">
 
@@ -90,7 +96,9 @@
                     android:id="@+id/edit_text_bairro"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Bairro:" />
+                    android:hint="Bairro:"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -104,6 +112,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
+                android:textColorHint="@color/colorPrimary"
                 whilu:boxBackgroundColor="#FFFFFF"
                 whilu:errorEnabled="true">
 
@@ -111,13 +120,16 @@
                     android:id="@+id/edit_text_rua"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Rua:" />
+                    android:hint="Rua:"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
+                android:textColorHint="@color/colorPrimary"
                 whilu:boxBackgroundColor="#FFFFFF"
                 whilu:errorEnabled="true">
 
@@ -126,7 +138,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Número:"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textColorHint="@color/colorPrimary"
+                    android:textSize="16sp" />
 
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>

@@ -120,7 +120,7 @@ public class ConsultaPacientDialogFragment extends DialogFragment {
         super.onStart();
         Dialog consultaPacienteDialog = getDialog();
         if ( consultaPacienteDialog  != null) {
-            consultaPacienteDialog .getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+            consultaPacienteDialog .getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         }
     }
 

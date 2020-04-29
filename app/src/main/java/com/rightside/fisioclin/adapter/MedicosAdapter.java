@@ -62,7 +62,7 @@ public class MedicosAdapter extends RecyclerView.Adapter<MedicosAdapter.ViewHold
         holder.textViewCrefito.setText("Crefito: " + medico.getCrefito());
         holder.ratingBar.isIndicator();
         if(medico.getPontuacao().getMedia() == 0) {
-            holder.textViewNotaAtendimento.setText("Ainda não possui nota de atendimento");
+            holder.textViewNotaAtendimento.setText("Ainda não possui nota de atendimento:");
             holder.ratingBar.setNumStars(0);
             holder.ratingBar.setVisibility(View.GONE);
         } else {

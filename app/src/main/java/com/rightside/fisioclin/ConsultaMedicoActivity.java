@@ -6,14 +6,18 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 
 import com.google.android.material.tabs.TabLayout;
 import com.rightside.fisioclin.adapter.ConsultaMedicoAdapter;
+import com.rightside.fisioclin.fragment.DicasDialogFragment;
 import com.rightside.fisioclin.models.Consulta;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.repository.FirebaseRepository;
+import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelHorarios;
@@ -28,7 +32,9 @@ public class ConsultaMedicoActivity extends FragmentActivity {
     private ViewModelConsultas viewModelConsultas;
     private Ficha ficha = new Ficha();
     private Toolbar toolbar;
-
+    private boolean isFirtRunConsulta;
+    private SharedPreferences prefs;
+    private SharedPreferences.Editor editor;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,6 +47,9 @@ public class ConsultaMedicoActivity extends FragmentActivity {
         recyclerView.setHasFixedSize(true);
         mAdapter = new ConsultaMedicoAdapter(ConsultaMedicoActivity.this, ConsultaMedicoActivity.this);
         recyclerView.setAdapter(mAdapter);
+        prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        editor = prefs.edit();
+        isFirtRunConsulta = prefs.getBoolean("isFirtRunConsulta", true);
 
         String id = FirebaseRepository.getIdPessoaLogada();
 
@@ -96,6 +105,17 @@ public class ConsultaMedicoActivity extends FragmentActivity {
 
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(isFirtRunConsulta) {
+            DicasDialogFragment.novaInstancia("Se chegou até aqui, já deve ter uma consulta no aplicativo, uhuul!!", "Aqui é sua agenda. Para ver detalhes da consulta clique e segure nela, para finalizar a consulta do paciente basta clicar. É importante que você finalize a consulta após o paciente ter sido atendido ou desistido.").show(getSupportFragmentManager(), "dicas");
+            editor.putBoolean("isFirtRunConsulta",false);
+            isFirtRunConsulta = false;
+            editor.commit();
+        }
     }
 
     @Override

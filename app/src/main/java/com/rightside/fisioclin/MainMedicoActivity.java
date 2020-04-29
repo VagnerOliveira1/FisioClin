@@ -1,7 +1,6 @@
 package com.rightside.fisioclin;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -12,34 +11,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
-import com.google.firebase.firestore.FirebaseFirestoreException;
-
 import com.rightside.fisioclin.fragment.EscolherAlvoNotificacaoFragment;
-
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
 
 import com.rightside.fisioclin.fragment.FichasMedicoFragment;
 import com.rightside.fisioclin.models.Consulta;
-import com.rightside.fisioclin.models.Horario;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.repository.FirebaseRepository;
 import com.rightside.fisioclin.utils.GeralUtils;
 import com.rightside.fisioclin.viewmodel.ViewModelConsultas;
 import com.rightside.fisioclin.viewmodel.ViewModelFichas;
 import com.rightside.fisioclin.viewmodel.ViewModelMedicos;
-import com.rightside.fisioclin.viewmodel.ViewModelUser;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -141,7 +128,6 @@ public class MainMedicoActivity extends FragmentActivity {
         cardViewLoja.setOnClickListener(view -> {
             startActivity(new Intent(MainMedicoActivity.this, LojaActivity.class));
         });
-
 
 
     }

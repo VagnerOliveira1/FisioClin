@@ -37,6 +37,7 @@ public class HourFragment extends DialogFragment implements TimePickerDialog.OnT
         void OnTimeSet(TimePicker timePicker, int i, int i1);
     }
 
+
     private TimePickerListener mListener;
 
 
@@ -57,10 +58,9 @@ public class HourFragment extends DialogFragment implements TimePickerDialog.OnT
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         TimeZone zone = TimeZone.getTimeZone("GMT-03:00");
         Locale locale = new Locale("pt", "BR");
-        Calendar c = Calendar.getInstance(zone, locale);
+         Calendar c = Calendar.getInstance(zone, locale);
         int hour = c.get(Calendar.HOUR_OF_DAY);
         int min = c.get(Calendar.MINUTE);
-
         Log.d("hora", String.valueOf(hour));
         return new TimePickerDialog(getActivity(), this, hour, min, true);
     }

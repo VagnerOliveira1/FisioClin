@@ -14,7 +14,7 @@
         android:paddingBottom="10dp"
         android:text="Complete sua ficha, ela é importante para os pacientes."
         android:textColor="#000000"
-        android:textSize="20sp" />
+        android:textSize="18sp" />
 
     <!--    </LinearLayout>-->
 
@@ -26,7 +26,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:textColorHint="@color/colorPrimary"
         android:theme="@style/TextInputLayoutStyle"
+        app:hintTextColor="@color/colorPrimary"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNomePaciente"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,8 +40,10 @@
             android:id="@+id/editNomeExibicaoMedico"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nome exibicao"
-            android:inputType="text" />
+            android:hint="Nome de exibição"
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -50,6 +54,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:textColorHint="@color/colorPrimary"
         android:theme="@style/TextInputLayoutStyle"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayoutNomePaciente"
         app:layout_constraintEnd_toEndOf="parent"
@@ -63,7 +68,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Crefito:"
-            android:inputType="text" />
+            android:inputType="text"
+            android:textColorHint="@color/colorPrimary"
+            android:textSize="16sp" />
     </com.google.android.material.textfield.TextInputLayout>
 
 
@@ -87,7 +94,7 @@
                 android:gravity="center"
                 android:text="Telefone para contato:"
                 android:textColor="#000000"
-                android:textSize="15sp" />
+                android:textSize="17sp" />
 
 
             <com.santalu.maskedittext.MaskEditText
@@ -96,8 +103,10 @@
                 android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
-                android:hint="(xx) xxxxx xxxx"
+                android:hint="(xx)xxxxxxxxx"
                 android:inputType="number"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp"
                 app:met_mask="(##) ##### ####" />
 
 
@@ -118,25 +127,22 @@
             android:gravity="center"
             android:text="Endereço de Atendimento:"
             android:textColor="#000000"
-            android:textSize="15sp" />
+            android:textSize="17sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_cep_medico"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                app:boxBackgroundColor="#FFFFFF">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/edit_text_cep_medico"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Cep:" />
-            </com.google.android.material.textfield.TextInputLayout>
+                android:hint="Cep:"
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp" />
 
             <Button
                 android:id="@+id/button_buscar_cidade_medico"
@@ -168,14 +174,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Bairro:" />
+                android:hint="Bairro:"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_rua_medico"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Rua:" />
+                android:hint="Rua:"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp" />
 
         </LinearLayout>
 
@@ -189,20 +199,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Número:" />
+                android:hint="Número:"
+                android:inputType="numberDecimal"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp" />
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_text_nome_clinica"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:hint="Nome da Clinica:" />
+                android:hint="Nome da Clinica:"
+                android:textColorHint="@color/colorPrimary"
+                android:textSize="16sp" />
         </LinearLayout>
 
         <Button
             android:id="@+id/btnSalvarMedico"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
             android:layout_margin="6dp"
             android:background="@drawable/botao_salva_ficha"
             android:text="Confirmar"

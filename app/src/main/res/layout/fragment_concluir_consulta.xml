@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="10dp"
     android:orientation="vertical"
     android:padding="10dp"
     tools:context=".fragment.ConcluirConsultaFragment">
@@ -27,6 +28,7 @@
             android:id="@+id/edittext_concluirconsulta"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:hint="Evolução do paciente pós consulta:" />
 
         <ProgressBar

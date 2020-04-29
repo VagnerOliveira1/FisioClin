@@ -16,6 +16,7 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.rightside.fisioclin.adapter.MedicosAdapter;
+import com.rightside.fisioclin.fragment.DicasDialogFragment;
 import com.rightside.fisioclin.models.Ficha;
 import com.rightside.fisioclin.models.Medico;
 import com.rightside.fisioclin.models.User;
@@ -89,7 +90,7 @@ public class ListaMedicosActivity extends AppCompatActivity {
         super.onResume();
 
         if(firstRun) {
-            GeralUtils.mostraAlerta("Primeira vez usando o aplicativo?\naqui vai algumas dicas!!", "Para ver os horários do fisioterapeuta basta clicar.\nPara ver mais detalhes de endereço clicar e segurar.", this);
+            DicasDialogFragment.novaInstancia("Que bom ver você por aqui! vou te dar algumas dicas:", "Para escolher um fisioterapeuta e ver seus horários basta clicar, se quiser ver mais detalhes de localização basta clicar e segurar").show(getSupportFragmentManager(), "dicas");
             editor.putBoolean("firstRun",false);
             editor.commit();
         }

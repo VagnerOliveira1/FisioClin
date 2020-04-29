@@ -33,6 +33,7 @@ public class HorarioPacienteActivity extends AppCompatActivity {
         private TextView textViewNomeMedicoEscolhido;
         private Medico medico;
 
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);

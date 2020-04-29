@@ -26,7 +26,6 @@ public class NovoHorarioController {
                 HourFragment hourFragment = new HourFragment();
                 hourFragment.setCancelable(false);
                 hourFragment.show(activity.getSupportFragmentManager(), "teste");
-
             }
         }).setNegativeButton("Cancelar", null).show();
     }
